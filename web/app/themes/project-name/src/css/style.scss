@@ -1,0 +1,10 @@
+@import "base/reset";
+@import "base/variables";
+@import "base/mixins";
+@import "base/functions";
+
+* {
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
