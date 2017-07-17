@@ -12,3 +12,10 @@
 body,html{
 	font-size: $base-font;
 }
+
+.constrain{
+	width: 100%;
+	max-width: 1160px;
+}
+
+@import "common/topDripForm";
