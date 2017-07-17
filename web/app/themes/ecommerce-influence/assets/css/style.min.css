@@ -6,4 +6,13 @@ blockquote,q{quotes:none}
 blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}
 table{border-collapse:collapse;border-spacing:0}
 *{-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body,html{font-size:16px}
+body,html{font-size:16}
+.constrain{width:100%;max-width:1160px}
+.topDripForm{position:relative;width:100%;max-width:1440px;margin:0 auto}
+.topDripForm__inner{position:relative;min-height:320px;background-image:url(../images/iPad.png);background-repeat:no-repeat}
+.topDripForm__iPad,.topDripForm__content{display:inline-block;vertical-align:middle}
+.topDripForm__iPad{width:46%;height:100%;background-image:url(../images/iPad.png);background-repeat:no-repeat}
+.topDripForm__content{width:54%;background-color:red;margin-left:46%}
+.topDripForm__content-title{position:relative;display:inline-block;font-size:2.4375em;line-height:1.1794871795em;color:#2f3d65}
+.topDripForm__content-title::after{content:"";position:absolute;bottom:-1px;left:0;width:85%;height:12px;background-color:#fff477;z-index:-1}
+.topDripForm__content-text{font-size:1.5em;line-height:1.1666666667em;color:#2f3d65;letter-spacing:0}

@@ -1,0 +1,63 @@
+.topDripForm{
+	position: relative;
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
+}
+.topDripForm__inner{
+	position: relative;
+	min-height: 320px;
+	background-image: url(../images/iPad.png);
+	background-repeat: no-repeat;
+}
+.topDripForm__iPad,
+.topDripForm__content{
+	display: inline-block;
+	vertical-align: middle;
+}
+.topDripForm__iPad{
+	width: 46%;
+	height: 100%;
+	background-image: url(../images/iPad.png);
+	background-repeat: no-repeat;
+	// background-size: contain;
+}
+.topDripForm__content{
+	width: 54%;
+	background-color: red;
+	margin-left: 46%;
+}
+.topDripForm__content-title{
+	position: relative;
+	display: inline-block;
+
+	font-size: px-to-ems(39);
+	line-height: px-to-ems(46,39);
+	color: $text-blue;
+
+	&::after{
+		content: "";
+		position: absolute;
+		bottom: -1px;
+		left: 0;
+
+		width: 85%;
+		height: 12px;
+
+		background-color: $primary-yellow;
+
+		z-index: -1;
+	}
+}
+.topDripForm__content-text{
+	font-size: px-to-ems(24);
+	line-height: px-to-ems(28,24);
+	color: $text-blue;
+	letter-spacing: 0;
+}
+.topDripForm__content-formContainer{
+	
+}
+.topDripForm__content-form{
+	
+}
