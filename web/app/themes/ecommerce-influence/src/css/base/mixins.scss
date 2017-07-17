@@ -2,7 +2,7 @@
 	transition: $element $speed $easing;
 }
 
-@mixin font-size($desired, $context: 16){
+@mixin font-size($desired, $context: $base-font){
 	font-size: #{$desired/$context}em;
 }
 
