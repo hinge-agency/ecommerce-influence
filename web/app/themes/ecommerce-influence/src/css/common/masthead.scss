@@ -1,0 +1,126 @@
+.masthead{
+	position: relative;
+	width: 100%;
+	min-height: 80px;
+
+	border-top: 1px solid white;
+	background-color: $text-blue;
+}
+.masthead__inner{
+	position: relative;
+	width: 100%;
+
+	padding: 12px 40px;
+}
+.masthead__left,
+.masthead__right,
+.masthead__right-nav,
+.masthead__right-search,
+.masthead__right-nav-items-item{
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	vertical-align: middle;
+}
+.masthead__left{
+	position: relative;
+	width: 266px;
+}
+.masthead__right{
+	position: relative;
+	width: calc(100% - 266px);
+	text-align: right;
+}
+.masthead__right-nav-items{
+	margin: 0;
+	padding: 0;
+}
+.masthead__right-nav-items-item{
+
+	&+.masthead__right-nav-items-item{
+		padding-left:40px;
+	}
+}
+.masthead__right-nav-items-item-link{
+	font-family: $brandon;
+	font-weight: 900;
+
+	font-size: px-to-ems(15);
+	color: white;
+	line-height: px-to-ems(15,15);
+
+	text-transform: uppercase;
+
+	@include transition();
+
+	&:hover{
+		color: $primary-yellow;
+	}
+
+	&--button{
+		padding: 9px 21px;
+
+		color: $primary-yellow;
+		border: 3px solid $primary-yellow;
+
+		&:hover{
+			background-color: $primary-yellow;
+			color: $text-blue;
+		}
+	}
+}
+.masthead__right-search{
+	min-width: 280px;
+	margin-left: 40px;
+}
+.masthead__right-search-input{
+	width: 100%;
+	padding-left: 10px;
+
+	font-family: $brandon;
+	font-weight: 600;
+
+	font-size: px-to-ems(20);
+	line-height: px-to-ems(29,20);
+	color: white;
+	letter-spacing: 0;
+
+	border-bottom: 2px solid $text-purple;
+
+	background-image: url(../images/search.svg);
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+
+	cursor: pointer;
+
+	@include transition();
+
+	&::placeholder{
+		color: $text-purple;
+
+		@include transition();
+	}
+
+	&:hover,
+	&:focus{
+		border-bottom: 2px solid $primary-yellow;
+
+		&::placeholder{
+			color: $primary-yellow;
+		}
+	}
+		
+}
+
+/*==================================================
+=            LEGACY BROWSER PLACEHOLDER            =
+==================================================*/
+
+.masthead__right-search-input:-ms-input-placeholder{
+	color: $text-purple !important;
+}
+.masthead .placeholder{
+	color: $text-purple !important;
+}
+
+/*=====  End of LEGACY BROWSER PLACEHOLDER  ======*/
