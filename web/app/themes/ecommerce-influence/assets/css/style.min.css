@@ -26,13 +26,13 @@ body,html{font-size:16}
 }.constrain{width:100%;max-width:1160px}
 .topDripForm{position:relative;width:100%;max-width:1440px;margin:0 auto}
 .topDripForm__inner{position:relative;min-height:320px;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
-.topDripForm__inner--close{margin-top:-320px}
+.topDripForm__inner--close{display:none}
 @media all and (max-width:1030px){.topDripForm__inner{width:95%;min-height:336px}
 }@media all and (max-width:600px){.topDripForm__inner{width:90%;margin:0 auto}
-}.topDripForm__content{position:relative;width:100%;min-height:320px;background-image:url(../images/iPad.png);background-repeat:no-repeat;background-position:-35px -55px;padding-left:46.597222222222222%;padding-top:42px;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
+}.topDripForm__content{position:relative;width:100%;min-height:320px;background-image:url(../images/iPad.png);background-repeat:no-repeat;background-position:0 -55px;padding-left:49%;padding-top:42px;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 @media all and (max-width:1440px){.topDripForm__content{background-position:-80px -55px}
 }@media all and (max-width:1310px){.topDripForm__content{background-position:-125px -55px}
-}@media all and (max-width:1210px){.topDripForm__content{background-position:-175px -55px}
+}@media all and (max-width:1210px){.topDripForm__content{background-position:-175px -55px;padding-left:46%}
 }@media all and (max-width:1110px){.topDripForm__content{background-position:-220px -55px}
 }@media all and (max-width:1030px){.topDripForm__content{background-position:-280px -55px}
 }@media all and (max-width:920px){.topDripForm__content{background-image:url(../images/iPad-small.png);background-position:-180px 5px;padding-left:40%}
@@ -80,5 +80,3 @@ body,html{font-size:16}
 .topDripForm__closeButton-line{position:absolute;top:calc(50% - 1px);left:calc(50% - 12px);width:24px;height:2px;background-color:white}
 .topDripForm__closeButton-line--lineOne{transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg)}
 .topDripForm__closeButton-line--lineTwo{transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-ms-transform:rotate(-45deg)}
-@media all and (max-width:600px){.topDripForm__inner--close{margin-top:-450px}
-}
