@@ -7,6 +7,12 @@
 .topDripForm__inner{
 	position: relative;
 	min-height: 320px;
+	
+	@include transition();
+	
+	&--close{
+		margin-top: -320px;
+	}
 
 	@include screen-lt(1030){
 		width: 95%;
@@ -286,6 +292,8 @@
 	right: 30px;
 
 	cursor: pointer;
+
+	z-index: 10;
 
 	@include transition();
 
