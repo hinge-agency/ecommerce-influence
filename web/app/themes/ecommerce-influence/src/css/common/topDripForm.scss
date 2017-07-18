@@ -29,9 +29,9 @@
 	min-height: 320px;
 	background-image: url(../images/iPad.png);
 	background-repeat: no-repeat;
-	background-position: -35px -55px;
+	background-position: 0px -55px;
 
-	padding-left: 46.597222222222222%;
+	padding-left: 49%;
 	padding-top: 42px;
 
 	@include transition();
@@ -44,6 +44,7 @@
 	}
 	@include screen-lt(1210){
 		background-position: -175px -55px;
+		padding-left: 46%;
 	}
 	@include screen-lt(1110){
 		background-position: -220px -55px;
