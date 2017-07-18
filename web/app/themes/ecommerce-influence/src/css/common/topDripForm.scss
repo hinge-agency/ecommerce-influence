@@ -11,7 +11,7 @@
 	@include transition();
 	
 	&--close{
-		margin-top: -320px;
+		display: none;
 	}
 
 	@include screen-lt(1030){
@@ -346,11 +346,5 @@
 		transform: rotate(-45deg);
 		-webkit-transform: rotate(-45deg);
 		    -ms-transform: rotate(-45deg);	        
-	}
-}
-
-.topDripForm__inner--close{
-	@include screen-lt(600){
-		margin-top: -450px;
 	}
 }
