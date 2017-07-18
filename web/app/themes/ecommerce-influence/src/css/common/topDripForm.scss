@@ -347,3 +347,9 @@
 		    -ms-transform: rotate(-45deg);	        
 	}
 }
+
+.topDripForm__inner--close{
+	@include screen-lt(600){
+		margin-top: -450px;
+	}
+}
