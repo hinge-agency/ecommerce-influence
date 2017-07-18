@@ -1,0 +1,350 @@
+.topDripForm{
+	position: relative;
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
+}
+.topDripForm__inner{
+	position: relative;
+	min-height: 320px;
+	
+	@include transition();
+	
+	&--close{
+		display: none;
+	}
+
+	@include screen-lt(1030){
+		width: 95%;
+		min-height: 336px;
+	}
+	@include screen-lt(600){
+		width: 90%;
+		margin: 0 auto;
+	}
+}
+.topDripForm__content{
+	position: relative;
+	width: 100%;
+	min-height: 320px;
+	background-image: url(../images/iPad.png);
+	background-repeat: no-repeat;
+	background-position: 0px -55px;
+
+	padding-left: 49%;
+	padding-top: 42px;
+
+	@include transition();
+
+	@include screen-lt(1440){
+		background-position: -80px -55px;
+	}
+	@include screen-lt(1310){
+		background-position: -125px -55px;
+	}
+	@include screen-lt(1210){
+		background-position: -175px -55px;
+		padding-left: 46%;
+	}
+	@include screen-lt(1110){
+		background-position: -220px -55px;
+	}
+	@include screen-lt(1030){
+		background-position: -280px -55px;
+	}
+	@include screen-lt(920){
+		background-image: url(../images/iPad-small.png);
+		background-position: -180px 5px;
+
+		padding-left: 40%;
+	}
+	@include screen-lt(840){
+		background-position: -210px 5px;
+		padding-top: 45px;
+	}
+	@include screen-lt(710){
+		background-position: -282px 5px;
+		padding-left: 35%;
+	}
+	@include screen-lt(600){
+		background-image: none;
+		padding-left: 0;
+		padding-top: 70px;
+
+		text-align: center;
+	}
+}
+.topDripForm__content-title{
+	position: relative;
+	display: inline-block;
+
+	font-size: px-to-ems(39);
+	line-height: px-to-ems(46,39);
+	color: $text-blue;
+
+	font-family: $brandon;
+	font-weight: 900;
+
+	&::after{
+		content: "";
+		position: absolute;
+		bottom: -1px;
+		left: -1%;
+
+		width: 102%;
+		height: 12px;
+
+		background-color: $primary-yellow;
+
+		z-index: -1;
+	}
+
+	@include screen-lt(600){
+		font-size: px-to-ems(25);
+		line-height: px-to-ems(36,25);
+	}
+}
+.topDripForm__content-text{
+	display: block;
+	max-width: 548px;
+	margin-top: 6px;
+
+	font-size: px-to-ems(24);
+	line-height: px-to-ems(28,24);
+	color: $text-blue;
+	letter-spacing: 0;
+
+	font-family: $brandon;
+	font-weight: 600;
+
+	@include screen-lt(600){
+		font-size: px-to-ems(20);
+		line-height: px-to-ems(27,20);
+		margin-top: 8px;
+	}
+}
+.topDripForm__content-formContainer{
+	margin-top: 25px;
+	
+	@include transition();
+
+	@include screen-lt(840){
+		margin-top: 15px;
+	}
+}
+.topDripForm__content-form{
+	
+}
+.topDripForm__form-block{
+	display: inline-block;
+	vertical-align: bottom;
+
+	text-align: left;
+
+	&+.topDripForm__form-block{
+		margin-left: 8px;
+
+		&--button{
+			margin-left: 0;
+
+			@include screen-lt(1030){
+				display: block;
+				width: 100%;
+				margin-top: 8px;
+			}
+		}
+
+		@include screen-lt(600){
+			margin: 0;
+			margin-top: 10px;
+		}
+	}
+
+	@include screen-lt(1030){
+		width: calc(50% - 4px);
+	}
+	@include screen-lt(600){
+		display: block;
+		width: 100%;
+	}
+}
+.topDripForm__form-block-label{
+	display: block;
+
+	font-size: px-to-ems(17);
+	color: #2F3D65;
+	letter-spacing: 0;
+	line-height: px-to-ems(27,17);
+
+	font-family: $brandon;
+	font-weight: 900;
+}
+.topDripForm__form-block-input,
+.topDripForm__form-block-button{
+	appearance:  none;
+	-o-appearance:  none;
+	-moz-appearance: none;
+	-webkit-appearance:  none;
+	border: none;
+}
+.topDripForm__form-block-input{
+	display: inline-block;
+	width: 168px;
+	height: 60px;
+	padding-left: 22px;
+
+	background: $light-gray;
+	box-shadow: inset 0 1px 3px 0 rgba(0,0,0,0.10);
+	-webkit-box-shadow: inset 0 1px 3px 0 rgba(0,0,0,0.10);
+	border-radius: 3px 0 0 3px;
+	
+	font-size: px-to-ems(25);
+	color: $text-blue;
+	letter-spacing: 0;
+	line-height: px-to-ems(27,25);
+
+	font-family: $brandon;
+	font-weight: 600;
+
+	&::-webkit-input-placeholder{
+		color: $text-gray;
+	}
+
+	&:-ms-input-placeholder{
+		color: $text-gray;
+	}
+
+	&::placeholder{
+		color: $text-gray;
+	}
+
+	&--email{
+		width: 228px;
+		border-radius: 0;
+
+		@include screen-lt(1030){
+			border-radius: 0 3px 3px 0;
+		}
+		@include screen-lt(600){
+			border-radius: 3px;
+		}
+	}
+
+	@include screen-lt(1030){
+		width: 100%;
+	}
+	@include screen-lt(920){
+		height: 50px;
+	}
+	@include screen-lt(600){
+		border-radius: 3px;
+	}
+}
+.topDripForm__form-block-button{
+	display: block;
+	padding: 0;
+	width: 148px;
+	height: 60px;
+
+	background: $primary-yellow;
+	border-radius: 0 3px 3px 0;
+
+	font-size: px-to-ems(20);
+	color: $text-blue;
+	line-height: px-to-ems(15,20);
+
+	font-family: $brandon;
+	font-weight: 900;
+	text-transform: uppercase;
+	
+	cursor: pointer;
+	@include transition();
+
+	&:hover{
+		background-color: $yellow-dark;
+	}
+
+	@include screen-lt(1030){
+		width: 100%;
+		border-radius: 3px;
+	}
+	@include screen-lt(920){
+		height: 50px;
+	}
+	
+}
+
+/*==================================================
+=            LEGACY BROWSER PLACEHOLDER            =
+==================================================*/
+
+.topDripForm__form-block-input:-ms-input-placeholder{
+	color: $text-gray !important;
+}
+.topDripForm .placeholder{
+	color: $text-gray !important;
+}
+
+/*=====  End of LEGACY BROWSER PLACEHOLDER  ======*/
+
+.topDripForm__closeButton{
+	position: absolute;
+	top: 30px;
+	right: 30px;
+
+	cursor: pointer;
+
+	z-index: 10;
+
+	@include transition();
+
+	@include screen-lt(1030){
+		right: -10px;
+	}
+	@include screen-lt(840){
+		top: 10px;
+	}
+	@include screen-lt(600){
+		right: 50%;
+		top: 20px;
+
+		transform: translateX(50%);
+		-webkit-transform: translateX(50%);
+		    -ms-transform: translateX(50%);	        
+	}
+}
+.topDripForm__closeButton-wrapper{
+	position: relative;
+	width: 37px;
+	height: 37px;
+
+	background-color: $gray;
+	border-radius: 50%;
+	
+	@include transition();
+
+	&:hover{
+		background-color: $text-gray;
+	}
+}
+.topDripForm__closeButton-line{
+	position: absolute;
+	top: calc(50% - 1px);
+	left: calc(50% - 12px);
+
+	width: 24px;
+	height: 2px;
+
+	background-color: white;
+
+	&--lineOne{
+		transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+		    -ms-transform: rotate(45deg);	        
+	}
+	&--lineTwo{
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		    -ms-transform: rotate(-45deg);	        
+	}
+}

@@ -1,5 +1,6 @@
 @import "base/reset";
 @import "base/variables";
+@import "base/typography";
 @import "base/mixins";
 @import "base/functions";
 
@@ -11,4 +12,18 @@
 
 body,html{
 	font-size: $base-font;
+
+	@include screen-lt(768){
+		font-size: 90%;
+	}
+	@include screen-lt(600){
+		font-size: 100%;
+	}
 }
+
+.constrain{
+	width: 100%;
+	max-width: 1160px;
+}
+
+@import "common/topDripForm";
