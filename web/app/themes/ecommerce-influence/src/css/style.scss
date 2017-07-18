@@ -12,6 +12,13 @@
 
 body,html{
 	font-size: $base-font;
+
+	@include screen-lt(768){
+		font-size: 90%;
+	}
+	@include screen-lt(600){
+		font-size: 100%;
+	}
 }
 
 .constrain{
