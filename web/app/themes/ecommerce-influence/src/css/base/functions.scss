@@ -1,3 +1,3 @@
 @function px-to-ems($pixels, $base: $base-font){
-	@return #{$pixels/$base}em
+	@return #{$pixels/$base}em;
 }
