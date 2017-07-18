@@ -31,6 +31,11 @@
 	width: calc(100% - 266px);
 	text-align: right;
 }
+.masthead__right-nav{
+	@include screen-lt(1250){
+		display: none;
+	}
+}
 .masthead__right-nav-items{
 	margin: 0;
 	padding: 0;
@@ -72,6 +77,10 @@
 .masthead__right-search{
 	min-width: 280px;
 	margin-left: 40px;
+
+	@include screen-lt(1250){
+		margin: 10px;
+	}
 }
 .masthead__right-search-input{
 	width: 100%;
@@ -124,3 +133,81 @@
 }
 
 /*=====  End of LEGACY BROWSER PLACEHOLDER  ======*/
+
+.masthead__right-responsive{
+	display: none;
+	padding-left: 40px;
+
+	@include screen-lt(1250){
+		display: inline-block;
+		vertical-align: middle;
+	}
+}
+.masthead__right-responsive-link{
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+
+	font-family: $brandon;
+	font-weight: 900;
+
+	font-size: px-to-ems(15);
+	color: white;
+	line-height: px-to-ems(15,16);
+
+	text-transform: uppercase;
+
+	@include transition();
+	
+	&-text{
+		display: inline-block;
+		vertical-align: bottom;	
+	}
+	&-hamburger{
+		position: relative;
+		display: inline-block;
+		vertical-align: bottom;
+		width: 20px;
+		height: 14px;
+		margin-left: 6px;
+		
+		@include transition();
+		span{
+			display: block;
+			position: absolute;
+			height: 3px;
+			width: 100%;
+			background: white;
+			border-radius: 25%;
+			opacity: 1;
+			left: 0;
+			transform: rotate(0deg);
+			-webkit-transform: rotate(0deg);
+			-moz-transform: rotate(0deg);
+			-o-transform: rotate(0deg);
+			-ms-transform: rotate(0deg);
+			@include transition();
+		}
+		span:nth-child(1) {
+		  top: 0px;
+		}
+
+		span:nth-child(2) {
+		  top: 5px;
+		}
+
+		span:nth-child(3) {
+		  top: 10px;
+		}
+	}
+
+	&:hover{
+		color: $primary-yellow;
+
+		.masthead__right-responsive-link-hamburger{
+			span{
+				background: $primary-yellow;
+			}
+		}
+	}
+}
