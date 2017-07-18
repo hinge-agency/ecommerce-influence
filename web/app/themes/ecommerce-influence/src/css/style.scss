@@ -21,6 +21,17 @@ body,html{
 	}
 }
 
+.main{
+	width: 100%;
+	min-height: 300px;
+	opacity: 1;
+
+	&.nav-active{
+		background-color: $text-blue;
+		opacity: 0.95;
+	}
+}
+
 .constrain{
 	width: 100%;
 	max-width: 1160px;
