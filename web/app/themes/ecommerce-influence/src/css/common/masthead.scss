@@ -78,14 +78,23 @@
 	min-width: 280px;
 	margin-left: 40px;
 
+	// border-bottom: 2px solid $text-purple;
+
 	@include screen-lt(1250){
 		margin: 10px;
 	}
 }
+.masthead__right-search-input,
+.masthead__right-search-button{
+	display: inline-block;
+	vertical-align: middle;
+}
 .masthead__right-search-input{
-	width: 100%;
+	width: calc(100% - 30px);
 	padding-left: 10px;
+	padding-right: 40px;
 
+	border-bottom: 2px solid $text-purple;
 	font-family: $brandon;
 	font-weight: 600;
 
@@ -93,14 +102,6 @@
 	line-height: px-to-ems(29,20);
 	color: white;
 	letter-spacing: 0;
-
-	border-bottom: 2px solid $text-purple;
-
-	background-image: url(../images/search.svg);
-	background-repeat: no-repeat;
-	background-position: right 10px center;
-
-	cursor: pointer;
 
 	@include transition();
 
@@ -112,6 +113,7 @@
 
 	&:hover,
 	&:focus{
+
 		border-bottom: 2px solid $primary-yellow;
 
 		&::placeholder{
@@ -120,7 +122,19 @@
 	}
 		
 }
+.masthead__right-search-button{
+	position: relative;
+	width: 30px;
+	height: 22px;
+	left: -40px;
+	z-index: 5;
 
+	background-image: url(../images/search.svg);
+	background-repeat: no-repeat;
+	background-position: right top;
+
+	cursor: pointer;
+}
 /*==================================================
 =            LEGACY BROWSER PLACEHOLDER            =
 ==================================================*/
@@ -310,7 +324,7 @@
 		border: 3px solid $primary-yellow;
 		
 		@include transition();
-		
+
 		&:hover{
 			background-color: $primary-yellow;
 			color: $text-blue;
