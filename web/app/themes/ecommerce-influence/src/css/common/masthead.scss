@@ -201,6 +201,39 @@
 		}
 	}
 
+	&.active {
+		.masthead__right-responsive-link-hamburger{
+			span:nth-child(1) {
+			  top: 5px;
+			  transform: rotate(135deg);
+			  -webkit-transform: rotate(135deg);
+			  -moz-transform: rotate(135deg);
+			  -o-transform: rotate(135deg);
+			  -ms-transform: rotate(135deg);
+			}
+
+			span:nth-child(2) {
+			  opacity: 0;
+			  top: 0px;
+			  transform: rotate(135deg);
+			  -webkit-transform: rotate(135deg);
+			  -moz-transform: rotate(135deg);
+			  -o-transform: rotate(135deg);
+			  -ms-transform: rotate(135deg);
+			  transition: none;
+			}
+
+			span:nth-child(3) {
+			  top: 5px;
+			  transform: rotate(-135deg);			  
+			  -webkit-transform: rotate(-135deg);
+			  -moz-transform: rotate(-135deg);
+			  -o-transform: rotate(-135deg);
+			  -ms-transform: rotate(-135deg);
+			}
+		}
+	}
+
 	&:hover{
 		color: $primary-yellow;
 
@@ -211,3 +244,78 @@
 		}
 	}
 }
+
+/*=============================================
+=            RESPONSIVE NAVIGATION            =
+=============================================*/
+
+.responsive-nav-wrapper{
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.masthead__nav-responsive{
+	position: fixed;
+	top: 80px;
+	left: 0;
+
+	width: 100%;
+	height: calc(100% - 80px);
+
+	visibility: hidden;
+	opacity: 0;
+	z-index: 5;
+
+	overflow: scroll;
+
+	text-align: center;
+
+	@include transition();
+
+	&:after{
+		content: "";
+		position: fixed;
+		top: 80px;
+		left: 0;
+		
+		width: 100%;
+		height: 100%;
+
+		background-color: $text-blue;
+		opacity: 0.95;
+		z-index: -5;
+	}
+}
+
+.masthead__nav-responsive-items{
+	margin-top: 10px;
+}
+.masthead__nav-responsive-items-item{
+	margin-top: 35px;
+}
+.masthead__nav-responsive-items-item-link{
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(20);
+	line-height: px-to-ems(15,20);
+	color: white;
+
+	text-transform: uppercase;
+
+	&--button{
+		padding: 9px 21px;
+
+		color: $primary-yellow;
+		border: 3px solid $primary-yellow;
+		
+		@include transition();
+		
+		&:hover{
+			background-color: $primary-yellow;
+			color: $text-blue;
+		}
+	}
+}
+/*=====  End of RESPONSIVE NAVIGATION  ======*/
+
