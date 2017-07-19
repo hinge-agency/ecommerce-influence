@@ -351,7 +351,12 @@
 	margin-top: 10px;
 }
 .masthead__nav-responsive-items-item{
+	position: relative;
 	margin-top: 35px;
+
+	&--button{
+		margin-top: 44px;
+	}
 }
 .masthead__nav-responsive-items-item-link{
 	font-family: $brandon;
