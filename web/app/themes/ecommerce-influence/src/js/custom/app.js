@@ -11,7 +11,16 @@ $(function(){
 	$('.masthead__right-responsive-link').on('click', function(e){
 		e.preventDefault();
 
-		$('.main').toggleClass('nav-active');
+		$('body,html').toggleClass('nav-active');
 		$(this).toggleClass('active');
+	});
+
+	// Watch the screen width and remove the nav active class if the screen > 1300
+	$(window).resize(function(){
+		if ($(window).width() >= 1250 && $('.nav-active')){
+			$('body,html').removeClass('nav-active');
+			$('.masthead__right-responsive-link').removeClass('active');
+
+		}
 	});
 });
