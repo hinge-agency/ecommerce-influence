@@ -10,8 +10,10 @@
         
         <main class="main constrain">
 
-            {% include 'components/blocks/sidebar.twig' %}
-
+            <div class="content">
+                {% include 'components/blocks/latest-content.twig' %}
+            </div><!--
+            -->{% include 'components/blocks/sidebar.twig' %}
         </main>
 
         {% block content %}
