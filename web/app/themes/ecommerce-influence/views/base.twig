@@ -8,7 +8,11 @@
 
         {% include 'components/common/masthead.twig' %}
         
-        <main class="main"></main>
+        <main class="main constrain">
+
+            {% include 'components/blocks/sidebar.twig' %}
+
+        </main>
 
         {% block content %}
             <p>Sorry, no content</p>
