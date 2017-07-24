@@ -34,13 +34,33 @@ body,html{
 	}
 }
 
+.main{
+	padding-top: 60px;
+}
+
 .constrain{
 	width: 100%;
 	max-width: 1160px;
 
 	margin: 0 auto;
+	
+	@include transition();
+
+	@include screen-lt(1220){
+		width: 90%;
+	}
+}
+
+.homePage-sidebar,
+.pages-sidebar{
+	display: inline-block;
+	vertical-align: top;
+
+	width: 100%;
+	max-width: 340px;
 }
 
 @import "common/topDripForm";
 @import "common/masthead";
 @import "common/footer";
+@import "blocks/sidebar";
