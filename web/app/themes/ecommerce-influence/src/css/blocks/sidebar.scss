@@ -101,6 +101,10 @@
 .sidebar__profiles{
 	margin-top: 35px;
 	width: 100%;
+
+	@include screen-lt(1000){
+		max-width: 340px;
+	}
 }
 .sidebar__profiles-profile{
 	position: relative;
@@ -291,6 +295,8 @@
 	margin-top: 40px;
 	padding-top: 150px;
 
+	max-width: 340px;
+
 	border-radius: 3px;
 
 	background-repeat: no-repeat;
@@ -302,7 +308,7 @@
 
 	background-color: $text-blue;
 	border-radius: 0 0 3px 3px;
-	
+
 	text-align: center;
 }
 .sidebar__testimonial-blue-wrapper{
