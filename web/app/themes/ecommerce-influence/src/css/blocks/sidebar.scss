@@ -96,3 +96,65 @@
 		background-color: $primary-yellow;
 	}
 }
+
+/* PROFILES */
+.sidebar__profiles{
+	margin-top: 35px;
+	width: 100%;
+}
+.sidebar__profiles-profile{
+	position: relative;
+	margin-top: 20px;
+	padding: 17px;
+	padding-left: 150px;
+
+	width: 100%;
+
+	background-color: $cloudy-white;
+
+	background-repeat: no-repeat;
+	background-position: left 10px center;
+}
+.sidebar__profiles-profile-context{
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(14);
+	line-height: px-to-ems(14,14);
+
+	text-transform: uppercase;
+
+	color: $primary-purple;
+}
+.sidebar__profiles-profile-name{
+	margin-top: 4px;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(28);
+	line-height: px-to-ems(24,28);
+
+	text-transform: uppercase;
+
+	color: $text-blue;
+}
+.sidebar__profiles-profile-name-first,
+.sidebar__profiles-profile-name-last{
+	display: inline-block;
+}
+.sidebar__profiles-profile-name-last{
+	position: relative;
+	z-index: 0;
+
+	&:after{
+		content: "";
+		position: absolute;
+		bottom: -2px;
+		left: -2%;
+		z-index: -1;
+
+		width: 104%;
+		height: 12px;
+
+		background-color: $primary-yellow;
+	}
+}
