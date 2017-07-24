@@ -134,8 +134,8 @@ body,html{font-size:16px}
 .masthead__right-responsive-link:hover{color:#fff477}
 .masthead__right-responsive-link:hover .masthead__right-responsive-link-hamburger span{background:#fff477}
 .responsive-nav-wrapper{position:relative;height:100%;width:100%}
-.masthead__nav-responsive{position:fixed;top:80px;left:0;width:100%;height:calc(100% - 80px);visibility:hidden;opacity:0;z-index:5;overflow:scroll;text-align:center;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
-.masthead__nav-responsive:after{content:"";position:fixed;top:80px;left:0;width:100%;height:100%;background-color:#2f3d65;opacity:.95;z-index:-5}
+.masthead__nav-responsive{position:fixed;left:0;width:100%;height:100%;visibility:hidden;opacity:0;z-index:5;overflow:scroll;text-align:center;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
+.masthead__nav-responsive:after{content:"";position:fixed;top:inherit;left:0;width:100%;height:inherit;background-color:#2f3d65;opacity:.95;z-index:-5}
 .masthead__nav-responsive-items{margin-top:10px}
 .masthead__nav-responsive-items-item{position:relative;margin-top:35px}
 .masthead__nav-responsive-items-item--button{margin-top:44px}
