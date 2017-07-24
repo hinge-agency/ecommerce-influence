@@ -36,8 +36,22 @@ body,html{
 
 .main{
 	padding-top: 60px;
+	direction: rtl;
 }
+.content{
+	display: inline-block;
+	vertical-align: top;
+	direction: ltr;
 
+	width: 70%;
+
+	background-color: white;
+
+	@include screen-lt(1000){
+		display: block;
+		width: 100%;
+	}
+}
 .constrain{
 	width: 100%;
 	max-width: 1160px;
@@ -55,12 +69,20 @@ body,html{
 .pages-sidebar{
 	display: inline-block;
 	vertical-align: top;
+	direction: ltr;
 
-	width: 100%;
-	max-width: 340px;
+	width: 30%;
+
+	@include screen-lt(1000){
+		margin-top: 50px;
+		
+		display: block;
+		width: 100%;
+	}
 }
 
 @import "common/topDripForm";
 @import "common/masthead";
 @import "common/footer";
 @import "blocks/sidebar";
+@import "blocks/latestContent";
