@@ -31,10 +31,6 @@
 .footer__content-logo{
 	position: relative;
 	width: 266px;
-
-	@include screen-lt(600){
-		width: 38px;
-	}
 }
 .footer__content-nav{
 	width: calc(100% - 560px);
@@ -65,20 +61,8 @@
 }
 .footer__content-logo-image{
 	display: block;
-
-	@include screen-lt(600){
-		display: none;
-	}
-
-	&--responsive{
-		display: none;
-
-		@include screen-lt(600){
-			display: block;
-		}
-	}
+	max-width: 100%;
 }
-
 .footer__content-nav-items{
 	margin: 0;
 	padding: 0;
