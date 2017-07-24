@@ -277,6 +277,13 @@
 	color: $text-blue;
 
 	text-transform: uppercase;
+	cursor: pointer;
+
+	@include transition();
+
+	&:hover{
+		background-color: $yellow-dark;
+	}
 }
 
 /* TESTIMONIAL */
@@ -294,7 +301,8 @@
 	padding: 0 6px;
 
 	background-color: $text-blue;
-
+	border-radius: 0 0 3px 3px;
+	
 	text-align: center;
 }
 .sidebar__testimonial-blue-wrapper{
@@ -357,6 +365,8 @@
 	color: $primary-yellow;
 
 	text-transform: uppercase;
+
+	@include transition();
 
 	&:hover{
 		background-color: $primary-yellow;
