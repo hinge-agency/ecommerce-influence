@@ -27,7 +27,7 @@ body,html{font-size:16px}
 }.nav-active{overflow:hidden}
 .nav-active .masthead__nav-responsive{visibility:visible;opacity:1}
 .nav-active .masthead__right-search{opacity:0}
-.constrain{width:100%;max-width:1160px}
+.constrain{width:100%;max-width:1160px;margin:0 auto}
 .topDripForm{position:relative;width:100%;max-width:1440px;margin:0 auto}
 .topDripForm__inner{position:relative;min-height:320px;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 .topDripForm__inner--close{display:none}
@@ -142,3 +142,32 @@ body,html{font-size:16px}
 .masthead__nav-responsive-items-item-link{font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:1.25em;line-height:.75em;color:white;text-transform:uppercase}
 .masthead__nav-responsive-items-item-link--button{padding:9px 21px;color:#fff477;border:3px solid #fff477;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 .masthead__nav-responsive-items-item-link--button:hover{background-color:#fff477;color:#2f3d65}
+.footer{padding-top:50px}
+.footer__inner{position:relative;width:100%}
+@media all and (max-width:1240px){.footer__inner{padding:0 40px}
+}@media all and (max-width:1250px){.footer__inner{padding:0 10px}
+}.footer__upper{background-color:#2f3d65;padding:55px 0}
+.footer__lower{background-color:#212f55;padding:22px 0}
+.footer__content-logo,.footer__content-nav,.footer__content-social,.footer__content-nav-items-item,.footer__content-social-items-item{display:inline-block;vertical-align:middle}
+.footer__content-logo{position:relative;width:266px}
+.footer__content-nav{width:calc(100% - 560px)}
+.footer__content-social{width:100%;max-width:294px;height:32px}
+.footer__content-logo,.footer__content-nav,.footer__content-social{text-align:right}
+@media all and (max-width:1250px){.footer__content-logo,.footer__content-nav,.footer__content-social{display:block;margin:0 auto;text-align:center}
+}@media all and (max-width:1250px){.footer__content-nav,.footer__content-social{margin-top:45px;width:100%}
+}.footer__content-logo-image{display:block;max-width:100%}
+.footer__content-nav-items{margin:0;padding:0}
+.footer__content-nav-items-item+.footer__content-nav-items-item{padding-left:40px}
+@media all and (max-width:600px){.footer__content-nav-items-item+.footer__content-nav-items-item{padding-left:30px}
+}@media all and (max-width:600px){.footer__content-nav-items-item+.footer__content-nav-items-item--button{padding:0}
+}@media all and (max-width:600px){.footer__content-nav-items-item--button{display:block;margin-top:44px}
+}.footer__content-nav-items-item-link{font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:.9375em;color:white;line-height:1em;text-transform:uppercase;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
+.footer__content-nav-items-item-link:hover{color:#fff477}
+.footer__content-nav-items-item-link--button{padding:9px 21px;color:#fff477;border:3px solid #fff477}
+.footer__content-nav-items-item-link--button:hover{background-color:#fff477;color:#2f3d65}
+.footer__content-social-items-item+.footer__content-social-items-item{margin-left:25px}
+.footer__content-social-items-item-link{display:block;width:45px;height:32px}
+.footer__content-social-items-item-link--twitter{background-image:url(../images/twitter.svg);background-repeat:no-repeat;background-position:center center}
+.footer__content-social-items-item-link--facebook{background-image:url(../images/facebook.svg);background-repeat:no-repeat;background-position:center center}
+.footer__content-social-items-item-link--youtube{background-image:url(../images/youtube.svg);background-repeat:no-repeat;background-position:center center}
+.footer__copyright-text{font-family:"Brandon Grotesque",sans-serif;font-weight:600;font-size:.875em;line-height:1.4285714286em;color:#8797c3;letter-spacing:.5px;text-align:center}
