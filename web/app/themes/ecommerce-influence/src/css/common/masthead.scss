@@ -316,11 +316,10 @@
 
 .masthead__nav-responsive{
 	position: fixed;
-	top: 80px;
 	left: 0;
 
 	width: 100%;
-	height: calc(100% - 80px);
+	height: 100%;
 
 	visibility: hidden;
 	opacity: 0;
@@ -335,11 +334,11 @@
 	&:after{
 		content: "";
 		position: fixed;
-		top: 80px;
+		top: inherit;
 		left: 0;
 		
 		width: 100%;
-		height: 100%;
+		height: inherit;
 
 		background-color: $text-blue;
 		opacity: 0.95;
