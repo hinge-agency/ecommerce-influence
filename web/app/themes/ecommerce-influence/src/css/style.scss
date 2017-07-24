@@ -11,7 +11,7 @@
 }
 
 body,html{
-	font-size: $base-font;
+	font-size: 16px;
 
 	@include screen-lt(768){
 		font-size: 90%;
@@ -21,9 +21,23 @@ body,html{
 	}
 }
 
+.nav-active{
+	overflow: hidden;
+	
+	.masthead__nav-responsive{
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.masthead__right-search{
+		opacity: 0;
+	}
+}
+
 .constrain{
 	width: 100%;
 	max-width: 1160px;
 }
 
 @import "common/topDripForm";
+@import "common/masthead";
