@@ -27,12 +27,12 @@ body,html{font-size:16px}
 }.nav-active{overflow:hidden}
 .nav-active .masthead__nav-responsive{visibility:visible;opacity:1}
 .nav-active .masthead__right-search{opacity:0}
-.main{padding-top:60px;direction:rtl}
+.main{position:relative;padding-top:60px;direction:rtl}
 .content{display:inline-block;vertical-align:top;direction:ltr;width:70%;background-color:white}
 @media all and (max-width:1000px){.content{display:block;width:100%}
 }.constrain{width:100%;max-width:1160px;margin:0 auto;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 @media all and (max-width:1220px){.constrain{width:90%}
-}.homePage-sidebar,.pages-sidebar{display:inline-block;vertical-align:top;direction:ltr;width:30%}
+}.homePage-sidebar,.pages-sidebar{position:relative;display:inline-block;vertical-align:top;direction:ltr;width:30%}
 @media all and (max-width:1000px){.homePage-sidebar,.pages-sidebar{margin-top:50px;display:block;width:100%}
 }.topDripForm{position:relative;width:100%;max-width:1440px;margin:0 auto}
 .topDripForm__inner{position:relative;min-height:320px;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}

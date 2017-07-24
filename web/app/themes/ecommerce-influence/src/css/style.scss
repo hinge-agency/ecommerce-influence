@@ -35,6 +35,8 @@ body,html{
 }
 
 .main{
+	position: relative;
+
 	padding-top: 60px;
 	direction: rtl;
 }
@@ -67,6 +69,8 @@ body,html{
 
 .homePage-sidebar,
 .pages-sidebar{
+	position: relative;
+	
 	display: inline-block;
 	vertical-align: top;
 	direction: ltr;
@@ -75,7 +79,7 @@ body,html{
 
 	@include screen-lt(1000){
 		margin-top: 50px;
-		
+
 		display: block;
 		width: 100%;
 	}
