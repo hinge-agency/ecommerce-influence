@@ -158,3 +158,223 @@
 		background-color: $primary-yellow;
 	}
 }
+
+/* FORM BLOCK */
+.sidebar__formBlock{
+	margin-top: 40px;
+	padding: 25px 30px;
+
+	width: 100%;
+
+	background-color: $text-blue;
+	border-radius: 3px;
+
+	text-align: center;
+}
+.sidebar__formBlock-image{
+	max-width: 100%;
+}
+.sidebar__formBlock-formTitle{
+	position: relative;
+	margin-top: 6px;
+	z-index: 0;
+
+	display: inline-block;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(35);
+	line-height: px-to-ems(50,35);
+
+	text-transform: capitalize;
+
+	color: white;
+
+	&:after{
+		content: "";
+		position: absolute;
+		bottom: 2px;
+		left: -2%;
+		z-index: -1;
+
+		width: 104%;
+		height: 10px;
+
+		background-color: $secondary-purple;
+	}
+}
+.sidebar__formBlock-formText{
+	position: relative;
+	margin-top: 6px;
+	z-index: 0;
+
+	display: inline-block;
+
+	font-family: $brandon;
+	font-weight: 600;
+	font-size: px-to-ems(24);
+	line-height: px-to-ems(28,24);
+
+	color: white;
+}
+.sidebar__formBlock-form{
+	margin-top: 10px;
+}
+.sidebar__formBlock-form-block{
+	margin-top: 12px;
+	width: 100%;
+	max-height: 50px;
+
+	&--button{
+		max-height: 60px;
+	}
+}
+.sidebar__formBlock-form-block-input{
+	padding-left: 20px;
+
+	width: 100%;
+	height: 50px;
+
+	background-color: white;
+	border-radius: 3px;
+
+	font-family: $brandon;
+	font-weight: 600;
+	font-size: px-to-ems(25);
+	line-height: px-to-ems(27,25);
+
+	color: $text-blue;
+
+	&::-webkit-input-placeholder{
+		color: $text-gray;
+	}
+
+	&:-ms-input-placeholder{
+		color: $text-gray;
+	}
+
+	&::placeholder{
+		color: $text-gray;
+	}
+}
+.sidebar__formBlock-form-block-button{
+	display: block;
+	width: 100%;
+	height: 60px;
+	padding: 18px 62px;
+
+	background-color: $primary-yellow;
+	border-radius: 3px;
+
+	text-align: center;
+	white-space: normal;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(20);
+	line-height: px-to-ems(15,20);
+
+	color: $text-blue;
+
+	text-transform: uppercase;
+}
+
+/* TESTIMONIAL */
+.sidebar__testimonial{
+	margin-top: 40px;
+	padding-top: 150px;
+
+	border-radius: 3px;
+
+	background-repeat: no-repeat;
+	background-position: center bottom 10px;
+}
+.sidebar__testimonial-blue{
+	position: relative;
+	padding: 0 6px;
+
+	background-color: $text-blue;
+
+	text-align: center;
+}
+.sidebar__testimonial-blue-wrapper{
+	position: relative;
+	top: -20px;
+}
+.sidebar__testimonial-blue-text{
+	position: relative;
+	margin-top: 6px;
+	padding: 0 2px;
+
+	display: inline-block;
+
+	font-family: $brandon;
+	font-weight: 600;
+	font-size: px-to-ems(25);
+	line-height: px-to-ems(41,25);
+
+	color: $text-blue;
+	background-color: $primary-yellow;
+
+	// &:before{
+	// 	content: "";
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+
+	// 	width: 100%;
+	// 	height: 100%;
+
+	// 	background-color: $primary-yellow;
+	// }
+}
+.sidebar__testimonial-blue-details{
+	margin-top: 8px;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(18);
+	line-height: px-to-ems(28,18);
+
+	color: white;
+
+	text-transform: uppercase;
+}
+.sidebar__testimonial-blue-button{
+	margin-top: 14px;
+	padding: 9px 21px;
+
+	display: inline-block;
+
+	background-color: $text-blue;
+	border: 3px solid $primary-yellow;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(15);
+	line-height: px-to-ems(15,15);
+	
+	color: $primary-yellow;
+
+	text-transform: uppercase;
+
+	&:hover{
+		background-color: $primary-yellow;
+		color: $text-blue;
+	}
+
+}
+
+/*==================================================
+=            LEGACY BROWSER PLACEHOLDER            =
+==================================================*/
+
+.sidebar__formBlock-form-block-input:-ms-input-placeholder{
+	color: $text-gray !important;
+}
+.sidebar__formBlock .placeholder{
+	color: $text-gray !important;
+}
+
+/*=====  End of LEGACY BROWSER PLACEHOLDER  ======*/
+
