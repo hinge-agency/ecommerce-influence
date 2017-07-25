@@ -184,6 +184,7 @@
 
 /* FORM BLOCK */
 .sidebar__formBlock{
+	position: relative;
 	margin-top: 45px;
 	padding: 0 26px;
 
@@ -431,12 +432,13 @@
 
 	display: inline-block;
 	vertical-align: top;
-	width: calc(50% - 20px);
+	width: 50%;
 
 	text-align: right;
 
 	@include screen-lt(780){
 		margin-left: 20px;
+		width: calc(50% - 20px);
 	}
 	@include screen-lt(660){
 		margin-left: 0;
