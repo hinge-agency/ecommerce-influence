@@ -45,7 +45,7 @@ body,html{
 	vertical-align: top;
 	direction: ltr;
 
-	width: 70%;
+	width: calc(100% - 340px);
 
 	background-color: white;
 
@@ -75,7 +75,7 @@ body,html{
 	vertical-align: top;
 	direction: ltr;
 
-	width: 30%;
+	width: 340px;
 
 	@include screen-lt(1000){
 		margin-top: 50px;
