@@ -34,13 +34,60 @@ body,html{
 	}
 }
 
+.main{
+	position: relative;
+
+	padding-top: 60px;
+	direction: rtl;
+}
+.content{
+	display: inline-block;
+	vertical-align: top;
+	direction: ltr;
+
+	width: calc(100% - 340px);
+
+	background-color: white;
+
+	@include screen-lt(1000){
+		display: block;
+		width: 100%;
+	}
+}
 .constrain{
 	width: 100%;
 	max-width: 1160px;
 
 	margin: 0 auto;
+	
+	@include transition();
+
+	@include screen-lt(1220){
+		width: 90%;
+	}
+}
+
+.homePage-sidebar,
+.pages-sidebar{
+	position: relative;
+
+	display: inline-block;
+	vertical-align: top;
+	direction: ltr;
+
+	width: 340px;
+
+	@include screen-lt(1000){
+		margin-top: 50px;
+
+		display: block;
+		width: 100%;
+	}
 }
 
 @import "common/topDripForm";
 @import "common/masthead";
 @import "common/footer";
+@import "blocks/sidebar";
+@import "blocks/latestContent";
+@import "blocks/bottomDripForm";
