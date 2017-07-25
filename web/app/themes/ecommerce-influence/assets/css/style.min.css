@@ -195,7 +195,7 @@ sidebar__testimonial-blue .sidebar__latest-block:nth-child(even){background-colo
 .sidebar__profiles{margin-top:30px;width:100%}
 @media all and (max-width:1000px){.sidebar__profiles{display:inline-block;vertical-align:top;width:50%}
 }@media all and (max-width:660px){.sidebar__profiles{display:block;width:100%;text-align:center}
-}.sidebar__profiles-profile{position:relative;margin-top:20px;padding:17px;padding-left:150px;display:inline-block;width:100%;max-width:340px;background-color:#f9f9f9;background-repeat:no-repeat;background-position:left 4px top -4px}
+}.sidebar__profiles-profile{position:relative;margin-top:20px;padding:17px;padding-left:150px;display:inline-block;width:100%;max-width:340px;background-color:#f9f9f9;background-repeat:no-repeat;background-position:left 2px top -2px}
 .sidebar__profiles-profile-context{font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:.875em;line-height:1em;text-transform:uppercase;color:#8797c3}
 .sidebar__profiles-profile-name{margin-top:4px;font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:1.75em;line-height:.8571428571em;text-transform:uppercase;color:#2f3d65}
 .sidebar__profiles-profile-name-first,.sidebar__profiles-profile-name-last{display:inline-block;max-width:100%}
