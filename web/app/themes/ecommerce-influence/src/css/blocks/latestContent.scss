@@ -76,6 +76,11 @@
 	&:hover{
 		text-decoration: underline;
 	}
+
+	@include screen-lt(660){
+		font-size: px-to-ems(25);
+		line-height: px-to-ems(34,25);
+	}
 }
 .latestContentHome__block-text{
 	margin-top: 12px;
