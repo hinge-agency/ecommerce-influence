@@ -13,10 +13,14 @@
 
 	&:nth-child(1){
 		padding-top: 0;
-	}
+	}sidebar__testimonial-blue
 
 	&:nth-child(even){
 		background-color: $cloudy-white;
+	}
+
+	@include screen-lt(1000){
+		padding-left: 0;
 	}
 }
 .sidebar__latest-block-label{
@@ -71,6 +75,10 @@
 	margin-top: 5px;
 
 	text-align: center;
+
+	@include screen-lt(1000){
+		text-align: left;
+	}
 }
 .sidebar__latest-all-link{
 	position: relative;
@@ -99,11 +107,19 @@
 
 /* PROFILES */
 .sidebar__profiles{
-	margin-top: 35px;
+	margin-top: 30px;
 	width: 100%;
 
 	@include screen-lt(1000){
-		max-width: 340px;
+		display: inline-block;
+		vertical-align: top;
+		width: 50%;
+	}
+	@include screen-lt(660){
+		display: block;
+		width: 100%;
+
+		text-align: center;
 	}
 }
 .sidebar__profiles-profile{
@@ -111,13 +127,15 @@
 	margin-top: 20px;
 	padding: 17px;
 	padding-left: 150px;
-
+	
+	display: inline-block;
 	width: 100%;
+	max-width: 340px;
 
 	background-color: $cloudy-white;
 
 	background-repeat: no-repeat;
-	background-position: left 10px center;
+	background-position: left 4px top -4px;
 }
 .sidebar__profiles-profile-context{
 	font-family: $brandon;
@@ -144,6 +162,7 @@
 .sidebar__profiles-profile-name-first,
 .sidebar__profiles-profile-name-last{
 	display: inline-block;
+	max-width: 100%;
 }
 .sidebar__profiles-profile-name-last{
 	position: relative;
@@ -165,8 +184,8 @@
 
 /* FORM BLOCK */
 .sidebar__formBlock{
-	margin-top: 40px;
-	padding: 25px 30px;
+	margin-top: 45px;
+	padding: 0 26px;
 
 	width: 100%;
 
@@ -174,9 +193,87 @@
 	border-radius: 3px;
 
 	text-align: center;
+
+	@include screen-lt(1000){
+		padding: 0 50px;
+		padding-bottom: 20px;
+		text-align: left;
+	}
+	@include screen-lt(660){
+		padding: 0 20px;
+		text-align: center;
+	}
+}
+.sidebar__formBlock-wrapper{
+	position: relative;
+	top: -20px;
+
+	@include screen-lt(1000){
+		top: -40px;
+	}
+	@include screen-lt(660){
+		top: -20px;
+	}
+}
+.sidebar__formBlock-top,
+.sidebar__formBlock-form{
+	display: block;
+
+	@include screen-lt(1000){
+		display: inline-block;
+		vertical-align: bottom;
+		width: 48%;
+	}
+	@include screen-lt(660){
+		display: block;
+		width: 100%;
+	}
+}
+.sidebar__formBlock-form{
+	margin-top: 20px;
+
+	@include screen-lt(1000){
+		margin-left: 2%;
+	}
+	@include screen-lt(660){
+		margin-left: 0;
+	}
+}
+.sidebar__formBlock-top{
+	position: relative;
+
+	@include screen-lt(1000){
+		padding-right: 10px;
+	}
+	@include screen-lt(660){
+		padding-right: 0;
+	}
 }
 .sidebar__formBlock-image{
 	max-width: 100%;
+
+	&--small{
+		display: block;
+		margin: 0 auto;
+
+		@include screen-lt(1000){
+			display: none;
+		}
+		@include screen-lt(660){
+			display: block;
+		}
+	}
+
+	&--medium{
+		display: none;
+
+		@include screen-lt(1000){
+			display: block;
+		}
+		@include screen-lt(660){
+			display: none;
+		}
+	}
 }
 .sidebar__formBlock-formTitle{
 	position: relative;
@@ -187,8 +284,8 @@
 
 	font-family: $brandon;
 	font-weight: 900;
-	font-size: px-to-ems(35);
-	line-height: px-to-ems(50,35);
+	font-size: px-to-ems(23);
+	line-height: px-to-ems(33,23);
 
 	text-transform: capitalize;
 
@@ -197,7 +294,7 @@
 	&:after{
 		content: "";
 		position: absolute;
-		bottom: 2px;
+		bottom: -1px;
 		left: -2%;
 		z-index: -1;
 
@@ -209,20 +306,17 @@
 }
 .sidebar__formBlock-formText{
 	position: relative;
-	margin-top: 6px;
+	margin-top: 11px;
 	z-index: 0;
 
 	display: inline-block;
 
 	font-family: $brandon;
 	font-weight: 600;
-	font-size: px-to-ems(24);
-	line-height: px-to-ems(28,24);
+	font-size: px-to-ems(17);
+	line-height: px-to-ems(27,17);
 
 	color: white;
-}
-.sidebar__formBlock-form{
-	margin-top: 10px;
 }
 .sidebar__formBlock-form-block{
 	margin-top: 12px;
@@ -265,7 +359,7 @@
 	display: block;
 	width: 100%;
 	height: 60px;
-	padding: 18px 62px;
+	padding: 18px 0;
 
 	background-color: $primary-yellow;
 	border-radius: 3px;
@@ -292,30 +386,73 @@
 
 /* TESTIMONIAL */
 .sidebar__testimonial{
+	position: relative;
 	margin-top: 40px;
-	padding-top: 150px;
+	padding: 120px 10px 30px 10px;
 
 	max-width: 340px;
 
 	border-radius: 3px;
 
 	background-repeat: no-repeat;
-	background-position: center bottom 10px;
-}
-.sidebar__testimonial-blue{
-	position: relative;
-	padding: 0 6px;
+	background-position: center top;
 
-	background-color: $text-blue;
-	border-radius: 0 0 3px 3px;
+	overflow: hidden;
+	
+	@include screen-lt(1000){
+		display: none;
+	}
+
+	&--responsive{
+		display: none;
+
+		@include screen-lt(1000){
+			display: inline-block;
+		}
+	}
+
+	&:after{
+		content: "";
+		position: absolute;
+		top: 40%;
+		left: 0;
+		z-index: 0;
+
+		width: 200%;
+		height: 100%;
+
+		background-color: $text-blue;
+
+		transform: rotate(-16deg);
+	}
+}
+.sidebar__testimonial-wrapper{
+	position: relative;
+
+	display: inline-block;
+	vertical-align: top;
+	width: calc(50% - 20px);
+
+	text-align: right;
+
+	@include screen-lt(780){
+		margin-left: 20px;
+	}
+	@include screen-lt(660){
+		margin-left: 0;
+		display: block;
+		width: 100%;
+
+		text-align: center;
+	}
+}
+.sidebar__testimonial-textWrapper{
+	position: relative;
+	z-index: 1;
 
 	text-align: center;
 }
-.sidebar__testimonial-blue-wrapper{
-	position: relative;
-	top: -20px;
-}
-.sidebar__testimonial-blue-text{
+.sidebar__testimonial-text{
 	position: relative;
 	margin-top: 6px;
 	padding: 0 2px;
@@ -328,21 +465,13 @@
 	line-height: px-to-ems(41,25);
 
 	color: $text-blue;
-	background-color: $primary-yellow;
 
-	// &:before{
-	// 	content: "";
-	// 	position: absolute;
-	// 	top: 0;
-	// 	left: 0;
-
-	// 	width: 100%;
-	// 	height: 100%;
-
-	// 	background-color: $primary-yellow;
-	// }
+  	span{
+		background-color: $primary-yellow;
+		padding: 0 2px;
+  	}
 }
-.sidebar__testimonial-blue-details{
+.sidebar__testimonial-details{
 	margin-top: 8px;
 
 	font-family: $brandon;
@@ -354,9 +483,9 @@
 
 	text-transform: uppercase;
 }
-.sidebar__testimonial-blue-button{
+.sidebar__testimonial-button{
 	margin-top: 14px;
-	padding: 9px 21px;
+	padding: 12px 21px;
 
 	display: inline-block;
 
@@ -378,7 +507,6 @@
 		background-color: $primary-yellow;
 		color: $text-blue;
 	}
-
 }
 
 /*==================================================
