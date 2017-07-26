@@ -5,10 +5,13 @@
 	width: 100%;
 
 	background-color: $light-gray;
+
+	@include screen-lt(500){
+		padding: 30px 0;
+	}
 }
 .relatedContent__inner{
 	position: relative;
-	width: 100%;
 }
 .relatedContent__topBar{
 	position: relative;
@@ -20,18 +23,34 @@
 	display: inline-block;
 	vertical-align: middle;
 
-	width: 50%;
+	@include screen-lt(500){
+		margin: 0 auto;
+		display: block;
+	}
 }
 .relatedContent__topBar-title{
+	width: calc(100% - 110px);
+
 	color: $text-blue;
 
 	font-family: $brandon;
 	font-weight: 900;
 	font-size: px-to-ems(35);
 	line-height: px-to-ems(35,35);
+
+	@include screen-lt(500){
+		width: 100%;
+		text-align: center;
+	}
 }
 .relatedContent__topBar-pagination{
 	text-align: right;
+
+	width: 110px;
+
+	@include screen-lt(500){
+		margin-top: 20px;
+	}
 }
 .relatedContent__topBar-pagination-buttons{
 	display: inline-block;
