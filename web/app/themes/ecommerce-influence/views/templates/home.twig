@@ -1,8 +1,18 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    <main>
-        <h1>{{ title }}</h1>
-        <p>{{ content|raw }}</p>
-    </main>
+
+ 	<main class="main constrain">
+
+        <section class="content">
+            {% include 'components/blocks/latest-content.twig' %}
+        </section><!--
+        --><section class="homePage-sidebar">
+        	{% include 'components/blocks/sidebar.twig' %}
+        </section>
+
+	</main>
+
+	{% include 'components/blocks/bottom-drip-form.twig' %}
+
 {% endblock %}
