@@ -7,21 +7,13 @@
      	{% include 'components/common/top-drip-form.twig' %}
 
         {% include 'components/common/masthead.twig' %}
-        
-        <main class="main constrain">
-
-            <div class="content">
-                {% include 'components/blocks/latest-content.twig' %}
-            </div><!--
-            -->{% include 'components/blocks/sidebar.twig' %}
-        </main>
 
         {% block content %}
             <p>Sorry, no content</p>
         {% endblock %}
             
-        {% include 'components/blocks/bottom-drip-form.twig' %}
-         
+        {% include 'components/blocks/acf.twig' %}
+
         {% include 'components/common/footer.twig' %}
 
         {% include 'html-footer.twig' %}

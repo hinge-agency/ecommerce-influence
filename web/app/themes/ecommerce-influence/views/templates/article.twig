@@ -1,0 +1,16 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+ 	<main class="main constrain">
+
+        <section class="content">
+            {% include 'components/blocks/latest-content.twig' %}
+        </section><!--
+        --><section class="pages-sidebar">
+        	{% include 'components/blocks/pages-sidebar.twig' %}
+        </section>
+
+	</main>
+
+{% endblock %}
