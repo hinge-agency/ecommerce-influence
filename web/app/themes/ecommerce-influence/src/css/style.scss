@@ -85,10 +85,57 @@ body,html{
 	}
 }
 
+.pages-sidebar{
+
+	.sidebar__formBlock{
+		margin-top: 0;
+	}
+	.sidebar__profiles{
+		@include screen-lt(1000){	
+			margin: 0 auto;
+
+			display: block;
+			width: 100%;
+
+			text-align: center;
+		}
+		@include screen-lt(400){	
+			margin: 0 auto;
+
+			display: block;
+			width: 100%;
+
+			text-align: left;
+		}
+	}
+	.sidebar__latest,
+	.sidebar__latest-all{
+		margin-top: 47px;
+
+		@include screen-lt(1000){	
+			text-align: center;
+		}
+		@include screen-lt(400){	
+			text-align: left;
+		}
+	}
+	.sidebar__latest-all{
+		@include screen-lt(1000){
+			margin-top: 0;
+			padding: 20px 0;
+		}
+	}
+}
+
 @import "common/topDripForm";
 @import "common/masthead";
 @import "common/footer";
 @import "blocks/sidebar";
 @import "blocks/latestContent";
+<<<<<<< HEAD
 @import "blocks/contentGrid";
 @import "blocks/bottomDripForm";
+=======
+@import "blocks/bottomDripForm";
+@import "blocks/related";
+>>>>>>> templates
