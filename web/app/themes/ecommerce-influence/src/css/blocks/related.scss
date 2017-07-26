@@ -54,7 +54,7 @@
 	}
 }
 .relatedContent__topBar-pagination-button-link{
-	padding: 20px 25px;
+	padding: 20px 26px;
 
 	display: block;
 
@@ -67,7 +67,7 @@
 		background-image: url('../images/leftArrow.svg');
 
 		&--first{
-			background-image: url('../images/rightArrow-last.svg');
+			background-image: url('../images/leftArrow-last.svg');
 		}
 	}
 
