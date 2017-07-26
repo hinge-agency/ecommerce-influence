@@ -34,6 +34,13 @@ body,html{font-size:16px}
 @media all and (max-width:1220px){.constrain{width:90%}
 }.homePage-sidebar,.pages-sidebar{position:relative;display:inline-block;vertical-align:top;direction:ltr;width:340px}
 @media all and (max-width:1000px){.homePage-sidebar,.pages-sidebar{margin-top:50px;display:block;width:100%}
+}.pages-sidebar .sidebar__formBlock{margin-top:0}
+@media all and (max-width:1000px){.pages-sidebar .sidebar__profiles{margin:0 auto;display:block;width:100%;text-align:center}
+}@media all and (max-width:400px){.pages-sidebar .sidebar__profiles{margin:0 auto;display:block;width:100%;text-align:left}
+}.pages-sidebar .sidebar__latest,.pages-sidebar .sidebar__latest-all{margin-top:47px}
+@media all and (max-width:1000px){.pages-sidebar .sidebar__latest,.pages-sidebar .sidebar__latest-all{text-align:center}
+}@media all and (max-width:400px){.pages-sidebar .sidebar__latest,.pages-sidebar .sidebar__latest-all{text-align:left}
+}@media all and (max-width:1000px){.pages-sidebar .sidebar__latest-all{margin-top:0;padding:20px 0}
 }.topDripForm{position:relative;width:100%;max-width:1440px;margin:0 auto}
 .topDripForm__inner{position:relative;min-height:336px;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 .topDripForm__inner--close{display:none}
@@ -177,7 +184,7 @@ body,html{font-size:16px}
 .footer__content-social-items-item-link--facebook{background-image:url(../images/facebook.svg);background-repeat:no-repeat;background-position:center center}
 .footer__content-social-items-item-link--youtube{background-image:url(../images/youtube.svg);background-repeat:no-repeat;background-position:center center}
 .footer__copyright-text{font-family:"Brandon Grotesque",sans-serif;font-weight:600;font-size:.875em;line-height:1.4285714286em;color:#8797c3;letter-spacing:.5px;text-align:center}
-.sidebar{position:relative;width:100%}
+.sidebar{position:relative;padding-bottom:50px}
 .sidebar__latest-block{position:relative;padding:20px;background-color:white}
 .sidebar__latest-block:nth-child(1){padding-top:0}
 sidebar__testimonial-blue .sidebar__latest-block:nth-child(even){background-color:#f9f9f9}
@@ -328,3 +335,17 @@ sidebar__testimonial-blue .sidebar__latest-block:nth-child(even){background-colo
 .bottomDripForm__closeButton-line{position:absolute;top:calc(50% - 1px);left:calc(50% - 12px);width:24px;height:2px;background-color:white}
 .bottomDripForm__closeButton-line--lineOne{transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg)}
 .bottomDripForm__closeButton-line--lineTwo{transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-ms-transform:rotate(-45deg)}
+.relatedContent{position:relative;padding:50px 0;width:100%;background-color:#f5f5f5}
+.relatedContent__inner{position:relative;width:100%}
+.relatedContent__topBar{position:relative;width:100%}
+.relatedContent__topBar-title,.relatedContent__topBar-pagination{display:inline-block;vertical-align:middle;width:50%}
+.relatedContent__topBar-title{color:#2f3d65;font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:2.1875em;line-height:1em}
+.relatedContent__topBar-pagination{text-align:right}
+.relatedContent__topBar-pagination-buttons{display:inline-block;max-width:110px;background:white;-webkit-box-shadow:0 6px 14px 0 rgba(0,0,0,0.06),0 1px 3px 0 rgba(0,0,0,0.06);box-shadow:0 6px 14px 0 rgba(0,0,0,0.06),0 1px 3px 0 rgba(0,0,0,0.06);border-radius:5px}
+.relatedContent__topBar-pagination-button{position:relative;display:inline-block;vertical-align:middle;border-right:3px solid #f5f5f5}
+.relatedContent__topBar-pagination-button:nth-last-child(1){border:0}
+.relatedContent__topBar-pagination-button-link{padding:20px 25px;display:block;background-repeat:no-repeat;background-position:center center;cursor:pointer}
+.relatedContent__topBar-pagination-button-link--left{background-image:url("../images/leftArrow.svg")}
+.relatedContent__topBar-pagination-button-link--left--first{background-image:url("../images/rightArrow-last.svg")}
+.relatedContent__topBar-pagination-button-link--right{background-image:url("../images/rightArrow.svg")}
+.relatedContent__topBar-pagination-button-link--right--last{background-image:url("../images/rightArrow-last.svg")}
