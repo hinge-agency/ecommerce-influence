@@ -1,5 +1,6 @@
 .contentGrid{
-
+	position: relative;
+	padding-top: 100px;
 }
 .contentGrid__inner{
 
@@ -17,14 +18,39 @@
 
 }
 .contentGrid__items-item{
+	position: relative;
 
+	display: inline-block;
+	vertical-align: top;
+	width: 29.310344827586207%;
+	margin-left: 6.03448275862069%;
+	margin-top: 80px;
+
+	&:nth-child(3n+1){
+		margin-left: 0;
+	}
+}
+.contentGrid__items-item-wrapper{
+	display: block;
+	width: 100%;
+	height: 100%;
+
+	cursor: pointer;
+
+	&:hover{
+		.contentGrid__items-item-textWrapper-title{
+			text-decoration: underline;
+		}
+	}
 }
 
 .contentGrid__items-item-imageWrapper{
 	position: relative;
 }
 .contentGrid__items-item-imageWrapper-sizingImage{
-
+	display: block;
+	
+	max-width: 100%;
 }
 .contentGrid__items-item-imageWrapper-image{
 	position: absolute;
@@ -39,15 +65,80 @@
 }
 
 .contentGrid__items-item-textWrapper{
+	position: relative;
 
+	margin-top: 20px;
 }
 .contentGrid__items-item-textWrapper-label{
-	
+	padding: 5px 5px 5px 24px;
+
+	display: inline-block;
+	vertical-align: center;
+
+	font-size: 0;
+
+	font-family: $brandon;
+	font-weight: bold;
+	font-size: px-to-ems(10);
+	line-height: px-to-ems(10,10);
+	letter-spacing: 1px;
+
+	text-transform: uppercase;
+
+	&--podcast{
+		background-color: $primary-yellow;
+		color: black;
+
+		background-image: url('../images/podcast.svg');
+		background-repeat: no-repeat;
+		background-position: left 10px center;
+	}
+	&--article{
+		background-color: $text-blue;
+		color: white;
+
+		background-image: url('../images/article.svg');
+		background-repeat: no-repeat;
+		background-position: left 10px center;
+	}
 }
-.contentGrid__items-item-textWrapper-text{
-	
+.contentGrid__items-item-textWrapper-title{
+	margin-top: 8px;
+
+	color: $text-blue;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(23);
+	line-height: px-to-ems(30,23);
 }
 .contentGrid__items-item-textWrapper-link{
+	position: relative;
+	z-index: 0; 
+	margin-top: 15px;
+
+	display: inline-block;
+
+	font-size: 0;
 	
+	color: $text-blue;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(18);
+	line-height: px-to-ems(30,18);
+
+	&:after{
+		content: "";
+		position: absolute;
+		bottom: 5px;
+		left: -1%;
+		z-index: -1;
+
+		width: 102%;
+		height: 6px;
+
+		background-color: $primary-yellow;
+	}
 }
 
