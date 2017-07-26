@@ -1,6 +1,10 @@
 .contentGrid{
 	position: relative;
 	padding-top: 100px;
+
+	@include screen-lt(1000){
+		padding-top: 40px;
+	}
 }
 .contentGrid__inner{
 
@@ -11,10 +15,19 @@
 .contentGrid__actionBar{
 	position: relative;
 
+	display: block;
 	width: 100%;
 
 	&--bottom{
 		margin-top: 80px;
+
+		@include screen-lt(1000){
+			display: none;
+		}
+	}
+
+	@include screen-lt(1000){
+		text-align: center;
 	}
 }
 .contentGrid__actionBar-new,
@@ -33,6 +46,12 @@
 	background: white;
 	box-shadow: 0 6px 14px 0 rgba(0,0,0,0.06), 0 1px 3px 0 rgba(0,0,0,0.06);
 	border-radius: 5px;
+
+	@include transition();
+
+	@include screen-lt(1000){
+		width: 50px;
+	}
 }
 .contentGrid__actionBar-new{
 	text-align: left;
@@ -44,6 +63,10 @@
 	width: calc(100% - 270px);
 
 	text-align: center;
+
+	@include screen-lt(1000){
+		display: none;
+	}
 }
 
 .contentGrid__actionBar-filter-items{
@@ -92,6 +115,13 @@
 
 		background-image: url('../images/leftArrow-last.svg');
 	}
+
+	@include screen-lt(1000){
+		padding: 25px;
+		font-size: 0;
+
+		background-position: center center;
+	}
 }
 .contentGrid__actionBar-old-link{
 	padding: 10px 20px 10px 0;
@@ -105,6 +135,13 @@
 
 		background-image: url('../images/rightArrow-last.svg');
 	}
+
+	@include screen-lt(1000){
+		padding: 25px;
+		font-size: 0;
+
+		background-position: center center;
+	}
 }
 .contentGrid__actionBar-filter-items-item-link{
 	padding: 10px 55px;
@@ -117,6 +154,44 @@
 		background-color: $primary-yellow;
 	}
 }
+
+/* RESPONSIVE ACTION SELECT FILTER */
+
+.contentGrid__actionBar-filterResponsive{
+	display: none;
+
+	background: white;
+	box-shadow: 0 6px 14px 0 rgba(0,0,0,0.06), 0 1px 3px 0 rgba(0,0,0,0.06);
+	border-radius: 5px;
+
+	@include screen-lt(1000){
+		margin: 0 10px;
+
+		display: inline-block;
+		vertical-align: middle;
+		min-width: 160px;
+	}
+}
+.contentGrid__actionBar-filterResponsive-select{
+	padding: 14px 20px 14px 24px;
+
+	width: 100%;
+
+	color: $text-blue;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(22);
+	line-height: px-to-ems(22,22);
+	letter-spacing: 1px;
+
+	cursor: pointer;
+
+	background-image: url('../images/arrowDown.svg');
+	background-repeat: no-repeat;
+	background-position: right 20px center;
+}
+
 /* CONTENT LIST */
 
 .contentGrid__items{
@@ -124,15 +199,40 @@
 }
 .contentGrid__items-item{
 	position: relative;
+	margin-left: 6.03448275862069%;
+	margin-top: 80px;
 
 	display: inline-block;
 	vertical-align: top;
 	width: 29.310344827586207%;
-	margin-left: 6.03448275862069%;
-	margin-top: 80px;
+	max-width: 340px;
 
 	&:nth-child(3n+1){
 		margin-left: 0;
+	}
+
+	@include screen-lt(820){
+		margin-top: 40px;
+
+		width: 46%;
+		
+		&:nth-child(even){
+			margin-left: 8%;
+		}
+		&:nth-child(odd){
+			margin-left: 0;
+		}
+	}
+	@include screen-lt(500){
+		
+		display: block;
+		width: 100%;
+		
+		&:nth-child(even),
+		&:nth-child(odd){
+			margin: 0 auto;
+			margin-top: 40px;
+		}
 	}
 }
 .contentGrid__items-item-wrapper{
@@ -217,6 +317,13 @@
 	font-weight: 900;
 	font-size: px-to-ems(23);
 	line-height: px-to-ems(30,23);
+
+	@include transition();
+
+	@include screen-lt(500){
+		font-size: px-to-ems(22);
+		line-height: px-to-ems(29,22);
+	}
 }
 .contentGrid__items-item-textWrapper-link{
 	position: relative;
