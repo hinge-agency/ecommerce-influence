@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Article Template
+Template Name: Episode Template
 */
 
 use Timber\Timber;
@@ -13,4 +13,4 @@ $context['post'] = $post;
 $context['title'] = $post->title;
 $context['content'] = $post->content;
 
-Timber::render('article.twig', $context);
+Timber::render('episode.twig', $context);
