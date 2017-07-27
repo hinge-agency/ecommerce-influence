@@ -1,13 +1,17 @@
 .sidebar{
 	position: relative;
 	padding-bottom: 50px;
+
+	@include screen-lt(500){
+		padding-bottom: 20px;
+	}
 }
 .sidebar__latest{
 
 }
 .sidebar__latest-block{
 	position: relative;
-	padding: 20px;
+	padding: 20px 0;
 	
 	background-color: white;
 
