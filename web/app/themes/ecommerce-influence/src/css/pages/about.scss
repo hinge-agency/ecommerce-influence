@@ -10,10 +10,15 @@
 	margin: 0 auto;
 	padding: 90px 0 50px 0;
 
-	width: 100%;
 	max-width: 850px;
 
 	text-align: center;
+
+	@include transition();
+
+	@include screen-lt(600){
+		padding: 40px 0;
+	}
 }
 .about__hero-heading{
 	margin: 0 auto;
@@ -27,6 +32,11 @@
 	font-weight: 900;
 	font-size: px-to-ems(39);
 	line-height: px-to-ems(48,39);
+	
+	@include screen-lt(600){
+		font-size: px-to-ems(30);
+		line-height: px-to-ems(40,30);;
+	}
 }
 .about__hero-text{
 	margin-top: 15px;
@@ -39,6 +49,11 @@
 	font-weight: normal;
 	font-size: px-to-ems(25);
 	line-height: px-to-ems(34,25);
+
+	@include screen-lt(600){
+		font-size: px-to-ems(24);
+		line-height: px-to-ems(36,24);;
+	}
 }
 
 .about__profiles{
@@ -49,7 +64,9 @@
 	margin: 0 auto;
 	padding: 40px 0 80px 0;
 
-	width: 100%;
+	@include screen-lt(600){
+		padding: 40px 0;
+	}
 }
 .about__profiles-items{
 	position: relative;
@@ -60,9 +77,20 @@
 
 	display: inline-block;
 	vertical-align: top;
-	width: 50%;
+	width: 49%;
 
 	text-align: center;
+
+	@include transition();
+
+	&:nth-child(even){
+		margin-left: 2%;
+	}
+
+	@include screen-lt(600){
+		display: block;
+		width: 100%;
+	}
 }
 .about__profiles-items-item-wrapper{
 	position: relative;
@@ -129,5 +157,13 @@
 		height: 6px;
 
 		background-color: $primary-yellow;
+	}
+}
+
+.about__hero{
+	@include transition();
+
+	@include screen-lt(600){
+		font-size: 75%;
 	}
 }
