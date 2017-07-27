@@ -189,10 +189,12 @@
 /* FORM BLOCK */
 .sidebar__formBlock{
 	position: relative;
+	margin: 0 auto;
 	margin-top: 45px;
 	padding: 0 26px;
 
 	width: 100%;
+	max-width: 760px;
 
 	background-color: $text-blue;
 	border-radius: 3px;
@@ -204,8 +206,10 @@
 		padding-bottom: 20px;
 		text-align: left;
 	}
-	@include screen-lt(660){
+	@include screen-lt(760){
 		padding: 0 20px;
+	}
+	@include screen-lt(660){
 		text-align: center;
 	}
 }

@@ -80,7 +80,7 @@
 	text-transform: uppercase;
 
 	@include transition();
-
+	
 	&:hover{
 		color: $primary-yellow;
 	}
@@ -95,6 +95,10 @@
 			background-color: $primary-yellow;
 			color: $text-blue;
 		}
+	}
+
+	&--active{
+		color: $primary-yellow;
 	}
 }
 .masthead__right-search{

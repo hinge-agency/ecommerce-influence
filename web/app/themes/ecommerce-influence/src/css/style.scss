@@ -41,10 +41,12 @@ body,html{
 	direction: rtl;
 }
 .content{
-	display: inline-block;
-	vertical-align: top;
+	position: relative;
+	padding-left: 60px;
 	direction: ltr;
 
+	display: inline-block;
+	vertical-align: top;
 	width: calc(100% - 340px);
 
 	background-color: white;
@@ -65,6 +67,9 @@ body,html{
 	@include screen-lt(1220){
 		width: 90%;
 	}
+}
+.lastBlock{
+	padding-bottom: 80px;
 }
 
 .homePage-sidebar,
@@ -130,10 +135,12 @@ body,html{
 @import "common/topDripForm";
 @import "common/masthead";
 @import "common/footer";
+@import "blocks/404";
 @import "blocks/sidebar";
 @import "blocks/latestContent";
 @import "blocks/contentGrid";
 @import "blocks/bottomDripForm";
 @import "blocks/bottomDripForm";
 @import "blocks/related";
-@import "blocks/article";
+@import "blocks/episode";
+@import "blocks/popupForm";
