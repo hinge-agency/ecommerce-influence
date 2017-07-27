@@ -52,6 +52,8 @@ body,html{
 	background-color: white;
 
 	@include screen-lt(1000){
+		padding-left: 0;
+		
 		display: block;
 		width: 100%;
 	}
