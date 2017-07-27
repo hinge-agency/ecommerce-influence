@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Episode Template
+Template Name: 404 Template
 */
 
 use Timber\Timber;

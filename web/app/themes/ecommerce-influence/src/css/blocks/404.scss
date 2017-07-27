@@ -1,0 +1,81 @@
+.notFound{
+	position: relative;
+
+	background-image: url('../images/404.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+
+	background-size: contain;
+
+	@include transition();
+
+	@include screen-lt(600){
+		background-position: center top 10px;
+	}
+}
+.notFound__content{
+	position: relative;
+	padding: 160px 0;
+
+	text-align: center;
+}
+.notFound__content-wrapper{
+	position: relative;
+	margin: 0 auto;
+
+	width: 100%;
+	max-width: 850px;
+}
+.notFound__content-error{
+	color: $text-blue;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(39);
+	line-height: px-to-ems(56,39);
+}
+.notFound__content-message{
+	margin-top: 12px;
+
+	color: $dark-gray;
+
+	font-family: $brandon;
+	font-weight: normal;
+	font-size: px-to-ems(25);
+	line-height: px-to-ems(34,25);
+}
+.notFound__content-button{
+	margin-top: 20px;
+	padding: 22px 27px;
+
+	display: inline-block;
+	border-radius: 3px;
+
+	background-color: $primary-yellow;
+	color: $text-blue;
+	
+	text-transform: uppercase;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: 0;
+	font-size: px-to-ems(20);
+	line-height: px-to-ems(15,20);
+
+	cursor: pointer;
+	
+	@include transition();
+
+	&:hover{
+		background-color: $yellow-dark;
+	}
+}
+
+.notFound__content{
+	@include transition();
+
+	@include screen-lt(600){
+		padding: 80px 0;
+		font-size: 90%;
+	}
+}
