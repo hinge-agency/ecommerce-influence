@@ -1,0 +1,41 @@
+.stories{
+	position: relative;
+	width: 100%;
+
+	background-color: $light-gray;
+}
+
+.stories__top{
+	position: relative;
+	width: 100%;
+}
+.stories__top-contentWrapper{
+	margin: 0 auto;
+	padding: 55px 0;
+	max-width: 760px;
+
+	text-align: center; 
+}
+.stories__top-heading{
+	margin: 0 auto;
+	
+	width: 100%;
+	max-width: 660px;
+
+	color: $text-blue;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(35);
+	line-height: px-to-ems(50,35);
+}
+.stories__top-text{
+	margin-top: 15px;
+
+	color: $dark-gray;
+
+	font-family: 'Spectral', $brandon;
+	font-weight: normal;
+	font-size: px-to-ems(20);
+	line-height: px-to-ems(29,20);
+}
