@@ -29,7 +29,7 @@ body,html{font-size:16px}
 .nav-active .masthead__right-search{opacity:0}
 .main{position:relative;padding-top:60px;direction:rtl}
 .content{position:relative;padding-left:60px;direction:ltr;display:inline-block;vertical-align:top;width:calc(100% - 340px);background-color:white}
-@media all and (max-width:1000px){.content{display:block;width:100%}
+@media all and (max-width:1000px){.content{padding-left:0;display:block;width:100%}
 }.constrain{width:100%;max-width:1160px;margin:0 auto;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 @media all and (max-width:1220px){.constrain{width:90%}
 }.lastBlock{padding-bottom:80px}
@@ -186,7 +186,30 @@ body,html{font-size:16px}
 .footer__content-social-items-item-link--facebook{background-image:url(../images/facebook.svg);background-repeat:no-repeat;background-position:center center}
 .footer__content-social-items-item-link--youtube{background-image:url(../images/youtube.svg);background-repeat:no-repeat;background-position:center center}
 .footer__copyright-text{font-family:"Brandon Grotesque",sans-serif;font-weight:600;font-size:.875em;line-height:1.4285714286em;color:#8797c3;letter-spacing:.5px;text-align:center}
-.notFound{position:relative;background-image:url("../images/404.png");background-repeat:no-repeat;background-position:center center;background-size:contain;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
+.about{position:relative}
+.about__hero{position:relative;width:100%}
+.about__hero-contentWrapper{margin:0 auto;padding:90px 0 50px 0;max-width:850px;text-align:center;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
+@media all and (max-width:600px){.about__hero-contentWrapper{padding:40px 0}
+}.about__hero-heading{margin:0 auto;width:100%;max-width:750px;color:#2f3d65;font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:2.4375em;line-height:1.2307692308em}
+@media all and (max-width:600px){.about__hero-heading{font-size:1.875em;line-height:1.3333333333em}
+}.about__hero-text{margin-top:15px;width:100%;color:#3e3e3e;font-family:"Spectral","Brandon Grotesque",sans-serif;font-weight:normal;font-size:1.5625em;line-height:1.36em}
+@media all and (max-width:600px){.about__hero-text{font-size:1.5em;line-height:1.5em}
+}.about__profiles{position:relative;width:100%}
+.about__profiles-contentWrapper{margin:0 auto;padding:40px 0 80px 0}
+@media all and (max-width:600px){.about__profiles-contentWrapper{padding:40px 0}
+}.about__profiles-items{position:relative;width:100%}
+.about__profiles-items-item{margin-top:40px;display:inline-block;vertical-align:top;width:49%;text-align:center;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
+.about__profiles-items-item:nth-child(even){margin-left:2%}
+@media all and (max-width:600px){.about__profiles-items-item{display:block;width:100%}
+}.about__profiles-items-item-wrapper{position:relative;margin:0 auto;width:100%;max-width:400px}
+.about__profiles-items-item-image{margin:0 auto;display:block;width:125px;height:125px;border-radius:50%}
+.about__profiles-items-item-name{margin-top:8px;width:100%;color:#2f3d65;font-family:"Brandon Grotesque",sans-serif;font-weight:bold;font-size:1.5625em;line-height:1.16em}
+.about__profiles-items-item-text{margin-top:15px;width:100%;color:#3e3e3e;font-family:"Spectral","Brandon Grotesque",sans-serif;font-weight:normal;font-size:1.25em;line-height:1.45em}
+.about__profiles-items-item-link{position:relative;z-index:0;margin-top:15px;display:inline-block;color:#2f3d65;font-family:"Brandon Grotesque",sans-serif;font-weight:bold;font-size:1.125em;line-height:1.6666666667em}
+.about__profiles-items-item-link:after{content:"";position:absolute;bottom:5px;left:-1%;z-index:-1;width:102%;height:6px;background-color:#fff477}
+.about__hero{-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
+@media all and (max-width:600px){.about__hero{font-size:75%}
+}.notFound{position:relative;background-image:url("../images/404.png");background-repeat:no-repeat;background-position:center center;background-size:contain;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 @media all and (max-width:600px){.notFound{background-position:center top 10px}
 }.notFound__content{position:relative;padding:160px 0;text-align:center}
 .notFound__content-wrapper{position:relative;margin:0 auto;width:100%;max-width:850px}
@@ -553,3 +576,14 @@ sidebar__testimonial-blue .sidebar__latest-block:nth-child(even){background-colo
 .popUpTemplate__formBlock-form-block-input::placeholder{color:#b4b4b4}
 .popUpTemplate__formBlock-form-block-button{display:block;width:100%;height:60px;padding:18px 0;background-color:#fff477;border-radius:3px;text-align:center;white-space:normal;font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:1.25em;line-height:.75em;color:#2f3d65;text-transform:uppercase;cursor:pointer;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 .popUpTemplate__formBlock-form-block-button:hover{background-color:#ccc35f}
+.stories{position:relative;width:100%;background-color:#f5f5f5}
+.stories__top,.stories__bottom{position:relative;width:100%}
+.stories__top-contentWrapper{margin:0 auto;padding:25px 0 55px 0;max-width:760px;text-align:center}
+.stories__top-heading{margin:0 auto;width:100%;max-width:660px;color:#2f3d65;font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:2.1875em;line-height:1.4285714286em}
+.stories__top-text{margin-top:15px;color:#3e3e3e;font-family:"Spectral","Brandon Grotesque",sans-serif;font-weight:normal;font-size:1.25em;line-height:1.45em}
+.stories__bottom-contentWrapper{margin:0 auto;margin-left:10%;padding:20px 0;width:90%}
+.stories__bottom-carousel-item{position:relative;margin-top:2%;display:table-cell;vertical-align:top;width:45%;max-width:570px;min-height:370px;background-color:white;-webkit-box-shadow:0 1px 2px 0 rgba(0,0,0,0.27),0 4px 12px 0 rgba(0,0,0,0.04);box-shadow:0 1px 2px 0 rgba(0,0,0,0.27),0 4px 12px 0 rgba(0,0,0,0.04);border-radius:3px}
+.stories__bottom-carousel-item+.stories__bottom-carousel-item{margin-left:2%}
+.stories__bottom-carousel-item-contentWrapper{padding:75px 50px 40px 50px;width:100%;height:100%}
+.stories__bottom-carousel-item-text{color:#3e3e3e;font-family:"Spectral","Brandon Grotesque",sans-serif;font-weight:normal;font-size:1.375em;line-height:1.4090909091em}
+.stories__bottom-carousel-item-details{margin-top:15px;color:#2f3d65;font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:1.375em;line-height:1.4090909091em}
