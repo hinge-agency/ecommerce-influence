@@ -17,7 +17,7 @@
 use Timber\Timber;
 use Lumberjack\PostTypes\Post;
 
-$templates = ['posts.twig', 'generic-page.twig'];
+$templates = ['episodes.twig', 'posts.twig', 'generic-page.twig'];
 
 $data = Timber::get_context();
 
