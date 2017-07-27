@@ -68,6 +68,9 @@ body,html{
 		width: 90%;
 	}
 }
+.lastBlock{
+	padding-bottom: 80px;
+}
 
 .homePage-sidebar,
 .pages-sidebar{
@@ -132,6 +135,7 @@ body,html{
 @import "common/topDripForm";
 @import "common/masthead";
 @import "common/footer";
+@import "blocks/404";
 @import "blocks/sidebar";
 @import "blocks/latestContent";
 @import "blocks/contentGrid";
