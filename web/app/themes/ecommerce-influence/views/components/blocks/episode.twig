@@ -10,7 +10,12 @@
 
 <section class="episode">
 
-	<img src="{{ assets }}/images/article.png" alt="Episode 118" class="episode__image">
+	<div class="episode__imageWrapper">
+		<img src="{{ assets }}/images/sizingImage-episode.png" alt="Sizing Image" class="episode__imageWrapper-sizingImage">
+		<span class="episode__imageWrapper-image" style="background-image: url('{{ image.url }}')"></span>
+	</div>
+
+	<!-- style="background-image: url({{ brick.hero_background_image.url }}) -->
 
 		<div class="episode__header">
 			

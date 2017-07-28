@@ -9,13 +9,27 @@
 	}
 }
 
-.episode__image{
-	margin: 0 auto;
-
-	display: block;
-	width: 100%;
-	max-width: 760px;
+.episode__imageWrapper{
+	position: relative;
 }
+.episode__imageWrapper-sizingImage{
+	display: block;
+	
+	max-width: 100%;
+}
+.episode__imageWrapper-image{
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: cover;
+}
+
 .episode__header{
 	position: relative;
 	margin-top: 35px;
