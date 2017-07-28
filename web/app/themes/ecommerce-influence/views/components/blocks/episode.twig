@@ -1,12 +1,41 @@
+{% set image, author, intro = '','','' %}		
+
+{% for block in blocks.layouts %}
+	{% if (block.layout == 'post_details')%}
+
+		{% set image, author, intro = block.image, block.author, block.intro %}	
+	
+	{% endif %}
+{% endfor %}
+
 <section class="episode">
 
 	<img src="{{ assets }}/images/article.png" alt="Episode 118" class="episode__image">
 
 		<div class="episode__header">
 			
-			<h1 class="episode__header-title">“Un-Networking” or How (and Why) Successful People Become More Successful</h1>
-			<p class="episode__header-details">Posted by <span class="episode__header-details-author">Austin Brawner</span> on<span class="episode__header-details-date"> September 1, 2016</span></p>
-			<div class="episode__header-intro"><p>The other day I saw a book about networking called "<em>Coffee, Lunch, Coffee</em>". I only read the title and I was already exhausted.</p></div>
+			<h1 class="episode__header-title">{{ title }}</h1>
+			<p class="episode__header-details">
+			
+			{% if (author) %}
+
+				Posted by <span class="episode__header-details-author">{{ author }}</span>	
+
+			{% endif %}			
+
+			{% if (post.category.name == 'Podcasts') %}
+
+				on<span class="episode__header-details-date"> {{ post.post_date }}</span>
+
+			{% endif %}
+
+			</p>
+			
+			{% if (intro) %}
+
+				<div class="episode__header-intro">{{ intro }}</div>
+
+			{% endif %}	
 
 			<div class="episode__header-social">
 				
