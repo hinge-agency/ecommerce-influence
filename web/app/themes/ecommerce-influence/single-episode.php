@@ -11,9 +11,10 @@ use Timber\Timber;
 use Lumberjack\PostTypes\Episode;
 
 $context = Timber::get_context();
-$post = new Episode();
-$context['post'] = $post;
 
+$post = new Episode();
+
+$context['post'] = $post;
 $context['title'] = $post->title;
 $context['content'] = $post->content;
 
