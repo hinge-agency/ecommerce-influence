@@ -4,6 +4,7 @@ namespace Lumberjack\Config;
 
 use Lumberjack\PostTypes\Project;
 use Lumberjack\PostTypes\Episode;
+use Lumberjack\PostTypes\Test;
 
 class CustomPostTypes
 {
@@ -54,7 +55,7 @@ class CustomPostTypes
                 ],
                 'taxonomies'  => array( 'category' ),
                 'rewrite' => [
-                    'slug' => 'episodes',
+                    'slug' => 'episode',
                 ],
                 'show_in_nav_menus' => true,
             ]
