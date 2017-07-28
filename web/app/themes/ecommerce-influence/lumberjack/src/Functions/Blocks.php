@@ -10,7 +10,7 @@ class Blocks
      * The ACF field key were we want to get our layouts from
      * @var string
      */
-    protected $acfFieldKey = 'blocks';
+    protected $acfFieldKey = 'block';
 
     /**
      * layouts contains all of our acf layouts returned from the acf_field_key
