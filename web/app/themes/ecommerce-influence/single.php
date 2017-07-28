@@ -21,4 +21,4 @@ $context['post'] = $post;
 $context['title'] = $post->title;
 $context['content'] = $post->content;
 
-Timber::render(['generic-page.twig'], $context);
+Timber::render(['episode.twig'], $context);
