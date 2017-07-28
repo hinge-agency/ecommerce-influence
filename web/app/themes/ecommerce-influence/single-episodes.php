@@ -8,13 +8,13 @@
  */
 
 use Timber\Timber;
-use Lumberjack\PostTypes\Project;
+use Lumberjack\PostTypes\Episode;
 
 $context = Timber::get_context();
-$post = new Project();
+$post = new Episode();
 $context['post'] = $post;
 
 $context['title'] = $post->title;
 $context['content'] = $post->content;
 
-Timber::render(['project.twig', 'generic-page.twig'], $context);
+Timber::render(['episode.twig', 'generic-page.twig'], $context);

@@ -3,6 +3,7 @@
 namespace Lumberjack\Config;
 
 use Lumberjack\PostTypes\Project;
+use Lumberjack\PostTypes\Episode;
 
 class CustomPostTypes
 {
@@ -31,6 +32,29 @@ class CustomPostTypes
                 ],
                 'rewrite' => [
                     'slug' => 'project',
+                ],
+                'show_in_nav_menus' => true,
+            ]
+        );
+
+        register_post_type(
+            Episode::postType(),
+            [
+                'labels' => [
+                    'name' => __('Episodes'),
+                    'singular_name' => __('Episode')
+                ],
+                'public' => true,
+                'has_archive' => true,
+                'supports' => [
+                    'title',
+                    'author',
+                    'editor',
+                    'thumbnail'
+                ],
+                'taxonomies'  => array( 'category' ),
+                'rewrite' => [
+                    'slug' => 'episodes',
                 ],
                 'show_in_nav_menus' => true,
             ]
