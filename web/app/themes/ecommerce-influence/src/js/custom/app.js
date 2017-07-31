@@ -49,8 +49,19 @@ $(function(){
 				$('.masthead__nav-responsive').css({"top": requiredheight, "height" : 'calc(100% - ' + requiredheight + ')'});
 			}, 300);
 		}
+
+		// Set equal height for each slide
+		setTimeout(function() { 
+			$('.stories__bottom-carousel').on('setPosition', function () {
+
+		      $(this).find('.stories__bottom-carousel-item').height('auto');
+		      var slickTrackHeight = $(this).height();
+		      $(this).find('.stories__bottom-carousel-item').css('height', slickTrackHeight + 'px');     
+	     	})
+		}, 300); 
 	});
 
+	// Slick Carousel
 	$('.stories__bottom-carousel').slick({
 			infinite: true,
 			slidesToShow: 2,
@@ -85,5 +96,5 @@ $(function(){
 	      var slickTrackHeight = $(this).height();
 	      $(this).find('.stories__bottom-carousel-item').css('height', slickTrackHeight + 'px');
 
-      });
+     });
 });
