@@ -50,4 +50,33 @@ $(function(){
 			}, 300);
 		}
 	});
+
+	$('.stories__bottom-carousel').slick({
+			centerMode: true,
+			centerPadding: '60px',
+			slidesToShow: 2,
+			prevArrow: $('.stories__bottom-buttons-button-link--left'),
+			nextArrow: $('.stories__bottom-buttons-button-link--right'),
+
+		  responsive: [
+		    {
+		      breakpoint: 768,
+		      settings: {
+		        arrows: false,
+		        centerMode: true,
+		        centerPadding: '40px',
+		        slidesToShow: 3
+		      }
+		    },
+		    {
+		      breakpoint: 480,
+		      settings: {
+		        arrows: false,
+		        centerMode: true,
+		        centerPadding: '40px',
+		        slidesToShow: 1
+		      }
+		    }
+		  ]
+	  });
 });
