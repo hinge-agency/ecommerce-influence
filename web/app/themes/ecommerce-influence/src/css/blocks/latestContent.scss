@@ -14,7 +14,7 @@
 	width: 100%;
 	min-height: 360px;
 
-	&--episode{
+	&--podcast{
 		border-top: 6px solid $primary-yellow;
 	}
 	&--article{
@@ -41,7 +41,7 @@
 	font-size: px-to-ems(18);
 	line-height: px-to-ems(24,18);
 
-	&--episode{
+	&--podcast{
 		background-color: $primary-yellow;
 		color: $text-blue;
 	}
