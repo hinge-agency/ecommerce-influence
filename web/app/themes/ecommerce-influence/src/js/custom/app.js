@@ -52,31 +52,38 @@ $(function(){
 	});
 
 	$('.stories__bottom-carousel').slick({
-			centerMode: true,
-			centerPadding: '60px',
+			infinite: true,
 			slidesToShow: 2,
+			slidesToScroll: 1,
 			prevArrow: $('.stories__bottom-buttons-button-link--left'),
 			nextArrow: $('.stories__bottom-buttons-button-link--right'),
 
 		  responsive: [
 		    {
-		      breakpoint: 768,
+		      breakpoint: 1001,
 		      settings: {
 		        arrows: false,
-		        centerMode: true,
-		        centerPadding: '40px',
-		        slidesToShow: 3
+		        infinite: true,
+		        slidesToShow: 1
 		      }
 		    },
 		    {
-		      breakpoint: 480,
+		      breakpoint: 601,
 		      settings: {
 		        arrows: false,
-		        centerMode: true,
-		        centerPadding: '40px',
+		        infinite: true,
 		        slidesToShow: 1
 		      }
 		    }
 		  ]
 	  });
+
+	// Set equal height for each slide
+	$('.stories__bottom-carousel').on('setPosition', function () {
+
+	      $(this).find('.stories__bottom-carousel-item').height('auto');
+	      var slickTrackHeight = $(this).height();
+	      $(this).find('.stories__bottom-carousel-item').css('height', slickTrackHeight + 'px');
+
+      });
 });
