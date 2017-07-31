@@ -226,7 +226,7 @@ body,html{font-size:16px}
 sidebar__testimonial-blue .sidebar__latest-block:nth-child(even){background-color:#f9f9f9}
 @media all and (max-width:1000px){.sidebar__latest-block{padding-left:0}
 }.sidebar__latest-block-label{position:relative;padding:2px 16px;display:inline-block}
-.sidebar__latest-block-label--episode{background-color:#fff477;color:#2f3d65}
+.sidebar__latest-block-label--podcast{background-color:#fff477;color:#2f3d65}
 .sidebar__latest-block-label--article{padding:1px 16px 3px 24px;background-color:#2f3d65;color:white;background-image:url("../images/article.svg");background-repeat:no-repeat;background-position:left 8px center}
 .sidebar__latest-block-label-text{font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:.625em;line-height:1em;letter-spacing:1px;text-transform:uppercase}
 .sidebar__latest-block-title{position:relative;margin-top:10px;display:block;font-family:"Brandon Grotesque",sans-serif;font-weight:600;font-size:1.4375em;line-height:1.1739130435em;color:#2f3d65}
@@ -297,11 +297,11 @@ sidebar__testimonial-blue .sidebar__latest-block:nth-child(even){background-colo
 .latestContentHome{position:relative;width:100%;padding-left:60px}
 @media all and (max-width:1000px){.latestContentHome{padding:0}
 }.latestContentHome__block{position:relative;width:100%;min-height:360px}
-.latestContentHome__block--episode{border-top:6px solid #fff477}
+.latestContentHome__block--podcast{border-top:6px solid #fff477}
 .latestContentHome__block--article{border-top:6px solid #2f3d65}
 .latestContentHome__block+.latestContentHome__block{margin-top:60px}
 .latestContentHome__block-label{position:absolute;top:0;right:15px;padding:6px 14px;-webkit-transform:translateY(-50%);transform:translateY(-50%);max-height:35px;border-radius:3px;font-family:"Brandon Grotesque",sans-serif;font-weight:600;font-size:1.125em;line-height:1.3333333333em}
-.latestContentHome__block-label--episode{background-color:#fff477;color:#2f3d65}
+.latestContentHome__block-label--podcast{background-color:#fff477;color:#2f3d65}
 .latestContentHome__block-label--article{background-color:#2f3d65;color:white}
 .latestContentHome__block-image{display:block;width:100%}
 .latestContentHome__block-textWrapper{margin-top:20px}
