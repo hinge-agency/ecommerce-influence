@@ -17,7 +17,7 @@
 use Timber\Timber;
 use Lumberjack\PostTypes\Post;
 
-$templates = ['episodes.twig', 'posts.twig', 'generic-page.twig'];
+$templates = ['episodes.twig'];
 
 $data = Timber::get_context();
 
@@ -41,5 +41,6 @@ if (is_day()) {
 
 // TODO: Currently only works for posts, fix for custom post types
 $data['posts'] = Post::query();
+
 
 Timber::render($templates, $data);
