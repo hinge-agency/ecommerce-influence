@@ -2,6 +2,7 @@
 
 namespace Lumberjack\Core;
 
+use Timber\Timber as Timber;
 use Timber\Site as TimberSite;
 use Timber\Helper as TimberHelper;
 use Timber\FunctionWrapper as TimberFunctionWrapper;
@@ -41,8 +42,11 @@ class Site extends TimberSite
         // Get asset dir for loading inline images
         $data['assets'] = get_template_directory_uri().'/assets';
 
+        // Get categories for use later
+        $data['categories'] = Timber::get_terms('category', ['hide_empty' => true]);
+
         // Add ACF block layout fields
-        $data['blocks'] = new Blocks();
+        // $data['blocks'] = new Blocks();
 
         return $data;
     }

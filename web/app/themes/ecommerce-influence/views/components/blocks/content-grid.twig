@@ -14,14 +14,13 @@
 				<ul class="contentGrid__actionBar-filter-items">
 					
 					<li class="contentGrid__actionBar-filter-items-item">
-						<a href="/episodes" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all {{ title == 'Episodes' ? 'contentGrid__actionBar-filter-items-item-link--active'}}">All</a>
+						<a href="" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all">All</a>
 					</li><!--
+					-->{% for cat in categories %}<!--
 					--><li class="contentGrid__actionBar-filter-items-item">
-						<a href="/category/podcasts" class="contentGrid__actionBar-filter-items-item-link {{ title == 'Podcasts' ? 'contentGrid__actionBar-filter-items-item-link--active'}}">Podcasts</a>
+						<a href="{{ cat.link }}" class="contentGrid__actionBar-filter-items-item-link {{ title == cat.name ? 'contentGrid__actionBar-filter-items-item-link--active'}}">{{ cat.name }}</a>
 					</li><!--
-					--><li class="contentGrid__actionBar-filter-items-item">
-						<a href="/category/articles" class="contentGrid__actionBar-filter-items-item-link {{ title == 'Articles' ? 'contentGrid__actionBar-filter-items-item-link--active'}}">Articles</a>
-					</li>
+					-->{% endfor %}
 
 				</ul> 
 
@@ -45,168 +44,35 @@
 
 		<ul class="contentGrid__items">
 			
-			<li class="contentGrid__items-item">
+			{% for episode in old_episodes %}<!--
+			--><li class="contentGrid__items-item">
 				
-				<a href="/episode" class="contentGrid__items-item-wrapper">
+				<a href="{{ episode.link }}" class="contentGrid__items-item-wrapper">
 
 					<div class="contentGrid__items-item-imageWrapper">
 						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="contentGrid__items-item-imageWrapper-sizingImage">
-						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ assets }}/images/episode-1.png')"></span>
+						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ episode.thumbnail.src }}')"></span>
 					</div>
 
-					<div class="contentGrid__items-item-textWrapper">
-						<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">Episode 117</div>
-						<p class="contentGrid__items-item-textWrapper-title">Confessions of a Podcast Procrastinator (We’re Back!)</p>
-						<a href="/episode" class="contentGrid__items-item-textWrapper-link">Listen now</a>
-					</div>
+					{% if (episode.category.name == 'Podcasts') %}
+						<div class="contentGrid__items-item-textWrapper">
+							<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">Episode {{ episode.podcast_number }}</div>
+							<p class="contentGrid__items-item-textWrapper-title">{{ episode.title }}</p>
+							<a href="/episode" class="contentGrid__items-item-textWrapper-link">Listen now</a>
+						</div>
+					{% else %}
+						<div class="contentGrid__items-item-textWrapper">
+							<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--article">{{ episode.category.name }}</div>
+							<p class="contentGrid__items-item-textWrapper-title">{{ episode.title }}</p>
+							<a href="/episode" class="contentGrid__items-item-textWrapper-link">Read now</a>
+						</div>
+					{% endif %}
+					
 
 				</a>	
 
-			</li><!-- ITEM END
-			--><li class="contentGrid__items-item">
-				
-				<a href="/episode" class="contentGrid__items-item-wrapper">
-
-					<div class="contentGrid__items-item-imageWrapper">
-						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="contentGrid__items-item-imageWrapper-sizingImage">
-						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ assets }}/images/article-1.png')"></span>
-					</div>
-
-					<div class="contentGrid__items-item-textWrapper">
-						<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--article">Article</div>
-						<p class="contentGrid__items-item-textWrapper-title">How to get a 10x return on adspend with Facebook Advertising</p>
-						<a href="/episode" class="contentGrid__items-item-textWrapper-link">Read now</a>
-					</div>
-
-				</a>	
-
-			</li><!-- ITEM END
-			--><li class="contentGrid__items-item">
-				
-				<a href="/episode" class="contentGrid__items-item-wrapper">
-
-					<div class="contentGrid__items-item-imageWrapper">
-						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="contentGrid__items-item-imageWrapper-sizingImage">
-						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ assets }}/images/episode-2.png')"></span>
-					</div>
-
-					<div class="contentGrid__items-item-textWrapper">
-						<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">Episode 117</div>
-						<p class="contentGrid__items-item-textWrapper-title">Confessions of a Podcast Procrastinator (We’re Back!)</p>
-						<a href="/episode" class="contentGrid__items-item-textWrapper-link">Listen now</a>
-					</div>
-
-				</a>	
-
-			</li><!-- ITEM END
-			--><li class="contentGrid__items-item">
-
-				<a href="/episode" class="contentGrid__items-item-wrapper">
-				
-					<div class="contentGrid__items-item-imageWrapper">
-						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="contentGrid__items-item-imageWrapper-sizingImage">
-						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ assets }}/images/episode-3.png')"></span>
-					</div>
-
-					<div class="contentGrid__items-item-textWrapper">
-						<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">Episode 117</div>
-						<p class="contentGrid__items-item-textWrapper-title">Confessions of a Podcast Procrastinator (We’re Back!)</p>
-						<a href="/episode" class="contentGrid__items-item-textWrapper-link">Listen now</a>
-					</div>
-
-				</a>
-
-			</li><!-- ITEM END
-			--><li class="contentGrid__items-item">
-				
-				<a href="/episode" class="contentGrid__items-item-wrapper">
-
-					<div class="contentGrid__items-item-imageWrapper">
-						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="contentGrid__items-item-imageWrapper-sizingImage">
-						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ assets }}/images/article-2.png')"></span>
-					</div>
-
-					<div class="contentGrid__items-item-textWrapper">
-						<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--article">Article</div>
-						<p class="contentGrid__items-item-textWrapper-title">How to get a 10x return on adspend with Facebook Advertising</p>
-						<a href="/episode" class="contentGrid__items-item-textWrapper-link">Read now</a>
-					</div>
-
-				</a>	
-
-			</li><!-- ITEM END
-			--><li class="contentGrid__items-item">
-				
-				<a href="/episode" class="contentGrid__items-item-wrapper">
-
-					<div class="contentGrid__items-item-imageWrapper">
-						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="contentGrid__items-item-imageWrapper-sizingImage">
-						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ assets }}/images/episode-3.png')"></span>
-					</div>
-
-					<div class="contentGrid__items-item-textWrapper">
-						<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">Episode 117</div>
-						<p class="contentGrid__items-item-textWrapper-title">Confessions of a Podcast Procrastinator (We’re Back!)</p>
-						<a href="/episode" class="contentGrid__items-item-textWrapper-link">Listen now</a>
-					</div>
-
-				</a>	
-
-			</li><!-- ITEM END
-			--><li class="contentGrid__items-item">
-				
-				<a href="/episode" class="contentGrid__items-item-wrapper">
-
-					<div class="contentGrid__items-item-imageWrapper">
-						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="contentGrid__items-item-imageWrapper-sizingImage">
-						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ assets }}/images/episode-4.png')"></span>
-					</div>
-
-					<div class="contentGrid__items-item-textWrapper">
-						<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">Episode 117</div>
-						<p class="contentGrid__items-item-textWrapper-title">Confessions of a Podcast Procrastinator (We’re Back!)</p>
-						<a href="/episode" class="contentGrid__items-item-textWrapper-link">Listen now</a>
-					</div>
-
-				</a>	
-
-			</li><!-- ITEM END
-			--><li class="contentGrid__items-item">
-				
-				<a href="/episode" class="contentGrid__items-item-wrapper">
-
-					<div class="contentGrid__items-item-imageWrapper">
-						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="contentGrid__items-item-imageWrapper-sizingImage">
-						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ assets }}/images/article-3.png')"></span>
-					</div>
-
-					<div class="contentGrid__items-item-textWrapper">
-						<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--article">Article</div>
-						<p class="contentGrid__items-item-textWrapper-title">How to get a 10x return on adspend with Facebook Advertising</p>
-						<a href="/episode" class="contentGrid__items-item-textWrapper-link">Read now</a>
-					</div>
-
-				</a>	
-
-			</li><!-- ITEM END
-			--><li class="contentGrid__items-item">
-				
-				<a href="/episode" class="contentGrid__items-item-wrapper">
-
-					<div class="contentGrid__items-item-imageWrapper">
-						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="contentGrid__items-item-imageWrapper-sizingImage">
-						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ assets }}/images/episode-4.png')"></span>
-					</div>
-
-					<div class="contentGrid__items-item-textWrapper">
-						<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">Episode 117</div>
-						<p class="contentGrid__items-item-textWrapper-title">Confessions of a Podcast Procrastinator (We’re Back!)</p>
-						<a href="/episode" class="contentGrid__items-item-textWrapper-link">Listen now</a>
-					</div>
-
-				</a>	
-
-			</li><!-- ITEM END -->
+			</li><!--
+			-->{% endfor %}
 
 		</ul><!-- GRID ITEMS END -->
 
@@ -222,14 +88,13 @@
 				<ul class="contentGrid__actionBar-filter-items">
 					
 					<li class="contentGrid__actionBar-filter-items-item">
-						<a href="/episodes" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all {{ title == 'Episodes' ? 'contentGrid__actionBar-filter-items-item-link--active'}}">All</a>
+						<a href="" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all">All</a>
 					</li><!--
+					-->{% for cat in categories %}<!--
 					--><li class="contentGrid__actionBar-filter-items-item">
-						<a href="/category/podcasts" class="contentGrid__actionBar-filter-items-item-link {{ title == 'Podcasts' ? 'contentGrid__actionBar-filter-items-item-link--active'}}">Podcasts</a>
+						<a href="{{ cat.link }}" class="contentGrid__actionBar-filter-items-item-link {{ title == cat.name ? 'contentGrid__actionBar-filter-items-item-link--active'}}">{{ cat.name }}</a>
 					</li><!--
-					--><li class="contentGrid__actionBar-filter-items-item">
-						<a href="/category/articles" class="contentGrid__actionBar-filter-items-item-link {{ title == 'Articles' ? 'contentGrid__actionBar-filter-items-item-link--active'}}">Articles</a>
-					</li>
+					-->{% endfor %}
 
 				</ul>
 

@@ -6,17 +6,17 @@
 		   <div class="latestContentHome__block {{ episode.category.name == 'Podcasts' ? 'latestContentHome__block--podcast' : 'latestContentHome__block--article' }}">
 				
 				{% if (episode.category.name == 'Podcasts') %}
-					<div class="latestContentHome__block-label latestContentHome__block-label--podcast">Episode 118</div>
-				{% elseif (episode.category.name == 'Articles') %}
-					<div class="latestContentHome__block-label latestContentHome__block-label--article">Article</div>
+					<div class="latestContentHome__block-label latestContentHome__block-label--podcast">Episode {{ episode.podcast_number }}</div>
+				{% else %}
+					<div class="latestContentHome__block-label latestContentHome__block-label--article">{{ episode.category.name }}</div>
 				{% endif %}
 				
-				<img src="{{ assets }}/images/episode-118.png" alt="Episode 118" class="latestContentHome__block-image">
+				<img src="{{ episode.thumbnail.src }}" alt="Episode 118" class="latestContentHome__block-image">
 
 				<div class="latestContentHome__block-textWrapper">
 					<h2 class="latestContentHome__block-title"><a href="{{ episode.link }}" class="latestContentHome__block-title-link">{{ episode.title }}</a></h2>
 
-						<p class="latestContentHome__block-text">In this week’s episode, we share some of the big discoveries we’ve made on Facebook. As you know, Facebook changes quickly and this episode is designed to give you a flash briefing on what is currently working for our clients.</p>
+						<p class="latestContentHome__block-text">{{ episode.get_preview(50,false,false)}}</p>
 					
 				</div>
 

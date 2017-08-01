@@ -2,7 +2,7 @@
 
 	<div class="episode__imageWrapper">
 		<img src="{{ assets }}/images/sizingImage-episode.png" alt="Sizing Image" class="episode__imageWrapper-sizingImage">
-		<span class="episode__imageWrapper-image" style="background-image: url('{{ image.url }}')"></span>
+		<span class="episode__imageWrapper-image" style="background-image: url('{{ post.thumbnail.src }}')"></span>
 	</div>
 
 	<!-- style="background-image: url({{ brick.hero_background_image.url }}) -->
@@ -12,9 +12,9 @@
 			<h1 class="episode__header-title">{{ title }}</h1>
 			<p class="episode__header-details">
 			
-			{% if (author) %}
+			{% if (post.author.name) %}
 
-				Posted by <span class="episode__header-details-author">{{ author }}</span>	
+				Posted by <span class="episode__header-details-author">{{ post.author.name }}</span>	
 
 			{% endif %}			
 
@@ -25,36 +25,6 @@
 			{% endif %}
 
 			</p>
-			
-			{% if (intro) %}
-
-				<div class="episode__header-intro">{{ intro }}</div>
-
-			{% endif %}	
-
-			<div class="episode__header-social">
-				
-				<ul class="episode__header-social-items">
-					
-					<li class="episode__header-social-items-item">
-						<a href="" class="episode__header-social-items-item-link" style="background-image: url('{{ assets }}/images/facebook-small.svg')"></a>
-					</li><!--
-					--><li class="episode__header-social-items-item">
-						<a href="" class="episode__header-social-items-item-link" style="background-image: url('{{ assets }}/images/twitter-small.svg')"></a>
-					</li><!--
-					--><li class="episode__header-social-items-item">
-						<a href="" class="episode__header-social-items-item-link" style="background-image: url('{{ assets }}/images/google-small.svg')"></a>
-					</li><!--
-					--><li class="episode__header-social-items-item">
-						<a href="" class="episode__header-social-items-item-link" style="background-image: url('{{ assets }}/images/linkedin-small.svg')"></a>
-					</li><!--
-					--><li class="episode__header-social-items-item">
-						<a href="" class="episode__header-social-items-item-link" style="background-image: url('{{ assets }}/images/tumblr-small.svg')"></a>
-					</li>
-
-				</ul>
-
-			</div><!-- SOCIAL END -->
 
 		</div><!-- HEADER END --> 
 

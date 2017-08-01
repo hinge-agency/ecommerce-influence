@@ -41,6 +41,8 @@
 	font-size: px-to-ems(18);
 	line-height: px-to-ems(24,18);
 
+	text-transform: capitalize;
+
 	&--podcast{
 		background-color: $primary-yellow;
 		color: $text-blue;
