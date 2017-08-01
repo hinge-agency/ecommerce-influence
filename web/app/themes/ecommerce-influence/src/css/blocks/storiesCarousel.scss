@@ -129,13 +129,6 @@
     white-space: nowrap;
     font-size: 0;
 
-    &:after{
-    	content: "";
-    	display: inline-block;
-    	vertical-align: middle;
-    	height: 100%;
-    }
-
     &--picture{
 		display: block;
 		width: 90px;
