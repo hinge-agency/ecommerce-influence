@@ -32,7 +32,11 @@ class Site extends TimberSite
         // the context, you can get items from it in a way that is a little smoother and more
         // versatile than Wordpress's wp_nav_menu. (You need never again rely on a
         // crazy "Walker Function!")
-        $data['menu'] = new Menu('main-nav');
+        $data['main_menu'] = new Menu('main-nav');
+        $data['featured_menu'] = new Menu('featured-nav');
+
+        //Get Site Settings
+        $data['site_settings'] = get_fields('options');
 
         // Get asset dir for loading inline images
         $data['assets'] = get_template_directory_uri().'/assets';
