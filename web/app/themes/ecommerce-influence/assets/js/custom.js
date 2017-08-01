@@ -1,11 +1,11 @@
 $(function(){
 
-	var formheight = $('.topDripForm').height();
-	var requiredheight = formheight + 80;
-	var offset = $(document).scrollTop();
-	console.log(offset);
-	var newheight = 0;
+	var formheight = $('.topDripForm').height(); // TOP DRIP FORM INITIAL HEIGHT
+	var masthead = $('.masthead').height(); // HEADER INITIAL HEIGHT
+	var requiredheight = formheight + masthead; // REQUIRED HEIGHT
+	var offset = $(document).scrollTop(); // DETERMINE HOW MUCH WE SCROLLED
 
+	var newheight = 0;
 	var height = "";
 
 	//PLACEHOLDER PLUGIN FOR LEGACY BROWSERS
@@ -14,10 +14,7 @@ $(function(){
 	$('.topDripForm__closeButton').on('click', function(e){
 		e.preventDefault();
 		$('.topDripForm__inner').addClass('topDripForm__inner--close');
-
-			newheight = requiredheight + "px";
-
-		$('.masthead__nav-responsive').css({"top": newheight, "height" : 'calc(100% - ' + newheight + ')'});
+		requiredheight = masthead;
 	});
 
 	// Responsive navigation menu toggle
@@ -25,13 +22,8 @@ $(function(){
 		e.preventDefault();
 
 			//Adjust position of the responsive navigiation
-			console.log(offset + ' OFFSET');
-			console.log(requiredheight + ' FORM');
-
 			newheight = requiredheight - offset;
 			height = newheight + "px";
-
-			console.log(requiredheight + ' REQUIRED');
 
 		$('.masthead__nav-responsive').css({"top": height, "height" : 'calc(100% - ' + height + ')'});
 
@@ -52,7 +44,8 @@ $(function(){
 
 			setTimeout(function() { 
 		  		formheight = $('.topDripForm').height();
-				requiredheight = formheight + 80;
+		  		masthead = $('.masthead').height()
+				requiredheight = formheight + masthead;
 				newheight = requiredheight - offset;
 				height = newheight + "px";
 
@@ -71,7 +64,7 @@ $(function(){
 		}, 300); 
 	});
 
-	Watch scroll
+	// Watch scroll
 	$(window).scroll(function(){
 		if ($('.topDripForm__inner').length){
 			var setoffset = $(document).scrollTop();
@@ -79,8 +72,7 @@ $(function(){
 			if (setoffset < requiredheight){
 				offset = setoffset;
 			}else{
-				offset = requiredheight - 80;
-				console.log(offset);
+				offset = masthead;
 			}
 		}
 	});
