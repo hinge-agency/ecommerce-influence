@@ -14,10 +14,6 @@ $(function(){
 	$('.topDripForm__closeButton').on('click', function(e){
 		e.preventDefault();
 		$('.topDripForm__inner').addClass('topDripForm__inner--close');
-
-			newheight = requiredheight + "px";
-
-		$('.masthead__nav-responsive').css({"top": newheight, "height" : 'calc(100% - ' + newheight + ')'});
 	});
 
 	// Responsive navigation menu toggle
@@ -25,13 +21,8 @@ $(function(){
 		e.preventDefault();
 
 			//Adjust position of the responsive navigiation
-			console.log(offset + ' OFFSET');
-			console.log(requiredheight + ' FORM');
-
 			newheight = requiredheight - offset;
 			height = newheight + "px";
-
-			console.log(requiredheight + ' REQUIRED');
 
 		$('.masthead__nav-responsive').css({"top": height, "height" : 'calc(100% - ' + height + ')'});
 
@@ -78,10 +69,8 @@ $(function(){
 
 			if (setoffset < requiredheight){
 				offset = setoffset;
-				console.log(offset);
 			}else{
 				offset = requiredheight - 80;
-				console.log(offset);
 			}
 		}
 	});
