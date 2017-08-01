@@ -7,7 +7,7 @@
 				<div class="sidebar__latest-block">
 					
 					{% if (episode.category.name == 'Podcasts')%}
-						<div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">Episode 118</span></div>
+						<div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">Episode {{ episode.podcast_number }}</span></div>
 						<a href="/episode" class="sidebar__latest-block-title">{{ episode.title }}</a>
 					{% elseif (episode.category.name == 'Articles') %}
 						<div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">Article</span></div>
