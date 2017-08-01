@@ -15,7 +15,8 @@ class Menus
         // Register the action
         add_action($action, function () {
             register_nav_menus([
-                'main-nav' => __('Main Navigation'),
+                'main-nav' => __('Navigation'),
+                'featured-nav' => __('Featured'),
             ]);
         });
     }
