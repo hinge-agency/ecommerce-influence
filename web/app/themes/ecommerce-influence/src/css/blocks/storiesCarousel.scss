@@ -124,8 +124,6 @@
 	display: table;
 	height: 90px;      /* equals max image height */
 
-	background: white;
-
     white-space: nowrap;
     font-size: 0;
 
@@ -138,7 +136,9 @@
 
  		display: table-cell;
  		vertical-align: middle;
-
+ 		max-width: 250px;
+		
+		background: white;
 		box-shadow: 0 1px 2px 0 rgba(0,0,0,0.27), 0 4px 12px 0 rgba(0,0,0,0.04);
 		border-radius: 8px;
 	}
@@ -146,6 +146,7 @@
 .stories__bottom-carousel-item-image{
 	vertical-align: middle;
 	max-height: 90px;
+	max-width: 100%;
 
 	&--picture{
 		border-radius: 50%;
