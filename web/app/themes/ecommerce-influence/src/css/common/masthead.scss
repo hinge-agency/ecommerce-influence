@@ -334,7 +334,7 @@
 
 	text-align: center;
 
-	@include transition();
+	@include transition(opacity);
 
 	&:after{
 		content: "";
