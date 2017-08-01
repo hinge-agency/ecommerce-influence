@@ -1,13 +1,3 @@
-{% set image, author, intro = '','','' %}		
-
-{% for block in blocks.layouts %}
-	{% if (block.layout == 'post_details')%}
-
-		{% set image, author, intro = block.image, block.author, block.intro %}	
-	
-	{% endif %}
-{% endfor %}
-
 <section class="episode">
 
 	<div class="episode__imageWrapper">
