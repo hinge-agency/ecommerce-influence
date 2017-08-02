@@ -14,6 +14,7 @@ use Timber\Timber;
 use Lumberjack\PostTypes\Post;
 
 $context = Timber::get_context();
+
 $post = new Post();
 
 $context['post'] = $post;
