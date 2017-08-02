@@ -6,9 +6,12 @@
 		padding-bottom: 20px;
 	}
 }
-.sidebar__latest{
-
+.sidebar__latest,
+.sidebar__profiles,
+.sidebar__testimonial{
+	margin-top: 30px;
 }
+
 .sidebar__latest-block{
 	position: relative;
 	padding: 20px 0;
@@ -17,7 +20,7 @@
 
 	&:nth-child(1){
 		padding-top: 0;
-	}sidebar__testimonial-blue
+	}
 
 	&:nth-child(even){
 		background-color: $cloudy-white;
@@ -111,13 +114,12 @@
 
 /* PROFILES */
 .sidebar__profiles{
-	margin-top: 30px;
 	width: 100%;
 
 	@include screen-lt(1000){
 		display: inline-block;
 		vertical-align: top;
-		width: 50%;
+		width: calc(50% - 2px);
 	}
 	@include screen-lt(660){
 		display: block;
@@ -128,7 +130,7 @@
 }
 .sidebar__profiles-profile{
 	position: relative;
-	margin-top: 20px;
+	margin-bottom: 20px;
 	padding: 17px;
 	padding-left: 150px;
 	
@@ -140,6 +142,10 @@
 
 	background-repeat: no-repeat;
 	background-position: left 2px top -2px;
+
+	&:nth-last-child(1){
+		margin-bottom: 0;
+	}
 }
 .sidebar__profiles-profile-context{
 	font-family: $brandon;
@@ -396,7 +402,6 @@
 /* TESTIMONIAL */
 .sidebar__testimonial{
 	position: relative;
-	margin-top: 40px;
 	padding: 120px 10px 30px 10px;
 
 	max-width: 340px;
@@ -438,15 +443,18 @@
 .sidebar__testimonial-wrapper{
 	position: relative;
 
-	display: inline-block;
+	display: none;
 	vertical-align: top;
-	width: 50%;
+	width: calc(50% - 2px);
 
 	text-align: right;
 
+	@include screen-lt(1000){
+		display: inline-block;
+	}
 	@include screen-lt(780){
 		margin-left: 20px;
-		width: calc(50% - 20px);
+		width: calc(50% - 22px);
 	}
 	@include screen-lt(660){
 		margin-left: 0;
@@ -532,3 +540,6 @@
 
 /*=====  End of LEGACY BROWSER PLACEHOLDER  ======*/
 
+.sidebar__first{
+	margin-top: 0;
+}
