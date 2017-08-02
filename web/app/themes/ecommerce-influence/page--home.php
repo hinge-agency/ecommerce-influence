@@ -16,20 +16,20 @@ $context['post'] = $post;
 $context['title'] = $post->title;
 $context['content'] = $post->content;
 
-/* EPISODES */
+/* posts */
 
-$episodes = Timber::get_posts(array(
+$latest_posts = Timber::get_posts(array(
     'posts_per_page' => 3,
     'orderby' => 'post__in'
 ));
 
-$old_episodes = Timber::get_posts(array(
+$old_posts = Timber::get_posts(array(
 	'offset' => 3,
     'posts_per_page' => 9,
     'orderby' => 'post__in'
 ));
 
-$context['episodes'] = $episodes;
-$context['old_episodes'] = $old_episodes;
+$context['latest_posts'] = $latest_posts;
+$context['old_posts'] = $old_posts;
 
 Timber::render('home.twig', $context);
