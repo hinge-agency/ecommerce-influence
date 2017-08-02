@@ -11,7 +11,10 @@
 					<div class="latestContentHome__block-label latestContentHome__block-label--article">{{ episode.category.name }}</div>
 				{% endif %}
 				
-				<img src="{{ episode.thumbnail.src }}" alt="Episode 118" class="latestContentHome__block-image">
+				<div class="latestContentHome__block-imageWrapper">
+					<img src="{{ assets }}/images/sizingImage-episode.png" alt="Sizing Image" class="latestContentHome__block-imageWrapper-sizingImage">
+					<span class="latestContentHome__block-imageWrapper-image" style="background-image: url('{{ episode.thumbnail.src }}')"></span>
+				</div>
 
 				<div class="latestContentHome__block-textWrapper">
 					<h2 class="latestContentHome__block-title"><a href="{{ episode.link }}" class="latestContentHome__block-title-link">{{ episode.title }}</a></h2>
