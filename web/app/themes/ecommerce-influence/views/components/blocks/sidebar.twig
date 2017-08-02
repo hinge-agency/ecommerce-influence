@@ -1,92 +1,119 @@
-<div class="sidebar">
+{% if (sidebar) %}
+	<ul class="sidebar">
 	
-	{% if (episodes|length > 0) %}
-		<div class="sidebar__latest">
-			
-			{% for episode in episodes %}
-				<div class="sidebar__latest-block">
+	{% for layout in sidebar %}<!-- SIDEBAR LAYOUTS -->
+		{% if (layout.acf_fc_layout == 'latest_posts') %}
+			{% if (episodes|length > 0) %}
+
+				<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
 					
-					{% if (episode.category.name == 'Podcasts')%}
-						<div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">Episode {{ episode.podcast_number }}</span></div>
-						<a href="/episode" class="sidebar__latest-block-title">{{ episode.title }}</a>
-					{% elseif (episode.category.name == 'Articles') %}
-						<div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">Article</span></div>
-						<a href="/episode" class="sidebar__latest-block-title">{{ episode.title }}</a>
-					{% endif %}
+					<div class="sidebar__latest">
 					
-				</div>
-			{% endfor %}
+						{% for episode in episodes %}
 
-		</div><!-- LATEST END -->
-	{% endif %}
+							<div class="sidebar__latest-block">
+								
+								{% if (episode.category.name == 'Podcasts')%}
+									<div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">Episode {{ episode.podcast_number }}</span></div>
+									<a href="{{ episode.link }}" class="sidebar__latest-block-title">{{ episode.title }}</a>
+								{% elseif (episode.category.name == 'Articles') %}
+									<div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">{{ episode.category.name }}</span></div>
+									<a href="{{ episode.link }}" class="sidebar__latest-block-title">{{ episode.title }}</a>
+								{% endif %}
+								
+							</div>
+							
+						{% endfor %}
 
-	<div class="sidebar__profiles">
-		
-		<div class="sidebar__profiles-profile" style="background-image: url('{{ assets }}/images/foxwell.png')">
-			<p class="sidebar__profiles-profile-context">Work with</p>
-			<p class="sidebar__profiles-profile-name"><span class="sidebar__profiles-profile-name-first">Andrew</span> <span class="sidebar__profiles-profile-name-last">Foxwell</span></p>
-		</div>
-		<div class="sidebar__profiles-profile" style="background-image: url('{{ assets }}/images/brawner.png')">
-			<p class="sidebar__profiles-profile-context">Work with</p>
-			<p class="sidebar__profiles-profile-name"><span class="sidebar__profiles-profile-name-first">Austin</span> <span class="sidebar__profiles-profile-name-last">Brawner</span></p>
-		</div>
+					</div>
 
-	</div><!-- PROFILES END --><div class="sidebar__testimonial-wrapper">
+				</li>
 
-		<div class="sidebar__testimonial sidebar__testimonial--responsive" style="background-image: url('{{ assets }}/images/testimonial.png')">
-			<div class="sidebar__testimonial-textWrapper">
-				<p class="sidebar__testimonial-text"><span>"Much of what helped MVMT grow to over $10 million in sales, I learned from Austin."</span></p>
+			{% endif %}<!-- LATEST END -->
 
-				<p class="sidebar__testimonial-details">Jake Kassan, CEO MVMT Watches</p>
-
-				<a href="" class="sidebar__testimonial-button">Live Workshop</a>
-			</div>
-
-		</div><!-- TESTIMONIAL END -->
-
-	</div><!-- WRAPPER END -->
-
-	<div class="sidebar__formBlock">
-
-		<div class="sidebar__formBlock-wrapper">
+		{% elseif (layout.acf_fc_layout) == 'user_profile' %}
 			
-			<div class="sidebar__formBlock-top">
-				<img src="{{ assets }}/images/tablet-small.png" alt="Form Image" class="sidebar__formBlock-image sidebar__formBlock-image--small">
-				<img src="{{ assets }}/images/tablet-medium.png" alt="Form Image" class="sidebar__formBlock-image sidebar__formBlock-image--medium">
+			<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
 
-				<h3 class="sidebar__formBlock-formTitle">The “Perfect Popup” Template</h3>
-				<p class="sidebar__formBlock-formText">Discover 7 Ways to Capture More Emails Without Being Annoying or Douchy</p>
-			</div>
+				<div class="sidebar__profiles">
 
-			<form class="sidebar__formBlock-form">
-				
-				<div class="sidebar__formBlock-form-block">
-					<label for="firstName"></label>
-					<input type="text" name="firstName" id="firstName" class="sidebar__formBlock-form-block-input" placeholder="First name">
-				</div>
-				<div class="sidebar__formBlock-form-block">
-					<label for="email"></label>
-					<input type="email" name="email" id="email" class="sidebar__formBlock-form-block-input" placeholder="Email address">
-				</div>
-				<div class="sidebar__formBlock-form-block sidebar__formBlock-form-block--button">
-					<input type="submit" value="Download now" class="sidebar__formBlock-form-block-button">
+						{% for user in layout.user %}
+							
+							<a href="{{ user.link }}" class="sidebar__profiles-profile-link">
+								<div class="sidebar__profiles-profile">
+									<div class="sidebar__profiles-profile-image" style="background-image: url('{{ user.custom_image.url }}')"></div>
+									<p class="sidebar__profiles-profile-context">Work with</p>
+									<p class="sidebar__profiles-profile-name"><span class="sidebar__profiles-profile-name-first">{{ user.profile.user_firstname }}</span> <span class="sidebar__profiles-profile-name-last">{{ user.profile.user_lastname }}</span></p>
+								</div>							
+							</a>
+
+
+						{% endfor %}
+
 				</div>
 
-			</form>
+			</li><!-- PROFILES END -->
 
-		</div><!-- WRAPPER END -->
+		{% elseif (layout.acf_fc_layout == 'testimonial') %}
 
-	</div><!-- FORM BLOCK END -->
+			<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
 
-	<div class="sidebar__testimonial" style="background-image: url('{{ assets }}/images/testimonial.png')">
-			<div class="sidebar__testimonial-textWrapper">
-				<p class="sidebar__testimonial-text"><span>"Much of what helped MVMT grow to over $10 million in sales, I learned from Austin."</span></p>
+				<div class="sidebar__testimonial" style="background-image: url('{{ layout.image.url }}')">
 
-				<p class="sidebar__testimonial-details">Jake Kassan, CEO MVMT Watches</p>
+					<div class="sidebar__testimonial-textWrapper">
+						<p class="sidebar__testimonial-text"><span>"{{ layout.text }}"</span></p>
 
-				<a href="" class="sidebar__testimonial-button">Live Workshop</a>
-			</div>
+						<p class="sidebar__testimonial-details">{{ layout.info }}</p>
 
-		</div><!-- TESTIMONIAL END -->
+						{% if (layout.button_link) %}
+							<a href="{{ layout.button_link }}" class="sidebar__testimonial-button">{{ layout.button_text }}</a>
+						{% endif %}	
+					</div>
 
-</div><!-- SIDEBAR END -->
+				</div>
+
+			</li><!-- TESTIMONIAL END -->
+
+		{% elseif (layout.acf_fc_layout) == 'popup_form' %}
+			
+			<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
+
+				<div class="sidebar__formBlock">
+
+					<div class="sidebar__formBlock-wrapper">
+						
+						<div class="sidebar__formBlock-top">
+							<img src="{{ assets }}/images/tablet-small.png" alt="Form Image" class="sidebar__formBlock-image">
+
+							<h3 class="sidebar__formBlock-formTitle">{{ site_settings.ss_popup_form_title }}</h3>
+							<p class="sidebar__formBlock-formText">{{ site_settings.ss_popup_form_text }}</p>
+						</div>
+
+						<form class="sidebar__formBlock-form">
+							
+							<div class="sidebar__formBlock-form-block">
+								<label for="firstName"></label>
+								<input type="text" name="firstName" id="firstName" class="sidebar__formBlock-form-block-input" placeholder="First name">
+							</div>
+							<div class="sidebar__formBlock-form-block">
+								<label for="email"></label>
+								<input type="email" name="email" id="email" class="sidebar__formBlock-form-block-input" placeholder="Email address">
+							</div>
+							<div class="sidebar__formBlock-form-block sidebar__formBlock-form-block--button">
+								<input type="submit" value="Download now" class="sidebar__formBlock-form-block-button">
+							</div>
+
+						</form>
+
+					</div><!-- WRAPPER END -->
+
+				</div>
+
+			</li><!-- FORM BLOCK END -->
+
+		{% endif %}
+
+	{% endfor %}
+
+	</ul><!-- SIDEBAR END -->
+{% endif %}	
