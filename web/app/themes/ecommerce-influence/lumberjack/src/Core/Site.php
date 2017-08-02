@@ -8,6 +8,8 @@ use Timber\Helper as TimberHelper;
 use Timber\FunctionWrapper as TimberFunctionWrapper;
 use Lumberjack\Core\Menu;
 use Lumberjack\Functions\Blocks;
+use Lumberjack\PostTypes\Post as Post;
+use Lumberjack\Helpers\Acf as AcfHelper;
 
 class Site extends TimberSite
 {
@@ -51,6 +53,8 @@ class Site extends TimberSite
         // Get ACF sidebar
         $data['sidebar'] = get_field('sidebar');
 
+        // ACF Helper functions
+        $data['acf_user_data'] = new AcfHelper();
 
         return $data;
     }
