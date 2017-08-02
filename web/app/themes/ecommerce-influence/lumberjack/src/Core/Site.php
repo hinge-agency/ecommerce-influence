@@ -48,6 +48,9 @@ class Site extends TimberSite
         // Add ACF block layout fields
         // $data['blocks'] = new Blocks();
 
+        // Get ACF sidebar
+        $data['sidebar'] = get_field('sidebar');
+
         return $data;
     }
 
