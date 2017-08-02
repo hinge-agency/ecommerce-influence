@@ -7,6 +7,7 @@ class Options
 	public static function register()
     {
         if( function_exists('acf_add_options_page') ) {
+
 			$option_page = acf_add_options_page(array(
 				'page_title' 	=> 'Site Settings',
 				'menu_title' 	=> 'Site Settings',
@@ -14,6 +15,18 @@ class Options
 				'capability' 	=> 'edit_posts',
 				'redirect' 	=> false
 			));
+
+			if( function_exists('acf_add_options_sub_page') ) {
+
+				// add sub page
+				acf_add_options_sub_page(array(
+					'page_title' 	=> 'Posts Settings',
+					'menu_title' 	=> 'Posts Settings',
+					'parent_slug' 	=> $option_page['menu_slug'],
+				));
+
+			}
+
 			// Reorder the menu to foce the options page to be at the top
 			self::reorder();
 		}

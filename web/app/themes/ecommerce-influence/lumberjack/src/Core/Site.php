@@ -51,6 +51,7 @@ class Site extends TimberSite
         // Get ACF sidebar
         $data['sidebar'] = get_field('sidebar');
 
+
         return $data;
     }
 
