@@ -65,5 +65,4 @@ class Post extends TimberPost
     {
         return static::$postType;
     }
-  
 }
