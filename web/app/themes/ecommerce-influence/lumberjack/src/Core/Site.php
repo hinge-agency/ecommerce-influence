@@ -48,7 +48,7 @@ class Site extends TimberSite
         $data['categories'] = Timber::get_terms('category', ['hide_empty' => true]);
 
         // Add ACF block layout fields
-        // $data['blocks'] = new Blocks();
+        $data['blocks'] = new Blocks();
 
         // Get ACF sidebar
         $data['sidebar'] = get_field('sidebar');

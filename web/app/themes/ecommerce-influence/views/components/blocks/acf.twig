@@ -1,4 +1,7 @@
 {% for block in blocks.layouts %}
-
-	
+	{% if (block.layout) == 'bottom_drip_form' %}
+		{% include 'components/blocks/bottom-drip-form.twig' %}
+	{% elseif (block.layout) == 'related_content' %}
+		{% include 'components/blocks/related.twig' %}
+	{% endif %}
 {% endfor %}
