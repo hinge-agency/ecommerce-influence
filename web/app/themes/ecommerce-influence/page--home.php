@@ -23,13 +23,13 @@ $latest_posts = Timber::get_posts(array(
     'orderby' => 'post__in'
 ));
 
-$old_posts = Timber::get_posts(array(
+$archive_posts = Timber::get_posts(array(
 	'offset' => 3,
     'posts_per_page' => 9,
     'orderby' => 'post__in'
 ));
 
 $context['latest_posts'] = $latest_posts;
-$context['old_posts'] = $old_posts;
+$context['archive_posts'] = $archive_posts;
 
 Timber::render('home.twig', $context);
