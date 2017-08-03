@@ -6,7 +6,7 @@
 			
 			<div class="contentGrid__actionBar-new">
 				
-				<a href="" class="contentGrid__actionBar-new-link contentGrid__actionBar-new-link--first">Newer</a>
+				<a href="{{ prev_page }}" class="contentGrid__actionBar-new-link {{ prev_page == '#' ? 'contentGrid__actionBar-new-link--first' }}">Newer</a>
 
 			</div><!-- NEW BLOCK END
 			--><div class="contentGrid__actionBar-filter">
@@ -14,7 +14,7 @@
 				<ul class="contentGrid__actionBar-filter-items">
 					
 					<li class="contentGrid__actionBar-filter-items-item">
-						<a href="" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all">All</a>
+						<a href="/posts" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all {{ allPosts ? 'contentGrid__actionBar-filter-items-item-link--active'}}">All</a>
 					</li><!--
 					-->{% for cat in categories %}<!--
 					--><li class="contentGrid__actionBar-filter-items-item">
@@ -36,7 +36,7 @@
 			</div><!--
 			--><div class="contentGrid__actionBar-old">
 				
-				<a href="" class="contentGrid__actionBar-old-link">Older</a>
+				<a href="{{ next_page }}" class="contentGrid__actionBar-old-link {{ next_page == '#' ? 'contentGrid__actionBar-old-link--last' }}">Older</a>
 
 			</div><!-- OLD BLOCK END -->
 
@@ -44,7 +44,7 @@
 
 		<ul class="contentGrid__items">
 			
-			{% for post in old_posts %}<!--
+			{% for post in archive_posts %}<!--
 			--><li class="contentGrid__items-item">
 				
 				<a href="{{ post.link }}" class="contentGrid__items-item-wrapper">
@@ -80,7 +80,7 @@
 			
 			<div class="contentGrid__actionBar-new">
 				
-				<a href="" class="contentGrid__actionBar-new-link contentGrid__actionBar-new-link--first">Newer</a>
+				<a href="{{ prev_page }}" class="contentGrid__actionBar-new-link {{ prev_page == '#' ? 'contentGrid__actionBar-new-link--first' }}">Newer</a>
 
 			</div><!-- NEW BLOCK END
 			--><div class="contentGrid__actionBar-filter">
@@ -88,7 +88,7 @@
 				<ul class="contentGrid__actionBar-filter-items">
 					
 					<li class="contentGrid__actionBar-filter-items-item">
-						<a href="" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all">All</a>
+						<a href="" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all {{ allPosts ? 'contentGrid__actionBar-filter-items-item-link--active'}}">All</a>
 					</li><!--
 					-->{% for cat in categories %}<!--
 					--><li class="contentGrid__actionBar-filter-items-item">
@@ -101,7 +101,7 @@
 			</div><!-- FILTER BLOCK END
 			--><div class="contentGrid__actionBar-old">
 				
-				<a href="" class="contentGrid__actionBar-old-link">Older</a>
+				<a href="/{{ next_page }}" class="contentGrid__actionBar-old-link {{ next_page == '#' ? 'contentGrid__actionBar-old-link--last' }}">Older</a>
 
 			</div><!-- OLD BLOCK END -->
 

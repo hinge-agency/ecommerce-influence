@@ -13,9 +13,9 @@
 
 	</main>
 	
-	{% if (old_posts|length > 0) %}
+	{% if (archive_posts|length > 0) %}
 
-		<section class="contentGrid lastBlock">
+		<section class="contentGrid">
 
 			<div class="contentGrid__innner constrain">
 				
@@ -26,7 +26,7 @@
 						<ul class="contentGrid__actionBar-filter-items">
 							
 							<li class="contentGrid__actionBar-filter-items-item">
-								<a href="" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all contentGrid__actionBar-filter-items-item-link--active">All</a>
+								<a href="/posts" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all contentGrid__actionBar-filter-items-item-link--active">All</a>
 							</li><!--
 							-->{% for cat in categories %}<!--
 							--><li class="contentGrid__actionBar-filter-items-item">
@@ -48,7 +48,7 @@
 					</div><!--
 					--><div class="contentGrid__actionBar-old">
 						
-						<a href="" class="contentGrid__actionBar-old-link">Older</a>
+						<a href="/posts" class="contentGrid__actionBar-old-link">Older</a>
 
 					</div><!-- OLD BLOCK END -->
 
@@ -56,7 +56,7 @@
 
 				<ul class="contentGrid__items">
 					
-					{% for post in old_posts %}<!--
+					{% for post in archive_posts %}<!--
 					--><li class="contentGrid__items-item">
 						
 						<a href="{{ post.link }}" class="contentGrid__items-item-wrapper">
@@ -68,15 +68,15 @@
 
 							{% if (post.category.name == 'Podcasts') %}
 								<div class="contentGrid__items-item-textWrapper">
-									<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">post {{ post.podcast_number }}</div>
+									<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">Episode {{ post.podcast_number }}</div>
 									<p class="contentGrid__items-item-textWrapper-title">{{ post.title }}</p>
-									<a href="/post" class="contentGrid__items-item-textWrapper-link">Listen now</a>
+									<a href="{{ post.link }}" class="contentGrid__items-item-textWrapper-link">Listen now</a>
 								</div>
 							{% else %}
 								<div class="contentGrid__items-item-textWrapper">
 									<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--article">{{ post.category.name }}</div>
 									<p class="contentGrid__items-item-textWrapper-title">{{ post.title }}</p>
-									<a href="/post" class="contentGrid__items-item-textWrapper-link">Read now</a>
+									<a href="{{ post.link }}" class="contentGrid__items-item-textWrapper-link">Read now</a>
 								</div>
 							{% endif %}
 							
@@ -108,7 +108,7 @@
 					</div><!-- FILTER BLOCK END
 					--><div class="contentGrid__actionBar-old">
 						
-						<a href="" class="contentGrid__actionBar-old-link">Older</a>
+						<a href="/posts" class="contentGrid__actionBar-old-link">Older</a>
 
 					</div><!-- OLD BLOCK END -->
 
@@ -119,8 +119,6 @@
 		</section>
 
 	{% endif %}
-
-	{% include 'components/blocks/bottom-drip-form.twig' %}
 
 {% endblock %}
 
