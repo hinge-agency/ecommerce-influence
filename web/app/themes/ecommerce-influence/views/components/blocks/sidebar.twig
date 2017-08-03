@@ -43,9 +43,9 @@
 
 						{% for user in layout.user %}
 
-							<a href="{{ acf_user_data.getUserData(user.profile.ID).link }}" class="sidebar__profiles-profile-link">
+							<a href="{{ acf_helper.getUserData(user.profile.ID).link }}" class="sidebar__profiles-profile-link">
 								<div class="sidebar__profiles-profile">
-									<div class="sidebar__profiles-profile-image" style="background-image: url('{{ acf_user_data.getUserData(user.profile.ID).image.url }}')"></div>
+									<div class="sidebar__profiles-profile-image" style="background-image: url('{{ acf_helper.getUserData(user.profile.ID).image.url }}')"></div>
 									<p class="sidebar__profiles-profile-context">Work with</p>
 									<p class="sidebar__profiles-profile-name"><span class="sidebar__profiles-profile-name-first">{{ user.profile.user_firstname }}</span> <span class="sidebar__profiles-profile-name-last">{{ user.profile.user_lastname }}</span></p>
 								</div>							

@@ -53,8 +53,11 @@ class Site extends TimberSite
         // Get ACF sidebar
         $data['sidebar'] = get_field('sidebar');
 
+        // Get ACF sidebar
+        $data['top_drip_form'] = get_field('hide_top_drip_form');
+
         // ACF Helper functions
-        $data['acf_user_data'] = new AcfHelper();
+        $data['acf_helper'] = new AcfHelper();
 
         return $data;
     }
