@@ -4,11 +4,9 @@
     {% include 'html-header.twig' %}
 
     <body class="{{ body_class }}">
-     	{% for block in blocks.layouts %}
-            {% if (block.layout) == 'top_drip_form' %}
-                {% include 'components/common/top-drip-form.twig' %}
-            {% endif %}
-        {% endfor %}
+     	{% if not top_drip_form %}
+            {% include 'components/common/top-drip-form.twig' %}
+        {% endif %}
 
         {% include 'components/common/masthead.twig' %}
 

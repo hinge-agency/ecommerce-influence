@@ -10,13 +10,13 @@
 				<div class="person__profiles-items-item-wrapper">
 
 					<div class="person__profiles-items-item-imageWrapper">
-						<div class="person__profiles-items-item-image" style="background-image: url('{{ acf_user_data.getUserData(profile.user.ID).image.url }}')"></div>				
+						<div class="person__profiles-items-item-image" style="background-image: url('{{ acf_helper.getUserData(profile.user.ID).image.url }}')"></div>				
 					</div>
 
 					<div class="person__profiles-items-item-name">{{ profile.user.display_name }}</div>
 					<div class="person__profiles-items-item-text">{{ profile.user.user_description }}</div>
 
-					<a href="{{ acf_user_data.getUserData(profile.user.ID).link }}" class="person__profiles-items-item-link">Work with {{ profile.user.user_firstname }}</a>
+					<a href="{{ acf_helper.getUserData(profile.user.ID).link }}" class="person__profiles-items-item-link">Work with {{ profile.user.user_firstname }}</a>
 				</div>
 
 				</li><!--

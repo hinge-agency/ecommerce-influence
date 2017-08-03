@@ -109,11 +109,23 @@
 	background-image: url('../images/leftArrow.svg');
 	background-repeat: no-repeat;
 	background-position: left 30px center;
+	border-radius: 5px;
+
+	@include transition();
+
+	&:hover{
+		background-color: $cloudy-white;
+	}
 
 	&--first{
 		color: $text-gray;
 
 		background-image: url('../images/leftArrow-last.svg');
+		cursor: default;
+
+		&:hover{
+			background-color: transparent;
+		}
 	}
 
 	@include screen-lt(1000){
@@ -129,11 +141,23 @@
 	background-image: url('../images/rightArrow.svg');
 	background-repeat: no-repeat;
 	background-position: right 30px center;
+	border-radius: 5px;
+
+	@include transition();
+
+	&:hover{
+		background-color: $cloudy-white;
+	}
 
 	&--last{
 		color: $text-gray;
 
 		background-image: url('../images/rightArrow-last.svg');
+		cursor: default;
+
+		&:hover{
+			background-color: transparent;
+		}
 	}
 
 	@include screen-lt(1000){
@@ -145,6 +169,12 @@
 }
 .contentGrid__actionBar-filter-items-item-link{
 	padding: 10px 55px;
+
+	@include transition();
+
+	&:hover{
+		background-color: $cloudy-white;
+	}
 	
 	&--all{
 		padding: 10px 45px;
@@ -152,6 +182,10 @@
 
 	&--active{
 		background-color: $primary-yellow;
+
+		&:hover{
+			background-color: $yellow-dark;
+		}
 	}
 }
 
