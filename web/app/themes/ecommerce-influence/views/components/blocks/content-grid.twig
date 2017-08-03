@@ -44,27 +44,27 @@
 
 		<ul class="contentGrid__items">
 			
-			{% for episode in old_episodes %}<!--
+			{% for post in old_posts %}<!--
 			--><li class="contentGrid__items-item">
 				
-				<a href="{{ episode.link }}" class="contentGrid__items-item-wrapper">
+				<a href="{{ post.link }}" class="contentGrid__items-item-wrapper">
 
 					<div class="contentGrid__items-item-imageWrapper">
 						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="contentGrid__items-item-imageWrapper-sizingImage">
-						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ episode.thumbnail.src }}')"></span>
+						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ post.thumbnail.src }}')"></span>
 					</div>
 
-					{% if (episode.category.name == 'Podcasts') %}
+					{% if (post.category.name == 'Podcasts') %}
 						<div class="contentGrid__items-item-textWrapper">
-							<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">Episode {{ episode.podcast_number }}</div>
-							<p class="contentGrid__items-item-textWrapper-title">{{ episode.title }}</p>
-							<a href="/episode" class="contentGrid__items-item-textWrapper-link">Listen now</a>
+							<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">Episode {{ post.podcast_number }}</div>
+							<p class="contentGrid__items-item-textWrapper-title">{{ post.title }}</p>
+							<a href="{{ post.link }}" class="contentGrid__items-item-textWrapper-link">Listen now</a>
 						</div>
 					{% else %}
 						<div class="contentGrid__items-item-textWrapper">
-							<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--article">{{ episode.category.name }}</div>
-							<p class="contentGrid__items-item-textWrapper-title">{{ episode.title }}</p>
-							<a href="/episode" class="contentGrid__items-item-textWrapper-link">Read now</a>
+							<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--article">{{ post.category.name }}</div>
+							<p class="contentGrid__items-item-textWrapper-title">{{ post.title }}</p>
+							<a href="{{ post.link }}" class="contentGrid__items-item-textWrapper-link">Read now</a>
 						</div>
 					{% endif %}
 					
