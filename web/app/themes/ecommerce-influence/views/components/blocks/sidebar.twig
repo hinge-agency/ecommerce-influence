@@ -14,7 +14,7 @@
 							<div class="sidebar__latest-block">
 								
 								{% if (post.category.name == 'Podcasts')%}
-									<div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">post {{ post.podcast_number }}</span></div>
+									<div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">Episode {{ post.podcast_number }}</span></div>
 									<a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a>
 								{% elseif (post.category.name == 'Articles') %}
 									<div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">{{ post.category.name }}</span></div>
@@ -92,7 +92,7 @@
 							<img src="{{ assets }}/images/tablet-small.png" alt="Form Image" class="sidebar__formBlock-image">
 
 							<h3 class="sidebar__formBlock-formTitle">{{ site_settings.ss_popup_form_title }}</h3>
-							<p class="sidebar__formBlock-formText">{{ site_settings.ss_popup_form_text }}</p>
+							<p class="sidebar__formBlock-formText">{{ site_settings.ss_popup_form_text ? site_settings.ss_popup_form_text }}</p>
 						</div>
 
 						<form class="sidebar__formBlock-form">
