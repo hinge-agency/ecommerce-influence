@@ -39,10 +39,11 @@
 					</div><!-- FILTER BLOCK END
 					--><div class="contentGrid__actionBar-filterResponsive">
 						
-						<select name="" id="" class="contentGrid__actionBar-filterResponsive-select">
-							<option value="all">All</option>
-							<option value="podcasts">Podcasts</option>
-							<option value="articles">Articles</option>
+						<select name="" id="responsive-filter-menu" class="contentGrid__actionBar-filterResponsive-select">
+							<option value="/posts">All</option>
+							{% for cat in categories %}
+								<option value="{{ cat.link }}">{{ cat.name }}</option>
+							{% endfor %}
 						</select>
 
 					</div><!--
