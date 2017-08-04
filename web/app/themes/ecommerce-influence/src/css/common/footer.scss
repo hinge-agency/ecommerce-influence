@@ -117,6 +117,10 @@
 			color: $text-blue;
 		}
 	}
+
+	&--active{
+		color: $primary-yellow;
+	}
 }
 .footer__content-social-items-item{
 	&+.footer__content-social-items-item{

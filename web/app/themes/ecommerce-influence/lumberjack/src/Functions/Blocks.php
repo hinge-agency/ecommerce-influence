@@ -10,7 +10,7 @@ class Blocks
      * The ACF field key were we want to get our layouts from
      * @var string
      */
-    protected $acfFieldKey = 'blocks';
+    protected $acfFieldKey = 'block';
 
     /**
      * layouts contains all of our acf layouts returned from the acf_field_key
@@ -38,15 +38,17 @@ class Blocks
         if ($this->layouts){
             // Iterate over our layouts
             foreach ($this->layouts as $key => &$block){
-                // Set a new key called layout to tidy our array up
-                $block['layout'] = $block['acf_fc_layout'];
-                // Unset the default acf_fc_layout key
-                unset($block['acf_fc_layout']);
-                // Switch through all of the layouts and build them out as required
-                switch ($block['layout']) {
-                    case 'custom_block':
-                            $this->constructBlock($block);
-                        break;
+                if (is_array($block)){
+                    // Set a new key called layout to tidy our array up
+                    $block['layout'] = $block['acf_fc_layout'] ;
+                    // Unset the default acf_fc_layout key
+                    unset($block['acf_fc_layout']);
+                    // Switch through all of the layouts and build them out as required
+                    switch ($block['layout']) {
+                        case 'custom_block':
+                                $this->constructBlock($block);
+                            break;
+                    }
                 }
             }
         }

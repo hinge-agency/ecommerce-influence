@@ -21,62 +21,37 @@
 		</div><!-- TOP BAR END -->
 
 		<ul class="relatedContent__items">
-			
-			<li class="relatedContent__items-item">
-				
-				<a href="/episode" class="relatedContent__items-item-wrapper">
-
-					<div class="relatedContent__items-item-imageWrapper">
-						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="relatedContent__items-item-imageWrapper-sizingImage">
-						<span class="relatedContent__items-item-imageWrapper-image" style="background-image: url('{{ assets }}/images/episode-1.png')"></span>
-					</div>
-
-					<div class="relatedContent__items-item-textWrapper">
-						<div class="relatedContent__items-item-textWrapper-label relatedContent__items-item-textWrapper-label--podcast">Episode 117</div>
-						<p class="relatedContent__items-item-textWrapper-title">Confessions of a Podcast Procrastinator (We’re Back!)</p>
-						<a href="/episode" class="relatedContent__items-item-textWrapper-link">Listen now</a>
-					</div>
-
-				</a>	
-
-			</li><!-- ITEM END
+			{% for post in block.link_posts %}<!--
 			--><li class="relatedContent__items-item">
 				
-				<a href="/episode" class="relatedContent__items-item-wrapper">
+				<a href="{{ acf_helper.getPostFromId(post.related_post).link }}" class="relatedContent__items-item-wrapper">
 
 					<div class="relatedContent__items-item-imageWrapper">
 						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="relatedContent__items-item-imageWrapper-sizingImage">
-						<span class="relatedContent__items-item-imageWrapper-image" style="background-image: url('{{ assets }}/images/article-1.png')"></span>
+						<span class="relatedContent__items-item-imageWrapper-image" style="background-image: url('{{ acf_helper.getPostFromId(post.related_post).thumbnail.src }}')"></span>
 					</div>
+					
+					{% if (acf_helper.getPostFromId(post.related_post).category.name == 'Podcasts') %}
+						
+						<div class="relatedContent__items-item-textWrapper">
+							<div class="relatedContent__items-item-textWrapper-label relatedContent__items-item-textWrapper-label--podcast">Episode {{ acf_helper.getPostFromId(post.related_post).podcast_number }}</div>
+							<p class="relatedContent__items-item-textWrapper-title">{{ acf_helper.getPostFromId(post.related_post).title }}</p>
+							<a href="{{ acf_helper.getPostFromId(post.related_post).link }}" class="relatedContent__items-item-textWrapper-link">Listen now</a>
+						</div>
 
-					<div class="relatedContent__items-item-textWrapper">
-						<div class="relatedContent__items-item-textWrapper-label relatedContent__items-item-textWrapper-label--article">Article</div>
-						<p class="relatedContent__items-item-textWrapper-title">How to get a 10x return on adspend with Facebook Advertising</p>
-						<a href="/episode" class="relatedContent__items-item-textWrapper-link">Read now</a>
-					</div>
+					{% else %}
+
+						<div class="relatedContent__items-item-textWrapper">
+							<div class="relatedContent__items-item-textWrapper-label relatedContent__items-item-textWrapper-label--article">{{ acf_helper.getPostFromId(post.related_post).category.name }}</div>
+							<p class="relatedContent__items-item-textWrapper-title">{{ acf_helper.getPostFromId(post.related_post).title }}</p>
+							<a href="{{ acf_helper.getPostFromId(post.related_post).link }}" class="relatedContent__items-item-textWrapper-link">Read now</a>
+						</div>
+
+					{% endif %}
 
 				</a>	
-
 			</li><!-- ITEM END
-			--><li class="relatedContent__items-item">
-				
-				<a href="/episode" class="relatedContent__items-item-wrapper">
-
-					<div class="relatedContent__items-item-imageWrapper">
-						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="relatedContent__items-item-imageWrapper-sizingImage">
-						<span class="relatedContent__items-item-imageWrapper-image" style="background-image: url('{{ assets }}/images/episode-2.png')"></span>
-					</div>
-
-					<div class="relatedContent__items-item-textWrapper">
-						<div class="relatedContent__items-item-textWrapper-label relatedContent__items-item-textWrapper-label--podcast">Episode 117</div>
-						<p class="relatedContent__items-item-textWrapper-title">Confessions of a Podcast Procrastinator (We’re Back!)</p>
-						<a href="/episode" class="relatedContent__items-item-textWrapper-link">Listen now</a>
-					</div>
-
-				</a>	
-
-			</li>
-
+			-->{% endfor %}
 		</ul>
 
 	</div><!-- INNER END -->

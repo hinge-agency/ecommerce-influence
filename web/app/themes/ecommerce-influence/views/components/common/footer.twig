@@ -17,18 +17,16 @@
 			
 					<ul class="footer__content-nav-items">
 						
-						<li class="footer__content-nav-items-item">
-							<a href="" class="footer__content-nav-items-item-link">About</a>
-						</li><!--
+						{% for item in main_menu.get_items %}<!--
 						--><li class="footer__content-nav-items-item">
-							<a href="/episodes/?e=articles" class="footer__content-nav-items-item-link">Articles</a>
-						</li><!--
-						--><li class="footer__content-nav-items-item">
-							<a href="/episodes/e=podcasts" class="footer__content-nav-items-item-link">Podcast</a>
-						</li><!--
-						--><li class="footer__content-nav-items-item footer__content-nav-items-item--button">
-							<a href="" class="footer__content-nav-items-item-link footer__content-nav-items-item-link--button">Live Workshop</a>
-						</li>
+                            <a href="{{ item.link }}" class="footer__content-nav-items-item-link {{ item.current ? 'footer__content-nav-items-item-link--active'}}">{{ item.title }}</a>
+	                    </li><!--
+	                    -->{% endfor %}<!--
+	                    -->{% for item in featured_menu.get_items %}<!--
+	                    --><li class="footer__content-nav-items-item footer__content-nav-items-item--button">
+	                            <a href="{{ item.link}}" class="footer__content-nav-items-item-link footer__content-nav-items-item-link--button">{{ item.title }}</a>
+                        </li><!--
+                        -->{% endfor %}
 
 					</ul>
 
@@ -38,13 +36,13 @@
 					<ul class="footer__content-social-items">
 						
 						<li class="footer__content-social-items-item">
-							<a href="" class="footer__content-social-items-item-link footer__content-social-items-item-link--twitter"></a>
+							<a href="{{ site_settings.ss_social_twitter }}" class="footer__content-social-items-item-link footer__content-social-items-item-link--twitter" target="_blank"></a>
 						</li><!--
 						--><li class="footer__content-social-items-item">
-							<a href="" class="footer__content-social-items-item-link footer__content-social-items-item-link--facebook"></a>
+							<a href="{{ site_settings.ss_social_facebook }}" class="footer__content-social-items-item-link footer__content-social-items-item-link--facebook" target="_blank"></a>
 						</li><!--
 						--><li class="footer__content-social-items-item">
-							<a href="" class="footer__content-social-items-item-link footer__content-social-items-item-link--youtube"></a>
+							<a href="{{ site_settings.ss_social_youtube }}" class="footer__content-social-items-item-link footer__content-social-items-item-link--youtube" target="_blank"></a>
 						</li>
 
 					</ul>
@@ -64,7 +62,7 @@
 			
 			<div class="footer__copyright">
 				
-				<p class="footer__copyright-text">© Ecommerce Influence LLC 2017 - All Rights Reserved</p>
+				<p class="footer__copyright-text">© Ecommerce Influence LLC {{ now|date('Y') }} - All Rights Reserved</p>
 
 			</div><!-- COPYRIGHT END -->
 

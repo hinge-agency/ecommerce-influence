@@ -36,9 +36,10 @@ body,html{
 
 .main{
 	position: relative;
-
 	padding-top: 60px;
 	direction: rtl;
+
+	display: block;
 }
 .content{
 	position: relative;
@@ -47,6 +48,7 @@ body,html{
 
 	display: inline-block;
 	vertical-align: top;
+	
 	width: calc(100% - 340px);
 
 	background-color: white;
@@ -137,7 +139,7 @@ body,html{
 @import "common/topDripForm";
 @import "common/masthead";
 @import "common/footer";
-@import "pages/about";
+@import "blocks/about";
 @import "blocks/404";
 @import "blocks/sidebar";
 @import "blocks/latestContent";
@@ -148,3 +150,4 @@ body,html{
 @import "blocks/episode";
 @import "blocks/popupForm";
 @import "blocks/storiesCarousel";
+@import "blocks/personProfile";

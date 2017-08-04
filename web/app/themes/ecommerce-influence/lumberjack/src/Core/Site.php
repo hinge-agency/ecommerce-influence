@@ -2,11 +2,14 @@
 
 namespace Lumberjack\Core;
 
+use Timber\Timber as Timber;
 use Timber\Site as TimberSite;
 use Timber\Helper as TimberHelper;
 use Timber\FunctionWrapper as TimberFunctionWrapper;
 use Lumberjack\Core\Menu;
 use Lumberjack\Functions\Blocks;
+use Lumberjack\PostTypes\Post as Post;
+use Lumberjack\Helpers\Acf as AcfHelper;
 
 class Site extends TimberSite
 {
@@ -32,13 +35,29 @@ class Site extends TimberSite
         // the context, you can get items from it in a way that is a little smoother and more
         // versatile than Wordpress's wp_nav_menu. (You need never again rely on a
         // crazy "Walker Function!")
-        $data['menu'] = new Menu('main-nav');
+        $data['main_menu'] = new Menu('main-nav');
+        $data['featured_menu'] = new Menu('featured-nav');
+
+        //Get Site Settings
+        $data['site_settings'] = get_fields('options');
 
         // Get asset dir for loading inline images
         $data['assets'] = get_template_directory_uri().'/assets';
 
+        // Get categories for use later
+        $data['categories'] = Timber::get_terms('category', ['hide_empty' => true]);
+
         // Add ACF block layout fields
         $data['blocks'] = new Blocks();
+
+        // Get ACF sidebar
+        $data['sidebar'] = get_field('sidebar');
+
+        // Get ACF sidebar
+        $data['top_drip_form'] = get_field('hide_top_drip_form');
+
+        // ACF Helper functions
+        $data['acf_helper'] = new AcfHelper();
 
         return $data;
     }

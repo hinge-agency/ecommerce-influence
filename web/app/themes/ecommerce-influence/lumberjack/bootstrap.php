@@ -7,6 +7,7 @@ use Lumberjack\Config\ThemeSupport;
 use Lumberjack\Config\CustomPostTypes;
 use Lumberjack\Config\CustomTaxonomies;
 use Lumberjack\Config\Menus;
+use Lumberjack\Config\Options;
 use Lumberjack\Functions\Assets;
 use Lumberjack\Config\ACF;
 
@@ -38,6 +39,9 @@ CustomTaxonomies::register();
 
 // Register WordPress menus
 Menus::register();
+
+//Register Options
+Options::register();
 
 // Register Advanced Custom Fields
 ACF::register();

@@ -11,6 +11,10 @@
 	width: 100%;
 
 	padding: 12px 40px;
+
+	&.responsive-open-search-active{
+		padding: 12px;
+	}
 }
 .masthead__left,
 .masthead__right,
@@ -28,6 +32,10 @@
 
 	@include screen-lt(600){
 		width: 38px;
+	}
+
+	&.responsive-open-search-active{
+		width: 0;
 	}
 }
 .masthead__left-logo-image{
@@ -52,6 +60,11 @@
 
 	@include screen-lt(600){
 		width: calc(100% - 38px);
+	}
+
+	&.responsive-open-search-active{
+		width: 100%;
+		text-align: center;
 	}
 }
 .masthead__right-nav{
@@ -101,8 +114,11 @@
 		color: $primary-yellow;
 	}
 }
+
+//SEARCH
 .masthead__right-search{
-	
+	position: relative;
+
 	min-width: 280px;
 	margin-left: 40px;
 
@@ -115,8 +131,18 @@
 	}
 
 	@include screen-lt(768){
-		min-width: auto;
-		margin-right: 20px;
+		display: none;
+
+		&.responsive-open-search-active{
+			margin: 6px;
+			display: inline-block;
+			min-width: auto;
+			width: calc(100% - 40px);
+
+			@include screen-lt(400){
+				text-align: left;
+			}
+		}
 	}	
 }
 .masthead__right-search-input,
@@ -148,6 +174,11 @@
 		color: $text-purple;
 
 		@include transition();
+		
+		@include screen-lt(400){
+			font-size: px-to-ems(14);
+			line-height: px-to-ems(22,14);
+		}
 	}
 
 	&:hover,
@@ -158,11 +189,19 @@
 		&::placeholder{
 			color: $primary-yellow;
 		}
-	}
-
-	@include screen-lt(768){
-		display: none;
 	}	
+
+	&.responsive-open-search-active{
+		
+		@include screen-lt(360){
+			min-width: auto;
+			width: 240x;
+		}
+
+		@include screen-lt(330){
+			padding-left: 5px;
+		}
+	}
 }
 .masthead__right-search-button{
 	position: relative;
@@ -177,13 +216,88 @@
 	background-repeat: no-repeat;
 	background-position: center center;
 
-	cursor: pointer;
+	cursor: pointer;	
+}
+
+.masthead__right-openSearch{
+	position: relative;
+	margin-right: 20px;
+
+	display: none;
+	width: 38px;
+	height: 38px;
 
 	@include screen-lt(768){
+		display: inline-block;
+		vertical-align: middle;
+	}
+}
+.masthead__right-openSearch-button{
+	position: relative;
+	left: 0;
+
+	display: block;
+	width: 38px;
+	height: 38px;
+
+	z-index: 15;
+
+	border-radius: 5px;
+	background-color: $light-blue;
+	background-image: url(../images/search.svg);
+	background-repeat: no-repeat;
+	background-position: center center;
+
+	cursor: pointer;
+}
+.masthead__right-closeSearch{
+	position: relative;
+	
+	display: none;
+	vertical-align: middle;
+	width: 20px;
+
+	&.responsive-open-search-active{
+		display: inline-block;
+	}
+}
+.masthead__right-responsive-closeSearch-cross{
+	position: relative;
+
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	height: 14px;
+	
+	span{
+		display: block;
+		position: absolute;
+		height: 3px;
+		width: 100%;
+		background: white;
+		border-radius: 25%;
+		opacity: 1;
 		left: 0;
-		background-color: $light-blue;
-		border-radius: 5px;
-	}	
+	}
+
+	span:nth-child(1) {
+	  top: 5px;
+	  transform: rotate(135deg);
+	  -webkit-transform: rotate(135deg);
+	  -moz-transform: rotate(135deg);
+	  -o-transform: rotate(135deg);
+	  -ms-transform: rotate(135deg);
+	  transition: none;
+	}
+
+	span:nth-child(2) {
+	  top: 5px;
+	  transform: rotate(-135deg);			  
+	  -webkit-transform: rotate(-135deg);
+	  -moz-transform: rotate(-135deg);
+	  -o-transform: rotate(-135deg);
+	  -ms-transform: rotate(-135deg);
+	}
 }
 /*==================================================
 =            LEGACY BROWSER PLACEHOLDER            =
@@ -334,7 +448,7 @@
 
 	text-align: center;
 
-	@include transition();
+	@include transition(opacity);
 
 	&:after{
 		content: "";

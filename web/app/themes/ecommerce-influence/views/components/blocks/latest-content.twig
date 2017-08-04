@@ -1,39 +1,31 @@
-<section class="latestContentHome">
-	
-	<div class="latestContentHome__block latestContentHome__block--episode">
+{% if latest_posts|length > 0 %}
+	<section class="latestContentHome">
 		
-		<div class="latestContentHome__block-label latestContentHome__block-label--episode">Episode 118</div>
-		<img src="{{ assets }}/images/episode-118.png" alt="Episode 118" class="latestContentHome__block-image">
+		{% for post in latest_posts %}
+			
+		   <div class="latestContentHome__block {{ post.category.name == 'Podcasts' ? 'latestContentHome__block--podcast' : 'latestContentHome__block--article' }}">
+				
+				{% if (post.category.name == 'Podcasts') %}
+					<div class="latestContentHome__block-label latestContentHome__block-label--podcast">Episode {{ post.podcast_number }}</div>
+				{% else %}
+					<div class="latestContentHome__block-label latestContentHome__block-label--article">{{ post.category.name }}</div>
+				{% endif %}
+				
+				<div class="latestContentHome__block-imageWrapper">
+					<img src="{{ assets }}/images/sizingImage-episode.png" alt="Sizing Image" class="latestContentHome__block-imageWrapper-sizingImage">
+					<span class="latestContentHome__block-imageWrapper-image" style="background-image: url('{{ post.thumbnail.src }}')"></span>
+				</div>
 
-		<div class="latestContentHome__block-textWrapper">
-			<h2 class="latestContentHome__block-title"><a href="/episode" class="latestContentHome__block-title-link">3 Facebook Ad Hacks Everyone Should Steal from Andrew Foxwell</a></h2>
-			<p class="latestContentHome__block-text">In this week’s episode, we share some of the big discoveries we’ve made on Facebook. As you know, Facebook changes quickly and this episode is designed to give you a flash briefing on what is currently working for our clients.</p>
-		</div>
+				<div class="latestContentHome__block-textWrapper">
+					<h2 class="latestContentHome__block-title"><a href="{{ post.link }}" class="latestContentHome__block-title-link">{{ post.title }}</a></h2>
 
-	</div><!--  ITEM BLOCK END -->
+					<p class="latestContentHome__block-text">{{ post.get_preview(50,false,false)}}</p>
+					
+				</div>
 
-	<div class="latestContentHome__block latestContentHome__block--article">
-		
-		<div class="latestContentHome__block-label latestContentHome__block-label--article">Article</div>
-		<img src="{{ assets }}/images/article.png" alt="Episode 118" class="latestContentHome__block-image">
+			</div>
 
-		<div class="latestContentHome__block-textWrapper">
-			<h2 class="latestContentHome__block-title"><a href="/episode" class="latestContentHome__block-title-link">“Un-Networking” or How (and Why) Successful People Become More Successful</a></h2>
-			<p class="latestContentHome__block-text">The other day I saw a book about networking called “Coffee, Lunch, Coffee”. I only read the title and I was already exhausted. The problem with most “networking experts” is they focus on the wrong things.</p>
-		</div>
+		{% endfor %}
 
-	</div><!--  ITEM BLOCK END -->
-
-	<div class="latestContentHome__block latestContentHome__block--episode">
-		
-		<div class="latestContentHome__block-label latestContentHome__block-label--episode">Episode 117</div>
-		<img src="{{ assets }}/images/episode-117.png" alt="Episode 118" class="latestContentHome__block-image">
-
-		<div class="latestContentHome__block-textWrapper">
-			<h2 class="latestContentHome__block-title"><a href="/episode" class="latestContentHome__block-title-link">Confessions of Podcast Procrastinator (We’re Back!)</a></h2>
-			<p class="latestContentHome__block-text">In this week’s episode, we share some of the big discoveries we’ve made on Facebook. As you know, Facebook changes quickly and this episode is designed to give you a flash briefing on what is currently working for our clients. </p>
-		</div>
-
-	</div><!--  ITEM BLOCK END -->
-
-</section>
+	</section>
+{% endif %}

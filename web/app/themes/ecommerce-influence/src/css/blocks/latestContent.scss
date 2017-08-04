@@ -1,12 +1,6 @@
 .latestContentHome{
 	position: relative;
 	width: 100%;
-
-	padding-left: 60px;
-
-	@include screen-lt(1000){
-		padding: 0;
-	}
 }
 .latestContentHome__block{
 	position: relative;
@@ -14,7 +8,7 @@
 	width: 100%;
 	min-height: 360px;
 
-	&--episode{
+	&--podcast{
 		border-top: 6px solid $primary-yellow;
 	}
 	&--article{
@@ -29,6 +23,8 @@
 	position: absolute;
 	top: 0;
 	right: 15px;
+	z-index: 1;
+
 	padding: 6px 14px;
 	transform: translateY(-50%);
 
@@ -41,7 +37,9 @@
 	font-size: px-to-ems(18);
 	line-height: px-to-ems(24,18);
 
-	&--episode{
+	text-transform: capitalize;
+
+	&--podcast{
 		background-color: $primary-yellow;
 		color: $text-blue;
 	}
@@ -50,9 +48,25 @@
 		color: white;
 	}
 }
-.latestContentHome__block-image{
+.latestContentHome__block-imageWrapper{
+	position: relative;
+}
+.latestContentHome__block-imageWrapper-sizingImage{
 	display: block;
+	
+	max-width: 100%;
+}
+.latestContentHome__block-imageWrapper-image{
+	position: absolute;
+	top: 0;
+	left: 0;
+
 	width: 100%;
+	height: 100%;
+
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: cover;
 }
 
 .latestContentHome__block-textWrapper{

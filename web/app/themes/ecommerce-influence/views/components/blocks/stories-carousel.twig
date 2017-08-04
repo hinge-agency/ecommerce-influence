@@ -3,9 +3,9 @@
 	<div class="stories__top">
 		
 		<div class="stories__top-contentWrapper constrain">
-			
-			<div class="stories__top-heading">Letting others tell our story</div>
-			<p class="stories__top-text">Curabitur nec porta sapien. Curabitur at posuere tellus. Donec vehicula dictum tortor ac egestas. Curabitur metus nulla, facilisis et libero ut, porttitor fringilla augue. Donec tincidunt bibendum ullamcorper. </p>
+
+			<div class="stories__top-heading">{{ block.carousel_title }}</div>
+			<p class="stories__top-text">{{ block.carousel_text }}</p>
 
 		</div><!-- TOP WRAPPER END -->
 
@@ -15,34 +15,44 @@
 		
 		<div class="stories__bottom-contentWrapper">
 			
-			<ul class="stories__bottom-carousel">
-				
-				<li class="stories__bottom-carousel-item">
+			<div class="stories__bottom-carousel">
+
+				{% for slide in block.carousel_slide %}<!--
+				--><div class="stories__bottom-carousel-item">
 					
-					<div class="stories__bottom-carousel-item-contentWrapper">
-						<p class="stories__bottom-carousel-item-text">Suspendisse feugiat sem id justo cursus fringilla. Suspendisse nec ante bibendum, porttitor diam ut, porta dolor. In sit amet dui risus. Phasellus eget nulla ut neque pretium aliquet eu at magna. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-						<p class="stories__bottom-carousel-item-details"><span class="stories__bottom-carousel-item-details-person">Jo Smith, </span><span class="stories__bottom-carousel-item-details-company">EcommerceWorld.com</span></p>
-					</div>
+						<div class="stories__bottom-carousel-item-contentWrapper">
 
-				</li><!--
-				--><li class="stories__bottom-carousel-item">
-					
-					<div class="stories__bottom-carousel-item-contentWrapper">
-						<p class="stories__bottom-carousel-item-text">Suspendisse feugiat sem id justo cursus fringilla. Suspendisse nec ante bibendum, porttitor diam ut, porta dolor. In sit amet dui risus.</p>
-						<p class="stories__bottom-carousel-item-details"><span class="stories__bottom-carousel-item-details-person">Jo Smith, </span><span class="stories__bottom-carousel-item-details-company">EcommerceWorld.com</span></p>
-					</div>
+							{% if (slide.image_type) == 'picture' %}
+								<div class="stories__bottom-carousel-item-imageWrapper stories__bottom-carousel-item-imageWrapper--picture">
+									<div style="background-image: url('{{ slide.image.url }}')" class="stories__bottom-carousel-item-image stories__bottom-carousel-item-image--picture"></div>
+								</div>	
+							{% elseif (slide.image_type) == 'logo' %}
+								<div class="stories__bottom-carousel-item-imageWrapper stories__bottom-carousel-item-imageWrapper--logo">
+									<div style="background-image: url('{{ slide.image.url }}')" class="stories__bottom-carousel-item-image stories__bottom-carousel-item-image--logo"></div>
+								</div>	
+							{% endif %}
 
-				</li><!--
-				--><li class="stories__bottom-carousel-item">
-					
-					<div class="stories__bottom-carousel-item-contentWrapper">
-						<p class="stories__bottom-carousel-item-text">Suspendisse feugiat sem id justo cursus fringilla. Suspendisse nec ante bibendum, porttitor diam ut, porta dolor. In sit amet dui risus. Phasellus eget nulla ut neque pretium aliquet eu at magna. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-						<p class="stories__bottom-carousel-item-details"><span class="stories__bottom-carousel-item-details-person">Jo Smith, </span><span class="stories__bottom-carousel-item-details-company">EcommerceWorld.com</span></p>
-					</div>
+							<p class="stories__bottom-carousel-item-text">{{ slide.testimonial_text }}</p>
+							<p class="stories__bottom-carousel-item-details"><span class="stories__bottom-carousel-item-details-person">{{ slide.testimonial_info }}</span></p>
 
-				</li>
+						</div>
 
-			</ul><!-- CAROUSEL END -->
+					</div><!--
+				-->{% endfor %}
+
+			</div>
+			
+			<div class="stories__bottom-buttonsWrapper">
+
+				<ul class="stories__bottom-buttons">
+					<li class="stories__bottom-buttons-button">
+						<a href="" class="stories__bottom-buttons-button-link stories__bottom-buttons-button-link--left"></a>
+					</li><!--
+					--><li class="stories__bottom-buttons-button">
+						<a href="" class="stories__bottom-buttons-button-link stories__bottom-buttons-button-link--right"></a>
+					</li>		
+				</ul>
+			</div>
 
 		</div><!-- BOTTOM WRAPPER END -->
 

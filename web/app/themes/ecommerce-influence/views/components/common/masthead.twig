@@ -15,31 +15,34 @@
             
                 <ul class="masthead__right-nav-items">
                     
-                    <li class="masthead__right-nav-items-item">
-                        <a href="/about" class="masthead__right-nav-items-item-link {{ title == 'About' ? 'masthead__right-nav-items-item-link--active'}}">About</a>
-                    </li><!--
+                    {% for item in main_menu.get_items %}<!--
                     --><li class="masthead__right-nav-items-item">
-                        <a href="/category/articles" class="masthead__right-nav-items-item-link {{ title == 'Articles' ? 'masthead__right-nav-items-item-link--active'}}">Articles</a>
+                            <a href="{{ item.link }}" class="masthead__right-nav-items-item-link {{ item.current ? 'masthead__right-nav-items-item-link--active'}}">{{ item.title }}</a>
                     </li><!--
+                    -->{% endfor %}<!--
+                    -->{% for item in featured_menu.get_items %}<!--
                     --><li class="masthead__right-nav-items-item">
-                        <a href="/category/podcasts" class="masthead__right-nav-items-item-link {{ title == 'Podcasts' ? 'masthead__right-nav-items-item-link--active'}}">Podcast</a>
-                    </li><!--
-                    --><li class="masthead__right-nav-items-item">
-                        <a href="" class="masthead__right-nav-items-item-link masthead__right-nav-items-item-link--button">Live Workshop</a>
-                    </li>
+                            <a href="{{ item.link}}" class="masthead__right-nav-items-item-link masthead__right-nav-items-item-link--button">{{ item.title }}</a>
+                        </li><!--
+                        -->{% endfor %}
 
                 </ul>
 
             </nav><!--
             --><div class="masthead__right-search">
                 
-                <form>
+                <form role="search" method="get" action="/">
                     
-                    <input type="text" class="masthead__right-search-input" placeholder="Find an article or podcast"><!--
+                    <input type="text" class="masthead__right-search-input" name="s" placeholder="Find an article or podcast"><!--
                     --><input type="submit" class="masthead__right-search-button" value="">
 
                 </form>  
                 
+
+            </div><!--
+            --><div class="masthead__right-openSearch">
+                
+                <a href="#" class="masthead__right-openSearch-button"></a>
 
             </div><!--
             --><div class="masthead__right-responsive">
@@ -48,6 +51,16 @@
                     <span class="masthead__right-responsive-text">Menu</span><!--
                     --><div class="masthead__right-responsive-link-hamburger">
                       <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                </a>
+
+            </div><!--
+            --><div class="masthead__right-closeSearch">
+                
+                 <a href="#" class="masthead__right-closeSearch-link">
+                    <div class="masthead__right-responsive-closeSearch-cross">
                       <span></span>
                       <span></span>
                     </div>
@@ -65,18 +78,16 @@
 <nav class="masthead__nav-responsive">
     <ul class="masthead__nav-responsive-items">
                     
-        <li class="masthead__nav-responsive-items-item">
-            <a href="/about" class="masthead__nav-responsive-items-item-link">About</a>
+         {% for item in main_menu.get_items %}<!--
+         --><li class="masthead__nav-responsive-items-item">
+                <a href="{{ item.link }}" class="masthead__nav-responsive-items-item-link {{ title == 'About' ? 'masthead__nav-responsive-items-item-link--active'}}">{{ item.title }}</a>
         </li><!--
-        --><li class="masthead__nav-responsive-items-item">
-            <a href="/episodes?e=articles" class="masthead__nav-responsive-items-item-link">Articles</a>
-        </li><!--
-        --><li class="masthead__nav-responsive-items-item">
-            <a href="/episodes?e=articles" class="masthead__nav-responsive-items-item-link">Podcast</a>
-        </li><!--
+        -->{% endfor %}<!--
+        -->{% for item in featured_menu.get_items %}<!--
         --><li class="masthead__nav-responsive-items-item masthead__nav-responsive-items-item--button">
-            <a href="" class="masthead__nav-responsive-items-item-link masthead__nav-responsive-items-item-link--button">Live Workshop</a>
-        </li>
+                <a href="{{ item.link}}" class="masthead__nav-responsive-items-item-link masthead__nav-responsive-items-item-link--button">{{ item.title }}</a>
+            </li><!--
+            -->{% endfor %}
 
     </ul>
 </nav>

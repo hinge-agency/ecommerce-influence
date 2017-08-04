@@ -6,9 +6,47 @@
 		padding-bottom: 20px;
 	}
 }
-.sidebar__latest{
+.sidebar__block{
+	position: relative;
+	margin-top: 30px;
 
+	display: block;
+
+	text-align: left;
+
+	@include screen-lt(1000){
+		display: inline-block;
+		vertical-align: top;
+		width: calc(48% - 2px);
+
+		&:nth-child(even){
+			margin-left: 2%;
+
+			text-align: right;
+		}
+	}
+
+	@include screen-lt(700){
+		display: block;
+		vertical-align: top;
+		width: 100%;
+
+		&:nth-child(odd),
+		&:nth-child(even){
+			margin: 0 auto;
+			margin-top: 30px;
+			text-align: center;
+		}
+	}
 }
+.sidebar__first{
+	margin-top: 0;
+
+	@include screen-lt(1000){
+		margin-top: 30px;
+	}
+}
+
 .sidebar__latest-block{
 	position: relative;
 	padding: 20px 0;
@@ -17,14 +55,10 @@
 
 	&:nth-child(1){
 		padding-top: 0;
-	}sidebar__testimonial-blue
+	}
 
 	&:nth-child(even){
 		background-color: $cloudy-white;
-	}
-
-	@include screen-lt(1000){
-		padding-left: 0;
 	}
 }
 .sidebar__latest-block-label{
@@ -33,7 +67,7 @@
 
 	display: inline-block;
 
-	&--episode{
+	&--podcast{
 		background-color: $primary-yellow;
 		color: $text-blue;
 	}
@@ -79,10 +113,6 @@
 	margin-top: 5px;
 
 	text-align: center;
-
-	@include screen-lt(1000){
-		text-align: left;
-	}
 }
 .sidebar__latest-all-link{
 	position: relative;
@@ -111,24 +141,21 @@
 
 /* PROFILES */
 .sidebar__profiles{
-	margin-top: 30px;
+	display: block;
 	width: 100%;
+}
+.sidebar__profiles-profile-link{
+	margin-bottom: 20px;
 
-	@include screen-lt(1000){
-		display: inline-block;
-		vertical-align: top;
-		width: 50%;
-	}
-	@include screen-lt(660){
-		display: block;
-		width: 100%;
+	display: block;
+	height: 100%;
 
-		text-align: center;
+	&:nth-last-child(1){
+		margin-bottom: 0;
 	}
 }
 .sidebar__profiles-profile{
 	position: relative;
-	margin-top: 20px;
 	padding: 17px;
 	padding-left: 150px;
 	
@@ -138,9 +165,22 @@
 
 	background-color: $cloudy-white;
 
-	background-repeat: no-repeat;
-	background-position: left 2px top -2px;
+	text-align: left;
 }
+
+.sidebar__profiles-profile-image {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 140px;
+	height: 100%;
+	
+	background-color: $cloudy-white;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
 .sidebar__profiles-profile-context{
 	font-family: $brandon;
 	font-weight: 900;
@@ -190,99 +230,57 @@
 .sidebar__formBlock{
 	position: relative;
 	margin: 0 auto;
-	margin-top: 45px;
 	padding: 0 26px;
 
+	display: inline-block;
 	width: 100%;
-	max-width: 760px;
+	max-width: 340px;
 
 	background-color: $text-blue;
 	border-radius: 3px;
 
 	text-align: center;
-
-	@include screen-lt(1000){
-		padding: 0 50px;
-		padding-bottom: 20px;
-		text-align: left;
-	}
-	@include screen-lt(760){
-		padding: 0 20px;
-	}
-	@include screen-lt(660){
-		text-align: center;
-	}
 }
 .sidebar__formBlock-wrapper{
 	position: relative;
 	top: -20px;
-
-	@include screen-lt(1000){
-		top: -40px;
-	}
-	@include screen-lt(660){
-		top: -20px;
-	}
 }
 .sidebar__formBlock-top,
 .sidebar__formBlock-form{
 	display: block;
-
-	@include screen-lt(1000){
-		display: inline-block;
-		vertical-align: bottom;
-		width: 48%;
-	}
-	@include screen-lt(660){
-		display: block;
-		width: 100%;
-	}
+	width: 100%;
 }
 .sidebar__formBlock-form{
 	margin-top: 20px;
-
-	@include screen-lt(1000){
-		margin-left: 2%;
-	}
-	@include screen-lt(660){
-		margin-left: 0;
-	}
 }
 .sidebar__formBlock-top{
 	position: relative;
-
-	@include screen-lt(1000){
-		padding-right: 10px;
-	}
-	@include screen-lt(660){
-		padding-right: 0;
-	}
 }
 .sidebar__formBlock-image{
 	max-width: 100%;
 
-	&--small{
-		display: block;
-		margin: 0 auto;
+	// &--small{
+	// 	display: block;
+	// 	margin: 0 auto;
 
-		@include screen-lt(1000){
-			display: none;
-		}
-		@include screen-lt(660){
-			display: block;
-		}
-	}
+	// 	@include screen-lt(1000){
+	// 		display: none;
+	// 	}
+	// 	@include screen-lt(660){
+	// 		display: block;
+	// 	}
+	// }
 
-	&--medium{
-		display: none;
+	// &--medium{
+	// 	display: none;
 
-		@include screen-lt(1000){
-			display: block;
-		}
-		@include screen-lt(660){
-			display: none;
-		}
-	}
+	// 	@include screen-lt(1000){
+	// 		display: block;
+	// 	}
+	// 	@include screen-lt(660){
+	// 		display: none;
+	// 	}
+	// }
 }
 .sidebar__formBlock-formTitle{
 	position: relative;
@@ -396,9 +394,9 @@
 /* TESTIMONIAL */
 .sidebar__testimonial{
 	position: relative;
-	margin-top: 40px;
 	padding: 120px 10px 30px 10px;
 
+	display: inline-block;
 	max-width: 340px;
 
 	border-radius: 3px;
@@ -407,18 +405,6 @@
 	background-position: center top;
 
 	overflow: hidden;
-	
-	@include screen-lt(1000){
-		display: none;
-	}
-
-	&--responsive{
-		display: none;
-
-		@include screen-lt(1000){
-			display: inline-block;
-		}
-	}
 
 	&:after{
 		content: "";
@@ -438,23 +424,11 @@
 .sidebar__testimonial-wrapper{
 	position: relative;
 
-	display: inline-block;
+	display: none;
 	vertical-align: top;
-	width: 50%;
+	width: calc(50% - 2px);
 
 	text-align: right;
-
-	@include screen-lt(780){
-		margin-left: 20px;
-		width: calc(50% - 20px);
-	}
-	@include screen-lt(660){
-		margin-left: 0;
-		display: block;
-		width: 100%;
-
-		text-align: center;
-	}
 }
 .sidebar__testimonial-textWrapper{
 	position: relative;
@@ -531,4 +505,3 @@
 }
 
 /*=====  End of LEGACY BROWSER PLACEHOLDER  ======*/
-

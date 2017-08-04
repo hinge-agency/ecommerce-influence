@@ -4,14 +4,16 @@
     {% include 'html-header.twig' %}
 
     <body class="{{ body_class }}">
-     	{% include 'components/common/top-drip-form.twig' %}
+     	{% if not top_drip_form %}
+            {% include 'components/common/top-drip-form.twig' %}
+        {% endif %}
 
         {% include 'components/common/masthead.twig' %}
 
         {% block content %}
             <p>Sorry, no content</p>
         {% endblock %}
-            
+
         {% include 'components/blocks/acf.twig' %}
 
         {% include 'components/common/footer.twig' %}

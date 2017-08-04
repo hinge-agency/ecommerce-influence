@@ -1,3 +1,13 @@
 {% for block in blocks.layouts %}
-	
+	{% if (block.layout) == 'drip_form_yellow_background' %}
+		{% include 'components/blocks/bottom-drip-form.twig' %}
+	{% elseif (block.layout) == 'related_content' %}
+		{% include 'components/blocks/related.twig' %}
+	{% elseif (block.layout) == 'person_profile' %}
+		{% include 'components/blocks/profiles.twig' %}
+	{% elseif (block.layout) == 'testimonial_carousel' %}
+		{% include 'components/blocks/stories-carousel.twig' %}
+	{% elseif (block.layout) == 'about_block' %}
+		{% include 'components/blocks/about.twig' %}
+	{% endif %}
 {% endfor %}
