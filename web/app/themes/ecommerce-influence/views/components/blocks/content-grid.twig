@@ -6,7 +6,7 @@
 			
 			<div class="contentGrid__actionBar-new">
 				
-				<a href="{{ prev_page }}" class="contentGrid__actionBar-new-link {{ prev_page == '#' ? 'contentGrid__actionBar-new-link--first' }}">Newer</a>
+				<a href="{{ search ? search }}{{ prev_page }}" class="contentGrid__actionBar-new-link {{ prev_page == '#' ? 'contentGrid__actionBar-new-link--first' }}">Newer</a>
 
 			</div><!-- NEW BLOCK END
 			--><div class="contentGrid__actionBar-filter">
@@ -18,7 +18,7 @@
 					</li><!--
 					-->{% for cat in categories %}<!--
 					--><li class="contentGrid__actionBar-filter-items-item">
-						<a href="{{ cat.link }}" class="contentGrid__actionBar-filter-items-item-link {{ title == cat.name ? 'contentGrid__actionBar-filter-items-item-link--active'}}">{{ cat.name }}</a>
+						<a href="{{ cat.link }}{{ search ? search }}" class="contentGrid__actionBar-filter-items-item-link {{ title == cat.name ? 'contentGrid__actionBar-filter-items-item-link--active'}}">{{ cat.name }}</a>
 					</li><!--
 					-->{% endfor %}
 
@@ -30,19 +30,20 @@
 				<select name="" id="responsive-filter-menu" class="contentGrid__actionBar-filterResponsive-select">
 					<option value="/posts" {{ allPosts ? 'selected'}} >All</option>
 					{% for cat in categories %}
-						<option value="{{ cat.link }}" {{ title == cat.name ? 'selected' }}>{{ cat.name }}</option>
+						<option value="{{ search ? search }}{{ cat.link }}" {{ title == cat.name ? 'selected' }}>{{ cat.name }}</option>
 					{% endfor %}
 				</select>
 
 			</div><!--
 			--><div class="contentGrid__actionBar-old">
 				
-				<a href="{{ next_page }}" class="contentGrid__actionBar-old-link {{ next_page == '#' ? 'contentGrid__actionBar-old-link--last' }}">Older</a>
+				<a href="{{ search ? search }}{{ next_page }}" class="contentGrid__actionBar-old-link {{ next_page == '#' ? 'contentGrid__actionBar-old-link--last' }}">Older</a>
 
 			</div><!-- OLD BLOCK END -->
 
 		</div><!-- ACTION BAR END -->
 
+	{% if archive_posts %}
 		<ul class="contentGrid__items">
 			
 			{% for post in archive_posts %}<!--
@@ -77,11 +78,17 @@
 
 		</ul><!-- GRID ITEMS END -->
 
+	{% else %}
+		
+		<h1 class="contentGrid__noresults">Sorry, no results were found!</h1>
+
+	{% endif %}
+
 		<div class="contentGrid__actionBar contentGrid__actionBar--bottom">
 			
 			<div class="contentGrid__actionBar-new">
 				
-				<a href="{{ prev_page }}" class="contentGrid__actionBar-new-link {{ prev_page == '#' ? 'contentGrid__actionBar-new-link--first' }}">Newer</a>
+				<a href="{{ search ? search }}{{ prev_page }}" class="contentGrid__actionBar-new-link {{ prev_page == '#' ? 'contentGrid__actionBar-new-link--first' }}">Newer</a>
 
 			</div><!-- NEW BLOCK END
 			--><div class="contentGrid__actionBar-filter">
@@ -93,7 +100,7 @@
 					</li><!--
 					-->{% for cat in categories %}<!--
 					--><li class="contentGrid__actionBar-filter-items-item">
-						<a href="{{ cat.link }}" class="contentGrid__actionBar-filter-items-item-link {{ title == cat.name ? 'contentGrid__actionBar-filter-items-item-link--active'}}">{{ cat.name }}</a>
+						<a href="{{ cat.link }}{{ search ? search }}" class="contentGrid__actionBar-filter-items-item-link {{ title == cat.name ? 'contentGrid__actionBar-filter-items-item-link--active'}}">{{ cat.name }}</a>
 					</li><!--
 					-->{% endfor %}
 
@@ -102,7 +109,7 @@
 			</div><!-- FILTER BLOCK END
 			--><div class="contentGrid__actionBar-old">
 				
-				<a href="/{{ next_page }}" class="contentGrid__actionBar-old-link {{ next_page == '#' ? 'contentGrid__actionBar-old-link--last' }}">Older</a>
+				<a href="{{ search ? search }}{{ next_page }}" class="contentGrid__actionBar-old-link {{ next_page == '#' ? 'contentGrid__actionBar-old-link--last' }}">Older</a>
 
 			</div><!-- OLD BLOCK END -->
 
