@@ -163,4 +163,11 @@ $(function(){
 	 	$('.masthead__right-search').removeClass('responsive-open-search-active');
 	 	$('.masthead__right-closeSearch').removeClass('responsive-open-search-active');
 	 });
+
+	 // Search form submission
+	 // $('.masthead__right-search form').on('submit', function(e){
+	 // 	e.preventDefault();
+	 // 	window.location = '/search/' + $('.masthead__right-search-input').val();
+	 // });
+
 });

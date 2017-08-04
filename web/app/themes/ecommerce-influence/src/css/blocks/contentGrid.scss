@@ -389,3 +389,16 @@
 	}
 }
 
+
+.contentGrid__noresults{
+	margin-top: 80px;
+
+	color: $text-blue;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(39);
+	line-height: px-to-ems(56,39);
+
+	text-align: center;
+}

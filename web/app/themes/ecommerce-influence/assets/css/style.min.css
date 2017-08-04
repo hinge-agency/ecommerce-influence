@@ -100,16 +100,19 @@ body,html{font-size:16px}
 .topDripForm__closeButton-line--lineTwo{transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-ms-transform:rotate(-45deg)}
 .masthead{position:relative;width:100%;min-height:80px;border-top:1px solid white;background-color:#2f3d65}
 .masthead__inner{position:relative;width:100%;padding:12px 40px}
+.masthead__inner.responsive-open-search-active{padding:12px}
 .masthead__left,.masthead__right,.masthead__right-nav,.masthead__right-search,.masthead__right-nav-items-item{margin:0;padding:0;display:inline-block;vertical-align:middle}
 .masthead__left{position:relative;width:266px}
 @media all and (max-width:600px){.masthead__left{width:38px}
-}.masthead__left-logo-image{display:block}
+}.masthead__left.responsive-open-search-active{width:0}
+.masthead__left-logo-image{display:block}
 @media all and (max-width:600px){.masthead__left-logo-image{display:none}
 }.masthead__left-logo-image--responsive{display:none}
 @media all and (max-width:600px){.masthead__left-logo-image--responsive{display:block}
 }.masthead__right{position:relative;width:calc(100% - 266px);text-align:right}
 @media all and (max-width:600px){.masthead__right{width:calc(100% - 38px)}
-}@media all and (max-width:1250px){.masthead__right-nav{display:none}
+}.masthead__right.responsive-open-search-active{width:100%;text-align:center}
+@media all and (max-width:1250px){.masthead__right-nav{display:none}
 }.masthead__right-nav-items{margin:0;padding:0}
 .masthead__right-nav-items-item+.masthead__right-nav-items-item{padding-left:40px}
 .masthead__right-nav-items-item-link{font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:.9375em;color:white;line-height:1em;text-transform:uppercase;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
@@ -117,22 +120,36 @@ body,html{font-size:16px}
 .masthead__right-nav-items-item-link--button{padding:9px 21px;color:#fff477;border:3px solid #fff477}
 .masthead__right-nav-items-item-link--button:hover{background-color:#fff477;color:#2f3d65}
 .masthead__right-nav-items-item-link--active{color:#fff477}
-.masthead__right-search{min-width:280px;margin-left:40px;opacity:1;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
+.masthead__right-search{position:relative;min-width:280px;margin-left:40px;opacity:1;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 @media all and (max-width:1250px){.masthead__right-search{margin:10px}
-}@media all and (max-width:768px){.masthead__right-search{min-width:auto;margin-right:20px}
+}@media all and (max-width:768px){.masthead__right-search{display:none}
+.masthead__right-search.responsive-open-search-active{margin:6px;display:inline-block;min-width:auto;width:calc(100% - 40px)}
+}@media all and (max-width:768px) and (max-width:400px){.masthead__right-search.responsive-open-search-active{text-align:left}
 }.masthead__right-search-input,.masthead__right-search-button{display:inline-block;vertical-align:middle}
 .masthead__right-search-input{width:calc(100% - 38px);min-width:280px;margin-right:-25px;padding:0;padding-left:10px;padding-right:40px;border-bottom:2px solid #aab4d1;font-family:"Brandon Grotesque",sans-serif;font-weight:600;font-size:1.25em;line-height:1.45em;color:white;letter-spacing:0;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 .masthead__right-search-input::-webkit-input-placeholder{color:#aab4d1;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 .masthead__right-search-input:-ms-input-placeholder{color:#aab4d1;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 .masthead__right-search-input::placeholder{color:#aab4d1;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
-.masthead__right-search-input:hover,.masthead__right-search-input:focus{border-bottom:2px solid #fff477}
+@media all and (max-width:400px){.masthead__right-search-input::-webkit-input-placeholder{font-size:.875em;line-height:1.5714285714em}
+.masthead__right-search-input:-ms-input-placeholder{font-size:.875em;line-height:1.5714285714em}
+.masthead__right-search-input::placeholder{font-size:.875em;line-height:1.5714285714em}
+}.masthead__right-search-input:hover,.masthead__right-search-input:focus{border-bottom:2px solid #fff477}
 .masthead__right-search-input:hover::-webkit-input-placeholder,.masthead__right-search-input:focus::-webkit-input-placeholder{color:#fff477}
 .masthead__right-search-input:hover:-ms-input-placeholder,.masthead__right-search-input:focus:-ms-input-placeholder{color:#fff477}
 .masthead__right-search-input:hover::placeholder,.masthead__right-search-input:focus::placeholder{color:#fff477}
-@media all and (max-width:768px){.masthead__right-search-input{display:none}
+@media all and (max-width:360px){.masthead__right-search-input.responsive-open-search-active{min-width:auto;width:240x}
+}@media all and (max-width:330px){.masthead__right-search-input.responsive-open-search-active{padding-left:5px}
 }.masthead__right-search-button{position:relative;left:-15px;width:38px;height:38px;z-index:5;background-image:url(../images/search.svg);background-repeat:no-repeat;background-position:center center;cursor:pointer}
-@media all and (max-width:768px){.masthead__right-search-button{left:0;background-color:#3f5286;border-radius:5px}
-}.masthead__right-search-input:-ms-input-placeholder{color:#aab4d1 !important}
+.masthead__right-openSearch{position:relative;margin-right:20px;display:none;width:38px;height:38px}
+@media all and (max-width:768px){.masthead__right-openSearch{display:inline-block;vertical-align:middle}
+}.masthead__right-openSearch-button{position:relative;left:0;display:block;width:38px;height:38px;z-index:15;border-radius:5px;background-color:#3f5286;background-image:url(../images/search.svg);background-repeat:no-repeat;background-position:center center;cursor:pointer}
+.masthead__right-closeSearch{position:relative;display:none;vertical-align:middle;width:20px}
+.masthead__right-closeSearch.responsive-open-search-active{display:inline-block}
+.masthead__right-responsive-closeSearch-cross{position:relative;display:inline-block;vertical-align:middle;width:20px;height:14px}
+.masthead__right-responsive-closeSearch-cross span{display:block;position:absolute;height:3px;width:100%;background:white;border-radius:25%;opacity:1;left:0}
+.masthead__right-responsive-closeSearch-cross span:nth-child(1){top:5px;transform:rotate(135deg);-webkit-transform:rotate(135deg);-moz-transform:rotate(135deg);-o-transform:rotate(135deg);-ms-transform:rotate(135deg);-webkit-transition:none;transition:none}
+.masthead__right-responsive-closeSearch-cross span:nth-child(2){top:5px;transform:rotate(-135deg);-webkit-transform:rotate(-135deg);-moz-transform:rotate(-135deg);-o-transform:rotate(-135deg);-ms-transform:rotate(-135deg)}
+.masthead__right-search-input:-ms-input-placeholder{color:#aab4d1 !important}
 .masthead .placeholder{color:#aab4d1 !important}
 .masthead__right-responsive{display:none}
 @media all and (max-width:1250px){.masthead__right-responsive{display:inline-block;vertical-align:middle}
@@ -338,6 +355,7 @@ body,html{font-size:16px}
 @media all and (max-width:500px){.contentGrid__items-item-textWrapper-title{font-size:1.375em;line-height:1.3181818182em}
 }.contentGrid__items-item-textWrapper-link{position:relative;z-index:0;margin-top:15px;display:inline-block;font-size:0;color:#2f3d65;font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:1.125em;line-height:1.6666666667em}
 .contentGrid__items-item-textWrapper-link:after{content:"";position:absolute;bottom:5px;left:-1%;z-index:-1;width:102%;height:6px;background-color:#fff477}
+.contentGrid__noresults{margin-top:80px;color:#2f3d65;font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:2.4375em;line-height:1.4358974359em;text-align:center}
 .bottomDripForm{position:relative;margin-top:100px;background-color:#fff477}
 .bottomDripForm:after{content:"";position:absolute;bottom:0;left:0;z-index:10;width:48%;height:438px;background-image:url("../images/iPad-gold.png");background-repeat:no-repeat;background-position:0 0;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 @media all and (max-width:1400px){.bottomDripForm:after{background-position:-100px 0}

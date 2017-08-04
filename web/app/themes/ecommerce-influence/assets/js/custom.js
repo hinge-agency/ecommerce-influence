@@ -15,6 +15,10 @@ $(function(){
 		e.preventDefault();
 		$('.topDripForm__inner').addClass('topDripForm__inner--close');
 		requiredheight = masthead;
+
+		console.log(requiredheight);
+
+		$('.masthead__nav-responsive').css({"top": requiredheight, "height" : 'calc(100% - ' + requiredheight + 'px)'});
 	});
 
 	// Responsive navigation menu toggle
@@ -123,6 +127,49 @@ $(function(){
 		}
 		return false;
 	 });
+
+	 // RESPONSIVE SEARCH
+	 $('.masthead__right-openSearch').on('click', function(e){
+
+	 	e.preventDefault();
+
+	 	$(this).hide();
+	 	$('.masthead__right-responsive').hide();
+	 	$('.masthead__left-logo').hide();
+
+	 	$('.masthead__inner').addClass('responsive-open-search-active');
+	 	$('.masthead__left').addClass('responsive-open-search-active');
+	 	$('.masthead__right').addClass('responsive-open-search-active');
+	 	$('.masthead__right-search-input').addClass('responsive-open-search-active');
+	 	$('.masthead__right-search').addClass('responsive-open-search-active');
+	 	$('.masthead__right-closeSearch').addClass('responsive-open-search-active');
+
+	 	$('.masthead__right-search-input').focus();
+	 });
+
+	 $('.masthead__right-closeSearch').on('click', function(e){
+
+	 	e.preventDefault();
+
+	 	$(this).removeClass('responsive-open-search-active');
+	 	$('.masthead__right-responsive').show();
+	 	$('.masthead__right-openSearch').show();
+	 	$('.masthead__left-logo').show();
+
+	 	$('.masthead__inner').removeClass('responsive-open-search-active');
+	 	$('.masthead__left').removeClass('responsive-open-search-active');
+	 	$('.masthead__right').removeClass('responsive-open-search-active');
+	 	$('.masthead__right-search-input').removeClass('responsive-open-search-active');
+	 	$('.masthead__right-search').removeClass('responsive-open-search-active');
+	 	$('.masthead__right-closeSearch').removeClass('responsive-open-search-active');
+	 });
+
+	 // Search form submission
+	 // $('.masthead__right-search form').on('submit', function(e){
+	 // 	e.preventDefault();
+	 // 	window.location = '/search/' + $('.masthead__right-search-input').val();
+	 // });
+
 });
 /* HTML5 Placeholder jQuery Plugin - v2.3.1
  * Copyright (c)2015 Mathias Bynens
