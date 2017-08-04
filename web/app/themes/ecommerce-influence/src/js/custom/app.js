@@ -15,6 +15,10 @@ $(function(){
 		e.preventDefault();
 		$('.topDripForm__inner').addClass('topDripForm__inner--close');
 		requiredheight = masthead;
+
+		console.log(requiredheight);
+
+		$('.masthead__nav-responsive').css({"top": requiredheight, "height" : 'calc(100% - ' + requiredheight + 'px)'});
 	});
 
 	// Responsive navigation menu toggle
