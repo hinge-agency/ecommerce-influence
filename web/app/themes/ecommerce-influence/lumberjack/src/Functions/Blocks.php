@@ -38,15 +38,17 @@ class Blocks
         if ($this->layouts){
             // Iterate over our layouts
             foreach ($this->layouts as $key => &$block){
-                // Set a new key called layout to tidy our array up
-                $block['layout'] = $block['acf_fc_layout'];
-                // Unset the default acf_fc_layout key
-                unset($block['acf_fc_layout']);
-                // Switch through all of the layouts and build them out as required
-                switch ($block['layout']) {
-                    case 'custom_block':
-                            $this->constructBlock($block);
-                        break;
+                if (is_array($block)){
+                    // Set a new key called layout to tidy our array up
+                    $block['layout'] = $block['acf_fc_layout'] ;
+                    // Unset the default acf_fc_layout key
+                    unset($block['acf_fc_layout']);
+                    // Switch through all of the layouts and build them out as required
+                    switch ($block['layout']) {
+                        case 'custom_block':
+                                $this->constructBlock($block);
+                            break;
+                    }
                 }
             }
         }
