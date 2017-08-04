@@ -113,4 +113,14 @@ $(function(){
 	      $(this).find('.stories__bottom-carousel-item').css('height', slickTrackHeight + 'px');
 
      });
+
+	// RESPONSIVE FILTER MENU
+	 $('#responsive-filter-menu').on('change', function() {
+		var loc = $(this).val();
+
+		if (loc) { 
+		window.location = loc; // redirect
+		}
+		return false;
+	 });
 });
