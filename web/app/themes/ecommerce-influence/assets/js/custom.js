@@ -113,6 +113,16 @@ $(function(){
 	      $(this).find('.stories__bottom-carousel-item').css('height', slickTrackHeight + 'px');
 
      });
+
+	// RESPONSIVE FILTER MENU
+	 $('#responsive-filter-menu').on('change', function() {
+		var loc = $(this).val();
+
+		if (loc) { 
+		window.location = loc; // redirect
+		}
+		return false;
+	 });
 });
 /* HTML5 Placeholder jQuery Plugin - v2.3.1
  * Copyright (c)2015 Mathias Bynens
