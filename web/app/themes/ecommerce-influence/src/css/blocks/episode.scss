@@ -42,6 +42,8 @@
 	font-size: px-to-ems(39);
 	line-height: px-to-ems(45,39);
 	
+	text-transform: capitalize;
+	
 	@include transition();
 
 	@include screen-lt(600){
