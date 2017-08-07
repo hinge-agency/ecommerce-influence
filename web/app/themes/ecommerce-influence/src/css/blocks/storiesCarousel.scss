@@ -117,53 +117,40 @@
 		font-size: 100%;
 	}
 }
+
 .stories__bottom-carousel-item-imageWrapper{
 	position: relative;
 	top: -25px;
 	
 	display: block;
+	width: 90px;
 	height: 90px;      /* equals max image height */
 
     white-space: nowrap;
     font-size: 0;
-
-    &--picture{
-		display: block;
-		width: 90px;
-	}
-	&--logo{
-		padding: 0 8px; 
-
- 		display: inline-block;
- 		vertical-align: middle;
- 		width: 100%;
- 		max-width: 250px;
-		
-		background: white;
-		box-shadow: 0 1px 2px 0 rgba(0,0,0,0.27), 0 4px 12px 0 rgba(0,0,0,0.04);
-		border-radius: 8px;
-	}
 }
-.stories__bottom-carousel-item-image{
+.stories__bottom-carousel-item-picture{
 	position: absolute;
 	top: 0;
 	left: 0;
 	
+	width: 90px;
 	height: 90px;
 
-	background-color: transparent;
-	background-repeat:no-repeat;
-	background-position: center center; 
+	border-radius: 50%;
+}
+.stories__bottom-carousel-item-logo{
+	position: relative;
+	margin-top: -25px;
+	padding: 15px;
+	
+	display: block;
+	max-width: 200px;
+	max-height: 90px;
 
-	&--logo{
-		width: 200px;
-		background-size: contain;
-	}
-	&--picture{
-		width: 90px;
-		border-radius: 50%;
-		background-size: cover;
-	}
+	background: white;
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.27), 0 4px 12px 0 rgba(0,0,0,0.04);
+	border-radius: 8px;
 }
 
 /* SLICK REDESIGN */
