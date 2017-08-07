@@ -9,7 +9,7 @@
 
 				<ul class="relatedContent__topBar-pagination-buttons">
 					<li class="relatedContent__topBar-pagination-button">
-						<a href="" class="relatedContent__topBar-pagination-button-link relatedContent__topBar-pagination-button-link--left relatedContent__topBar-pagination-button-link--left--first"></a>
+						<a href="" class="relatedContent__topBar-pagination-button-link relatedContent__topBar-pagination-button-link--left"></a>
 					</li><!--
 					--><li class="relatedContent__topBar-pagination-button">
 						<a href="" class="relatedContent__topBar-pagination-button-link relatedContent__topBar-pagination-button-link--right"></a>
@@ -20,39 +20,42 @@
 
 		</div><!-- TOP BAR END -->
 
-		<ul class="relatedContent__items">
+		<ul class="relatedContent__carousel">
+			
 			{% for post in block.link_posts %}<!--
-			--><li class="relatedContent__items-item">
-				
-				<a href="{{ acf_helper.getPostFromId(post.related_post).link }}" class="relatedContent__items-item-wrapper">
+			--><li class="relatedContent__carousel-slide-items-item">
+								
+				<a href="{{ acf_helper.getPostFromId(post.related_post).link }}" class="relatedContent__carousel-slide-items-item-wrapper">
 
-					<div class="relatedContent__items-item-imageWrapper">
-						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="relatedContent__items-item-imageWrapper-sizingImage">
-						<span class="relatedContent__items-item-imageWrapper-image" style="background-image: url('{{ acf_helper.getPostFromId(post.related_post).thumbnail.src }}')"></span>
+					<div class="relatedContent__carousel-slide-items-item-imageWrapper">
+						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="relatedContent__carousel-slide-items-item-imageWrapper-sizingImage">
+						<span class="relatedContent__carousel-slide-items-item-imageWrapper-image" style="background-image: url('{{ acf_helper.getPostFromId(post.related_post).thumbnail.src }}')"></span>
 					</div>
 					
 					{% if (acf_helper.getPostFromId(post.related_post).category.name == 'Podcasts') %}
 						
-						<div class="relatedContent__items-item-textWrapper">
-							<div class="relatedContent__items-item-textWrapper-label relatedContent__items-item-textWrapper-label--podcast">Episode {{ acf_helper.getPostFromId(post.related_post).podcast_number }}</div>
-							<p class="relatedContent__items-item-textWrapper-title">{{ acf_helper.getPostFromId(post.related_post).title }}</p>
-							<a href="{{ acf_helper.getPostFromId(post.related_post).link }}" class="relatedContent__items-item-textWrapper-link">Listen now</a>
+						<div class="relatedContent__carousel-slide-items-item-textWrapper">
+							<div class="relatedContent__carousel-slide-items-item-textWrapper-label relatedContent__carousel-slide-items-item-textWrapper-label--podcast">Episode {{ acf_helper.getPostFromId(post.related_post).podcast_number }}</div>
+							<p class="relatedContent__carousel-slide-items-item-textWrapper-title">{{ acf_helper.getPostFromId(post.related_post).title }}</p>
+							<a href="{{ acf_helper.getPostFromId(post.related_post).link }}" class="relatedContent__carousel-slide-items-item-textWrapper-link">Listen now</a>
 						</div>
 
 					{% else %}
 
-						<div class="relatedContent__items-item-textWrapper">
-							<div class="relatedContent__items-item-textWrapper-label relatedContent__items-item-textWrapper-label--article">{{ acf_helper.getPostFromId(post.related_post).category.name }}</div>
-							<p class="relatedContent__items-item-textWrapper-title">{{ acf_helper.getPostFromId(post.related_post).title }}</p>
-							<a href="{{ acf_helper.getPostFromId(post.related_post).link }}" class="relatedContent__items-item-textWrapper-link">Read now</a>
+						<div class="relatedContent__carousel-slide-items-item-textWrapper">
+							<div class="relatedContent__carousel-slide-items-item-textWrapper-label relatedContent__carousel-slide-items-item-textWrapper-label--article">{{ acf_helper.getPostFromId(post.related_post).category.name }}</div>
+							<p class="relatedContent__carousel-slide-items-item-textWrapper-title">{{ acf_helper.getPostFromId(post.related_post).title }}</p>
+							<a href="{{ acf_helper.getPostFromId(post.related_post).link }}" class="relatedContent__carousel-slide-items-item-textWrapper-link">Read now</a>
 						</div>
 
 					{% endif %}
 
-				</a>	
+				</a>
+
 			</li><!-- ITEM END
 			-->{% endfor %}
-		</ul>
+
+		</ul><!-- CAROUSEL END -->
 
 	</div><!-- INNER END -->
 
