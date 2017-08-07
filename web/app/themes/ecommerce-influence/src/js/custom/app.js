@@ -93,7 +93,6 @@ $(function(){
 		    {
 		      breakpoint: 1001,
 		      settings: {
-		        arrows: false,
 		        infinite: true,
 		        slidesToShow: 1
 		      }
@@ -101,13 +100,38 @@ $(function(){
 		    {
 		      breakpoint: 601,
 		      settings: {
-		        arrows: false,
 		        infinite: true,
 		        slidesToShow: 1
 		      }
 		    }
 		  ]
 	  });
+
+	$('.relatedContent__carousel').slick({
+		infinite: true,
+		dots: true,
+		slidesToShow: 3,
+		slidesToScroll: 3,
+		prevArrow: $('.relatedContent__topBar-pagination-button-link--left'),
+		nextArrow: $('.relatedContent__topBar-pagination-button-link--right'),
+
+		 responsive: [
+		    {
+		      breakpoint: 1001,
+		      settings: {
+		        slidesToShow: 2,
+				slidesToScroll: 2
+		      }
+		    },
+		    {
+		      breakpoint: 601,
+		      settings: {
+		        slidesToShow: 1,
+				slidesToScroll: 1
+		      }
+		    }
+		  ]
+	});
 
 	// Set equal height for each slide
 	$('.stories__bottom-carousel').on('setPosition', function () {
