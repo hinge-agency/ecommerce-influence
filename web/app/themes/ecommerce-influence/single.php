@@ -31,6 +31,4 @@ $latest_posts = Timber::get_posts(array(
 
 $context['latest_posts'] = $latest_posts;
 
-$context['disqus'] = disqus_embed('http-ecommerce-influence-wearehinge-com'); 
-
 Timber::render(['episode.twig'], $context);
