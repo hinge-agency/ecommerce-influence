@@ -136,6 +136,16 @@ body,html{
 	}
 }
 
+#at4-share{
+	display: none;
+
+	@include transition();
+}
+
+#at4-share.socialPlugin{
+	display: block;
+}
+
 @import "common/topDripForm";
 @import "common/masthead";
 @import "common/footer";
