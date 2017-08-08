@@ -33,7 +33,7 @@
                 
                 <form role="search" method="get" action="/">
                     
-                    <input type="text" class="masthead__right-search-input" name="s" placeholder="Find an article or podcast"><!--
+                    <input type="text" class="masthead__right-search-input" autocomplete="off" name="s" placeholder="Find an article or podcast" value="{{ searchTerm ? searchTerm }}"><!--
                     --><input type="submit" class="masthead__right-search-button" value="">
 
                 </form>  

@@ -20,7 +20,7 @@
 
 			{% if (post.category.name == 'Podcasts') %}
 
-				on<span class="episode__header-details-date"> {{ post.post_date }}</span>
+				on<span class="episode__header-details-date"> {{ post.post_date|date("F j, Y") }}</span>
 
 			{% endif %}
 

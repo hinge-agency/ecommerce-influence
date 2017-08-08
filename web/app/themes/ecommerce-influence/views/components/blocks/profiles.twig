@@ -8,9 +8,9 @@
 				--><li class="person__profiles-items-item">
 
 				<div class="person__profiles-items-item-wrapper">
-
+					
 					<div class="person__profiles-items-item-imageWrapper">
-						<div class="person__profiles-items-item-image" style="background-image: url('{{ acf_helper.getUserData(profile.user.ID).image.url }}')"></div>				
+						<img src="{{ acf_helper.getUserData(profile.user.ID).image.sizes['thumbnail'] }}" alt="" class="person__profiles-items-item-image">
 					</div>
 
 					<div class="person__profiles-items-item-name">{{ profile.user.display_name }}</div>

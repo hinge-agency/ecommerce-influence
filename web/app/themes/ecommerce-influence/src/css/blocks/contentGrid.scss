@@ -351,6 +351,8 @@
 	font-weight: 900;
 	font-size: px-to-ems(23);
 	line-height: px-to-ems(30,23);
+	
+	text-transform: capitalize;
 
 	@include transition();
 

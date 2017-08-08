@@ -50,19 +50,12 @@
 	height: 125px;
 
 	border-radius: 50%;
+	overflow: hidden;
 }
 .person__profiles-items-item-image{
-	position: absolute;
-	top: 0;
-	left: 0;
-
-	width: 100%;
-	height: 100%;
-
-	background-color: transparent;
-	background-repeat: no-repeat;
-
-	border-radius: 50%;
+	display: block;
+	max-width: 100%;
+	height: auto;
 }
 .person__profiles-items-item-name{
 	margin-top: 8px;

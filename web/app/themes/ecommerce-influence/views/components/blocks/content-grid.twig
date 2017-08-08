@@ -6,7 +6,7 @@
 			
 			<div class="contentGrid__actionBar-new">
 				
-				<a href="{{ search ? search }}{{ prev_page }}" class="contentGrid__actionBar-new-link {{ prev_page == '#' ? 'contentGrid__actionBar-new-link--first' }}">Newer</a>
+				<a href="{{ prev_page }}" class="contentGrid__actionBar-new-link {{ prev_page == '#' ? 'contentGrid__actionBar-new-link--first' }}">Newer</a>
 
 			</div><!-- NEW BLOCK END
 			--><div class="contentGrid__actionBar-filter">
@@ -30,14 +30,14 @@
 				<select name="" id="responsive-filter-menu" class="contentGrid__actionBar-filterResponsive-select">
 					<option value="/posts" {{ allPosts ? 'selected'}} >All</option>
 					{% for cat in categories %}
-						<option value="{{ search ? search }}{{ cat.link }}" {{ title == cat.name ? 'selected' }}>{{ cat.name }}</option>
+						<option value="{{ cat.link }}{{ search ? search }}" {{ title == cat.name ? 'selected' }}>{{ cat.name }}</option>
 					{% endfor %}
 				</select>
 
 			</div><!--
 			--><div class="contentGrid__actionBar-old">
 				
-				<a href="{{ search ? search }}{{ next_page }}" class="contentGrid__actionBar-old-link {{ next_page == '#' ? 'contentGrid__actionBar-old-link--last' }}">Older</a>
+				<a href="{{ next_page }}" class="contentGrid__actionBar-old-link {{ next_page == '#' ? 'contentGrid__actionBar-old-link--last' }}">Older</a>
 
 			</div><!-- OLD BLOCK END -->
 
@@ -88,7 +88,7 @@
 			
 			<div class="contentGrid__actionBar-new">
 				
-				<a href="{{ search ? search }}{{ prev_page }}" class="contentGrid__actionBar-new-link {{ prev_page == '#' ? 'contentGrid__actionBar-new-link--first' }}">Newer</a>
+				<a href="{{ prev_page }}" class="contentGrid__actionBar-new-link {{ prev_page == '#' ? 'contentGrid__actionBar-new-link--first' }}">Newer</a>
 
 			</div><!-- NEW BLOCK END
 			--><div class="contentGrid__actionBar-filter">
@@ -96,7 +96,7 @@
 				<ul class="contentGrid__actionBar-filter-items">
 					
 					<li class="contentGrid__actionBar-filter-items-item">
-						<a href="" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all {{ allPosts ? 'contentGrid__actionBar-filter-items-item-link--active'}}">All</a>
+						<a href="/posts" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all {{ allPosts ? 'contentGrid__actionBar-filter-items-item-link--active'}}">All</a>
 					</li><!--
 					-->{% for cat in categories %}<!--
 					--><li class="contentGrid__actionBar-filter-items-item">
@@ -109,7 +109,7 @@
 			</div><!-- FILTER BLOCK END
 			--><div class="contentGrid__actionBar-old">
 				
-				<a href="{{ search ? search }}{{ next_page }}" class="contentGrid__actionBar-old-link {{ next_page == '#' ? 'contentGrid__actionBar-old-link--last' }}">Older</a>
+				<a href="{{ next_page }}" class="contentGrid__actionBar-old-link {{ next_page == '#' ? 'contentGrid__actionBar-old-link--last' }}">Older</a>
 
 			</div><!-- OLD BLOCK END -->
 

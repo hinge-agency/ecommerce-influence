@@ -4,6 +4,18 @@
 
 	background-color: $primary-yellow;
 
+	
+
+	@include screen-lt(1000){
+		margin-top: 60px;
+	}
+}
+.bottomDripForm__inner{
+	position: relative;
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
+
 	&:after{
 		content: "";
 		position: absolute;
@@ -35,21 +47,12 @@
 		}
 	}
 
-	@include screen-lt(1000){
-		margin-top: 60px;
-	}
-}
-.bottomDripForm__inner{
-	position: relative;
-	width: 100%;
-	max-width: 1440px;
-
 	@include screen-lt(1170){
 		width: 95%;
+		margin-left: 0;
 	}
 	@include screen-lt(1000){
 		width: 100%;
-		margin: 0 auto;
 	}
 }
 .bottomDripForm__block{

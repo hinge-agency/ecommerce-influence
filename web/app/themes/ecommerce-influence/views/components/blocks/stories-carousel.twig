@@ -24,12 +24,10 @@
 
 							{% if (slide.image_type) == 'picture' %}
 								<div class="stories__bottom-carousel-item-imageWrapper stories__bottom-carousel-item-imageWrapper--picture">
-									<div style="background-image: url('{{ slide.image.url }}')" class="stories__bottom-carousel-item-image stories__bottom-carousel-item-image--picture"></div>
+									<img src="{{ slide.image.sizes['thumbnail'] }}" alt=""  class="stories__bottom-carousel-item-picture">
 								</div>	
 							{% elseif (slide.image_type) == 'logo' %}
-								<div class="stories__bottom-carousel-item-imageWrapper stories__bottom-carousel-item-imageWrapper--logo">
-									<div style="background-image: url('{{ slide.image.url }}')" class="stories__bottom-carousel-item-image stories__bottom-carousel-item-image--logo"></div>
-								</div>	
+								<img src="{{ slide.image.url }}" alt="" class="stories__bottom-carousel-item-logo">
 							{% endif %}
 
 							<p class="stories__bottom-carousel-item-text">{{ slide.testimonial_text }}</p>

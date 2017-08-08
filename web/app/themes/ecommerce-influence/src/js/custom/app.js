@@ -1,6 +1,11 @@
 $(function(){
 
-	var formheight = $('.topDripForm').height(); // TOP DRIP FORM INITIAL HEIGHT
+	if ($('.topDripForm').length){
+		var formheight = $('.topDripForm').height(); // TOP DRIP FORM INITIAL HEIGHT
+	}else{
+		formheight = 0;
+	}
+
 	var masthead = $('.masthead').height(); // HEADER INITIAL HEIGHT
 	var requiredheight = formheight + masthead; // REQUIRED HEIGHT
 	var offset = $(document).scrollTop(); // DETERMINE HOW MUCH WE SCROLLED
@@ -8,17 +13,25 @@ $(function(){
 	var newheight = 0;
 	var height = "";
 
+	var socialTop  = (requiredheight + 60 - offset);
+
+	setTimeout(function() {
+		$('#at4-share').addClass('socialPlugin');
+		$('#at4-share').attr('style', 'top: ' + socialTop + 'px !important');
+	}, 3000);
+
 	//PLACEHOLDER PLUGIN FOR LEGACY BROWSERS
 	$('input, textarea').placeholder();
 
+	//CLOSE TOP DRIP FORM
 	$('.topDripForm__closeButton').on('click', function(e){
 		e.preventDefault();
 		$('.topDripForm__inner').addClass('topDripForm__inner--close');
+
 		requiredheight = masthead;
 
-		console.log(requiredheight);
-
 		$('.masthead__nav-responsive').css({"top": requiredheight, "height" : 'calc(100% - ' + requiredheight + 'px)'});
+		$('#at4-share').attr('style', 'top: ' + requiredheight + 'px !important');
 	});
 
 	// Responsive navigation menu toggle
@@ -75,8 +88,15 @@ $(function(){
 
 			if (setoffset < requiredheight){
 				offset = setoffset;
+
+				socialTop = (requiredheight + 60 - offset);
+				
+				$('#at4-share').attr('style', 'top: ' + socialTop + 'px !important');
+
 			}else{
+
 				offset = masthead;
+
 			}
 		}
 	});
@@ -93,7 +113,6 @@ $(function(){
 		    {
 		      breakpoint: 1001,
 		      settings: {
-		        arrows: false,
 		        infinite: true,
 		        slidesToShow: 1
 		      }
@@ -101,13 +120,38 @@ $(function(){
 		    {
 		      breakpoint: 601,
 		      settings: {
-		        arrows: false,
 		        infinite: true,
 		        slidesToShow: 1
 		      }
 		    }
 		  ]
 	  });
+
+	$('.relatedContent__carousel').slick({
+		infinite: true,
+		dots: true,
+		slidesToShow: 3,
+		slidesToScroll: 3,
+		prevArrow: $('.relatedContent__topBar-pagination-button-link--left'),
+		nextArrow: $('.relatedContent__topBar-pagination-button-link--right'),
+
+		 responsive: [
+		    {
+		      breakpoint: 1001,
+		      settings: {
+		        slidesToShow: 2,
+				slidesToScroll: 2
+		      }
+		    },
+		    {
+		      breakpoint: 601,
+		      settings: {
+		        slidesToShow: 1,
+				slidesToScroll: 1
+		      }
+		    }
+		  ]
+	});
 
 	// Set equal height for each slide
 	$('.stories__bottom-carousel').on('setPosition', function () {
@@ -163,11 +207,5 @@ $(function(){
 	 	$('.masthead__right-search').removeClass('responsive-open-search-active');
 	 	$('.masthead__right-closeSearch').removeClass('responsive-open-search-active');
 	 });
-
-	 // Search form submission
-	 // $('.masthead__right-search form').on('submit', function(e){
-	 // 	e.preventDefault();
-	 // 	window.location = '/search/' + $('.masthead__right-search-input').val();
-	 // });
 
 });
