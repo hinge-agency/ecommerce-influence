@@ -103,6 +103,8 @@
 	line-height: px-to-ems(27,23);
 	color: $text-blue;
 
+	text-transform: capitalize;
+
 	&:hover{
 		text-decoration: underline;
 	}
