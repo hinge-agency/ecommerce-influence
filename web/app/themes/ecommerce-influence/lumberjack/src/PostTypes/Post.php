@@ -65,4 +65,9 @@ class Post extends TimberPost
     {
         return static::$postType;
     }
+
+    public static function disqus()
+    {
+        return comments_template();
+    }
 }
