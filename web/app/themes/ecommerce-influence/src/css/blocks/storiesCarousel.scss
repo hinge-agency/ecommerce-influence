@@ -123,11 +123,18 @@
 	top: -25px;
 	
 	display: block;
-	width: 90px;
+	width: 100%;
 	height: 90px;      /* equals max image height */
 
     white-space: nowrap;
     font-size: 0;
+
+    &--picture{
+		max-width: 90px;
+    }
+    &--logo{
+
+    }
 }
 .stories__bottom-carousel-item-picture{
 	position: absolute;
@@ -141,7 +148,6 @@
 }
 .stories__bottom-carousel-item-logo{
 	position: relative;
-	margin-top: -25px;
 	padding: 15px;
 	
 	display: block;

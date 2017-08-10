@@ -27,7 +27,9 @@
 									<img src="{{ slide.image.sizes['thumbnail'] }}" alt=""  class="stories__bottom-carousel-item-picture">
 								</div>	
 							{% elseif (slide.image_type) == 'logo' %}
-								<img src="{{ slide.image.url }}" alt="" class="stories__bottom-carousel-item-logo">
+								<div class="stories__bottom-carousel-item-imageWrapper stories__bottom-carousel-item-imageWrapper--logo">
+									<img src="{{ slide.image.url }}" alt="" class="stories__bottom-carousel-item-logo">
+								</div>	
 							{% endif %}
 
 							<p class="stories__bottom-carousel-item-text">{{ slide.testimonial_text }}</p>
