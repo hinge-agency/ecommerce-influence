@@ -56,8 +56,13 @@
 
 	@include transition();
 
+	@include screen-lt(1000){
+		max-width: 600px;
+	}
+
 	@include screen-lt(600){
 		padding: 15px 0;
+		max-width: 475px;
 	}
 }
 .stories__bottom-carousel{
