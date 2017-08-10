@@ -75,9 +75,12 @@ $(function(){
 			$('.stories__bottom-carousel').on('setPosition', function () {
 
 		      $(this).find('.stories__bottom-carousel-item').height('auto');
-		      var slickTrackHeight = $(this).height();
-		      $(this).find('.stories__bottom-carousel-item').css('height', slickTrackHeight + 'px');     
-	     	})
+		      var slickTrack = $(this).find('.slick-track');
+		      var slickTrackHeight = $(slickTrack).height();
+		      $(this).find('.stories__bottom-carousel-item').css('height', slickTrackHeight + 'px');  
+
+	     	});
+
 		}, 300); 
 	});
 
@@ -137,14 +140,14 @@ $(function(){
 
 		 responsive: [
 		    {
-		      breakpoint: 1001,
+		      breakpoint: 1000,
 		      settings: {
 		        slidesToShow: 2,
 				slidesToScroll: 2
 		      }
 		    },
 		    {
-		      breakpoint: 601,
+		      breakpoint: 600,
 		      settings: {
 		        slidesToShow: 1,
 				slidesToScroll: 1
@@ -153,11 +156,12 @@ $(function(){
 		  ]
 	});
 
-	// Set equal height for each slide
+	//Set equal height for each slide
 	$('.stories__bottom-carousel').on('setPosition', function () {
 
 	      $(this).find('.stories__bottom-carousel-item').height('auto');
-	      var slickTrackHeight = $(this).height();
+	      var slickTrack = $(this).find('.slick-track');
+	      var slickTrackHeight = $(slickTrack).height();
 	      $(this).find('.stories__bottom-carousel-item').css('height', slickTrackHeight + 'px');
 
      });

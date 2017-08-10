@@ -8,8 +8,9 @@ use Lumberjack\Config\CustomPostTypes;
 use Lumberjack\Config\CustomTaxonomies;
 use Lumberjack\Config\Menus;
 use Lumberjack\Config\Options;
-use Lumberjack\Functions\Assets;
 use Lumberjack\Config\ACF;
+use Lumberjack\Config\Filters;
+use Lumberjack\Functions\Assets;
 
 require_once('autoload.php');
 
@@ -45,6 +46,9 @@ Options::register();
 
 // Register Advanced Custom Fields
 ACF::register();
+
+// Register Filters
+Filters::register();
 
 /**
  * ------------------
