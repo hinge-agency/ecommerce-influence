@@ -1,24 +1,44 @@
 $(function(){
 
+	var formheight = 0;
+	var socialTop = 0;
+	var newheight = 0;
+	var padding = 60;
+	var height = "";
+
 	if ($('.topDripForm').length){
 		var formheight = $('.topDripForm').height(); // TOP DRIP FORM INITIAL HEIGHT
-	}else{
-		formheight = 0;
 	}
 
 	var masthead = $('.masthead').height(); // HEADER INITIAL HEIGHT
-	var requiredheight = formheight + masthead; // REQUIRED HEIGHT
+	var requiredheight = (formheight - 1) + masthead; // REQUIRED HEIGHT
 	var offset = $(document).scrollTop(); // DETERMINE HOW MUCH WE SCROLLED
+	
+	//Calculate the top position needed for the social banner
+	if(offset < requiredheight){
+		socialTop  = (requiredheight + padding - offset);
+	}else if(offset > requiredheight && $('.topDripForm').length){
+		socialTop = (masthead + padding);
+	}else{
+		socialTop = (requiredheight + padding);
+	}
+	
+	//Set interval to set social banner position - this is in case of slow network and load time of the plugin
+	var setSocial = setInterval(function(){ 
 
-	var newheight = 0;
-	var height = "";
+		console.log('Interval running');
 
-	var socialTop  = (requiredheight + 60 - offset);
+		if( $('#at4-share').length ){
 
-	setTimeout(function() {
-		$('#at4-share').addClass('socialPlugin');
-		$('#at4-share').attr('style', 'top: ' + socialTop + 'px !important');
-	}, 3000);
+			$('#at4-share').addClass('socialPlugin');
+			$('#at4-share').attr('style', 'top: ' + socialTop + 'px !important');
+
+			clearInterval(setSocial);
+				
+			console.log("Interval stop");
+		}
+
+	}, 2000);
 
 	//PLACEHOLDER PLUGIN FOR LEGACY BROWSERS
 	$('input, textarea').placeholder();
@@ -31,7 +51,7 @@ $(function(){
 		requiredheight = masthead;
 
 		$('.masthead__nav-responsive').css({"top": requiredheight, "height" : 'calc(100% - ' + requiredheight + 'px)'});
-		$('#at4-share').attr('style', 'top: ' + requiredheight + 'px !important');
+		$('#at4-share').attr('style', 'top: ' + (requiredheight + padding) + 'px !important');
 	});
 
 	// Responsive navigation menu toggle
@@ -57,12 +77,13 @@ $(function(){
 		}
 
 		// Only run this if responsive navigation and topDripForm are active
-		if (!$('.topDripForm__inner--close').length && $('.nav-active').length){
+		if (!$('.topDripForm__inner--close').length){
 
 			setTimeout(function() { 
 		  		formheight = $('.topDripForm').height();
 		  		masthead = $('.masthead').height()
-				requiredheight = formheight + masthead;
+				requiredheight = (formheight - 1) + masthead;
+				offset = $(document).scrollTop();
 				newheight = requiredheight - offset;
 				height = newheight + "px";
 
@@ -92,7 +113,7 @@ $(function(){
 			if (setoffset < requiredheight){
 				offset = setoffset;
 
-				socialTop = (requiredheight + 60 - offset);
+				socialTop = (requiredheight + padding - offset);
 				
 				$('#at4-share').attr('style', 'top: ' + socialTop + 'px !important');
 
