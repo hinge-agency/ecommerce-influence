@@ -181,7 +181,7 @@
 		color: $text-blue;
 		text-decoration: underline;
 	}
-	b{
+	strong{
 		font-weight: bold;
 	}
 	img{
@@ -196,20 +196,6 @@
 		}
 	}
 
-	p:first-of-type{
-		margin-top: 30px;
-		
-		color: $dark-gray;
-
-		font-family: 'Spectral', $brandon;
-		font-weight: normal;
-		font-size: px-to-ems(25);
-		line-height: px-to-ems(34,25);
-
-		em{
-			box-shadow: inset 0px -18px 0px 0px $primary-yellow;
-		}
-	}
 	blockquote{
 		float: left;
 		padding: 0 20px 10px 0;
@@ -241,6 +227,26 @@
 			}
 		}
 	}
+	
+	div{
+		max-width: 100%;
+	}
+
+	// p:first-child{
+	// 	margin-top: 30px;
+		
+	// 	color: $dark-gray;
+	// 	color: red;
+
+	// 	font-family: 'Spectral', $brandon;
+	// 	font-weight: normal;
+	// 	font-size: px-to-ems(25);
+	// 	line-height: px-to-ems(34,25);
+
+	// 	em{
+	// 		box-shadow: inset 0px -18px 0px 0px $primary-yellow;
+	// 	}
+	// }
 
 	.wp-video{
 		margin: 40px auto;
