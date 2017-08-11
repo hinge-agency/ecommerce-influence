@@ -38,7 +38,7 @@ $(function(){
 			console.log("Interval stop");
 		}
 
-	}, 3000);
+	}, 2000);
 
 	//PLACEHOLDER PLUGIN FOR LEGACY BROWSERS
 	$('input, textarea').placeholder();
