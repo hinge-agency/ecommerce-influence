@@ -57,12 +57,13 @@ $(function(){
 		}
 
 		// Only run this if responsive navigation and topDripForm are active
-		if (!$('.topDripForm__inner--close').length && $('.nav-active').length){
+		if (!$('.topDripForm__inner--close').length){
 
 			setTimeout(function() { 
 		  		formheight = $('.topDripForm').height();
 		  		masthead = $('.masthead').height()
 				requiredheight = formheight + masthead;
+				offset = $(document).scrollTop();
 				newheight = requiredheight - offset;
 				height = newheight + "px";
 
