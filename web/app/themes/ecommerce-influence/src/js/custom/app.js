@@ -26,19 +26,20 @@ $(function(){
 	//Set interval to set social banner position - this is in case of slow network and load time of the plugin
 	var setSocial = setInterval(function(){ 
 
-		console.log('Interval running');
-
 		if( $('#at4-share').length ){
 
 			$('#at4-share').addClass('socialPlugin');
 			$('#at4-share').attr('style', 'top: ' + socialTop + 'px !important');
 
 			clearInterval(setSocial);
-				
-			console.log("Interval stop");
 		}
 
 	}, 2000);
+
+	//Force Stop Interval
+	setTimeout(function(){
+		clearInterval(setSocial);
+	}, 20000);
 
 	//PLACEHOLDER PLUGIN FOR LEGACY BROWSERS
 	$('input, textarea').placeholder();
