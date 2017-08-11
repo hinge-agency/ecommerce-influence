@@ -31,7 +31,7 @@ $(function(){
 			$('#at4-share').addClass('socialPlugin');
 			$('#at4-share').attr('style', 'top: ' + socialTop + 'px !important');
 
-			clearInterval(setSocial);
+			clearInterval(setSocial);			
 		}
 
 	}, 2000);
