@@ -6,7 +6,7 @@
 }
 .topDripForm__inner{
 	position: relative;
-	min-height: 336px;
+	min-height: 320px;
 	
 	@include transition();
 	
@@ -16,7 +16,7 @@
 
 	@include screen-lt(1120){
 		width: 95%;
-		min-height: 336px;
+		min-height: 320px;
 	}
 	@include screen-lt(600){
 		width: 90%;
@@ -26,7 +26,7 @@
 .topDripForm__content{
 	position: relative;
 	width: 100%;
-	min-height: 336px;
+	min-height: 320px;
 	background-image: url(../images/iPad.png);
 	background-repeat: no-repeat;
 	background-position: 0px -55px;
@@ -37,7 +37,7 @@
 	@include transition();
 
 	@include screen-lt(1440){
-		background-position: -80px -55px;
+		background-position: -50px -55px;
 	}
 	@include screen-lt(1310){
 		background-position: -125px -55px;
@@ -45,6 +45,7 @@
 	@include screen-lt(1210){
 		background-position: -175px -55px;
 		padding-left: 46%;
+		padding-bottom: 20px;
 	}
 	@include screen-lt(1110){
 		background-position: -220px -55px;
@@ -128,7 +129,7 @@
 	margin-top: 25px;
 	
 	@include transition();
-
+	
 	@include screen-lt(840){
 		margin-top: 15px;
 	}
