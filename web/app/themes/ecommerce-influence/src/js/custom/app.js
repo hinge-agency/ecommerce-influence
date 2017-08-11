@@ -7,7 +7,7 @@ $(function(){
 	}
 
 	var masthead = $('.masthead').height(); // HEADER INITIAL HEIGHT
-	var requiredheight = formheight + masthead; // REQUIRED HEIGHT
+	var requiredheight = (formheight - 1) + masthead; // REQUIRED HEIGHT
 	var offset = $(document).scrollTop(); // DETERMINE HOW MUCH WE SCROLLED
 
 	var newheight = 0;
@@ -62,7 +62,7 @@ $(function(){
 			setTimeout(function() { 
 		  		formheight = $('.topDripForm').height();
 		  		masthead = $('.masthead').height()
-				requiredheight = formheight + masthead;
+				requiredheight = (formheight - 1) + masthead;
 				offset = $(document).scrollTop();
 				newheight = requiredheight - offset;
 				height = newheight + "px";
