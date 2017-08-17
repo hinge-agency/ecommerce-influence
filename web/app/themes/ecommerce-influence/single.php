@@ -22,10 +22,15 @@ $content_parts = get_extended( $post->content );
 
 $context['post'] = $post;
 $context['title'] = $post->title;
+
+
+
 // Before More Tag
-$context['more'] = $content_parts['main'];
+$context['excerpt'] = ($content_parts['extended'] != '' ? $content_parts['main'] : false);
+
 // After More Tag
-$context['content'] = $content_parts['extended'];
+$context['content'] = ($content_parts['extended'] ? $content_parts['extended'] : $content_parts['main']);
+
 
 $context['sidebar'] = ($context['site_settings']['sidebar'] ? $context['site_settings']['sidebar'] : '');
 

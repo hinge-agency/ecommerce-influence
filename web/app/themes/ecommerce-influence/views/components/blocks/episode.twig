@@ -26,15 +26,18 @@
 
 			</p>
 
-			{% if (more) %}
+			{% if (excerpt) %}
 				
-				<div class="episode__header-details-summary">{{ more }}</div>
+				<div class="episode__header-details-summary">{{ excerpt }}</div>
 
 			{% endif %}
 
+
 		</div><!-- HEADER END --> 
 		<div class="episode__content">
+
 			{{ content }}
+
 		</div>
 	
 </section>
