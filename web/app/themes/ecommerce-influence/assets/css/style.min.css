@@ -534,6 +534,11 @@ body,html{font-size:16px}
 }.episode__header-social-items-item{border-bottom:1px solid #e0e0e0}
 .episode__header-social-items-item:nth-last-child(1){border:0}
 .episode__header-social-items-item-link{padding:20px;display:block;background-color:#f5f5f5;background-repeat:no-repeat;background-position:center}
+.episode__header-details-summary{margin-top:10px}
+.episode__header-details-summary h1,.episode__header-details-summary h2,.episode__header-details-summary h3,.episode__header-details-summary h4,.episode__header-details-summary h5,.episode__header-details-summary h6,.episode__header-details-summary p{margin-top:20px;color:#2f3d65;font-family:"Spectral","Brandon Grotesque",sans-serif;font-weight:normal;font-size:1.5625em;line-height:1.36em}
+.episode__header-details-summary p{color:#3e3e3e}
+.episode__header-details-summary p em{-webkit-box-shadow:inset 0 -18px 0 0 #fff477;box-shadow:inset 0 -18px 0 0 #fff477}
+.episode__header-details-summary p strong{font-weight:bold}
 .episode__content{position:relative;margin-top:20px;padding-bottom:20px}
 .episode__content h1,.episode__content h2,.episode__content h3,.episode__content h4,.episode__content h5,.episode__content h6{margin-top:20px;margin-bottom:20px;color:#2f3d65;text-transform:capitalize;font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:1.5625em;line-height:1.16em}
 .episode__content p,.episode__content li{margin-top:10px;color:#3e3e3e;font-family:"Spectral","Brandon Grotesque",sans-serif;font-weight:normal;font-size:1.25em;line-height:1.45em}

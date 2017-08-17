@@ -84,7 +84,6 @@ $(function(){
 		  		formheight = $('.topDripForm').height();
 		  		masthead = $('.masthead').height()
 				requiredheight = (formheight - 1) + masthead;
-				offset = $(document).scrollTop();
 				newheight = requiredheight - offset;
 				height = newheight + "px";
 
