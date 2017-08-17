@@ -26,9 +26,15 @@
 
 			</p>
 
+			{% if (more) %}
+				
+				<div class="episode__header-details-summary">{{ more }}</div>
+
+			{% endif %}
+
 		</div><!-- HEADER END --> 
 		<div class="episode__content">
-			{{ post.content }}
+			{{ content }}
 		</div>
 	
 </section>
