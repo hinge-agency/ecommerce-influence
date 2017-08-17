@@ -17,10 +17,15 @@ $context = Timber::get_context();
 
 $post = new Post();
 
-$context['post'] = $post;
+// Get content parts
+$content_parts = get_extended( $post->content );
 
+$context['post'] = $post;
 $context['title'] = $post->title;
-$context['content'] = $post->content;
+// Before More Tag
+$context['more'] = $content_parts['main'];
+// After More Tag
+$context['content'] = $content_parts['extended'];
 
 $context['sidebar'] = ($context['site_settings']['sidebar'] ? $context['site_settings']['sidebar'] : '');
 

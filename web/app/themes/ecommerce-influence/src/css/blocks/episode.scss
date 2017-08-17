@@ -117,7 +117,29 @@
 	background-repeat: no-repeat;
 	background-position: center;
 }
+.episode__header-details-summary{
+	margin-top: 10px;
 
+	h1,h2,h3,h4,h5,h6,p{
+		margin-top: 20px;
+	
+		color: $text-blue;
+
+		font-family: 'Spectral', $brandon;
+		font-weight: normal;
+		font-size: px-to-ems(25);
+		line-height: px-to-ems(34,25);
+	}
+	p{
+		color: $dark-gray;
+		em{
+			box-shadow: inset 0px -18px 0px 0px $primary-yellow;
+		}
+		strong{
+			font-weight: bold;
+		}
+	}
+}
 /* WYSIWYG CONTENT */
 
 .episode__content{
@@ -221,7 +243,6 @@
 		em{
 			box-shadow: inset 0px -20px 0px 0px $primary-yellow;
 
-
 			@include screen-lt(600){
 				box-shadow: inset 0px -16px 0px 0px $primary-yellow;
 			}
@@ -231,22 +252,6 @@
 	div{
 		max-width: 100%;
 	}
-
-	// p:first-child{
-	// 	margin-top: 30px;
-		
-	// 	color: $dark-gray;
-	// 	color: red;
-
-	// 	font-family: 'Spectral', $brandon;
-	// 	font-weight: normal;
-	// 	font-size: px-to-ems(25);
-	// 	line-height: px-to-ems(34,25);
-
-	// 	em{
-	// 		box-shadow: inset 0px -18px 0px 0px $primary-yellow;
-	// 	}
-	// }
 
 	.wp-video{
 		margin: 40px auto;
