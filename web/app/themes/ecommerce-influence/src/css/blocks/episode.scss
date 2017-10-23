@@ -227,6 +227,74 @@
 	}
 
 	blockquote{
+		position: relative;
+		margin: 0;
+		padding: 20px 35px;
+
+		color: $dark-gray;
+
+		font-family: 'Spectral', $brandon;
+		font-weight: normal;
+		font-style: italic;
+		font-size: px-to-ems(22);
+		line-height: px-to-ems(34,22);
+
+		text-align: center;
+
+		&:before{
+			content: "";
+			position: absolute;
+			top: 20px;
+			left: 10px;
+
+			display: block;
+			width: 20px;
+			height: 20px;
+
+			background-image: url('../images/quotes.svg');
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center;
+		}
+
+		p,h1,h2,h3,h4,h5,h6{
+			padding: 0;
+			margin: 0;
+			color: inherit;
+			font-family: inherit;
+			font-weight: inherit;
+			font-style: inherit;
+			font-size: px-to-ems(22,22);
+			line-height: px-to-ems(34,22);
+		}
+
+		@include screen-lt(1050){
+			font-size: px-to-ems(20);
+			line-height: px-to-ems(32,20);
+
+			&:before{
+				left: 15px;
+				width: 15px;
+				height: 15px;
+			}
+
+			p,h1,h2,h3,h4,h5,h6{
+				font-size: px-to-ems(20,20);
+				line-height: px-to-ems(32,20);
+			}
+		}
+		@include screen-lt(600){
+			padding: 15px;
+
+			&:before{
+				left: 0;
+				width: 15px;
+				height: 15px;
+			}
+		}
+	}
+
+	.small-quote{
 		position: realtive;
 
 		float: left;
@@ -237,7 +305,9 @@
 		
 		color: $dark-gray;
 		font-size: px-to-ems(22);
-		line-height: px-to-ems(38,22);
+		line-height: px-to-ems(34,22);
+
+		box-shadow: inset 0px -20px 0px 0px $primary-yellow;
 
 		p,h1,h2,h3,h4,h5,h6{
 			padding: 0;
@@ -246,17 +316,17 @@
 			color: inherit;
 			font-weight: normal;
 			font-size: px-to-ems(22,22);
-			line-height: px-to-ems(38,22);
+			line-height: px-to-ems(34,22);
 		}
 
 		@include screen-lt(1050){
 			padding: 20px 10px 20px 0;
 			font-size: px-to-ems(20);
-			line-height: px-to-ems(34,20);
+			line-height: px-to-ems(32,20);
 
 			p,h1,h2,h3,h4,h5,h6{
 				font-size: px-to-ems(20,20);
-				line-height: px-to-ems(34,20);
+				line-height: px-to-ems(32,20);
 			}
 		}
 
@@ -273,21 +343,15 @@
 			font-size: px-to-ems(19);
 			line-height: px-to-ems(26,19);
 
+			box-shadow: inset 0px -16px 0px 0px $primary-yellow;
+
 			p,h1,h2,h3,h4,h5,h6{
 
 				font-family: 'Spectral', $brandon;
 				color: inherit;
 				font-weight: normal;
 				font-size: px-to-ems(19,19);
-				line-height: px-to-ems(40,19);
-			}
-		}
-
-		em{
-			box-shadow: inset 0px -20px 0px 0px $primary-yellow;
-
-			@include screen-lt(600){
-				box-shadow: inset 0px -16px 0px 0px $primary-yellow;
+				line-height: px-to-ems(26,19);
 			}
 		}
 	}
