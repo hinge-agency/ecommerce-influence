@@ -541,7 +541,7 @@ body,html{font-size:16px}
 .episode__header-details-summary p strong{font-weight:bold}
 .episode__header-details-summary a{color:#2f3d65;text-decoration:underline}
 .episode__header-details-summary .subwrap a{display:inline-block}
-.episode__header-details-summary .subwrap a img{margin-right:15px;display:inline-block}
+.episode__header-details-summary .subwrap a img{margin-top:10px;margin-right:15px;display:inline-block}
 @media all and (max-width:600px){.episode__header-details-summary .subwrap a{margin:0 auto;display:block;max-width:200px}
 .episode__header-details-summary .subwrap a+a{margin-top:15px;margin-bottom:30px}
 .episode__header-details-summary .subwrap a img{margin:0}
