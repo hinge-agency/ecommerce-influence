@@ -297,10 +297,11 @@
 	.subwrap{
 		a{
 			display: inline-block;
-		}
-		img{
-			margin-right: 15px;
-			display: inline-block;
+
+			img{
+				margin-right: 15px;
+				display: inline-block;
+			}
 		}
 
 		@include screen-lt(600){
@@ -313,9 +314,10 @@
 					margin-top: 15px;
 					margin-bottom: 30px;
 				}
-			}
-			img{
-				margin: 0;
+
+				img{
+					margin: 0;
+				}
 			}
 		}
 	}
