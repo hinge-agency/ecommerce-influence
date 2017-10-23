@@ -219,13 +219,26 @@
 	}
 
 	blockquote{
+		position: realtive;
+
 		float: left;
+		clear: both;
 		padding: 0 20px 10px 0;
 
 		width: 280px;
+		
+		color: $dark-gray;
+		font-size: px-to-ems(22);
+		line-height: px-to-ems(40,22);
 
-		font-size: px-to-ems(28,25);
-		line-height: px-to-ems(37,28);
+		p,h1,h2,h3,h4,h5,h6{
+
+			font-family: 'Spectral', $brandon;
+			color: inherit;
+			font-weight: normal;
+			font-size: px-to-ems(22,22);
+			line-height: px-to-ems(36,22);
+		}
 
 		@include screen-lt(600){
 			float: none;
@@ -236,8 +249,17 @@
 
 			text-align: center;
 
-			font-size: px-to-ems(24,28);
-			line-height: px-to-ems(24,24);
+			font-size: px-to-ems(20);
+			line-height: px-to-ems(26,20);
+
+			p,h1,h2,h3,h4,h5,h6{
+
+				font-family: 'Spectral', $brandon;
+				color: inherit;
+				font-weight: normal;
+				font-size: px-to-ems(20,20);
+				line-height: px-to-ems(40,20);
+			}
 		}
 
 		em{
