@@ -294,6 +294,32 @@
 		}
 	}
 
+	.subwrap{
+		a{
+			display: inline-block;
+		}
+		img{
+			margin-right: 15px;
+			display: inline-block;
+		}
+
+		@include screen-lt(600){
+			a{
+				margin: 0 auto;
+				display: block;
+				max-width: 200px;
+
+				&+a{
+					margin-top: 15px;
+					margin-bottom: 30px;
+				}
+			}
+			img{
+				margin: 0;
+			}
+		}
+	}
+
 	.small-quote{
 		position: realtive;
 

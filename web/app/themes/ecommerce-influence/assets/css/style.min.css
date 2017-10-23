@@ -236,7 +236,7 @@ body,html{font-size:16px}
 .sidebar__block:nth-child(odd),.sidebar__block:nth-child(even){margin:0 auto;margin-top:30px;text-align:center}
 }.sidebar__first{margin-top:0}
 @media all and (max-width:1000px){.sidebar__first{margin-top:30px}
-}.sidebar__latest-block{position:relative;padding:20px 0;background-color:white}
+}.sidebar__latest-block{position:relative;padding:20px 15px;background-color:white}
 .sidebar__latest-block:nth-child(1){padding-top:0}
 .sidebar__latest-block:nth-child(even){background-color:#f9f9f9}
 .sidebar__latest-block-label{position:relative;padding:2px 16px;display:inline-block}
@@ -560,6 +560,11 @@ body,html{font-size:16px}
 .episode__content blockquote p,.episode__content blockquote h1,.episode__content blockquote h2,.episode__content blockquote h3,.episode__content blockquote h4,.episode__content blockquote h5,.episode__content blockquote h6{font-size:1em;line-height:1.6em}
 }@media all and (max-width:600px){.episode__content blockquote{padding:15px;text-align:center}
 .episode__content blockquote:before{left:0;width:15px;height:15px}
+}.episode__content .subwrap a{display:inline-block}
+.episode__content .subwrap img{margin-right:15px;display:inline-block}
+@media all and (max-width:600px){.episode__content .subwrap a{margin:0 auto;display:block;max-width:200px}
+.episode__content .subwrap a+a{margin-top:15px;margin-bottom:30px}
+.episode__content .subwrap img{margin:0}
 }.episode__content .small-quote{position:realtive;float:left;clear:both;padding:20px 20px 20px 0;width:280px;color:#3e3e3e;font-size:1.375em;line-height:1.5454545455em}
 .episode__content .small-quote p,.episode__content .small-quote h1,.episode__content .small-quote h2,.episode__content .small-quote h3,.episode__content .small-quote h4,.episode__content .small-quote h5,.episode__content .small-quote h6{padding:0;margin:0;font-family:"Spectral","Brandon Grotesque",sans-serif;color:inherit;font-weight:normal;font-size:1em;line-height:1.5454545455em}
 @media all and (max-width:1050px){.episode__content .small-quote{padding:20px 10px 20px 0;font-size:1.25em;line-height:1.6em}
