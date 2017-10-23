@@ -551,15 +551,17 @@ body,html{font-size:16px}
 .episode__content strong{font-weight:bold}
 .episode__content img{margin:30px 0;display:block;max-width:100%;height:auto}
 @media all and (max-width:1000px){.episode__content img{margin:30px auto}
-}.episode__content blockquote{position:realtive;float:left;clear:both;padding:0 20px 10px 0;width:280px;color:#3e3e3e;font-size:1.375em;line-height:1.8181818182em}
-.episode__content blockquote p,.episode__content blockquote h1,.episode__content blockquote h2,.episode__content blockquote h3,.episode__content blockquote h4,.episode__content blockquote h5,.episode__content blockquote h6{font-family:"Spectral","Brandon Grotesque",sans-serif;color:inherit;font-weight:normal;font-size:1em;line-height:1.6363636364em}
-@media all and (max-width:600px){.episode__content blockquote{float:none;margin:0 auto;padding:0;width:100%;text-align:center;font-size:1.25em;line-height:1.3em}
-.episode__content blockquote p,.episode__content blockquote h1,.episode__content blockquote h2,.episode__content blockquote h3,.episode__content blockquote h4,.episode__content blockquote h5,.episode__content blockquote h6{font-family:"Spectral","Brandon Grotesque",sans-serif;color:inherit;font-weight:normal;font-size:1em;line-height:2em}
+}.episode__content blockquote{position:realtive;float:left;clear:both;padding:20px 20px 20px 0;width:280px;color:#3e3e3e;font-size:1.375em;line-height:1.7272727273em}
+.episode__content blockquote p,.episode__content blockquote h1,.episode__content blockquote h2,.episode__content blockquote h3,.episode__content blockquote h4,.episode__content blockquote h5,.episode__content blockquote h6{padding:0;margin:0;font-family:"Spectral","Brandon Grotesque",sans-serif;color:inherit;font-weight:normal;font-size:1em;line-height:1.7272727273em}
+@media all and (max-width:1050px){.episode__content blockquote{padding:20px 10px 20px 0;font-size:1.25em;line-height:1.7em}
+.episode__content blockquote p,.episode__content blockquote h1,.episode__content blockquote h2,.episode__content blockquote h3,.episode__content blockquote h4,.episode__content blockquote h5,.episode__content blockquote h6{font-size:1em;line-height:1.7em}
+}@media all and (max-width:600px){.episode__content blockquote{float:none;margin:0 auto;padding:0;padding-top:10px;width:100%;text-align:center;font-size:1.1875em;line-height:1.3684210526em}
+.episode__content blockquote p,.episode__content blockquote h1,.episode__content blockquote h2,.episode__content blockquote h3,.episode__content blockquote h4,.episode__content blockquote h5,.episode__content blockquote h6{font-family:"Spectral","Brandon Grotesque",sans-serif;color:inherit;font-weight:normal;font-size:1em;line-height:2.1052631579em}
 }.episode__content blockquote em{-webkit-box-shadow:inset 0 -20px 0 0 #fff477;box-shadow:inset 0 -20px 0 0 #fff477}
 @media all and (max-width:600px){.episode__content blockquote em{-webkit-box-shadow:inset 0 -16px 0 0 #fff477;box-shadow:inset 0 -16px 0 0 #fff477}
 }.episode__content div{max-width:100%}
 .episode__content .wp-video{margin:40px auto}
-.episode__content .iframeWrapper{position:relative;margin:40px auto;padding-bottom:56%;height:0;overflow:hidden}
+.episode__content .iframeWrapper{position:relative;margin:40px auto;padding-bottom:56%;height:0;overflow:hidden;clear:both}
 .episode__content .iframeWrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%}
 .popUpTemplate__wrapper{margin-bottom:30px;text-align:right}
 .popUpTemplate__formBlock{position:relative;margin:0;margin-top:45px;padding:0 35px;padding-bottom:5px;display:inline-block;width:100%;max-width:760px;background-color:#2f3d65;border-radius:3px;text-align:left}
