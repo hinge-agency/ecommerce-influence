@@ -239,8 +239,6 @@
 		font-size: px-to-ems(22);
 		line-height: px-to-ems(34,22);
 
-		text-align: center;
-
 		&:before{
 			content: "";
 			position: absolute;
@@ -285,6 +283,8 @@
 		}
 		@include screen-lt(600){
 			padding: 15px;
+
+			text-align: center;
 
 			&:before{
 				left: 0;
