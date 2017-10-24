@@ -1,0 +1,168 @@
+@import "base/reset";
+@import "base/variables";
+@import "base/typography";
+@import "base/mixins";
+@import "base/functions";
+
+* {
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body,html{
+	font-size: 16px;
+
+	@include screen-lt(768){
+		font-size: 90%;
+	}
+	@include screen-lt(600){
+		font-size: 100%;
+	}
+}
+
+.nav-active{
+	overflow: hidden;
+	
+	.masthead__nav-responsive{
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.masthead__right-search{
+		opacity: 0;
+	}
+}
+
+.main{
+	position: relative;
+	padding-top: 60px;
+	direction: rtl;
+
+	display: block;
+}
+.content{
+	position: relative;
+	padding-left: 60px;
+	direction: ltr;
+
+	display: inline-block;
+	vertical-align: top;
+	
+	width: calc(100% - 340px);
+
+	background-color: white;
+
+	@include screen-lt(1000){
+		padding-left: 0;
+		
+		display: block;
+		width: 100%;
+	}
+}
+.constrain{
+	width: 100%;
+	max-width: 1160px;
+
+	margin: 0 auto;
+	
+	@include transition();
+
+	@include screen-lt(1220){
+		width: 90%;
+	}
+}
+.lastBlock{
+	padding-bottom: 80px;
+}
+
+.homePage-sidebar,
+.pages-sidebar{
+	position: relative;
+
+	display: inline-block;
+	vertical-align: top;
+	direction: ltr;
+
+	width: 340px;
+
+	@include screen-lt(1000){
+		margin-top: 50px;
+
+		display: block;
+		width: 100%;
+	}
+}
+
+.pages-sidebar{
+
+	.sidebar__formBlock{
+		margin-top: 0;
+	}
+	.sidebar__profiles{
+		@include screen-lt(1000){	
+			margin: 0 auto;
+
+			display: block;
+			width: 100%;
+
+			text-align: center;
+		}
+		@include screen-lt(400){	
+			margin: 0 auto;
+
+			display: block;
+			width: 100%;
+
+			text-align: left;
+		}
+	}
+	.sidebar__latest,
+	.sidebar__latest-all{
+		margin-top: 47px;
+
+		@include screen-lt(1000){	
+			text-align: center;
+		}
+		@include screen-lt(400){	
+			text-align: left;
+		}
+	}
+	.sidebar__latest-all{
+		@include screen-lt(1000){
+			margin-top: 0;
+			padding: 20px 0;
+		}
+	}
+}
+
+.disqusCommentTemplate{
+	padding: 50px 0;
+}
+
+//PLUGINS
+
+#at4-share{
+	display: none;
+
+	@include transition();
+}
+#at4-share.socialPlugin{
+	display: block;
+}
+
+@import "common/topDripForm";
+@import "common/masthead";
+@import "common/footer";
+@import "blocks/about";
+@import "blocks/404";
+@import "blocks/sidebar";
+@import "blocks/latestContent";
+@import "blocks/contentGrid";
+@import "blocks/bottomDripForm";
+@import "blocks/bottomDripForm";
+@import "blocks/related";
+@import "blocks/episode";
+@import "blocks/popupForm";
+@import "blocks/storiesCarousel";
+@import "blocks/personProfile";

@@ -1,0 +1,226 @@
+.relatedContent{
+	position: relative;
+	margin-top: 50px;
+	padding: 50px 0;
+
+	width: 100%;
+
+	background-color: $light-gray;
+
+	@include screen-lt(500){
+		margin-top: 30px;
+		padding: 30px 0;
+	}
+}
+.relatedContent__inner{
+	position: relative;
+}
+.relatedContent__topBar{
+	position: relative;
+	padding: 0 30px;
+
+	width: 100%;
+}
+.relatedContent__topBar-title,
+.relatedContent__topBar-pagination{
+	display: inline-block;
+	vertical-align: middle;
+
+	@include screen-lt(500){
+		margin: 0 auto;
+		display: block;
+	}
+}
+.relatedContent__topBar-title{
+	width: calc(100% - 110px);
+
+	color: $text-blue;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(35);
+	line-height: px-to-ems(35,35);
+
+	@include screen-lt(500){
+		width: 100%;
+		text-align: center;
+	}
+}
+.relatedContent__topBar-pagination{
+	text-align: right;
+
+	width: 110px;
+
+	@include screen-lt(500){
+		margin-top: 20px;
+	}
+}
+.relatedContent__topBar-pagination-buttons{
+	display: block;
+	max-width: 110px;
+
+	background: white;
+	box-shadow: 0 6px 14px 0 rgba(0,0,0,0.06), 0 1px 3px 0 rgba(0,0,0,0.06);
+	border-radius: 5px;
+}
+.relatedContent__topBar-pagination-button{
+	position: relative;
+
+	display: inline-block;
+	vertical-align: middle;
+
+	border-right: 3px solid $light-gray;
+
+	&:nth-last-child(1){
+		border: none;
+	}
+}
+.relatedContent__topBar-pagination-button-link{
+	padding: 20px 26px;
+
+	display: block;
+
+	background-repeat: no-repeat;
+	background-position: center center;
+
+	cursor: pointer;
+	
+	&--left{
+		background-image: url('../images/leftArrow.svg');
+	}
+
+	&--right{
+		background-image: url('../images/rightArrow.svg');
+	}
+}
+
+/* CONTENT LIST */
+.relatedContent__carousel{
+	position: relative;
+	width: 100%;
+}
+.relatedContent__carousel-slide-items-item{
+	position: relative;
+	padding: 0 30px;
+
+	outline: none;
+}
+.relatedContent__carousel-slide-items-item-wrapper{
+	display: block;
+	width: 100%;
+	height: 100%;
+
+	cursor: pointer;
+
+	&:hover{
+		.relatedContent__carousel-slide-items-item-textWrapper-title{
+			text-decoration: underline;
+		}
+	}
+}
+
+.relatedContent__carousel-slide-items-item-imageWrapper{
+	position: relative;
+}
+.relatedContent__carousel-slide-items-item-imageWrapper-sizingImage{
+	display: block;
+	
+	max-width: 100%;
+}
+.relatedContent__carousel-slide-items-item-imageWrapper-image{
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: cover;
+}
+
+.relatedContent__carousel-slide-items-item-textWrapper{
+	position: relative;
+
+	margin-top: 20px;
+}
+.relatedContent__carousel-slide-items-item-textWrapper-label{
+	padding: 5px 5px 5px 24px;
+
+	display: inline-block;
+	vertical-align: center;
+
+	font-size: 0;
+
+	font-family: $brandon;
+	font-weight: bold;
+	font-size: px-to-ems(10);
+	line-height: px-to-ems(10,10);
+	letter-spacing: 1px;
+
+	text-transform: uppercase;
+
+	&--podcast{
+		background-color: $primary-yellow;
+		color: black;
+
+		background-image: url('../images/podcast.svg');
+		background-repeat: no-repeat;
+		background-position: left 10px center;
+	}
+	&--article{
+		background-color: $text-blue;
+		color: white;
+
+		background-image: url('../images/article.svg');
+		background-repeat: no-repeat;
+		background-position: left 10px center;
+	}
+}
+.relatedContent__carousel-slide-items-item-textWrapper-title{
+	margin-top: 8px;
+
+	color: $text-blue;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(23);
+	line-height: px-to-ems(30,23);
+
+	@include transition();
+
+	@include screen-lt(500){
+		font-size: px-to-ems(22);
+		line-height: px-to-ems(29,22);
+	}
+}
+.relatedContent__carousel-slide-items-item-textWrapper-link{
+	position: relative;
+	z-index: 0; 
+	margin-top: 15px;
+
+	display: inline-block;
+
+	font-size: 0;
+	
+	color: $text-blue;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(18);
+	line-height: px-to-ems(30,18);
+
+	&:after{
+		content: "";
+		position: absolute;
+		bottom: 5px;
+		left: -1%;
+		z-index: -1;
+
+		width: 102%;
+		height: 6px;
+
+		background-color: $primary-yellow;
+	}
+}

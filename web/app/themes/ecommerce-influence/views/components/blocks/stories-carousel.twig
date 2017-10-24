@@ -1,0 +1,61 @@
+<section class="stories">
+	
+	<div class="stories__top">
+		
+		<div class="stories__top-contentWrapper constrain">
+
+			<div class="stories__top-heading">{{ block.carousel_title }}</div>
+			<p class="stories__top-text">{{ block.carousel_text }}</p>
+
+		</div><!-- TOP WRAPPER END -->
+
+	</div><!-- TOP END -->
+
+	<div class="stories__bottom">
+		
+		<div class="stories__bottom-contentWrapper">
+			
+			<div class="stories__bottom-carousel">
+
+				{% for slide in block.carousel_slide %}<!--
+				--><div class="stories__bottom-carousel-item">
+					
+						<div class="stories__bottom-carousel-item-contentWrapper">
+
+							{% if (slide.image_type) == 'picture' %}
+								<div class="stories__bottom-carousel-item-imageWrapper stories__bottom-carousel-item-imageWrapper--picture">
+									<img src="{{ slide.image.sizes['thumbnail'] }}" alt=""  class="stories__bottom-carousel-item-picture">
+								</div>	
+							{% elseif (slide.image_type) == 'logo' %}
+								<div class="stories__bottom-carousel-item-imageWrapper stories__bottom-carousel-item-imageWrapper--logo">
+									<img src="{{ slide.image.url }}" alt="" class="stories__bottom-carousel-item-logo">
+								</div>	
+							{% endif %}
+
+							<p class="stories__bottom-carousel-item-text">{{ slide.testimonial_text }}</p>
+							<p class="stories__bottom-carousel-item-details"><span class="stories__bottom-carousel-item-details-person">{{ slide.testimonial_info }}</span></p>
+
+						</div>
+
+					</div><!--
+				-->{% endfor %}
+
+			</div>
+			
+			<div class="stories__bottom-buttonsWrapper">
+
+				<ul class="stories__bottom-buttons">
+					<li class="stories__bottom-buttons-button">
+						<a href="" class="stories__bottom-buttons-button-link stories__bottom-buttons-button-link--left"></a>
+					</li><!--
+					--><li class="stories__bottom-buttons-button">
+						<a href="" class="stories__bottom-buttons-button-link stories__bottom-buttons-button-link--right"></a>
+					</li>		
+				</ul>
+			</div>
+
+		</div><!-- BOTTOM WRAPPER END -->
+
+	</div><!-- BOTTOM END -->
+
+</section><!-- STORIES END -->

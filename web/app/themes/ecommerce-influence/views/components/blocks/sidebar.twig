@@ -1,0 +1,122 @@
+{% if (sidebar) %}
+	<ul class="sidebar">
+	
+	{% for layout in sidebar %}<!-- SIDEBAR LAYOUTS -->
+		{% if (layout.acf_fc_layout == 'latest_posts') %}
+			{% if (latest_posts|length > 0) %}
+
+				<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
+					
+					<div class="sidebar__latest">
+					
+						{% for post in latest_posts %}
+
+							<div class="sidebar__latest-block">
+								
+								{% if (post.category.name == 'Podcasts')%}
+									<div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">Episode {{ post.podcast_number }}</span></div>
+									<a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a>
+								{% elseif (post.category.name == 'Articles') %}
+									<div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">{{ post.category.name }}</span></div>
+									<a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a>
+								{% endif %}
+								
+							</div>
+							
+						{% endfor %}
+
+						<div class="sidebar__latest-all">
+							<a href="/posts" class="sidebar__latest-all-link">See all content</a>				
+						</div>
+
+					</div>
+
+				</li>
+
+			{% endif %}<!-- LATEST END -->
+
+		{% elseif (layout.acf_fc_layout) == 'user_profile' %}
+			
+			<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
+
+				<div class="sidebar__profiles">
+
+						{% for user in layout.user %}
+
+							<a href="{{ acf_helper.getUserData(user.profile.ID).link }}" class="sidebar__profiles-profile-link">
+								<div class="sidebar__profiles-profile">
+									<div class="sidebar__profiles-profile-image" style="background-image: url('{{ acf_helper.getUserData(user.profile.ID).image.sizes['thumbnail'] }}')"></div>
+									<p class="sidebar__profiles-profile-context">Work with</p>
+									<p class="sidebar__profiles-profile-name"><span class="sidebar__profiles-profile-name-first">{{ user.profile.user_firstname }}</span> <span class="sidebar__profiles-profile-name-last">{{ user.profile.user_lastname }}</span></p>
+								</div>							
+							</a>
+
+						{% endfor %}
+
+				</div>
+
+			</li><!-- PROFILES END -->
+
+		{% elseif (layout.acf_fc_layout == 'testimonial') %}
+
+			<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
+
+				<div class="sidebar__testimonial" style="background-image: url('{{ layout.image.url }}')">
+
+					<div class="sidebar__testimonial-textWrapper">
+						<p class="sidebar__testimonial-text"><span>"{{ layout.text }}"</span></p>
+
+						<p class="sidebar__testimonial-details">{{ layout.info }}</p>
+
+						{% if (layout.button_link) %}
+							<a href="{{ layout.button_link }}" class="sidebar__testimonial-button">{{ layout.button_text }}</a>
+						{% endif %}	
+					</div>
+
+				</div>
+
+			</li><!-- TESTIMONIAL END -->
+
+		{% elseif (layout.acf_fc_layout) == 'popup_form' %}
+			
+			<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
+
+				<div class="sidebar__formBlock">
+
+					<div class="sidebar__formBlock-wrapper">
+						
+						<div class="sidebar__formBlock-top">
+							<img src="{{ assets }}/images/tablet-small.png" alt="Form Image" class="sidebar__formBlock-image">
+
+							<h3 data-drip-attribute="headline" class="sidebar__formBlock-formTitle">{{ site_settings.ss_popup_form_title }}</h3>
+							<p data-drip-attribute="description" class="sidebar__formBlock-formText">{{ site_settings.ss_popup_form_text ? site_settings.ss_popup_form_text }}</p>
+						</div>
+
+						<form action="https://www.getdrip.com/forms/10754076/submissions" method="post" data-drip-embedded-form="10754076" class="topDripForm__form" class="sidebar__formBlock-form">
+							
+							<div class="sidebar__formBlock-form-block">
+								<label for="drip-First-Name"></label>
+								<input type="text" id="drip-First-Name" name="fields[First_Name]" value="" class="sidebar__formBlock-form-block-input" placeholder="First name">
+							</div>
+							<div class="sidebar__formBlock-form-block">
+								<label for="drip-email"></label>
+								<input type="email" id="drip-email" name="fields[email]" value="" class="sidebar__formBlock-form-block-input" placeholder="Email address">
+							</div>
+							<div class="sidebar__formBlock-form-block sidebar__formBlock-form-block--button">
+								<input type="submit" name="submit" value="Sign Up" data-drip-attribute="sign-up-button" class="sidebar__formBlock-form-block-button">
+							</div>
+
+						</form>
+
+					</div><!-- WRAPPER END -->
+
+				</div>
+
+			</li><!-- FORM BLOCK END -->
+
+		{% endif %}
+
+	{% endfor %}
+
+	</ul><!-- SIDEBAR END -->
+{% endif %}	

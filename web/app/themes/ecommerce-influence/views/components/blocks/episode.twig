@@ -1,0 +1,43 @@
+<section class="episode">
+
+	<div class="episode__imageWrapper">
+		<img src="{{ assets }}/images/sizingImage-episode.png" alt="Sizing Image" class="episode__imageWrapper-sizingImage">
+		<span class="episode__imageWrapper-image" style="background-image: url('{{ post.thumbnail.src }}')"></span>
+	</div>
+
+	<!-- style="background-image: url({{ brick.hero_background_image.url }}) -->
+
+		<div class="episode__header">
+			
+			<h1 class="episode__header-title">{{ title }}</h1>
+			<p class="episode__header-details">
+			
+			{% if (post.author.name) %}
+
+				Posted by <span class="episode__header-details-author">{{ post.author.name }}</span>	
+
+			{% endif %}			
+
+			{% if (post.category.name == 'Podcasts') %}
+
+				on<span class="episode__header-details-date"> {{ post.post_date|date("F j, Y") }}</span>
+
+			{% endif %}
+
+			</p>
+
+			{% if (excerpt) %}
+				
+				<div class="episode__header-details-summary">{{ excerpt }}</div>
+
+			{% endif %}
+
+
+		</div><!-- HEADER END --> 
+		<div class="episode__content">
+
+			{{ content }}
+
+		</div>
+	
+</section>

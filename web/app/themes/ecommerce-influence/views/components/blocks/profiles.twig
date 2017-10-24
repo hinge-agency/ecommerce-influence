@@ -1,0 +1,29 @@
+<div class="person__profiles">
+
+	<div class="person__profiles-contentWrapper constrain">
+
+		<ul class="person__profiles-items">
+			{% for user in block %}
+				{% for profile in user %}<!--
+				--><li class="person__profiles-items-item">
+
+				<div class="person__profiles-items-item-wrapper">
+					
+					<div class="person__profiles-items-item-imageWrapper">
+						<img src="{{ acf_helper.getUserData(profile.user.ID).image.sizes['thumbnail'] }}" alt="" class="person__profiles-items-item-image">
+					</div>
+
+					<div class="person__profiles-items-item-name">{{ profile.user.display_name }}</div>
+					<div class="person__profiles-items-item-text">{{ profile.user.user_description }}</div>
+
+					<a href="{{ acf_helper.getUserData(profile.user.ID).link }}" class="person__profiles-items-item-link">Work with {{ profile.user.user_firstname }}</a>
+				</div>
+
+				</li><!--
+				-->{% endfor %}
+			{% endfor %}
+		</ul>
+
+	</div><!-- PROFILES WRAPPER END -->
+
+</div><!-- PROFILES END -->

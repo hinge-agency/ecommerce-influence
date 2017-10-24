@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+ 	<main class="main constrain">
+
+        <section class="content">
+            {% include 'components/blocks/episode.twig' %}
+            {% include 'components/blocks/pop-up-form.twig' %}
+			
+			<div class="disqusCommentTemplate">
+				{{ post.disqus() }}
+			</div>
+            
+        </section><!--
+        --><section class="pages-sidebar">
+        	{% include 'components/blocks/sidebar.twig' %}
+        </section>
+
+	</main>
+
+{% endblock %}

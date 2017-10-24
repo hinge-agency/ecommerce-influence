@@ -1,0 +1,120 @@
+<section class="contentGrid lastBlock">
+
+	<div class="contentGrid__innner constrain">
+		
+		<div class="contentGrid__actionBar">
+			
+			<div class="contentGrid__actionBar-new">
+				
+				<a href="{{ prev_page }}" class="contentGrid__actionBar-new-link {{ prev_page == '#' ? 'contentGrid__actionBar-new-link--first' }}">Newer</a>
+
+			</div><!-- NEW BLOCK END
+			--><div class="contentGrid__actionBar-filter">
+				
+				<ul class="contentGrid__actionBar-filter-items">
+					
+					<li class="contentGrid__actionBar-filter-items-item">
+						<a href="/posts" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all {{ allPosts ? 'contentGrid__actionBar-filter-items-item-link--active'}}">All</a>
+					</li><!--
+					-->{% for cat in categories %}<!--
+					--><li class="contentGrid__actionBar-filter-items-item">
+						<a href="{{ cat.link }}{{ search ? search }}" class="contentGrid__actionBar-filter-items-item-link {{ title == cat.name ? 'contentGrid__actionBar-filter-items-item-link--active'}}">{{ cat.name }}</a>
+					</li><!--
+					-->{% endfor %}
+
+				</ul> 
+
+			</div><!-- FILTER BLOCK END
+			--><div class="contentGrid__actionBar-filterResponsive">
+				
+				<select name="" id="responsive-filter-menu" class="contentGrid__actionBar-filterResponsive-select">
+					<option value="/posts" {{ allPosts ? 'selected'}} >All</option>
+					{% for cat in categories %}
+						<option value="{{ cat.link }}{{ search ? search }}" {{ title == cat.name ? 'selected' }}>{{ cat.name }}</option>
+					{% endfor %}
+				</select>
+
+			</div><!--
+			--><div class="contentGrid__actionBar-old">
+				
+				<a href="{{ next_page }}" class="contentGrid__actionBar-old-link {{ next_page == '#' ? 'contentGrid__actionBar-old-link--last' }}">Older</a>
+
+			</div><!-- OLD BLOCK END -->
+
+		</div><!-- ACTION BAR END -->
+
+	{% if archive_posts %}
+		<ul class="contentGrid__items">
+			
+			{% for post in archive_posts %}<!--
+			--><li class="contentGrid__items-item">
+				
+				<a href="{{ post.link }}" class="contentGrid__items-item-wrapper">
+
+					<div class="contentGrid__items-item-imageWrapper">
+						<img src="{{ assets }}/images/sizing@19x9.svg" alt="Sizing Image" class="contentGrid__items-item-imageWrapper-sizingImage">
+						<span class="contentGrid__items-item-imageWrapper-image" style="background-image: url('{{ post.thumbnail.src }}')"></span>
+					</div>
+
+					{% if (post.category.name == 'Podcasts') %}
+						<div class="contentGrid__items-item-textWrapper">
+							<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">Episode {{ post.podcast_number }}</div>
+							<p class="contentGrid__items-item-textWrapper-title">{{ post.title }}</p>
+							<a href="{{ post.link }}" class="contentGrid__items-item-textWrapper-link">Listen now</a>
+						</div>
+					{% else %}
+						<div class="contentGrid__items-item-textWrapper">
+							<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--article">{{ post.category.name }}</div>
+							<p class="contentGrid__items-item-textWrapper-title">{{ post.title }}</p>
+							<a href="{{ post.link }}" class="contentGrid__items-item-textWrapper-link">Read now</a>
+						</div>
+					{% endif %}
+					
+
+				</a>	
+
+			</li><!--
+			-->{% endfor %}
+
+		</ul><!-- GRID ITEMS END -->
+
+	{% else %}
+		
+		<h1 class="contentGrid__noresults">Sorry, no results were found!</h1>
+
+	{% endif %}
+
+		<div class="contentGrid__actionBar contentGrid__actionBar--bottom">
+			
+			<div class="contentGrid__actionBar-new">
+				
+				<a href="{{ prev_page }}" class="contentGrid__actionBar-new-link {{ prev_page == '#' ? 'contentGrid__actionBar-new-link--first' }}">Newer</a>
+
+			</div><!-- NEW BLOCK END
+			--><div class="contentGrid__actionBar-filter">
+				
+				<ul class="contentGrid__actionBar-filter-items">
+					
+					<li class="contentGrid__actionBar-filter-items-item">
+						<a href="/posts" class="contentGrid__actionBar-filter-items-item-link contentGrid__actionBar-filter-items-item-link--all {{ allPosts ? 'contentGrid__actionBar-filter-items-item-link--active'}}">All</a>
+					</li><!--
+					-->{% for cat in categories %}<!--
+					--><li class="contentGrid__actionBar-filter-items-item">
+						<a href="{{ cat.link }}{{ search ? search }}" class="contentGrid__actionBar-filter-items-item-link {{ title == cat.name ? 'contentGrid__actionBar-filter-items-item-link--active'}}">{{ cat.name }}</a>
+					</li><!--
+					-->{% endfor %}
+
+				</ul>
+
+			</div><!-- FILTER BLOCK END
+			--><div class="contentGrid__actionBar-old">
+				
+				<a href="{{ next_page }}" class="contentGrid__actionBar-old-link {{ next_page == '#' ? 'contentGrid__actionBar-old-link--last' }}">Older</a>
+
+			</div><!-- OLD BLOCK END -->
+
+		</div><!-- ACTION BAR END -->
+
+	</div><!-- INNER END -->
+
+</section>

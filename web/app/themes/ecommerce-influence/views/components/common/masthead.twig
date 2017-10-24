@@ -1,0 +1,95 @@
+<div class="responsive-nav-wrapper">
+    <header class="masthead">
+    
+    <div class="masthead__inner">
+        
+        <div class="masthead__left">
+            <a href="/" class="masthead__left-logo">
+                <img src="{{ assets }}/images/websitelogo.png" alt="Ecommerce Influence" class="masthead__left-logo-image" srcset="{{ assets }}/images/websitelogo@2x.png 2x">
+                <img src="{{ assets }}/images/websitelogo-responsive.png" alt="Ecommerce Influence" class="masthead__left-logo-image masthead__left-logo-image--responsive" srcset="{{ assets }}/images/websitelogo-responsive@2x.png 2x">
+            </a>
+        </div><!-- LEFT END
+        --><div class="masthead__right">
+
+            <nav class="masthead__right-nav">
+            
+                <ul class="masthead__right-nav-items">
+                    
+                    {% for item in main_menu.get_items %}<!--
+                    --><li class="masthead__right-nav-items-item">
+                            <a href="{{ item.link }}" class="masthead__right-nav-items-item-link {{ item.current ? 'masthead__right-nav-items-item-link--active'}}">{{ item.title }}</a>
+                    </li><!--
+                    -->{% endfor %}<!--
+                    -->{% for item in featured_menu.get_items %}<!--
+                    --><li class="masthead__right-nav-items-item">
+                            <a href="{{ item.link}}" class="masthead__right-nav-items-item-link masthead__right-nav-items-item-link--button">{{ item.title }}</a>
+                        </li><!--
+                        -->{% endfor %}
+
+                </ul>
+
+            </nav><!--
+            --><div class="masthead__right-search">
+                
+                <form role="search" method="get" action="/">
+                    
+                    <input type="text" class="masthead__right-search-input" autocomplete="off" name="s" placeholder="Find an article or podcast" value="{{ searchTerm ? searchTerm }}"><!--
+                    --><input type="submit" class="masthead__right-search-button" value="">
+
+                </form>  
+                
+
+            </div><!--
+            --><div class="masthead__right-openSearch">
+                
+                <a href="#" class="masthead__right-openSearch-button"></a>
+
+            </div><!--
+            --><div class="masthead__right-responsive">
+                
+                <a href="#" class="masthead__right-responsive-link">
+                    <span class="masthead__right-responsive-text">Menu</span><!--
+                    --><div class="masthead__right-responsive-link-hamburger">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                </a>
+
+            </div><!--
+            --><div class="masthead__right-closeSearch">
+                
+                 <a href="#" class="masthead__right-closeSearch-link">
+                    <div class="masthead__right-responsive-closeSearch-cross">
+                      <span></span>
+                      <span></span>
+                    </div>
+                </a>
+
+            </div>
+
+        </div><!-- RIGHT END -->
+
+    </div><!-- INNER END -->
+
+</header><!-- HEADER END -->
+
+<!--googleoff: index-->
+<nav class="masthead__nav-responsive">
+    <ul class="masthead__nav-responsive-items">
+                    
+         {% for item in main_menu.get_items %}<!--
+         --><li class="masthead__nav-responsive-items-item">
+                <a href="{{ item.link }}" class="masthead__nav-responsive-items-item-link {{ title == 'About' ? 'masthead__nav-responsive-items-item-link--active'}}">{{ item.title }}</a>
+        </li><!--
+        -->{% endfor %}<!--
+        -->{% for item in featured_menu.get_items %}<!--
+        --><li class="masthead__nav-responsive-items-item masthead__nav-responsive-items-item--button">
+                <a href="{{ item.link}}" class="masthead__nav-responsive-items-item-link masthead__nav-responsive-items-item-link--button">{{ item.title }}</a>
+            </li><!--
+            -->{% endfor %}
+
+    </ul>
+</nav>
+<!--googleon: index-->
+</div>

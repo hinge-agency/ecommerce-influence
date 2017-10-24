@@ -1,0 +1,398 @@
+.bottomDripForm{
+	position: relative;
+	margin-top: 100px;
+
+	background-color: $primary-yellow;
+
+	
+
+	@include screen-lt(1000){
+		margin-top: 60px;
+	}
+}
+.bottomDripForm__inner{
+	position: relative;
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
+
+	&:after{
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		z-index: 10;
+
+		width: 48%;
+		height: 438px;
+		// min-height: 438px;
+
+		background-image: url('../images/iPad-gold.png');
+		background-repeat: no-repeat;
+		background-position: 0 0;
+
+		@include transition();
+
+		@include screen-lt(1400){
+			background-position: -100px 0;
+		}
+		@include screen-lt(1200){
+			background-position: -180px 0;
+		}
+		@include screen-lt(1075){
+			background-position: -220px 0;
+		}
+		@include screen-lt(1000){
+			display: none;
+		}
+	}
+
+	@include screen-lt(1170){
+		width: 95%;
+		margin-left: 0;
+	}
+	@include screen-lt(1000){
+		width: 100%;
+	}
+}
+.bottomDripForm__block{
+	padding: 0 0 0 48%;
+
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+
+	@include transition();
+
+	@include screen-lt(1000){
+		padding-left: 0;
+	}
+}
+.bottomDripForm__content{
+	position: relative;
+	padding-top: 85px;
+	padding-bottom: 100px;
+	
+	@include transition();
+
+	@include screen-lt(1000){
+		padding: 0 50px 55px 50px;
+	}
+	@include screen-lt(1000){
+		padding: 0 20px 55px 20px;
+	}
+}
+.bottomDripForm__content-top,
+.bottomDripForm__content-formContainer{
+
+	@include screen-lt(1000){
+		display: inline-block;
+		vertical-align: bottom;
+		width: 49%;
+	}
+	@include screen-lt(660){
+		display: block;
+		width: 100%;
+	}
+}
+.bottomDripForm__content-top{
+	@include screen-lt(660){
+		text-align: center;
+	}
+}
+.bottomDripForm__content-formContainer{
+	@include screen-lt(1000){
+		margin-left: 2%;
+	}
+	@include screen-lt(660){
+		margin-left: 0;
+	}
+}
+.bottomDripForm__content-top-image{
+	display: none;
+
+	@include screen-lt(1000){
+		margin-top: -20px;
+		display: block;
+		max-width: 100%;
+	}
+	@include screen-lt(660){
+		margin: 0 auto;
+		margin-top: -40px;
+	}
+}
+.bottomDripForm__content-title{
+	position: relative;
+	z-index: 0;
+
+	display: inline-block;
+
+	font-size: px-to-ems(39);
+	line-height: px-to-ems(46,39);
+	color: $text-blue;
+
+	font-family: $brandon;
+	font-weight: 900;
+
+	&::after{
+		content: "";
+		position: absolute;
+		bottom: -1px;
+		left: -1%;
+
+		width: 102%;
+		height: 12px;
+
+		background-color: $secondary-yellow;
+
+		z-index: -1;
+	}
+
+	@include screen-lt(1000){
+		font-size: px-to-ems(25);
+		line-height: px-to-ems(36,25);
+	}
+}
+.bottomDripForm__content-text{
+	display: block;
+	max-width: 548px;
+	margin-top: 6px;
+
+	font-size: px-to-ems(24);
+	line-height: px-to-ems(28,24);
+	color: $text-blue;
+	letter-spacing: 0;
+
+	font-family: $brandon;
+	font-weight: 600;
+
+	@include screen-lt(1000){
+		font-size: px-to-ems(20);
+		line-height: px-to-ems(27,20);
+		margin-top: 8px;
+	}
+}
+.bottomDripForm__content-formContainer{
+	margin-top: 25px;
+	
+	@include transition();
+
+	@include screen-lt(840){
+		margin-top: 15px;
+	}
+}
+.bottomDripForm__form-block{
+	display: inline-block;
+	vertical-align: bottom;
+
+	text-align: left;
+
+	&+.bottomDripForm__form-block{
+		margin-left: 8px;
+
+		&--button{
+			margin-left: 0;
+
+			@include screen-lt(1170){
+				display: block;
+				width: 100%;
+				margin-top: 8px;
+			}
+		}
+
+		@include screen-lt(1000){
+			margin: 0;
+			margin-top: 10px;
+		}
+	}
+
+	@include screen-lt(1170){
+		width: calc(50% - 4px);
+	}
+	@include screen-lt(1000){
+		display: block;
+		width: 100%;
+	}
+}
+.bottomDripForm__form-block-label{
+	display: block;
+
+	font-size: px-to-ems(17);
+	color: #2F3D65;
+	letter-spacing: 0;
+	line-height: px-to-ems(27,17);
+
+	font-family: $brandon;
+	font-weight: 900;
+
+	cursor: pointer;
+
+	@include screen-lt(1000){
+		display: none;
+	}
+}
+.bottomDripForm__form-block-input,
+.bottomDripForm__form-block-button{
+	appearance:  none;
+	-o-appearance:  none;
+	-moz-appearance: none;
+	-webkit-appearance:  none;
+	border: none;
+}
+.bottomDripForm__form-block-input{
+	display: inline-block;
+	width: 168px;
+	height: 60px;
+	padding-left: 22px;
+
+	background: $light-gray;
+	box-shadow: inset 0 1px 3px 0 rgba(0,0,0,0.10);
+	-webkit-box-shadow: inset 0 1px 3px 0 rgba(0,0,0,0.10);
+	border-radius: 3px 0 0 3px;
+	
+	font-size: px-to-ems(25);
+	color: $text-blue;
+	letter-spacing: 0;
+	line-height: px-to-ems(27,25);
+
+	font-family: $brandon;
+	font-weight: 600;
+
+	&::-webkit-input-placeholder{
+		color: $text-gray;
+	}
+
+	&:-ms-input-placeholder{
+		color: $text-gray;
+	}
+
+	&::placeholder{
+		color: $text-gray;
+	}
+
+	&--email{
+		width: 228px;
+		border-radius: 0;
+
+		@include screen-lt(1170){
+			border-radius: 0 3px 3px 0;
+		}
+		@include screen-lt(1000){
+			border-radius: 3px;
+		}
+	}
+
+	@include screen-lt(1170){
+		width: 100%;
+	}
+	@include screen-lt(1000){
+		border-radius: 3px;
+	}
+}
+.bottomDripForm__form-block-button{
+	position: relative;
+
+	display: block;
+	padding: 0 30px;
+	height: 60px;
+
+	background: $text-blue;
+	border: 3px solid $text-blue;
+	border-radius: 0 3px 3px 0;
+
+	font-size: px-to-ems(20);
+	color: $primary-yellow;
+	line-height: px-to-ems(15,20);
+
+	font-family: $brandon;
+	font-weight: 900;
+	text-transform: uppercase;
+	
+	cursor: pointer;
+	@include transition();
+
+	&:hover{
+		background-color: $primary-yellow;
+		color: $text-blue;
+	}
+
+	@include screen-lt(1170){
+		width: 100%;
+		border-radius: 3px;
+	}
+}
+
+/*==================================================
+=            LEGACY BROWSER PLACEHOLDER            =
+==================================================*/
+
+.bottomDripForm__form-block-input:-ms-input-placeholder{
+	color: $text-gray !important;
+}
+.bottomDripForm .placeholder{
+	color: $text-gray !important;
+}
+
+/*=====  End of LEGACY BROWSER PLACEHOLDER  ======*/
+
+.bottomDripForm__closeButton{
+	position: absolute;
+	top: 30px;
+	right: 30px;
+
+	cursor: pointer;
+
+	z-index: 10;
+
+	@include transition();
+
+	@include screen-lt(1170){
+		right: -10px;
+	}
+	@include screen-lt(840){
+		top: 10px;
+	}
+	@include screen-lt(600){
+		right: 50%;
+		top: 20px;
+
+		transform: translateX(50%);
+		-webkit-transform: translateX(50%);
+		    -ms-transform: translateX(50%);	        
+	}
+}
+.bottomDripForm__closeButton-wrapper{
+	position: relative;
+	width: 37px;
+	height: 37px;
+
+	background-color: $gray;
+	border-radius: 50%;
+	
+	@include transition();
+
+	&:hover{
+		background-color: $text-gray;
+	}
+}
+.bottomDripForm__closeButton-line{
+	position: absolute;
+	top: calc(50% - 1px);
+	left: calc(50% - 12px);
+
+	width: 24px;
+	height: 2px;
+
+	background-color: white;
+
+	&--lineOne{
+		transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+		    -ms-transform: rotate(45deg);	        
+	}
+	&--lineTwo{
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		    -ms-transform: rotate(-45deg);	        
+	}
+}

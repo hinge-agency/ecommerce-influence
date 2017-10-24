@@ -10,3 +10,8 @@ RewriteRule . /index.php [L]
 </IfModule>
 
 # END WordPress
+
+# search redirect
+# this will take anything in the query string, minus any extraneous values, and turn them into a clean working url
+RewriteCond %{QUERY_STRING} \\?s=([^&]+) [NC]
+RewriteRule ^$ /search/%1/? [NC,R,L]

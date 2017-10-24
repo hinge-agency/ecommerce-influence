@@ -1,0 +1,31 @@
+<div class="popUpTemplate__wrapper">
+	<div class="popUpTemplate__formBlock">
+
+		<div class="popUpTemplate__formBlock-wrapper">
+			
+			<div class="popUpTemplate__formBlock-top">
+				<img src="{{ assets }}/images/tablet-medium.png" alt="Form Image" class="popUpTemplate__formBlock-image popUpTemplate__formBlock-image">
+
+				<h3 data-drip-attribute="headline" class="popUpTemplate__formBlock-formTitle"><span class="popUpTemplate__formBlock-formTitle-text">{{ site_settings.ss_popup_form_title }}</span></h3>
+				<p data-drip-attribute="description" class="popUpTemplate__formBlock-formText">{{ site_settings.ss_popup_form_text ? site_settings.ss_popup_form_text }}</p>
+			</div><!--
+			--><form class="popUpTemplate__formBlock-form">
+				
+				<div class="popUpTemplate__formBlock-form-block">
+					<label "drip-First-Name"></label>
+					<input type="text" id="drip-First-Name" name="fields[First_Name]" value="" class="popUpTemplate__formBlock-form-block-input" placeholder="First name">
+				</div>
+				<div class="popUpTemplate__formBlock-form-block">
+					<label for=for="drip-email"></label>
+					<input type="email" id="drip-email" name="fields[email]" value="" class="popUpTemplate__formBlock-form-block-input" placeholder="Email address">
+				</div>
+				<div class="popUpTemplate__formBlock-form-block popUpTemplate__formBlock-form-block--button">
+					<input type="submit" name="submit" value="Sign Up" data-drip-attribute="sign-up-button" class="popUpTemplate__formBlock-form-block-button">
+				</div>
+
+			</form>
+
+		</div><!-- WRAPPER END -->
+
+	</div><!-- FORM BLOCK END -->
+</div><!-- WRAPPER END -->

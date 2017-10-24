@@ -1,0 +1,31 @@
+{% if latest_posts|length > 0 %}
+	<section class="latestContentHome">
+		
+		{% for post in latest_posts %}
+			
+		   <div class="latestContentHome__block {{ post.category.name == 'Podcasts' ? 'latestContentHome__block--podcast' : 'latestContentHome__block--article' }}">
+				
+				{% if (post.category.name == 'Podcasts') %}
+					<div class="latestContentHome__block-label latestContentHome__block-label--podcast">Episode {{ post.podcast_number }}</div>
+				{% else %}
+					<div class="latestContentHome__block-label latestContentHome__block-label--article">{{ post.category.name }}</div>
+				{% endif %}
+				
+				<div class="latestContentHome__block-imageWrapper">
+					<img src="{{ assets }}/images/sizingImage-episode.png" alt="Sizing Image" class="latestContentHome__block-imageWrapper-sizingImage">
+					<span class="latestContentHome__block-imageWrapper-image" style="background-image: url('{{ post.thumbnail.src }}')"></span>
+				</div>
+
+				<div class="latestContentHome__block-textWrapper">
+					<h2 class="latestContentHome__block-title"><a href="{{ post.link }}" class="latestContentHome__block-title-link">{{ post.title }}</a></h2>
+
+					<p class="latestContentHome__block-text">{{ post.get_preview(50,false,false)}}</p>
+					
+				</div>
+
+			</div>
+
+		{% endfor %}
+
+	</section>
+{% endif %}

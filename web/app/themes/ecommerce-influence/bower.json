@@ -1,0 +1,17 @@
+{
+  "name": "mprove",
+  "authors": [
+    "Hinge"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "slick-carousel": "^1.7.1"
+  }
+}
