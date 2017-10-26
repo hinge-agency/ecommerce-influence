@@ -18,14 +18,18 @@ $context['content'] = $post->content;
 
 /* posts */
 
+$context['transcript_id'] = get_cat_ID('transcripts');
+
 $latest_posts = Timber::get_posts(array(
     'posts_per_page' => 3,
+    'category__not_in' => $context['transcript_id'],
     'orderby' => 'post__in'
 ));
 
 $archive_posts = Timber::get_posts(array(
 	'offset' => 3,
     'posts_per_page' => 9,
+    'category__not_in' => $context['transcript_id'],
     'orderby' => 'post__in'
 ));
 
