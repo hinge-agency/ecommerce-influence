@@ -121,6 +121,7 @@ class Timber {
 
 	/**
 	 * Get a post by post ID or query (as a query string or an array of arguments).
+	 * But it's also cool
 	 *
 	 * @api
 	 * @param mixed        $query     Optional. Post ID or query (as query string or an array of arguments for
@@ -259,14 +260,30 @@ class Timber {
 	}
 
 	/**
-	 * Compile function.
+	 * Compile a Twig file.
+	 *
+	 * Passes data to a Twig file and returns the output.
+	 *
 	 * @api
-	 * @param array   $filenames
-	 * @param array   $data
-	 * @param boolean|integer    $expires
-	 * @param string  $cache_mode
-	 * @param bool    $via_render
-	 * @return bool|string
+	 * @example
+	 * ```php
+	 * $data = array(
+	 *     'firstname' => 'Jane',
+	 *     'lastname' => 'Doe',
+	 *     'email' => 'jane.doe@example.org',
+	 * );
+	 *
+	 * $team_member = Timber::compile( 'team-member.twig', $data );
+	 * ```
+	 * @param array|string $filenames  Name of the Twig file to render. If this is an array of files, Timber will
+	 *                                 render the first file that exists.
+	 * @param array        $data       Optional. An array of data to use in Twig template.
+	 * @param bool|int     $expires    Optional. In seconds. Use false to disable cache altogether. When passed an
+	 *                                 array, the first value is used for non-logged in visitors, the second for users.
+	 *                                 Default false.
+	 * @param string       $cache_mode Optional. Any of the cache mode constants defined in TimberLoader.
+	 * @param bool         $via_render Optional. Whether to apply optional render or compile filters. Default false.
+	 * @return bool|string The returned output.
 	 */
 	public static function compile( $filenames, $data = array(), $expires = false, $cache_mode = Loader::CACHE_USE_DEFAULT, $via_render = false ) {
 		if ( !defined('TIMBER_LOADED') ) {
@@ -275,31 +292,50 @@ class Timber {
 		$caller = LocationManager::get_calling_script_dir(1);
 		$loader = new Loader($caller);
 		$file = $loader->choose_template($filenames);
+
 		$caller_file = LocationManager::get_calling_script_file(1);
 		apply_filters('timber/calling_php_file', $caller_file);
-		$output = '';
-		if ( is_null($data) ) {
-			$data = array();
+
+		if ( $via_render ) {
+			$file = apply_filters('timber_render_file', $file);
+		} else {
+			$file = apply_filters('timber_compile_file', $file);
 		}
-		if ( strlen($file) ) {
+
+		$output = false;
+
+		if ($file !== false) {
+			if ( is_null($data) ) {
+				$data = array();
+			}
+
 			if ( $via_render ) {
-				$file = apply_filters('timber_render_file', $file);
 				$data = apply_filters('timber_render_data', $data);
 			} else {
-				$file = apply_filters('timber_compile_file', $file);
 				$data = apply_filters('timber_compile_data', $data);
 			}
+
 			$output = $loader->render($file, $data, $expires, $cache_mode);
 		}
+
 		do_action('timber_compile_done');
 		return $output;
 	}
 
 	/**
-	 * Compile string.
+	 * Compile a string.
+	 *
 	 * @api
-	 * @param string  $string a string with twig variables.
-	 * @param array   $data   an array with data in it.
+	 * @example
+	 * ```php
+	 * $data = array(
+	 *     'username' => 'Jane Doe',
+	 * );
+	 *
+	 * $welcome = Timber::compile_string( 'Hi {{ username }}, I’m a string with a custom Twig variable', $data );
+	 * ```
+	 * @param string $string A string with Twig variables.
+	 * @param array  $data   Optional. An array of data to use in Twig template.
 	 * @return  bool|string
 	 */
 	public static function compile_string( $string, $data = array() ) {
@@ -311,12 +347,16 @@ class Timber {
 
 	/**
 	 * Fetch function.
+	 *
 	 * @api
-	 * @param array   $filenames
-	 * @param array   $data
-	 * @param bool    $expires
-	 * @param string  $cache_mode
-	 * @return bool|string
+	 * @param array|string $filenames  Name of the Twig file to render. If this is an array of files, Timber will
+	 *                                 render the first file that exists.
+	 * @param array        $data       Optional. An array of data to use in Twig template.
+	 * @param bool|int     $expires    Optional. In seconds. Use false to disable cache altogether. When passed an
+	 *                                 array, the first value is used for non-logged in visitors, the second for users.
+	 *                                 Default false.
+	 * @param string       $cache_mode Optional. Any of the cache mode constants defined in TimberLoader.
+	 * @return bool|string The returned output.
 	 */
 	public static function fetch( $filenames, $data = array(), $expires = false, $cache_mode = Loader::CACHE_USE_DEFAULT ) {
 		$output = self::compile($filenames, $data, $expires, $cache_mode, true);
@@ -326,12 +366,24 @@ class Timber {
 
 	/**
 	 * Render function.
+	 *
+	 * Passes data to a Twig file and echoes the output.
+	 *
 	 * @api
-	 * @param array|string   $filenames
-	 * @param array   $data
-	 * @param boolean|integer    $expires
-	 * @param string  $cache_mode
-	 * @return boolean|string
+	 * @example
+	 * ```php
+	 * $context = Timber::get_context();
+	 *
+	 * Timber::render( 'index.twig', $context );
+	 * ```
+	 * @param array|string $filenames  Name of the Twig file to render. If this is an array of files, Timber will
+	 *                                 render the first file that exists.
+	 * @param array        $data       Optional. An array of data to use in Twig template.
+	 * @param bool|int     $expires    Optional. In seconds. Use false to disable cache altogether. When passed an
+	 *                                 array, the first value is used for non-logged in visitors, the second for users.
+	 *                                 Default false.
+	 * @param string       $cache_mode Optional. Any of the cache mode constants defined in TimberLoader.
+	 * @return bool|string The echoed output.
 	 */
 	public static function render( $filenames, $data = array(), $expires = false, $cache_mode = Loader::CACHE_USE_DEFAULT ) {
 		$output = self::fetch($filenames, $data, $expires, $cache_mode);
@@ -340,11 +392,20 @@ class Timber {
 	}
 
 	/**
-	 * Render string.
+	 * Render a string with Twig variables.
+	 *
 	 * @api
-	 * @param string  $string a string with twig variables.
-	 * @param array   $data   an array with data in it.
-	 * @return  bool|string
+	 * @example
+	 * ```php
+	 * $data = array(
+	 *     'username' => 'Jane Doe',
+	 * );
+	 *
+	 * Timber::render_string( 'Hi {{ username }}, I’m a string with a custom Twig variable', $data );
+	 * ```
+	 * @param string $string A string with Twig variables.
+	 * @param array  $data   An array of data to use in Twig template.
+	 * @return bool|string
 	 */
 	public static function render_string( $string, $data = array() ) {
 		$compiled = self::compile_string($string, $data);
@@ -437,7 +498,7 @@ class Timber {
 	 * @codeCoverageIgnore
 	 */
 	public static function add_route( $route, $callback, $args = array() ) {
-		Helper::warn('Timber::add_route (and accompanying methods for load_view, etc. Have been deprecated and will soon be removed. Please update your theme with Route::map. You can read more in the 1.0 Upgrade Guide: https://github.com/timber/timber/wiki/1.0-Upgrade-Guide');
+		Helper::warn('Timber::add_route (and accompanying methods for load_view, etc. Have been deprecated and will soon be removed. Please update your theme with Route::map. You can read more in the 1.0 Upgrade Guide: https://timber.github.io/docs/upgrade-guides/1.0/');
 		\Routes::map($route, $callback, $args);
 	}
 

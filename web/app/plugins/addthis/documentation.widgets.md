@@ -43,10 +43,23 @@ the_widget('AddThisGlobalOptionsWidget');
 ```php
 $instance = array(
     'title' => 'please share',
-    'class' => 'addthis_sharing_toolbox'
+    'class' => 'addthis_sharing_toolbox',
 );
 $args = array(
     'after_widget' => ':)'
 );
 the_widget('AddThisWidgetByDomClass', $instance, $args);
+```
+
+### echoing out the HTML for sharing buttons with custom defined share url, title, description and image
+```php
+$instance = array(
+    'title'             => 'please share',
+    'class'             => 'addthis_sharing_tool_x4sd8',
+    'share-url'         => 'https://www.example.com',
+    'share-title'       => 'Check this out',
+    'share-description' => 'An article about examples that everyone should read',
+    'share-media'       => 'https://www.example.com/image.png',
+);
+the_widget('AddThisWidgetByDomClass', $instance);
 ```

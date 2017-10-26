@@ -488,6 +488,11 @@ msgstr "Failed. Reason unknown."
 msgid "error_message_invalid_api_key"
 msgstr "The API Key is invalid. Please update your registration in the home section."
 
+# The text in an error message
+#, include in addthis-wordpress-plugin domain
+msgid "error_message_darkseid_ping_failed"
+msgstr "We can't communicate to AddThis from your browser. This is required for this plugin to function. These requests may be blocked by privacy or ad-blocking extensions; we recommend whitelisting the addthis.com domain or disabling these extensions to help ensure functionality."
+
 #. A message displayed when the form has an invalid input. Shown below the save button (save button grayed out)
 #, include in addthis-wordpress-plugin domain
 msgid "error_message_invalid_input_can_not_save"
@@ -2966,10 +2971,11 @@ msgstr ""
 #, include in addthis-wordpress-plugin domain
 msgid "warning_message_cross_plugin_share_button_buggy"
 msgstr ""
-"Do you have the {{old_share_plugin_name}} plugin activated? This plugin may "
-"not play nicely with it. Specifically, you may end up with sharing buttons "
-"and related posts showing up twice. If you run into issues, please "
-"deactivate either the {{old_share_plugin_name}} plugin or this one."
+"Do you have an old version of the {{old_share_plugin_name}} plugin activated? "
+"This plugin may not play nicely with it. Specifically, you may end up with "
+"sharing buttons and related posts showing up twice. If you run into issues, "
+"please deactivate either the out of date {{old_share_plugin_name}} plugin or "
+"this one."
 
 #. A warning message for users who have another plugin installed in an incompatable mode. AddThis mode is when they control their AddThis tools from AddThis.com, not within WordPress (WordPress mode is the reverse)
 #. {{old_share_plugin_name}} is a placeholder for the name of our old sharing buttons plugin (untranslated - it's not internationalized, so it makes sense to leave the name as it appears within WordPress), in bold
@@ -3007,13 +3013,6 @@ msgstr ""
 "in manually in {{advanced_settings_link}} >> {{developer_configuration}} >> "
 "addthis.layers(). A copy of your old settings will be available there for "
 "your reference.\n"
-"\n"
-"#. The title for our meta box on page/post edit pages. This box allows "
-"users to enable/disable the auto adding of AddThis tools above and below "
-"their content\n"
-"#, include in addthis-wordpress-plugin domain\n"
-"#, include in addthis-wordpress-plugin-backend domain\n"
-"msgid "
 
 #. message shown to users when they need to edit their plugin's configuration because we couldn't automatically upgrade their widgets settings
 #. {{link}} will be replaced with a link to the plugin's settings (see msgid plugin_settings_link for the text in a specific language)
@@ -3023,8 +3022,8 @@ msgid "warning_message_widget_conflict"
 msgstr ""
 "Uh oh! We couldn't automatically upgrade this widget. This widget still "
 "works, but if you would like to change its configuration please delete it, "
-"go to %1$s, update your tool settings, then come back here to add an "
-"AddThis Follow Button tool."
+"go to %1$s, update your tool settings, then come back here to add an a new "
+"AddThis Tool widget."
 
 #. widget description
 #. The widget for adding any inline AddThis tool onto page. This widget will have a dropdown menu from which the user can select the specific tool they want.

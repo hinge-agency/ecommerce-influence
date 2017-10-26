@@ -105,18 +105,55 @@ if (!class_exists('AddThisSharingButtonsFeature')) {
          */
         public function getInlineLayersAttributes(&$track = false)
         {
-            $dataUrlTemplate = 'data-url="%1$s"';
-            $dataTitleTemplate = 'data-title="%1$s"';
+            $url = $this->getShareUrl($track);
+            $title = $this->getShareTitle($track);
+            $attrString = self::buildDataAttrString($url, $title);
+            return $attrString;
+        }
+
+        /**
+         * Builds string for data attributes that can be included on AddThis
+         * inline share buttons
+         *
+         * @param string|boolean $url         Optional. URL to put in data
+         * attributes
+         * @param string|boolean $title       Optional. Title to put in data
+         * attributes
+         * @param string|boolean $description Optional. Description to put in
+         * data attributes
+         * @param string|boolean $media       Optional. Media url to put in
+         * data attributes
+         *
+         * @return string HTML attributes for telling AddThis what share
+         * attributes to use on some inline share buttons
+         */
+        public static function buildDataAttrString(
+            $url = false,
+            $title = false,
+            $description = false,
+            $media = false
+        ) {
 
             $attrs = array();
-            $url = $this->getShareUrl($track);
+
             if (!empty($url)) {
-                $attrs[] = sprintf($dataUrlTemplate, $url);
+                $url = str_replace('"', '', $url);
+                $attrs[] = 'data-url="' . $url . '"';
             }
 
-            $title = $this->getShareTitle($track);
             if (!empty($title)) {
-                $attrs[] = sprintf($dataTitleTemplate, $title);
+                $title = str_replace('"', '', $title);
+                $attrs[] = 'data-title="' . $title . '"';
+            }
+
+            if (!empty($description)) {
+                $description = str_replace('"', '', $description);
+                $attrs[] = 'data-description="' . $description . '"';
+            }
+
+            if (!empty($media)) {
+                $media = str_replace('"', '', $media);
+                $attrs[] = 'data-media="' . $media . '"';
             }
 
             $attrString = implode(' ', $attrs);
@@ -197,9 +234,11 @@ if (!class_exists('AddThisSharingButtonsFeature')) {
                             $toolObject = new AddThisSharingButtonsMobileToolbarTool();
                         }
 
-                        $toolLayers = $toolObject->getAddThisLayers($toolSettings);
-                        if (!empty($toolLayers)) {
-                            $allToolLayers[] = $toolLayers;
+                        if (is_object($toolObject)) {
+                            $toolLayers = $toolObject->getAddThisLayers($toolSettings);
+                            if (!empty($toolLayers)) {
+                                $allToolLayers[] = $toolLayers;
+                            }
                         }
                     }
                 }
@@ -542,6 +581,9 @@ if (!class_exists('AddThisSharingButtonsFeature')) {
             }
 
             $gooConfigs = $this->globalOptionsObject->getConfigs();
+            $gooConfigs['filter_get_the_excerpt'] = true;
+            $gooConfigs['filter_the_excerpt'] = false;
+            $gooConfigs['filter_wp_trim_excerpt'] = false;
 
             //
             // MIGRATE WIDGETS
@@ -912,6 +954,23 @@ if (!class_exists('AddThisSharingButtonsFeature')) {
             }
 
             $this->globalOptionsObject->saveConfigs($gooConfigs);
+        }
+
+        /**
+         * Upgrade from Share Buttons by AddThis to 6.1.0,
+         * Follow Buttons by AddThis to 4.1.0,
+         * Related Posts by AddThis to 2.1.0,
+         * Smart Layers by AddThis to 3.1.0 and
+         * Website Tools by AddThis to 3.1.0
+         *
+         * Deletes Share Buttons by WordPress 4.0/5.0 addthis_run_once flag
+         *
+         * @return null
+         */
+        protected function upgradeIterative5() {
+            if (get_option('addthis_run_once')) {
+                delete_option('addthis_run_once');
+            }
         }
     }
 }

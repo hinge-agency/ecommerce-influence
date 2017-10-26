@@ -2,7 +2,8 @@ appAddThisWordPress.directive('canEditToolsCheck', function(
   $wordpress,
   $q,
   $timeout,
-  $darkseid
+  $darkseid,
+  $state
 ) {
   return {
     transclude: true,
@@ -36,52 +37,74 @@ appAddThisWordPress.directive('canEditToolsCheck', function(
         });
       };
 
-      $wordpress.globalOptions.get().then(function(globalOptions) {
-        $scope.globalOptions = globalOptions;
+      var checkAddThisModeConfiguration = function() {
+        // if we're in AddThis mode, we need to check on more things
+        // do we still support this version of the plugin?
+        var compatibilityCheck = $wordpress.compatibleWithBoost();
+        // is the profile id valid?
+        var validateProfile = $darkseid.validateAddThisProfileId(
+          $scope.globalOptions.addthis_profile
+        );
+        // is the API key valid?
+        var validateApiKey = $wordpress.addThisApiKeyCheck(
+          $scope.globalOptions.addthis_profile,
+          $scope.globalOptions.api_key
+        );
 
-        if ($scope.globalOptions.addthis_plugin_controls === 'WordPress') {
-          removeAlertAndTransclude();
-        } else {
-          var compatibilityCheck = $wordpress.compatibleWithBoost();
-          var validateProfile = $darkseid.validateAddThisProfileId(
-            $scope.globalOptions.addthis_profile
-          );
-          var validateApiKey = $wordpress.addThisApiKeyCheck(
-            $scope.globalOptions.addthis_profile,
-            $scope.globalOptions.api_key
-          );
+        $q.all([compatibilityCheck, validateProfile, validateApiKey])
+        .then(function(data) {
+          var compatibility = data[0];
+          var profile = data[1];
+          var apikey = data[2];
 
-          $q.all([compatibilityCheck, validateProfile, validateApiKey])
-          .then(function(data) {
-            var compatibility = data[0];
-            var profile = data[1];
-            var apikey = data[2];
+          if(compatibility === false) {
+            $scope.alert = $scope.alerts.unsupported;
+          } else if(compatibility !== true) {
+            $scope.alert = $scope.alerts.genericError;
+          } else if ($state.current.name === 'registration.state') {
+            // if we're on a registration page, we don't need to check for the rest
+            removeAlertAndTransclude();
+          } else if (!angular.isDefined(profile.success)) {
+            $scope.alert = $scope.alerts.genericError;
+          } else if (!profile.success) {
+            $scope.alert = $scope.alerts.bogusProfile;
+          } else if (!angular.isDefined(profile.data.type)) {
+            $scope.alert = $scope.alerts.genericError;
+          } else if (profile.data.type !== 'wp') {
+            $scope.alert = $scope.alerts.badProfileType;
+          } else if (!angular.isDefined(apikey.success)) {
+            $scope.alert = $scope.alerts.genericError;
+          } else if (apikey.success === false) {
+            $scope.alert = $scope.alerts.badApiKey;
+          } else {
+            // all is good. no need for alerts
+            removeAlertAndTransclude();
+          }
+        });
+      };
 
-            if(compatibility === false) {
-              $scope.alert = $scope.alerts.unsupported;
-            } else if(compatibility !== true) {
-              $scope.alert = $scope.alerts.genericError;
-            } else if (!angular.isDefined(profile.success)) {
-              $scope.alert = $scope.alerts.genericError;
-            } else if (!profile.success) {
-              $scope.alert = $scope.alerts.bogusProfile;
-            } else if (!angular.isDefined(profile.data.type)) {
-              $scope.alert = $scope.alerts.genericError;
-            } else if (profile.data.type !== 'wp') {
-              $scope.alert = $scope.alerts.badProfileType;
-            } else if (!angular.isDefined(apikey.success)) {
-              $scope.alert = $scope.alerts.genericError;
-            } else if (apikey.success === false) {
-              $scope.alert = $scope.alerts.badApiKey;
-            } else {
+      $darkseid.testPing().then(
+        function() {
+          // if we can talk to darkseid, check for more stuff
+          $wordpress.globalOptions.get().then(function(globalOptions) {
+            $scope.globalOptions = globalOptions;
+
+            if ($scope.globalOptions.addthis_plugin_controls === 'WordPress') {
+              // if we're in WordPress mode, we don't need to check anything more
               removeAlertAndTransclude();
+            } else {
+              checkAddThisModeConfiguration();
             }
+          },
+          function() {
+            $scope.alert = $scope.alerts.genericError;
           });
+        },
+        function() {
+          // if we can;t talk to darkseid, display relevant error
+          $scope.alert = $scope.alerts.pingFailed;
         }
-      },
-      function() {
-        $scope.alert = $scope.alerts.genericError;
-      });
+      );
     },
     controller: function($scope) {
       $scope.alerts = {
@@ -108,6 +131,10 @@ appAddThisWordPress.directive('canEditToolsCheck', function(
         genericError: {
           level: 'danger',
           msgid: 'error_message_tool_check_generic'
+        },
+        pingFailed: {
+          level: 'danger',
+          msgid: 'error_message_darkseid_ping_failed'
         }
       };
 

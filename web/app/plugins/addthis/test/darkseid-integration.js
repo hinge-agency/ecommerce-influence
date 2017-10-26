@@ -124,6 +124,20 @@ var getWidgetById = function(boostSettings, widgetId) {
     return desiredToolSettings;
 }
 
+describe('Darkseid ping endpoint', function() {
+  it('has expected format', function(done) {
+    request
+    .get('/test/ping')
+    .set('Accept', json)
+    .expect(200)
+    .end(function(err, res) {
+      expect(res.body).to.be.a('object');
+      expect(res.body.hello).to.equal('world');
+      done(err, res);
+    });
+  });
+});
+
 describe('WordPress compatibility check endpoint', function() {
   this.timeout(15000);
   var unsupportedPluginVersions = {
@@ -141,15 +155,15 @@ describe('WordPress compatibility check endpoint', function() {
 
   var supportedPluginVersions = {
     // Website Tools by AddThis
-    'wpwt': ['1.0.0', '1.0.1', '1.0.2', '1.1.0', '1.1.1', '1.1.2'],
+    'wpwt': ['1.0.0', '1.0.1', '1.0.2', '1.1.0', '1.1.1', '1.1.2', '2.0.0', '2.0.1', '2.0.2', '3.0.0', '3.0.1'],
     // Follow Buttons by AddThis
-    'wpf': ['2.0.0', '2.0.1', '2.0.2', '3.0.0'],
+    'wpf': ['2.0.0', '2.0.1', '2.0.2', '3.0.0', '4.0.0', '4.0.1'],
     // Related Posts by AddThis
-    'wprp': ['1.0.0'],
+    'wprp': ['1.0.0', '2.0.0', '2.0.1'],
     // Smart Layers by AddThis
-    'wpsl': ['2.0.0'],
+    'wpsl': ['2.0.0', '3.0.0', '3.0.1'],
     // Share Buttons by AddThis
-    'wpp': []
+    'wpp': ['6.0.0']
   };
 
   // make sure it is returning a good results for all supported versions

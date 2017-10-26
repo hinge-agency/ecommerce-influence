@@ -76,8 +76,10 @@ appAddThisWordPress.directive('followServicePicker', function(
       };
 
       $scope.addService = function(userTypes) {
-
-        if (!angular.isDefined($scope.ngModel)) {
+        if (!angular.isDefined($scope.ngModel) ||
+          typeof $scope.ngModel !== 'object' ||
+          Array.isArray($scope.ngModel)
+        ) {
           $scope.ngModel = {};
         }
 

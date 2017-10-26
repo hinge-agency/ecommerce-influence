@@ -12,8 +12,8 @@
   "author": "AddThis <plugins@addthis.com>",
   "license": "GPLv2",
   "devDependencies": {
-    "angular": "^1.5.0",
-    "angular-aria": "^1.5.0",
+    "angular": "1.5.9",
+    "angular-aria": "1.5.9",
     "angular-hotkeys": "^1.7.0",
     "angular-translate": "^2.9.2",
     "angular-translate-loader-static-files": "^2.9.2",

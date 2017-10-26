@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInite2350b5c528aaf25adddd9dd13acb9a4
 {
     public static $files = array (
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '841f98c5d948ce534a6f87abe5b50614' => __DIR__ . '/..' . '/roots/wp-password-bcrypt/wp-password-bcrypt.php',
     );
 
@@ -15,6 +16,10 @@ class ComposerStaticInite2350b5c528aaf25adddd9dd13acb9a4
         array (
             'Twig\\' => 5,
             'Timber\\' => 7,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
         ),
         'P' => 
         array (
@@ -38,6 +43,10 @@ class ComposerStaticInite2350b5c528aaf25adddd9dd13acb9a4
         'Timber\\' => 
         array (
             0 => __DIR__ . '/..' . '/timber/timber/lib',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
         'PhilippBaschke\\ACFProInstaller\\' => 
         array (

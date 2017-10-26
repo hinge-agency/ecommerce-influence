@@ -81,6 +81,7 @@
    "error_message_failed_to_create_profile": "error_message_failed_to_create_profile",
    "error_message_failed_unknown_reason": "error_message_failed_unknown_reason",
    "error_message_invalid_api_key": "error_message_invalid_api_key",
+   "error_message_darkseid_ping_failed": "error_message_darkseid_ping_failed",
    "error_message_invalid_input_can_not_save": "error_message_invalid_input_can_not_save",
    "error_message_invalid_profile": "error_message_invalid_profile",
    "error_message_password_mismatch": "error_message_password_mismatch",

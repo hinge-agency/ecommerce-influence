@@ -27,9 +27,9 @@
   appearance: none;
   border: none;
   position: relative;
-  border-radius: 10px; //IE 11
-  -moz-border-radius: 10px; //Mozilla
-  -webkit-border-radius: 10px; //Chrome and Safari
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
   display: inline-block;
   float: right;
 }
@@ -42,9 +42,9 @@
   width: 30px;
   height: 15px;
   z-index: 1;
-  border-radius: 8px; //IE 11
-  -moz-border-radius: 8px; //Mozilla
-  -webkit-border-radius: 8px; //Chrome and Safari
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
 }
 
 .addthis-settings-page .toggle:after {
