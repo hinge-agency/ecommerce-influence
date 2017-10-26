@@ -24,6 +24,7 @@ $context['post'] = $post;
 $context['title'] = $post->title;
 
 
+$context['transcript_id'] = get_cat_ID('transcripts');
 
 // Before More Tag
 $context['excerpt'] = ($content_parts['extended'] != '' ? $content_parts['main'] : false);
@@ -36,6 +37,7 @@ $context['sidebar'] = ($context['site_settings']['sidebar'] ? $context['site_set
 
 $latest_posts = Timber::get_posts(array(
     'posts_per_page' => 3,
+    'category__not_in' => $context['transcript_id'],
     'orderby' => 'post__in'
 ));
 

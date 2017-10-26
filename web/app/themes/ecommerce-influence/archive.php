@@ -61,8 +61,8 @@ $count_posts = ($getPosts ? $getPosts->publish : 0);
 $cat = get_queried_object();
 $count_cat = ($cat ? $cat->count : '');
 $cat_name = ($cat ? $cat->slug : '');
+$data['transcript_id'] = get_cat_ID('transcripts');
 
-//CHECK IF SEARCH FOR ALL OR CATEGORY
 if($searchQuery){
 
     $query_searched_posts = [
@@ -122,6 +122,7 @@ $query_args = [
     'posts_per_page' => $posts_per_page,
     'orderby' => 'post__in',
     'category_name' => $cat_name,
+    'category__not_in' => $data['transcript_id'],
     'paged' => $data['current_page']
 ];
 

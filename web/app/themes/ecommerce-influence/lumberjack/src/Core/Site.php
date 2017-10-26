@@ -45,7 +45,7 @@ class Site extends TimberSite
         $data['assets'] = get_template_directory_uri().'/assets';
 
         // Get categories for use later
-        $data['categories'] = Timber::get_terms('category', ['hide_empty' => true]);
+        $data['categories'] = Timber::get_terms('category', ['hide_empty' => true, 'include' => array(get_cat_ID('articles'),get_cat_ID('podcasts'))]);
 
         // Add ACF block layout fields
         $data['blocks'] = new Blocks();
