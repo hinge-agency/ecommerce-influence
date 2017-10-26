@@ -5,10 +5,7 @@
         <div
             ng-repeat="(index, service) in serviceOptions"
             ng-click="addService(service.userTypes)"
-            class="follow-service-add-icon grayscale-off-on-focus grayscale-off-on-hover"
-            ng-class="{
-                'grayscale': showGrayscale(service.userTypes)
-            }"
+            class="follow-service-add-icon"
             alt="{{'service_add_alt'|translate:{'service': (service.displayName|translate)} }}"
         >
             <a

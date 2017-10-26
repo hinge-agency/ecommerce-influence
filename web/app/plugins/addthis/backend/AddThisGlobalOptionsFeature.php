@@ -124,7 +124,7 @@ if (!class_exists('AddThisGlobalOptionsFeature')) {
             'credential_validation_status'          => 0,
             'filter_get_the_excerpt'                => true,
             'filter_the_excerpt'                    => true,
-            'filter_wp_trim_excerpt'                => true,
+            'filter_wp_trim_excerpt'                => false,
             'wpfooter'                              => true,
             'xmlns_attrs'                           => true,
             'follow_buttons_feature_enabled'        => false,

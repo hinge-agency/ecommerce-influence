@@ -667,5 +667,16 @@ angular.module('addthisDarkseid').factory('$darkseid', function(
     });
   };
 
+  darkseid.testPing = function() {
+    var url = 'test/ping';
+
+    var promise = darkseidHttp({
+      method: 'GET',
+      url: url
+    });
+
+    return promise;
+  };
+
   return darkseid;
 });

@@ -3,7 +3,7 @@ Contributors: abramsm, jgrodel, bradaddthis.com, addthis_paul, addthis_matt, rib
 Tags: bookmarking, email sharing, facebook, linkedin, pinterest, share, sharing buttons, social marketing, social tools, twitter, whatsapp
 Requires at least: 3.0
 Tested up to: 4.8.1
-Stable tag: 6.0.0
+Stable tag: 6.1.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,20 +100,25 @@ If you register with an AddThis Pro account, the shortcodes for our Pro tools wi
 
 See our <a href="https://plugins.svn.wordpress.org/addthis-all/trunk/documentation.shortcodes.md">documentation</a> on our shortcodes. This documentation lists all the shortcodes for our plugins. This plugin does not include shortcodes for follow tools or related post tools.
 
-== Screenshots ==
-
-1. Sharing Tools tab on the plugin settings page (WordPress mode)
-2. Sharing Tools tab on the plugin settings page (WordPress mode)
-3. Advanced Options tab on the plugin settings page
-4. Drag and dropable sharing buttons widget (WordPress mode)
-4. Sharing Tools tab on the plugin settings page (AddThis mode)
-5. Analytics on the AddThis Dashboard
-6. Tool Gallery on the AddThis Dashboard
-7. Customization options on the AddThis Dashboard
-
 
 
 == Changelog ==
+
+= 6.1.1 =
+* Fix for PHP notice from AddThisPlugin.php on line 610
+* Changing the permission capability used for determining when users can edit AddThis settings from activate_plugins to manage_options. This will allow most admins on multi-site instances to edit settings. <a href="https://codex.wordpress.org/Roles_and_Capabilities">More information on WordPress roles and capabilities.</a>
+
+= 6.1.0 =
+* Fix for PHP error from AddThisSharingButtonsMobileToolbarTool.php line 66
+* Fix for PHP error from AddThisSharingButtonsFeature.php line 200
+* Fix for PHP notice from AddThisFeature.php line 652
+* Fixing error message complaining about plugin not being compatable with itself for upgraded users.
+* Correcting language for widgets in conflict mode after upgrade
+* Removing line breaks from HTML added to public pages
+* Not using addthis.layers() json on page when user is using their AddThis account as this creates buggy behavior
+* Disabling the wp_trim_excerpt by default as it's the most likely to cause theme issues
+* Adding error message if browser can't talk to addthis.com and communication with AddThis APIs are required for funtionality.
+* Adding requested AddThisWidgetByDomClass functionality that will allow users adding a widget via PHP to customze the URL, title, description and image used for that share. Please see the <a href="https://plugins.svn.wordpress.org/addthis-all/trunk/documentation.widgets.md">widget documentation</a> for more infromation.
 
 = 6.0.0 =
 * Plugin rewritten from scratch.
@@ -121,7 +126,7 @@ See our <a href="https://plugins.svn.wordpress.org/addthis-all/trunk/documentati
 * Redesigned the plugin's widget to work all current AddThis sharing tools. The class for the new widget is AddThisWidgetByDomClass. Widgets created through WordPress's UI will automatically be migrated to use the new class. However, any hard coded use of the old widget class AddThisSidebarWidget will need to be updated before upgrading. Developer <a href="https://plugins.svn.wordpress.org/addthis-all/trunk/documentation.widgets.md">documentation</a> on the new widget is available.
 * The filter addthis_post_exclude is replaced with addthis_sharing_buttons_enable. Please review the <a href="https://plugins.svn.wordpress.org/addthis-all/trunk/documentation.filters.md">documentation</a> for usage.
 * Optionally, allows users to set up their AddThis account and AddThis site profile from inside WordPress.
-* Optionally, walks existing AddThis users through logging into their AddThis account and picking a site profile to register their plugin without leaving WordPress. Once registered, AddThis is able to start collecting Analystics on your visitors social use of your site. No more copying in Profile IDs! (Analytics are only available at <a href="https://addthis.com">addthis.com</a>.)
+* Optionally, walks existing AddThis users through logging into their AddThis account and picking a site profile to register their plugin without leaving WordPress. Once registered, AddThis is able to start collecting Analytics on your visitors social use of your site. No more copying in Profile IDs! (Analytics are only available at <a href="https://addthis.com">addthis.com</a>.)
 * After registering the plugin with AddThis, Pro users can edit settings for any share tools from within WordPress.
 * Full compatibility with the current <a href="https://wordpress.org/support/plugin/addthis-follow">Follow Buttons by AddThis</a>, <a href="https://wordpress.org/support/plugin/addthis-related-posts">Related Posts by AddThis</a>, <a href="https://wordpress.org/support/plugin/addthis-smart-layers">Smart Layers by AddThis</a>, and <a href="https://wordpress.org/support/plugin/addthis-all">Website Tools by AddThis</a>plugins.
 
@@ -438,6 +443,12 @@ Fixed nondeterministic bug with the_title(), causing the title to occasionally a
 
 
 == Upgrade Notice ==
+
+= 6.1.1 =
+Fix for PHP notice from AddThisPlugin.php on line 610. Changing the permission capability used for determining when users can edit AddThis settings from activate_plugins to manage_options. This will allow most admins on multi-site instances to edit settings. <a href="https://codex.wordpress.org/Roles_and_Capabilities">More information on WordPress roles and capabilities.</a>
+
+= 6.1.0 =
+Fixs for PHP errors, whitespace issues, changes in default settings. Adding requested AddThisWidgetByDomClass functionality that will allow users adding a widget via PHP to customze the URL, title, description and image used for that share.
 
 = 6.0.0 =
 Plugin rewritten from scratch. Adding shortcodes for use inside posts for all current AddThis tools. Redesigned the plugin's widget to work all current AddThis sharing tools. The class for the new widget is AddThisWidgetByDomClass. Widgets created through WordPress's UI will automatically be migrated to use the new class. However, any hard coded use of the old widget class AddThisSidebarWidget will need to be updated before upgrading. Developer <a href="https://plugins.svn.wordpress.org/addthis-all/trunk/documentation.widgets.md">documentation</a> on the new widget is available. The filter addthis_post_exclude is replaced with addthis_sharing_buttons_enable. Please review the <a href="https://plugins.svn.wordpress.org/addthis-all/trunk/documentation.filters.md">documentation</a> for usage. Full compatibility with the current <a href="https://wordpress.org/support/plugin/addthis-follow">Follow Buttons by AddThis</a>, <a href="https://wordpress.org/support/plugin/addthis-related-posts">Related Posts by AddThis</a>, <a href="https://wordpress.org/support/plugin/addthis-smart-layers">Smart Layers by AddThis</a>, and <a href="https://wordpress.org/support/plugin/addthis-all">Website Tools by AddThis</a>plugins.

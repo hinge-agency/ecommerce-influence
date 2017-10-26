@@ -120,13 +120,11 @@ if (!class_exists('AddThisGlobalOptionsWidget')) {
                 $args['widget_name'] = 'no name';
             }
 
-            $html = '
-                <!-- Widget added by an AddThis plugin -->
-                    <!-- widget name: ' . $args['widget_name'] . ' -->
-                    <!-- tool class: ' . $this->toolClassName . ' -->
-                    '.$addThisToolCode.'
-                <!-- End of widget -->
-            ';
+            $html  = '<!-- Widget added by an AddThis plugin -->';
+            $html .= '<!-- widget name: ' . $args['widget_name'] . ' -->';
+            $html .= '<!-- tool class: ' . $this->toolClassName . ' -->';
+            $html .= $addThisToolCode;
+            $html .= '<!-- End of widget -->';
 
             echo $html;
         }

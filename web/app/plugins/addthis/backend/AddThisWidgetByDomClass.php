@@ -91,12 +91,32 @@ if (!class_exists('AddThisWidgetByDomClass')) {
                 $titleHtml = $titleHtml . $args['after_title'];
             }
 
-            if (!empty($instance)
-                && !empty($instance['conflict'])
-            ) {
-                $addThisToolHtml = $this->conflictMode($args, $instance);
-            } else {
-                $addThisToolHtml = '<div class="'.$instance['class'].' addthis_tool"></div>';
+            if (!empty($instance)) {
+                if (empty($instance['share-url'])) {
+                    $instance['share-url'] = false;
+                }
+                if (empty($instance['share-title'])) {
+                    $instance['share-title'] = false;
+                }
+                if (empty($instance['share-description'])) {
+                    $instance['share-description'] = false;
+                }
+                if (empty($instance['share-media'])) {
+                    $instance['share-media'] = false;
+                }
+
+                $attrString = AddThisSharingButtonsFeature::buildDataAttrString(
+                    $instance['share-url'],
+                    $instance['share-title'],
+                    $instance['share-description'],
+                    $instance['share-media']
+                );
+
+                if (!empty($instance['conflict'])) {
+                    $addThisToolHtml = $this->conflictMode($args, $instance);
+                } else {
+                    $addThisToolHtml = '<div class="'.$instance['class'].' addthis_tool" '.$attrString.'></div>';
+                }
             }
 
             $globalOptionsObject = new AddThisGlobalOptionsFeature();
@@ -115,15 +135,13 @@ if (!class_exists('AddThisWidgetByDomClass')) {
                 $args['after_widget'] = '';
             }
 
-            $html = '
-                '.$args['before_widget'].'
-                <!-- Widget added by an AddThis plugin -->
-                    <!-- widget name: ' . $args['widget_name'] . ' -->
-                    '.$titleHtml.'
-                    '.$addThisToolHtml.'
-                <!-- End of widget -->
-                '.$args['after_widget'].'
-            ';
+            $html  = $args['before_widget'];
+            $html .= '<!-- Widget added by an AddThis plugin -->';
+            $html .=   '<!-- widget name: ' . $args['widget_name'] . ' -->';
+            $html .=   $titleHtml;
+            $html .=   $addThisToolHtml;
+            $html .= '<!-- End of widget -->';
+            $html .= $args['after_widget'];
 
             echo $html;
         }
@@ -473,7 +491,7 @@ if (!class_exists('AddThisWidgetByDomClass')) {
                 $settingsText = esc_html__('the plugin\'s settings', AddThisFeature::$l10n_domain);
                 $settingsLink = '<a href="'.$url.'">'.$settingsText.'</a>';
 
-                $conflictTemplate = 'Uh oh! We couldn\'t automatically upgrade this widget. This widget still works, but if you would like to change its configuration please delete it, go to %1$s, update your tool settings, then come back here to add an AddThis Follow Button tool.';
+                $conflictTemplate = 'Uh oh! We couldn\'t automatically upgrade this widget. This widget still works, but if you would like to change its configuration please delete it, go to %1$s, update your tool settings, then come back here to add an a new AddThis Tool widget.';
                 $conflictTemplate = esc_html__($conflictTemplate, AddThisFeature::$l10n_domain);
                 $conflictText = sprintf($conflictTemplate, $settingsLink);
 

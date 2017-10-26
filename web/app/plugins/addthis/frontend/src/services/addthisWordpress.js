@@ -781,7 +781,6 @@ angular.module('addthisWordpress').factory('$wordpress', function(
         amount: 0,
         unit: 'px'
       }
-
     },
     'flwh': {
       title: 'Follow',

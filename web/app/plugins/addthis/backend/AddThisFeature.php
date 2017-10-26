@@ -57,6 +57,12 @@ if (!class_exists('AddThisFeature')) {
         protected $defaultConfigs = array();
         public $addedDefaultValue = false;
 
+        // only users with the following WordPress capability will be able to
+        // see AddThis settings pages in the WordPress dashboard.
+        // A full list for capabilities can be found here:
+        // https://codex.wordpress.org/Roles_and_Capabilities
+        protected $editOptionsCapability = 'manage_options';
+
         protected $tools = array();
 
         /**
@@ -595,7 +601,7 @@ if (!class_exists('AddThisFeature')) {
          */
         public function checkForEditPermissions($die = false)
         {
-            if (!current_user_can('activate_plugins')) {
+            if (!current_user_can($this->editOptionsCapability)) {
                 if ($die) {
                     header('X-PHP-Response-Code: 401', true, 401);
                     die();
@@ -625,6 +631,7 @@ if (!class_exists('AddThisFeature')) {
 
             $this->checkForEditPermissions(true);
 
+            $input = array();
             if (!empty($_REQUEST['data'])) {
                 $input = json_decode(stripslashes($_REQUEST['data']), true);
             }
@@ -969,7 +976,6 @@ if (!class_exists('AddThisFeature')) {
             $menu_slug,
             $callback
         ) {
-            $capability = 'manage_options';
             /**
              * Was using $icon = 'dashicons-plus' but removed for compatibility
              * with older WordPress versions
@@ -983,7 +989,7 @@ if (!class_exists('AddThisFeature')) {
             $hookSuffix = add_menu_page(
                 $page_title,
                 'AddThis',
-                $capability,
+                $this->editOptionsCapability,
                 $menu_slug,
                 $callback,
                 $iconUrl
@@ -1016,7 +1022,6 @@ if (!class_exists('AddThisFeature')) {
             $menu_slug,
             $callback
         ) {
-            $capability = 'manage_options';
             $page_title = esc_html__($page_title, self::$l10n_domain);
             $menu_title = esc_html__($menu_title, self::$l10n_domain);
 
@@ -1024,7 +1029,7 @@ if (!class_exists('AddThisFeature')) {
                 $parent_slug,
                 $page_title,
                 $menu_title,
-                $capability,
+                $this->editOptionsCapability,
                 $menu_slug,
                 $callback
             );
@@ -1571,10 +1576,11 @@ if (!class_exists('AddThisFeature')) {
                 $htmlComments[$location] = array();
                 $search = 'AddThis '.$this->name.' '.$location;
                 $comment = '<!-- '.$search.' via filter on '.htmlspecialchars($trigger);
+                $track = array_unique($track);
                 if (!empty($track)) {
                     $comment .= ' using AddThis filters: ' . htmlspecialchars(implode(', ', $track));
                 }
-                $comment .= " -->\n";
+                $comment .= " -->";
 
                 $htmlComments[$location]['search'] = $search;
                 $htmlComments[$location]['comment'] = $comment;

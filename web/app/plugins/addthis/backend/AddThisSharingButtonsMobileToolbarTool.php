@@ -63,7 +63,9 @@ if (!class_exists('AddThisSharingButtonsMobileToolbarTool')) {
                 'buttonBarPosition'  => $input['buttonBarPosition'],
             );
 
-            $smartLayersConfigs['followServices'] = AddThisFollowButtonsToolParent::formatServicesForAddThisLayers($input['followServices']);
+            if (!empty($input['followServices'])) {
+                $smartLayersConfigs['followServices'] = AddThisFollowButtonsToolParent::formatServicesForAddThisLayers($input['followServices']);
+            }
 
             $output = array('dock' => $smartLayersConfigs);
             return $output;

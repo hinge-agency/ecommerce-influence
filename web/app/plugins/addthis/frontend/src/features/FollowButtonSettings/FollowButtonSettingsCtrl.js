@@ -59,6 +59,7 @@ appAddThisWordPress.controller('FollowButtonSettingsCtrl', function(
       angular.isDefined($scope.followButtons[toolPco].enabled) &&
       $scope.followButtons[toolPco].enabled === true
     ) {
+      $scope.followButtons[toolPco].enabled = false;
       $scope.save(toolPco);
     } else if ($state.current.name === 'follow') {
       $scope.changeState(toolPco);
