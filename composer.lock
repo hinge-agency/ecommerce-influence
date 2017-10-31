@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a1050a3626933cea53ee5ce08c39678",
+    "content-hash": "7d2c2d91d1ac7a62ed9d7c3d0a5dd838",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -839,6 +839,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/disqus-comment-system/"
+        },
+        {
+            "name": "wpackagist-plugin/google-tag-manager",
+            "version": "1.0.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/google-tag-manager/",
+                "reference": "tags/1.0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/google-tag-manager.1.0.2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/google-tag-manager/"
         },
         {
             "name": "wpackagist-plugin/redirection",

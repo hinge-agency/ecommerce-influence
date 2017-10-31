@@ -62,7 +62,8 @@
     "wpackagist-plugin/tinymce-custom-styles": "^1.0.4",
     "wpackagist-plugin/addthis": "^6.0.0",
     "wpackagist-plugin/wufoo-shortcode": "^1.43",
-    "wpackagist-plugin/redirection": "^2.8.1"
+    "wpackagist-plugin/redirection": "^2.8.1",
+    "wpackagist-plugin/google-tag-manager": "^1.0.2"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"

@@ -1034,5 +1034,27 @@
         "type": "wordpress-plugin",
         "installation-source": "dist",
         "homepage": "https://wordpress.org/plugins/addthis/"
+    },
+    {
+        "name": "wpackagist-plugin/google-tag-manager",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "svn",
+            "url": "https://plugins.svn.wordpress.org/google-tag-manager/",
+            "reference": "tags/1.0.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://downloads.wordpress.org/plugin/google-tag-manager.1.0.2.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "wordpress-plugin",
+        "installation-source": "dist",
+        "homepage": "https://wordpress.org/plugins/google-tag-manager/"
     }
 ]
