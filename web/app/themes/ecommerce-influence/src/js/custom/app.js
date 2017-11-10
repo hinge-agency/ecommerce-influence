@@ -47,6 +47,10 @@ $(function(){
 	//CLOSE TOP DRIP FORM
 	$('.topDripForm__closeButton').on('click', function(e){
 		e.preventDefault();
+
+		// When closed, set a cookie to prevent the popup showing again until site is revisited
+		Cookies.set('hidetopdripform', true);
+
 		$('.topDripForm__inner').addClass('topDripForm__inner--close');
 
 		requiredheight = masthead;

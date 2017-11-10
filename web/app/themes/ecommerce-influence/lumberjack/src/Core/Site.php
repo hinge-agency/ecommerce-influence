@@ -59,6 +59,8 @@ class Site extends TimberSite
         // ACF Helper functions
         $data['acf_helper'] = new AcfHelper();
 
+        $data['hide_top_drip_form'] = (isset($_COOKIE['hidetopdripform']) ? true : false);
+
         return $data;
     }
 
