@@ -32,4 +32,8 @@ $context['post'] = $post;
 $context['title'] = $post->title;
 $context['content'] = $post->content;
 
+if (isset($_COOKIE['cookie'])) {
+	$context['content']
+}
+
 Timber::render(['generic-page.twig'], $context);

@@ -2,12 +2,14 @@
 <html class="no-js" {{ site.language_attributes }}>
 
     {% include 'html-header.twig' %}
-
+    
     <body class="{{ body_class }}">
-     	{% if not top_drip_form %}
-            {% include 'components/common/top-drip-form.twig' %}
+        {% if not hide_top_drip_form %}
+         	{% if not top_drip_form %}
+                {% include 'components/common/top-drip-form.twig' %}
+            {% endif %}
         {% endif %}
-
+        
         {% include 'components/common/masthead.twig' %}
 
         {% block content %}
