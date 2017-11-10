@@ -1,0 +1,27 @@
+{
+  "name": "leadpages",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-composer": "^0.4.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-shell": "^0.5.2",
+    "gulp-zip": "^3.2.0",
+    "os": "^0.1.1",
+    "run-sequence": "^1.1.5"
+  },
+  "dependencies": {
+    "composer": "^0.11.4",
+    "del": "^2.2.0"
+  }
+}
