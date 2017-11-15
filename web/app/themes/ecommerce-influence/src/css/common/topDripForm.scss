@@ -245,9 +245,9 @@
 	}
 }
 .topDripForm__form-block-button{
+	text-align: center;
 	display: block;
-	padding: 0 30px;
-	height: 60px;
+	padding: 22.5px 30px;
 
 	background: $primary-yellow;
 	border-radius: 0 3px 3px 0;
@@ -272,9 +272,18 @@
 		border-radius: 3px;
 	}
 	@include screen-lt(920){
-		height: 50px;
+		padding: 17.5px 30px;
 	}
 	
+}
+
+.topDripForm__form-errors {
+	color: $primary-red;
+	font-size: px-to-ems(16);
+	margin-top: 6px;
+	font-family: $brandon;
+	font-weight: 600;
+	display: none;
 }
 
 /*==================================================

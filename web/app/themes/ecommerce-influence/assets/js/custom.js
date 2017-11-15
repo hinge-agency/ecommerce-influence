@@ -237,6 +237,25 @@ $(function(){
 	 	$('.masthead__right-closeSearch').removeClass('responsive-open-search-active');
 	 });
 
+	$(".topDripForm__form-block-button").on('click', function() {
+
+		var errors = $(".topDripForm__form-errors");
+		errors.hide();
+
+		if ( $("#drip-First-Name").val() && isEmail($("#drip-email").val()) ) {
+			// Form submitted, don't show again for 28 days
+			Cookies.set('hidetopdripform', true, { expires: 28 });
+			$(".topDripForm__form").submit();
+		} else {
+			errors.show();
+		}
+	});
+
+	function isEmail(email) {
+		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	    return regex.test(email);
+	}
+
 });
 /* HTML5 Placeholder jQuery Plugin - v2.3.1
  * Copyright (c)2015 Mathias Bynens
