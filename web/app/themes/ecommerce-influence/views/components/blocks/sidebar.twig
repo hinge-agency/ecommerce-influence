@@ -114,6 +114,31 @@
 
 			</li><!-- FORM BLOCK END -->
 
+		{% elseif (layout.acf_fc_layout) == 'webinar_signup' %}
+
+			<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
+
+				<div class="sidebar__webinarSignup">
+
+					<div class="sidebar__webinarSignup-text">
+						{{ layout.top_text }}
+					</div>
+
+					<div class="sidebar__webinarSignup-image" style="background-image:url({{ layout.image.url }})"></div>
+
+					<div class="sidebar__webinarSignup-text">
+						{{ layout.bottom_text }}
+					</div>
+
+					<button type="button" class="sidebar__webinarSignup-button" title="{{ layout.button_title }}">
+						<span>{{ layout.button_text }}</span>
+					</button>
+					<script src="//events.genndi.com/register.evergreen.extra.js" language="javascript" type="text/javascript" async></script>
+					<img src="//events.genndi.com/tracker?action=registration-evergreen&webicode={{ layout.webicode }}&version=&memberid={{ layout.member_id }}" style="visibility:hidden; height:0px; width:0px; border:none;">
+				</div>
+
+			</li>
+
 		{% endif %}
 
 	{% endfor %}
