@@ -86,11 +86,12 @@ body,html{font-size:16px}
 }@media all and (max-width:1120px){.topDripForm__form-block-input{width:100%}
 }@media all and (max-width:920px){.topDripForm__form-block-input{height:50px}
 }@media all and (max-width:600px){.topDripForm__form-block-input{border-radius:3px}
-}.topDripForm__form-block-button{display:block;padding:0 30px;height:60px;background:#fff477;border-radius:0 3px 3px 0;font-size:1.25em;color:#2f3d65;line-height:.75em;font-family:"Brandon Grotesque",sans-serif;font-weight:900;text-transform:uppercase;cursor:pointer;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
+}.topDripForm__form-block-button{text-align:center;display:block;padding:22.5px 30px;background:#fff477;border-radius:0 3px 3px 0;font-size:1.25em;color:#2f3d65;line-height:.75em;font-family:"Brandon Grotesque",sans-serif;font-weight:900;text-transform:uppercase;cursor:pointer;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 .topDripForm__form-block-button:hover{background-color:#ccc35f}
 @media all and (max-width:1120px){.topDripForm__form-block-button{width:100%;border-radius:3px}
-}@media all and (max-width:920px){.topDripForm__form-block-button{height:50px}
-}.topDripForm__form-block-input:-ms-input-placeholder{color:#b4b4b4 !important}
+}@media all and (max-width:920px){.topDripForm__form-block-button{padding:17.5px 30px}
+}.topDripForm__form-errors{color:#e74c3c;font-size:1em;margin-top:6px;font-family:"Brandon Grotesque",sans-serif;font-weight:600;display:none}
+.topDripForm__form-block-input:-ms-input-placeholder{color:#b4b4b4 !important}
 .topDripForm .placeholder{color:#b4b4b4 !important}
 .topDripForm__closeButton{position:absolute;top:30px;right:30px;cursor:pointer;z-index:10;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 @media all and (max-width:1120px){.topDripForm__closeButton{right:-10px}
@@ -284,6 +285,12 @@ body,html{font-size:16px}
 .sidebar__testimonial-details{margin-top:8px;font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:1.125em;line-height:1.5555555556em;color:white;text-transform:uppercase}
 .sidebar__testimonial-button{margin-top:14px;padding:12px 21px;display:inline-block;background-color:#2f3d65;border:3px solid #fff477;font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:.9375em;line-height:1em;color:#fff477;text-transform:uppercase;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
 .sidebar__testimonial-button:hover{background-color:#fff477;color:#2f3d65}
+.sidebar__webinarSignup{background-color:#2f3d65;border-radius:3px;padding:40px 26px 10px 26px;text-align:center;max-width:340px;display:inline-block}
+.sidebar__webinarSignup-text{color:white;font-family:"Brandon Grotesque",sans-serif;font-size:1.5em;line-height:1.3333333333em;display:block;font-weight:600}
+.sidebar__webinarSignup-image{width:180px;height:180px;display:inline-block;border-radius:50%;background-color:white;margin-top:10px;background-size:cover;background-position:center}
+.sidebar__webinarSignup-image+.sidebar__webinarSignup-text{margin-top:20px}
+.sidebar__webinarSignup-button{display:block;width:100%;height:60px;padding:18px 0;background-color:#fff477;border-radius:3px;text-align:center;white-space:normal;font-family:"Brandon Grotesque",sans-serif;font-weight:900;font-size:1.25em;line-height:.75em;color:#2f3d65;cursor:pointer;outline:0;border:0;margin-top:30px;text-transform:uppercase;-webkit-transition:all .3s ease-out;transition:all .3s ease-out}
+.sidebar__webinarSignup-button:hover{background-color:#ccc35f}
 .sidebar__formBlock-form-block-input:-ms-input-placeholder{color:#b4b4b4 !important}
 .sidebar__formBlock .placeholder{color:#b4b4b4 !important}
 .latestContentHome{position:relative;width:100%}

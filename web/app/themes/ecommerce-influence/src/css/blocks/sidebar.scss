@@ -495,6 +495,71 @@
 	}
 }
 
+/* Webinar Signup */
+.sidebar__webinarSignup {
+	background-color: $text-blue;
+	border-radius: 3px;
+	padding: 40px 26px 10px 26px;
+	text-align: center;
+	max-width: 340px;
+	display: inline-block;
+}
+.sidebar__webinarSignup-text {
+	color: white;
+	font-family: $brandon;
+	font-size: px-to-ems(24);
+	line-height: px-to-ems(32, 24);
+	display: block;
+	font-weight: 600;
+}
+.sidebar__webinarSignup-image {
+	width: 180px;
+	height: 180px;
+	display: inline-block;
+	border-radius: 50%;
+	background-color: white;
+	margin-top: 10px;
+	background-size: cover;
+	background-position: center;
+
+	& + .sidebar__webinarSignup-text {
+		margin-top: 20px;
+	}
+}
+.sidebar__webinarSignup-button {
+	display: block;
+	width: 100%;
+	height: 60px;
+	padding: 18px 0;
+
+	background-color: $primary-yellow;
+	border-radius: 3px;
+
+	text-align: center;
+	white-space: normal;
+
+	font-family: $brandon;
+	font-weight: 900;
+	font-size: px-to-ems(20);
+	line-height: px-to-ems(15,20);
+
+	color: $text-blue;
+	cursor: pointer;
+
+	outline: none;
+	border: none;
+
+	margin-top: 30px;
+
+	text-transform: uppercase;
+
+	@include transition();
+
+	&:hover{
+		background-color: $yellow-dark;
+	}
+}
+
 /*==================================================
 =            LEGACY BROWSER PLACEHOLDER            =
 ==================================================*/
