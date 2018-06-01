@@ -18,6 +18,7 @@
 }
 .footer__lower{
 	background-color: $dark-blue;
+	min-height: 60px;
 	padding: 22px 0;
 }
 .footer__content-logo,
@@ -156,6 +157,32 @@
 	line-height: px-to-ems(20,14);
 	color: $primary-purple;
 	letter-spacing: 0.5px;
+	float: left;
+	margin-left: 20px;
 
-	text-align: center;
+	@media screen and(max-width: 810px){
+		float: none;
+		margin: 0;
+		text-align: center;
+	}
+}
+
+.footer__disclaimer-text > a {
+	font-family: $brandon;
+	font-weight: 600;
+	font-size: px-to-ems(14);
+	line-height: px-to-ems(20,14);
+	color: $primary-purple;
+	letter-spacing: 0.5px;
+}
+
+.footer__disclaimer-text {
+	float: right;
+	margin-right: 20px;
+
+	@media screen and(max-width: 810px){
+		float: none;
+		margin: 0;
+		text-align: center;
+	}
 }
