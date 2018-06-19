@@ -302,7 +302,7 @@ body,html{font-size:16px}
 .latestContentHome__block--podcast{border-top:6px solid #fff477}
 .latestContentHome__block--article{border-top:6px solid #2f3d65}
 .latestContentHome__block+.latestContentHome__block{margin-top:60px}
-.latestContentHome__block-label{position:absolute;top:0;right:15px;z-index:1;padding:6px 14px;-webkit-transform:translateY(-50%);transform:translateY(-50%);max-height:35px;border-radius:3px;font-family:"Brandon Grotesque",sans-serif;font-weight:600;font-size:1.125em;line-height:1.3333333333em;text-transform:capitalize}
+.latestContentHome__block-label{position:absolute;top:-21;right:15px;z-index:1;padding:6px 14px;-webkit-transform:translateY(-50%);transform:translateY(-50%);max-height:35px;border-radius:3px;font-family:"Brandon Grotesque",sans-serif;font-weight:600;font-size:1.125em;line-height:1.3333333333em;text-transform:capitalize}
 .latestContentHome__block-label--podcast{background-color:#fff477;color:#2f3d65}
 .latestContentHome__block-label--article{background-color:#2f3d65;color:white}
 .latestContentHome__block-imageWrapper{position:relative}
