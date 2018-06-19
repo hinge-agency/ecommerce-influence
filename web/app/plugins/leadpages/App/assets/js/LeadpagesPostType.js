@@ -33,18 +33,9 @@
                 },
 
                 complete: function(response) {
-                    var elem = $(response.responseText),
-                        diffMessage = '';
+                    var elem = $(response.responseText);
 
                     $("#leadpages_my_selected_page").trigger('change');
-
-                    if (elem && elem.data('human-diff')) {
-                        diffMessage = elem.data('human-diff');
-                        if (diffMessage.length) {
-                            $(".diff-message").text(diffMessage);
-                            $(".human-diff").show();
-                        }
-                    }
 
                     //setup select 2 on the leadpages dropdown(sets up searchbox etc)
                     $(".leadpage_select_dropdown").select2({
@@ -55,8 +46,7 @@
                         var stats = data.published + ' &bull; ';
 
                         if (data.issplit) {
-                            stats += 'Split Test &bull; '
-                                  + data.variations + ' variations';
+                            stats += 'Split Test';
 
                         } else {
                             stats += data.views + ' views &bull; '
@@ -187,10 +177,6 @@
         //setting up the Leadpages Post Type Page for redesign
         $("#leadpage-create").removeClass('postbox');
         $("#leadpage-create > div").removeClass('inside');
-
-        $("#leadpages_my_selected_page").on('click',function(){
-             //alert('123');
-        });
 
     });
 }(jQuery));

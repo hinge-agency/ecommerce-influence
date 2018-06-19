@@ -13,7 +13,7 @@
  * Plugin Name:       Smart Podcast Player
  * Plugin URI:        http://support.smartpodcastplayer.com
  * Description:       The WordPress media player for the future—specializing in podcasts using Soundcloud, Libsyn, and any other podcast feed that works in iTunes.
- * Version:           2.2.0
+ * Version:           2.4.0
  * Author:            Smart Podcast Player
  * Author URI:        http://smartpodcastplayer.com
  * Text Domain:       smart-podcast-player
@@ -60,11 +60,14 @@ if ( ! defined( 'SPP_SETTINGS_URL' ) ) {
 
 require_once( SPP_PLUGIN_BASE . 'classes/core.php' );
 require_once( SPP_PLUGIN_BASE . 'classes/ajax-feed.php' );
+require_once( SPP_PLUGIN_BASE . 'classes/ajax-jsobj.php' );
+require_once( SPP_PLUGIN_BASE . 'classes/ajax-newsletter.php' );
 require_once( SPP_PLUGIN_BASE . 'classes/ajax-tracks.php' );
+require_once( SPP_PLUGIN_BASE . 'classes/dynamic-css.php' );
+require_once( SPP_PLUGIN_BASE . 'classes/shortcodes.php' );
 require_once( SPP_PLUGIN_BASE . 'classes/transients.php' );
 require_once( SPP_PLUGIN_BASE . 'classes/utils/color.php' );
 
-register_activation_hook( __FILE__, array( 'SPP_Core', 'upgrade_options' ) );
 add_action( 'plugins_loaded', array( 'SPP_Core', 'get_instance' ) );
 
 /*----------------------------------------------------------------------------*

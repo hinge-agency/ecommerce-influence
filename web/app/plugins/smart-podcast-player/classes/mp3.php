@@ -237,11 +237,6 @@ class SPP_MP3 {
 		$info = $id3->analyze( $file );
 	    $data = array();
 		
-		if( isset( $info[ 'error' ] ) ) {
-			trigger_error( implode( $info[ 'error' ] ) );
-			return null;
-		}
-		
 		// For MP3 files, artist and title are in id3v2 tags
 	    getid3_lib::CopyTagsToComments( $info ); 
 	    if( isset( $info['id3v2']['comments'] ) ) {
@@ -262,6 +257,14 @@ class SPP_MP3 {
 			if( isset( $info['tags']['quicktime']['artist'] ) ) {
 				$data['artist'] = $info['tags']['quicktime']['artist'][0];
 			}
+		}
+		
+		// If we don't have artist, title, or album, and ID3 set an error, throw that error.
+		if( !isset( $data['artist'] ) && !isset( $data['title'] ) && !isset( $data['album'] )
+				&& isset( $info[ 'error' ] ) ) {
+			if( SPP_Core::debug_output() )
+				trigger_error( implode( $info[ 'error' ] ) );
+			return null;
 		}
 
 	    return $data;

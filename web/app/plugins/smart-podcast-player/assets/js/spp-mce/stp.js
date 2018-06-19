@@ -11,6 +11,9 @@
 		var savedFileUrlInput = '';
 		
 		// Shorter name for the default options from the settings page
+		if( typeof smart_podcast_player_user_settings === 'undefined' ) {
+			return;
+		}
 		var def = smart_podcast_player_user_settings;
 		
 		// Escape characters within shortcode.  Code from mustache.js

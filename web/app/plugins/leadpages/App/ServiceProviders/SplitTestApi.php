@@ -40,25 +40,34 @@ class SplitTestApi
 
     public function getActiveSplitTests()
     {
-        //return an array because thats what the pages loop is expecting
         $returnArray = [];
 
         /**
-         * needs to be in format
-         *$array['id' => 'id', 'name' => 'pagename', ['_meta']['xor_hex_id']
-         **/
+         * Ex. format
+         * [
+         *   'id' => 'id',
+         *   'name' => 'pagename',
+         *   '_meta' => [
+         *       'xor_hex_id' => XOR_HEX_ID,
+         *   ],]
+         */
 
         /**
-         * pages loop is expecint an xor_id to be set for builder 2 pages,
-         *no relavence except for need to be there
-        **/
+         * pages loop is expecting an xor_id to be set for builder 2 pages,
+         */
+        try {
+            $testObject = $this->getTestsObject();
+        } catch (\Exception $e) {
+            return [];
+        }
 
-        $testObject = $this->getTestsObject();
-        // echo '<pre>'; print_r($testObject);die();
-        
+        if (empty($testObject)) {
+            return [];
+        }
+
         $i = 0;
-        foreach($testObject as $test){
-            if($test->status == 'active'){
+        foreach ($testObject as $test) {
+            if ($test->status == 'active') {
                 $returnArray[$i]['name'] = $test->name . ' (Split Test)';
                 $returnArray[$i]['_meta'] = [
                     'xor_hex_id' => 0,
@@ -68,8 +77,8 @@ class SplitTestApi
                     'id' => $test->_meta->id,
                 ];
 
-                foreach($test->variations as $variation){
-                    if($variation->control == 'true'){
+                foreach ($test->variations as $variation) {
+                    if ($variation->control == 'true') {
                         $returnArray[$i]['id'] = $variation->assetId;
                         $returnArray[$i]['_meta']['controlUrl'] = $variation->uri;
                     }
