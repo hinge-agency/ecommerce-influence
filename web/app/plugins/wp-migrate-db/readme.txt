@@ -3,8 +3,8 @@ Contributors: bradt, deliciousbrains
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5VPMGLLK94XJC
 Tags: migrate, migration, export, data dump, backup, database, mysql
 Requires at least: 3.6
-Tested up to: 4.8.1
-Stable tag: 1.0.1
+Tested up to: 4.9
+Stable tag: 1.0.2
 License: GPLv2
 
 Migrates your database by running find & replace on URLs and file paths, handling serialized data, and saving an SQL file.
@@ -75,7 +75,7 @@ Yep, it will run a find &amp; replace on your serialized data and migrate it wit
 
 = What are the requirements? =
 
-They are the same as the [requirements for WP Migrate DB Pro](https://deliciousbrains.com/wp-migrate-db-pro/pricing/?utm_campaign=WP%2BMigrate%2BDB%2BPro&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blisting&utm_content=requirements#requirements.
+They are the same as the [requirements for WP Migrate DB Pro](https://deliciousbrains.com/wp-migrate-db-pro/pricing/?utm_campaign=WP%2BMigrate%2BDB%2BPro&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blisting&utm_content=requirements#requirements).
 
 = Do you offer email support? =
 
@@ -88,6 +88,10 @@ If you upgrade to [WP Migrate DB Pro](http://deliciousbrains.com/wp-migrate-db-p
 3. Saving the exported database
 
 == Changelog ==
+
+= WP Migrate DB 1.0.2 - 2017-10-25 =
+* Bug fix: Some plugins causing "Invalid nonce" errors when using compatibility mode
+* Bug fix: Error for invalid permissions for Exports not displaying
 
 = WP Migrate DB 1.0.1 - 2017-09-14 =
 * Bug Fix: Parse error on PHP 5.2
