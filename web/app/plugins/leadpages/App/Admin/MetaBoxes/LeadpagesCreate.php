@@ -5,7 +5,6 @@ namespace LeadpagesWP\Admin\MetaBoxes;
 use LeadpagesWP\Admin\CustomPostTypes\LeadpagesPostType;
 use LeadpagesWP\models\LeadPagesPostTypeModel;
 use TheLoop\Contracts\MetaBox;
-use Carbon\Carbon;
 
 class LeadpagesCreate extends LeadpagesPostType implements MetaBox
 {
@@ -14,6 +13,7 @@ class LeadpagesCreate extends LeadpagesPostType implements MetaBox
      * @var \LeadpagesWP\models\LeadPagesPostTypeModel
      */
     private $postTypeModel;
+
     /**
      * @var \Leadpages\Pages\LeadpagesPages
      */
@@ -25,7 +25,6 @@ class LeadpagesCreate extends LeadpagesPostType implements MetaBox
 
         $this->pagesApi      = $leadpagesApp['pagesApi'];
         $this->postTypeModel = $leadpagesApp['lpPostTypeModel'];
-        $this->splitTestApi  = $leadpagesApp['splitTestApi'];
         add_action('wp_ajax_get_pages_dropdown', [$this, 'generateSelectList']);
         add_action('wp_ajax_get_pages_dropdown_nocache', [$this, 'generateSelectListNoCache']);
         add_action('wp_ajax_nopriv_get_pages_dropdown', [$this, 'generateSelectList']);
@@ -39,19 +38,30 @@ class LeadpagesCreate extends LeadpagesPostType implements MetaBox
 
     public function defineMetaBox()
     {
-        add_meta_box("leadpage-create", "Leadpages Create", [$this, 'callback'], $this->postTypeName, "normal",
-          "high", null);
+        add_meta_box(
+            "leadpage-create",
+            "Leadpages Create",
+            [$this, 'callback'],
+            $this->postTypeName,
+            "normal",
+            "high",
+            null
+        );
     }
 
     public function callBack($post, $box)
     {
-        $useCache    = LeadPagesPostTypeModel::getMetaCache($post->ID);
+        $useCache = LeadPagesPostTypeModel::getMetaCache($post->ID);
         $currentType = LeadPagesPostTypeModel::getMetaPageType($post->ID);
-        $slug        = LeadPagesPostTypeModel::getMetaPagePath($post->ID);
-        $action      = (isset($_GET['action']) && $_GET['action'] == 'edit') ? 'Edit' : 'Add New';
-        $is_edit     = $_GET['action'] == 'edit' ? 'true' : 'false';
+        $slug = LeadPagesPostTypeModel::getMetaPagePath($post->ID);
+        $is_edit = isset($_GET['action']) && $_GET['action'] == 'edit';
+        $action = $is_edit ? 'Edit' : 'Add New';
         ?>
-    <style>.select2-container--default .select2-results>.select2-results__options { max-height: 400px !important;  } </style>
+    <style>
+    .select2-container--default .select2-results>.select2-results__options {
+        max-height: 400px !important;
+    }
+    </style>
     <div class="leadpages-edit-wrapper" data-is-edit="<?php echo $is_edit; ?>">
         <div id="leadpages-header-wrapper" class="flex flex--xs-between flex--xs-middle">
             <div class="ui-title-nav" aria-controls="navigation">
@@ -65,17 +75,14 @@ class LeadpagesCreate extends LeadpagesPostType implements MetaBox
 
             <button id="publish" name="publish" class="ui-btn">
                 Publish
-                <!-- Loading icons-->
                 <div class="ui-loading ui-loading--sm ui-loading--inverted">
                     <div class="ui-loading__dots ui-loading__dots--1"></div>
                     <div class="ui-loading__dots ui-loading__dots--2"></div>
                     <div class="ui-loading__dots ui-loading__dots--3"></div>
                 </div>
-                <!-- End Loading Icons-->
             </button>
         </div>
 
-        <!-- Body Start -->
         <div class="leadpages-edit-body">
             <div class="flex leadpages-loading">
                 <div class="ui-loading">
@@ -87,7 +94,8 @@ class LeadpagesCreate extends LeadpagesPostType implements MetaBox
             <div class="flex">
                 <div class="flex__item--xs-12">
                     <p class="header_text">
-                        Welcome to the Leadpages admin.  Publish a Leadpage to your site in a few easy steps below: 
+                        Welcome to the Leadpages admin.
+                        Publish a Leadpage to your site in a few easy steps below:
                     </p>
                 </div>
                 <h3 class="flex__item--xs-12">Select a Leadpage</h3>
@@ -104,7 +112,6 @@ class LeadpagesCreate extends LeadpagesPostType implements MetaBox
                 </p>
                 </div>
             </div>
-
 
             <div class="flex">
             <div class="flex__item-xs-12">
@@ -134,8 +141,9 @@ class LeadpagesCreate extends LeadpagesPostType implements MetaBox
                         <h3 class="header">Home Page</h3>
 
                         <p>
-                            This will take over your home page on your blog. Anytime someone goes to
-                            your home page it will show this page.
+                            This will take over your home page on your blog.
+                            Anytime someone goes to your home page it will show
+                            this page.
                         </p>
                         <input id="leadpage-home-page" type="radio" name="leadpages-post-type" class="leadpages-post-type leadpage-home-page"
                                value="fp" <?php echo $currentType == "fp" ? 'checked=checked"' : ""; ?> >
@@ -169,7 +177,8 @@ class LeadpagesCreate extends LeadpagesPostType implements MetaBox
                 <h3 class="flex__item--xs-12">Set a Custom Slug</h3>
 
                 <p class="flex__item--xs-12">
-                    Enter a custom slug for your Leadpage. <small>This will be the url to view your Leadpage on your site.</small>
+                    Enter a custom slug for your Leadpage.
+                    <small>This will be the url to view your Leadpage on your site.</small>
                     <br />
                 </p>
 
@@ -199,13 +208,11 @@ class LeadpagesCreate extends LeadpagesPostType implements MetaBox
 
             <button id="publish" name="publish" class="ui-btn">
                 Publish
-                <!-- Loading icons-->
                 <div class="ui-loading ui-loading--sm ui-loading--inverted">
                     <div class="ui-loading__dots ui-loading__dots--1"></div>
                     <div class="ui-loading__dots ui-loading__dots--2"></div>
                     <div class="ui-loading__dots ui-loading__dots--3"></div>
                 </div>
-                <!-- End Loading Icons-->
             </button>
         </div>
         <?php
@@ -230,63 +237,118 @@ class LeadpagesCreate extends LeadpagesPostType implements MetaBox
 
         $id = sanitize_text_field($_POST['id']);
         $currentPage = LeadPagesPostTypeModel::getMetaPageId($id);
-
         if (!$currentPage) {
             $currentPage = $leadpagesApp['lpPostTypeModel']->getPageByXORId($id);
         }
 
         $pages = $this->fetchPages($refresh_cache);
-        $cached_at = $pages['timestamp'];
-        $human_diff = $pages['time_since'];
-        $splitTest = $leadpagesApp['splitTestApi']->getActiveSplitTests();
-        $items['_items'] = array_merge($pages['_items'], $splitTest);
+        $items['_items'] = $pages['_items'];
         $items = $leadpagesApp['pagesApi']->sortPages($items);
-        $size = count($items['_items']);
-        $optionString = '<select data-human-diff="' . $human_diff . '" data-timestamp="'. $cached_at . '" id="select_leadpages" class="leadpage_select_dropdown" name="leadpages_my_selected_page">';
+        $optionString = '<select id="select_leadpages" '
+                            . 'class="leadpage_select_dropdown" name="leadpages_my_selected_page">';
+
         foreach ($items['_items'] as $page) {
-            if (isset($page['splitTestId'])) {
-                continue;
-            }
+            $pageId = $page['id'];
+            $is_split = $page['isSplit'];
+            $last_published = date('Y-m-d', $page['updated']);
+            $slug = $page['slug'];
 
-            $pageId = number_format($page['id'], 0, '.', '');
-            $is_split = 'false';
-            $variations = 1;
-            if (isset($page['_meta']['lastUpdated'])) {
-                $last_published = date('Y-m-d', $page['updated']);
-                $slug = $page['slug'];
-            } else {
-                $is_split = 'true';
-                $last_published_at = $page['_meta']['updated'];
-                $last_published = date('Y-m-d', strtotime($last_published_at));
-                $url_parts = parse_url($page['_meta']['controlUrl']);
-                $slug = str_replace('/', '', $url_parts['path']);
-                $variations = $page['_meta']['variationsCount'];
-            }
+            $composite_id = $this->makeCompositeId($page);
 
-            $xor_hex_id = $page['xor_hex_id'];
             $edit_url = $page['editUrl'];
             $preview_url = $page['previewUrl'];
             $publish_url = $page['publishUrl'];
-            $optins = $page['optins'];
-            $views = $page['views'];
+            $optins = $page['optins'] ?: 0;
+            $views = $page['views'] ?: 0;
+
             $optionString .= "
                 <option data-slug='{$slug}'
                         data-issplit='{$is_split}'
-                        data-variations='{$variations}'
                         data-published='{$last_published}'
                         data-optins='{$optins}'
                         data-views='{$views}'
                         data-preview-url='{$preview_url}'
                         data-publish-url='{$publish_url}'
                         data-edit-url='{$edit_url}'
-                        value='{$xor_hex_id}:{$pageId}'"
-                . ($currentPage == $pageId ? ' selected="selected"' : '')
+                        value='{$composite_id}'"
+                        . ($this->isCurrentPage($page, $currentPage) ? ' selected="selected"' : '')
                 .">{$page['name']}</option>";
         }
 
         $optionString .= '</select>';
         echo $optionString;
         die();
+    }
+
+    /**
+     * Helper to compare selected page id variations with current
+     *
+     * @param mixed  $page          page api row
+     * @param string $currentPageId active edit page's id
+     *
+     * @return bool
+     */
+    private function isCurrentPage($page, $currentPageId)
+    {
+        return $page['id'] == $currentPageId
+            || $page['xor_hex_id'] == $currentPageId
+            || $page['publicMetaId'] == $currentPageId
+            || $page['contentUuid'] == $currentPageId
+            || $this->makeCompositeId($page) == $currentPageId;
+    }
+
+    /**
+     * Helper to determine if data structure is for split test
+     *
+     * @param mixed $page From pages api
+     *
+     * @return bool
+     */
+    private function isSplit($page)
+    {
+        return isset($page['isSplit']) && (bool)$page['isSplit'];
+    }
+
+    /**
+     * Helper to strip temporary prepended id string
+     *
+     * @param mixed $page
+     *
+     * @return string
+     */
+    private function cleanId($page)
+    {
+        return str_replace('cid-', '', $page['id']);
+    }
+
+    /**
+     * Helper to choose which value to use for legacy xor id
+     *
+     * @param mixed $page Page data
+     *
+     * @return string id with ':' replaced by ';' to prevent conflicts
+     */
+    private function whichXorId($page)
+    {
+        $hex_id = $this->isSplit($page)
+            ? $page['_meta']['id']
+            : $page['xor_hex_id'];
+
+        return str_replace(':', ';', $hex_id);
+
+    }
+    /**
+     * Helper to create composite id wordpress uses to identify assets
+     *
+     * @param mixed $page Page data
+     *
+     * @return string
+     */
+    private function makeCompositeId($page)
+    {
+        $hex_id = $this->whichXorId($page);
+        $page_id = $this->cleanId($page);
+        return $hex_id . ':' . $page_id;
     }
 
     protected function fetchPages($refresh_cache = false)
@@ -298,14 +360,9 @@ class LeadpagesCreate extends LeadpagesPostType implements MetaBox
         if (false === ($pages = get_transient('user_leadpages'))) {
             global $leadpagesApp;
             $pages = $leadpagesApp['pagesApi']->getAllUserPages();
-            $pages['timestamp'] = Carbon::now();
-            set_transient('user_leadpages', $pages, 900);
+            set_transient('user_leadpages', $pages, 120);
         }
 
-        $pages['time_since'] = 'just now';
-        if (isset($pages['timestamp'])) {
-            $pages['time_since'] = Carbon::parse($pages['timestamp'])->diffForHumans();
-        }
 
         return $pages;
     }
