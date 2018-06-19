@@ -19,6 +19,11 @@ class SPP_Transients {
 				$transient_name = 'spp_cachea_' . md5(
 						SPP_Core::VERSION . $args['url'] . (string) $args['episode_limit'] );
 			}
+		} else if( $args['purpose'] === 'jsobj from uid' ) {
+			$timeout = 5 * MINUTE_IN_SECONDS;
+			if( isset( $args['uid'] ) ) {
+				$transient_name = 'spp_cacheuid_' . md5( SPP_Core::VERSION . $args['uid'] );
+			}
 		} else if( $args['purpose'] === 'xml from feed url' ) {
 			$timeout = 5 * MINUTE_IN_SECONDS;
 			if( isset( $args['url'] ) ) {
@@ -42,21 +47,12 @@ class SPP_Transients {
 		}
 		// Partial list of other transients:
 		//    spp_license_check
+		//    spp_cachep_* Soundcloud "sets"
+		//    spp_caches_* Soundcloud tracks  (all four in get_soundcloud_tracks)
+		//    spp_caches_* Soundcloud fallback?
+		//    spp_cacheu_* Soundcloud profile
+
 		
 		return array( $transient_name, $timeout );
-	}
-	
-	public static function spp_get_transient( $transient_name ) {
-		// Sometimes, the transient timeouts disappear.  I don't know the cause.
-		// This will pretend there's no transient there when there's no associated timeout.
-		if( !isset( $transient_name ) )
-			return false;
-		$transient_option = get_option( '_transient_' . $transient_name );
-		$timeout_option = get_option( '_transient_timeout_' . $transient_name );
-		if( $timeout_option == false ) {
-			return false;
-		} else {
-			return get_transient( $transient_name );
-		}
 	}
 }

@@ -24,14 +24,69 @@ class SPP_Ajax_Feed {
 			exit;
 		}
 		
+		$data = self::get_and_cache_tracks( $url, $episode_limit );
+		
+		if( is_wp_error( $data[ 'tracks' ] ) ) {
+			trigger_error( $data[ 'tracks' ]->get_error_message() );
+		}
+		
+		sleep($delay);
+		if( version_compare( phpversion(), '5.5.0', '>' ) ) {
+			$ret = json_encode( $data[ 'tracks' ], JSON_PARTIAL_OUTPUT_ON_ERROR );
+		} else {
+			$ret = json_encode( $data[ 'tracks' ] );
+		}
+		echo $ret;
+		exit;
+
+	}
+	
+	public static function ajax_get_tracks_array() {
+		
+		if( SPP_Core::debug_output() ) {
+			ini_set( 'display_errors', '1' );
+			error_reporting( E_ALL );
+		}
+		
+		$url_array = isset( $_POST['streams'] ) ? $_POST['streams'] : '';
+		$episode_limit_array = isset( $_POST['episode_limits'] ) ? $_POST['episode_limits'] : 0;
+		$uid_array = isset( $_POST['uids'] ) ? $_POST['uids'] : false;
+
+		if( !$url_array || !$uid_array || count($url_array) !== count($uid_array) ) {
+			trigger_error( 'URLs and UIDs required' );
+			die();
+		}
+		
+		$response_array = array();
+		$len = count($url_array);
+		for( $i = 0; $i < $len; $i++ ) {
+			$data = self::get_and_cache_tracks( $url_array[$i], $episode_limit_array[$i] );
+			if( is_wp_error( $data[ 'tracks' ] ) ) {
+				trigger_error( $data[ 'tracks' ]->get_error_message() );
+			}
+			$response_array[] = $data[ 'tracks' ];
+			$response_array[$i]['uid'] = $uid_array[$i];
+		}
+		
+		if( version_compare( phpversion(), '5.5.0', '>' ) ) {
+			$ret = json_encode( $response_array, JSON_PARTIAL_OUTPUT_ON_ERROR );
+		} else {
+			$ret = json_encode( $response_array );
+		}
+		header('Content-Type: application/json');
+		echo $ret;
+		exit;
+	}
+	
+	public static function get_and_cache_tracks( $url, $episode_limit, $no_cache = false ) {
+		
 		list( $transient_name, $timeout ) = SPP_Transients::spp_transient_info( array(
 				'purpose' => 'tracks from feed url',
 				'url' => $url,
 				'episode_limit' => $episode_limit ) );
-		$data = SPP_Transients::spp_get_transient( $transient_name );
-		$no_cache = filter_input( INPUT_GET, 'spp_no_cache' ) ? filter_input( INPUT_GET, 'spp_no_cache' ) : 'false';
+		$data = get_transient( $transient_name );
 		
-		if( ( ( false === $data ) || !isset( $data['tracks'] ) ) || $no_cache == 'true' ) {
+		if( ( ( false === $data ) || !isset( $data['tracks'] ) ) || $no_cache ) {
 
 			$data = array(
 				'url' => $url,
@@ -60,21 +115,9 @@ class SPP_Ajax_Feed {
 				// Prevent crazy load and re-fetching
 				set_transient( $transient_name, $data, MINUTE_IN_SECONDS);
 			}
-		} 
-		
-		if( is_wp_error( $data[ 'tracks' ] ) ) {
-			trigger_error( $data[ 'tracks' ]->get_error_message() );
 		}
 		
-		sleep($delay);
-		if( version_compare( phpversion(), '5.5.0', '>' ) ) {
-			$ret = json_encode( $data[ 'tracks' ], JSON_PARTIAL_OUTPUT_ON_ERROR );
-		} else {
-			$ret = json_encode( $data[ 'tracks' ] );
-		}
-		echo $ret;
-		exit;
-
+		return $data;
 	}
 	
 	// Returns the tracks if they're cached, otherwise null
@@ -83,7 +126,7 @@ class SPP_Ajax_Feed {
 				'purpose' => 'tracks from feed url',
 				'url' => $url,
 				'episode_limit' => $episode_limit ) );
-		return SPP_Transients::spp_get_transient( $transient_name );
+		return get_transient( $transient_name );
 	}
 
 	/**
@@ -108,7 +151,7 @@ class SPP_Ajax_Feed {
 			$url_prof = SPP_Core::SPP_SOUNDCLOUD_API_URL . '/resolve?url=' . urlencode( $url ) . '&format=json&consumer_key=' . $api_consumer_key;
 			$transient = 'spp_cachep_' . substr( preg_replace("/[^a-zA-Z0-9]/", '', md5( $url_prof ) ), -32 );
 			
-			if(  false === ( $profile = SPP_Transients::spp_get_transient( $transient ) )  ) {
+			if(  false === ( $profile = get_transient( $transient ) )  ) {
 
 				$response = wp_remote_get( $url_prof );
 				if( !is_wp_error( $response ) && ( $response['response']['code'] < 400 ) ) {
@@ -140,7 +183,7 @@ class SPP_Ajax_Feed {
 
 			$transient = 'spp_caches_' . substr( preg_replace("/[^a-zA-Z0-9]/", '', SPP_Core::VERSION . $url . (string)$track_count ), -32 );
 
-			if(  false === ( $tracks = SPP_Transients::spp_get_transient ( $transient ) ) ) {
+			if(  false === ( $tracks = get_transient ( $transient ) ) ) {
 
 				$url = SPP_Core::SPP_SOUNDCLOUD_API_URL . '/users/' . $user_id . '/tracks?format=json&client_id=' . $api_consumer_key . '&limit=' . $limit .'&linked_partitioning=1';
 
@@ -199,7 +242,7 @@ class SPP_Ajax_Feed {
 			$url = SPP_Core::SPP_SOUNDCLOUD_API_URL . '/resolve?url=' . urlencode( $url ) . '&format=json&consumer_key=' . $api_consumer_key;
 			$transient = 'spp_cachesu_' . substr( preg_replace("/[^a-zA-Z0-9]/", '', md5( $url ) . (string)$track_count ), -32 );
 			
-			if(  false === ( $tracks = SPP_Transients::spp_get_transient( $transient ) )  ) {
+			if(  false === ( $tracks = get_transient( $transient ) )  ) {
 
 				$response = wp_remote_get( $url );
 				if( !is_wp_error( $response ) && ( $response['response']['code'] < 400 ) ) {
@@ -225,8 +268,11 @@ class SPP_Ajax_Feed {
 			// Linkify and truncate the show notes for display
 			foreach( $tracks as $track ) {
 				$track->description = self::linkify_show_notes( $track->description );
-				$maxLength = strlen( $track->tag_list ) > 0 ? 140 : 280;
-				$track->truncated_show_notes = self::truncate_show_notes( $track->description, $maxLength, 10 );
+				$track->truncated_show_notes_140 = self::truncate_show_notes( $track->description, 140, 10 );
+				$track->truncated_show_notes_280 = self::truncate_show_notes( $track->description, 280, 10 );
+				$track->truncated_show_notes_420 = self::truncate_show_notes( $track->description, 420, 10 );
+				$track->truncated_show_notes_560 = self::truncate_show_notes( $track->description, 560, 10 );
+				$track->truncated_show_notes_700 = self::truncate_show_notes( $track->description, 700, 10 );
 			}
 			return $tracks;
 		}
@@ -235,7 +281,7 @@ class SPP_Ajax_Feed {
 			for( $track_count = 0; $track_count < 10; ++$track_count ) {
 				$transient = 'spp_caches_' . substr( preg_replace("/[^a-zA-Z0-9]/", '', SPP_Core::VERSION . $url . substr( $track_count, -1 ) ), -32 );
 				$tracks = null;
-				if( ( $tracks = SPP_Transients::spp_get_transient ( $transient ) ) && !empty( $tracks ) ) {
+				if( ( $tracks = get_transient ( $transient ) ) && !empty( $tracks ) ) {
 					return $tracks;
 				}
 			}
@@ -245,7 +291,8 @@ class SPP_Ajax_Feed {
 
 	/**
 	 * Rewrite of WP Core fetch_feed function, removing the WP_SimplePie_File, which was causing issues 
-	 * with FeedBlitz feeds
+	 * with FeedBlitz feeds. Commit of 2016-03-10 accidentally added it back for all files, not just
+	 * FeedBlitz, so I added it back for everything 2017-09-08.  TODO: Look at going back to core fetch_feed.
 	 * 
 	 * @param  string $url Url of RSS feed
 	 * @return void
@@ -263,15 +310,13 @@ class SPP_Ajax_Feed {
 		// constructor sets it before we have a chance to set the sanitization class
 		$rss->sanitize = new WP_SimplePie_Sanitize_KSES();
 		$rss->set_cache_class( 'WP_Feed_Cache' );
-		if( strpos( 'feedblitz.com', $url ) === false ) {
-			$rss->set_file_class( 'WP_SimplePie_File' );
-		}
+		$rss->set_file_class( 'WP_SimplePie_File' );
 		$rss->set_feed_url( $url );
 		// extend for slow feed generation/hosts
 		$rss->set_timeout(15);
 
 		// If the user has cleared the cache, it was marked in this transient
-		if( SPP_Transients::spp_get_transient( 'spp_cache_clear_simplepie' ) == true ) {
+		if( get_transient( 'spp_cache_clear_simplepie' ) == true ) {
 			$rss->enable_cache( false );
 		} else {
 			$rss->set_cache_duration( 5 * MINUTE_IN_SECONDS );
@@ -282,7 +327,25 @@ class SPP_Ajax_Feed {
 		// I don't know the root cause, but I do know the fix: force_feed.
 		$rss->force_feed(true);
 		
+		// Squarespace returns a 403 Forbidden with the default SimplePie user agent.
+		if( strpos( $url, 'squarespace.com' ) !== false ) {
+			$rss->set_useragent( 'iTunes/9.1.1' );
+		}
+		
+		// Set the parser to a class that accepts more feeds
+		require_once( SPP_PLUGIN_BASE . 'classes/simplepie-ext.php' );
+		$rss->set_parser_class( 'SPP_SimplePie_Parser_Ext' );
+		
 		$rss->init();
+		
+		// Check to see if it's a "403 Forbidden" page.  Squarespace returns these pages
+		// when they don't recognize the user agent, and not all Squarespace feeds are on
+		// Squarespace URLs.  If the page says 403 Forbidden, we retry as iTunes.
+		if( $rss->error() && stripos( $rss->get_raw_data(), '403 Forbidden' ) > -1 ) {
+			$rss->set_useragent( 'iTunes/9.1.1' );
+			$rss->init();
+		}
+		
 		$rss->handle_content_type();
 
 		if ( $rss->error() ) {
@@ -310,7 +373,7 @@ class SPP_Ajax_Feed {
 		list( $transient_name, $timeout ) = SPP_Transients::spp_transient_info( array(
 				'purpose' => 'xml from feed url',
 				'url' => $url ) );
-		$data = SPP_Transients::spp_get_transient( $transient_name );
+		$data = get_transient( $transient_name );
 		
 		// See if RAW XML is already available from SimplePie. Indicates when feed new/changed too.
 		if ( $rss->get_raw_data() ) {
@@ -318,44 +381,42 @@ class SPP_Ajax_Feed {
 				set_transient( $transient_name, $data, $timeout );
 		}
 		else {	
-			if( false === ( $data = SPP_Transients::spp_get_transient($transient_name) ) ) {
+			if( false === ( $data = get_transient($transient_name) ) ) {
 				$data = wp_remote_retrieve_body ( wp_remote_get( $url ) );
 
 				if ( !empty ( $data ) && !is_wp_error( $data )  )
 					set_transient( $transient_name, $data, $timeout );
 			}
 		}
-
-		if ( !empty ( $data ) )
-			$xml = simplexml_load_string( $data );	// URL file-access is disabled? HS1438
-
-		if ( empty( $xml ) || empty( $data ) )
-			$xml = simplexml_load_file( $url ); 	// Raw xml so we can fetch other data
-
-		$base = new StdClass;
-		$user = new StdClass;
-
-		// Many of these fields are pulled from the data that soundcloud includes in their track player
-		$attr = array( 'kind', 'id', 'created_at', 'user_id', 'duration', 'user_id', 'duration', 'commentable', 'state', 'original_content_size', 'sharing', 'tag_list', 'permalink', 'streamable', 'embeddable_by', 'downloadable', 'purchase_url', 'label_id', 'purchase_title', 'genre', 'title', 'description', 'label_name', 'release', 'track_type', 'key_signature', 'isrc', 'video_url', 'bpm', 'release_year', 'release_month', 'release_day', 'original_format', 'license', 'uri', 'user', 'permalink_url', 'artwork_url', 'waveform_url', 'stream_url', 'download_url', 'download_count', 'favoritings_count', 'comment_count', 'attachments_uri', 'episode_number', 'content' );
-
-		$user_attr = array( 'id', 'kind', 'permalink', 'username', 'uri', 'permalink_url', 'avatar_url' );
-
-		foreach( $attr as $a ) {
-			$base->{$a} = '';
+		
+		// Cut whitespace from start of raw data
+		$whitespace = strspn($data, "\x09\x0A\x0D\x20");
+		if( $whitespace > 0 ) {
+			$data = substr( $data, $whitespace );
 		}
 
-		foreach( $user_attr as $a ) {
-			$user->{$a} = '';
+		// Get the number of episodes, image URL, and show name.  Prior to 2.3.28, we used SimpleXML
+		// always.  Some people don't have this library, so we have the SimplePie functions as a
+		// backup.  They should be the primary and only way, but I'm leaving in the old way just in
+		// case it's different for some people.  Probably remove the SimpleXML part in the future.
+		if( function_exists( 'simplexml_load_string' ) && function_exists( 'simplexml_load_file' ) ) {
+			if ( !empty ( $data ) )
+				$xml = simplexml_load_string( $data );	// URL file-access is disabled? HS1438
+
+			if ( empty( $xml ) || empty( $data ) )
+				$xml = simplexml_load_file( $url ); 	// Raw xml so we can fetch other data
+			$channel = $xml->channel;
+			$items = $channel->item;
+			$episode_number = count( $items );
+			$image_url = (string) $channel->image->url;
+			$show_name = (string) $channel->title;;
+		} else {
+			$episode_number = $rss->get_item_quantity();
+			$image_url = $rss->get_image_url();
+			$show_name = $rss->get_title();
 		}
-
-		$base->user = $user;
-
-		$channel = $xml->channel;
-		$items = $channel->item;
 
 		$tracks = array();
-
-		$episode_number = count( $items );
 		$i = 0;
 
 		if( !is_wp_error( $rss ) ) {
@@ -373,7 +434,7 @@ class SPP_Ajax_Feed {
 					}
 				}
 
-	 			$track = clone $base ;
+	 			$track = new StdClass;
 				$date = new DateTime( $item->get_date() );
 
 				$track->id = $i;
@@ -422,8 +483,11 @@ class SPP_Ajax_Feed {
 				}
 				
 				// Truncate the show notes for display
-				$maxLength = strlen( $track->tag_list ) > 0 ? 140 : 280;
-				$track->truncated_show_notes = self::truncate_show_notes( $track->description, $maxLength, 10 );
+				$track->truncated_show_notes_140 = self::truncate_show_notes( $track->description, 140, 10 );
+				$track->truncated_show_notes_280 = self::truncate_show_notes( $track->description, 280, 10 );
+				$track->truncated_show_notes_420 = self::truncate_show_notes( $track->description, 420, 10 );
+				$track->truncated_show_notes_560 = self::truncate_show_notes( $track->description, 560, 10 );
+				$track->truncated_show_notes_700 = self::truncate_show_notes( $track->description, 700, 10 );
 				
 				// HS4058 and 4428: The string '?#' was being appended to the enclosure's link
 				if( substr( $enclosure->link, -2) == "?#" ) {
@@ -437,8 +501,8 @@ class SPP_Ajax_Feed {
 				$track->download_url = $enclosure->link;
 				$track->duration = $enclosure->duration;
 				$track->created_at = $date->format( 'Y/m/d h:i:s O' );
+				$track->artwork_url = $image_url;
 				
-				$track->artwork_url = (string) $channel->image->url;
 				if ( stripos( $track->artwork_url, "http://i1.sndcdn.com" ) !== FALSE )
 					$track->artwork_url = str_replace( "http://i1.sndcdn.com", "//i1.sndcdn.com", $track->artwork_url );
 				
@@ -460,7 +524,7 @@ class SPP_Ajax_Feed {
 
 				}
 				
-				$track->show_name = (string) $channel->title;
+				$track->show_name = $show_name;
 				$track->episode_number = $episode_number;
 				$track->download_id = SPP_Download::save_download_id($enclosure->link);
 

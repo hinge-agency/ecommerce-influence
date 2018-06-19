@@ -1,12 +1,40 @@
 # Smart Podcast Player
 Requires at least: 3.9.4
-Tested up to: 4.7
-Stable tag: 2.2.0
+Tested up to: 4.9
+Stable tag: 2.4.0
 Copyright: SPI Labs, LLC
 
 An audio player built for podcasters by podcasters.  Most web-based podcast players are dumb. Not this one.  The Smart Podcast Player is the best way to engage your listeners and grow your audience.
 
 ## Changelog
+
+### v2.4.0
+* Updated email capture feature for GDPR requirements
+* Improved loading performance of latest episode track player
+* Increased amount of show notes displayed in full player
+* Added support for RSS files with extra whitespace at start
+* Fix to RSS subscription link in full player
+* Fix to search functionality
+* Added fix for Squarespace feeds
+* Reduced database usage
+* Fix for some design issues in iOS
+* Added Finnish support and updated French translation
+
+### v2.3.0
+* New email list signup feature
+* Show notes take up more space in full player
+* Track player data retrieved preferentially from RSS feed
+* Download issue on Safari/iOS fixed
+* Added option to turn off track player marquee
+* Added option to hide tags/keywords
+* Added time-based callbacks to Javascript API
+* Better loading procedure on pages with multiple track players
+* Fix for themes that alter _.template's delimiters
+* Fix for Episode Details not appearing in full in mobile full player
+* Fixed for " characters in show name/artist name
+* Fix for running with the Beaver Builder plugin
+* Fix for the UX Editor in the Flatsome theme
+* Fix for track players where title is a number
 
 ### v2.2.0
 * New design and animation for play/pause button
