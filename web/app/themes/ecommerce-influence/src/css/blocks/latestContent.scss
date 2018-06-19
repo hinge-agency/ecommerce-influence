@@ -21,7 +21,7 @@
 }
 .latestContentHome__block-label{
 	position: absolute;
-	top: -21;
+	top: 0;
 	right: 15px;
 	z-index: 1;
 
@@ -38,6 +38,10 @@
 	line-height: px-to-ems(24,18);
 
 	text-transform: capitalize;
+
+	@include screen-lt(650){
+		top: -21px;
+	}
 
 	&--podcast{
 		background-color: $primary-yellow;
