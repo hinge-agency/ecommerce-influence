@@ -326,7 +326,7 @@
 
 	font-family: $brandon;
 	font-weight: 900;
-
+	z-index: 1;
 	font-size: px-to-ems(15);
 	color: white;
 	line-height: px-to-ems(15,16);
@@ -434,6 +434,7 @@
 .masthead__nav-responsive{
 	position: fixed;
 	left: 0;
+	top: 0;
 	padding-bottom: 50px;
 
 	width: 100%;
@@ -464,8 +465,9 @@
 	}
 }
 
+
 .masthead__nav-responsive-items{
-	margin-top: 10px;
+	margin-top: 70px;
 }
 .masthead__nav-responsive-items-item{
 	position: relative;
