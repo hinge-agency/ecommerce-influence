@@ -457,6 +457,7 @@ if (!class_exists('AddThisRegistrationFeature')) {
 
                 if (isset($result['data']['id'])) {
                     $result['success'] = true;
+                    $this->kissMetricsAlias($input['email']);
                 }
 
                 if (isset($result['data']['error'])) {
@@ -514,6 +515,7 @@ if (!class_exists('AddThisRegistrationFeature')) {
 
                 if (isset($result['data']['email']) == $input['email']) {
                     $result['success'] = true;
+                    $this->kissMetricsAlias($input['email']);
                 }
 
                 if (isset($result['data']['error'])) {
@@ -818,6 +820,31 @@ if (!class_exists('AddThisRegistrationFeature')) {
             }
 
             $this->printJsonResults($result);
+        }
+
+        /**
+         * KissMetrics aliasing for the pubId and user email
+         *
+         * @return null
+         */
+        private function kissMetricsAlias($email)
+        {
+            if (isset($_COOKIE["km_ai"])) {
+                $url = $this->globalOptionsObject->getDarkseidBaseUrl() . 'wordpress/aliasing';
+                $body = array(
+                    'email' => $email,
+                    'kmId' => $_COOKIE['km_ai']
+                );
+                $args = array(
+                    'headers' => array(
+                        'Content-Type' => 'application/json',
+                        'Accept' => 'application/json',
+                    ),
+                    'body' => json_encode($body),
+                    'timeout' => $this->requestTimeout,
+                );
+                $response = wp_remote_post($url, $args);
+            }
         }
     }
 }

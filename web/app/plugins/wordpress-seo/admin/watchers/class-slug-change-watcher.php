@@ -1,5 +1,9 @@
 <?php
-/** @package WPSEO\Admin\Watchers */
+/**
+ * WPSEO plugin file.
+ *
+ * @package WPSEO\Admin\Watchers
+ */
 
 /**
  * Class WPSEO_Slug_Change_Watcher
@@ -29,7 +33,7 @@ class WPSEO_Slug_Change_Watcher implements WPSEO_WordPress_Integration {
 	public function enqueue_assets() {
 		global $pagenow;
 
-		if ( ! in_array( $pagenow, array( 'edit.php' ), true )  ) {
+		if ( ! in_array( $pagenow, array( 'edit.php' ), true ) ) {
 			return;
 		}
 

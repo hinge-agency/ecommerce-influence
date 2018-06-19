@@ -24,6 +24,8 @@ class SPP_Admin_Settings {
 		register_setting( 'spp-player', 'spp_player_social' );
 		register_setting( 'spp-player-general', 'spp_player_general' );
 		register_setting( 'spp-player-defaults', 'spp_player_defaults' );
+		register_setting( 'spp-player-email', 'spp_player_email',
+				array( 'SPP_Admin_Settings', 'email_sanitize' ) );
 		register_setting( 'spp-player-advanced', 'spp_player_advanced' );
 		
 		add_options_page( 'Smart Podcast Player Settings', 'Smart Podcast Player', 'manage_options', 'spp-player', array( $this, 'settings_page' ) );
@@ -32,6 +34,23 @@ class SPP_Admin_Settings {
 
 	public function settings_page() {
 		require_once( SPP_ASSETS_PATH . 'views/settings.php' );
+	}
+	
+	public static function email_sanitize( $news_opts ) {
+		$checkbox_names = array(
+				'cta_request_first_name',
+				'cta_require_first_name',
+				'cta_request_last_name',
+				'cta_require_last_name',
+			);
+		foreach( $checkbox_names as $name ) {
+			if( isset( $news_opts[ $name ] ) && $news_opts[ $name ] === 'true' ) {
+				$news_opts[ $name ] = 'true';
+			} else {
+				$news_opts[ $name ] = 'false';
+			}
+		}
+		return $news_opts;
 	}
 
 	public function settings_sections() {
@@ -352,6 +371,21 @@ class SPP_Admin_Settings {
 	        'spp-player-defaults'
 	    );
 
+			add_settings_field(   
+			    'spp_player_defaults[show_tags]',
+			    'Show tags: ',
+			    array( $this, 'field_default_show_tags' ),
+			    'spp-player-defaults',
+			    'spp_player_defaults_dummy_section_episode_limit_help'
+			);
+
+		add_settings_section(  
+	        'spp_player_defaults_dummy_section_show_tags_help',
+	        '',
+	        array( $this, 'spp_player_defaults_dummy_section_show_tags_help_callback' ),
+	        'spp-player-defaults'
+	    );
+
 		add_settings_section(  
 			'spp_player_advanced_settings',
 			'',
@@ -405,11 +439,26 @@ class SPP_Admin_Settings {
 	    );
 
 			add_settings_field(   
+			    'spp_player_advanced[stp_data_source]',
+			    'Track player data source: ',
+			    array( $this, 'field_advanced_stp_data_source' ),
+			    'spp-player-advanced',
+			    'spp_advanced_dummy_section_debug_output_help'
+			);
+
+		add_settings_section(  
+	        'spp_advanced_dummy_section_stp_data_source_help',
+	        '',
+	        array( $this, 'spp_advanced_dummy_section_stp_data_source_help_callback' ),
+	        'spp-player-advanced'
+	    );
+
+			add_settings_field(   
 			    'spp_player_advanced[downloader]',
 			    'Download Method: ',
 			    array( $this, 'field_advanced_downloader' ),
 			    'spp-player-advanced',
-			    'spp_advanced_dummy_section_debug_output_help'
+			    'spp_advanced_dummy_section_stp_data_source_help'
 			);
 
 		add_settings_section(  
@@ -534,7 +583,7 @@ class SPP_Admin_Settings {
 	
 	public function spp_player_defaults_player_design_section_callback() {
 		echo '<p>For more on how to customize the look of your players, visit <a target="_blank" href="http://support.smartpodcastplayer.com/article/91-start-here-customize-the-smart-podcast-player"> this support article</a>.</p>'
-		   . '<h4>Colors and Image</h4><p>Watch <a target="_blank" href="http://support.smartpodcastplayer.com/article/91-start-here-customize-the-smart-podcast-player">this video</a> to see how you can customize different colors and themes.</p>';
+		   . '<h4>Colors and Image</h4><p>Check out <a target="_blank" href="http://support.smartpodcastplayer.com/article/91-start-here-customize-the-smart-podcast-player">this guide</a> to see how you can customize different colors and themes.</p>';
 	}
 	
 	public function spp_player_defaults_dummy_section_bg_color_callback() {
@@ -561,6 +610,10 @@ class SPP_Admin_Settings {
 		echo '<div class="spp-indented-option">Enter a number to limit the display to that many of your most recent episodes.</div>';
 	}
 	
+	public function spp_player_defaults_dummy_section_show_tags_help_callback() {
+		echo '<div class="spp-indented-option">Whether to display the episode&#39;s tags/keywords in the full Smart Podcast Player.</div>';
+	}
+	
 	public function spp_player_defaults_dummy_section_playback_timer_help_callback() {
 		echo "<div class='spp-indented-option'>Help me choose which to use [link]</div>";
 	}
@@ -575,6 +628,11 @@ class SPP_Admin_Settings {
 	
 	public function spp_advanced_dummy_section_debug_output_help_callback() {
 		echo "Show extra debugging output in the Javascript console.";
+	}
+	
+	public function spp_advanced_dummy_section_stp_data_source_help_callback() {
+		echo "The preferred source for artist and title information for the Smart Track Player.<br>";
+		echo "Setting the artist or title in a player's shortcode will override this.";
 	}
 	
 	public function spp_advanced_dummy_section_download_method_help_callback() {
@@ -724,6 +782,7 @@ class SPP_Admin_Settings {
         $settings = get_option( 'spp_player_defaults' );
 
         $val = isset( $settings['show_name'] ) ? $settings['show_name'] : '';
+		$val = str_replace( '"', '&#34;', $val );
 
         $html .= '<input type="text" name="spp_player_defaults[show_name]" class="spp-wider-left-column" value="' . $val . '" size="40" />';
         
@@ -738,6 +797,7 @@ class SPP_Admin_Settings {
         $settings = get_option( 'spp_player_defaults' );
 
         $val = isset( $settings['artist_name'] ) ? $settings['artist_name'] : '';
+		$val = str_replace( '"', '&#34;', $val );
 
         $html .= '<input type="text" name="spp_player_defaults[artist_name]" class="spp-wider-left-column" value="' . $val . '" size="40" />';
         
@@ -903,6 +963,22 @@ class SPP_Admin_Settings {
 
 	}
 
+	public function field_default_show_tags() {
+		
+		$html = '';
+        $settings = get_option( 'spp_player_defaults' );
+
+        $val = isset( $settings['show_tags'] ) ? $settings['show_tags'] : 'true';
+
+        $html .= '<select name="spp_player_defaults[show_tags]" class="spp-indent-ancestor-table">';
+        	$html .= '<option ' . selected( $val, 'true', false ) . ' value="true">Yes</option>';
+        	$html .= '<option value="false" ' . selected( $val, 'false', false ) . ' >No</option>';
+        $html .= '</select>';
+        
+		echo $html;
+
+	}
+
 	public function field_license_key() {
 		
 		$html = '';  
@@ -1004,6 +1080,23 @@ class SPP_Admin_Settings {
 
 	}
 
+	public function field_advanced_stp_data_source() {
+		
+		$html = '';  
+        
+        $settings = get_option( 'spp_player_advanced' );
+
+        $val = isset( $settings['stp_data_source'] ) ? $settings['stp_data_source'] : 'feed';
+
+        $html .= '<select name="spp_player_advanced[stp_data_source]">';
+        	$html .= '<option ' . selected( $val, 'feed', false ) . ' value="feed">RSS feed, then MP3 metadata (default)</option>';
+        	$html .= '<option value="mp3" ' . selected( $val, 'mp3', false ) . ' >MP3 metadata, then RSS feed</option>';
+        $html .= '</select>';
+        
+		echo $html;
+
+	}
+
 	public function field_advanced_downloader() {
 		
 		$html = '';  
@@ -1028,11 +1121,11 @@ class SPP_Admin_Settings {
         
         $settings = get_option( 'spp_player_advanced' );
 
-        $val = isset( $settings['css_important'] ) ? $settings['css_important'] : 'false';
+        $val = isset( $settings['css_important'] ) ? $settings['css_important'] : 'true';
 
         $html .= '<select name="spp_player_advanced[css_important]">';
         	$html .= '<option ' . selected( $val, 'true', false ) . ' value="true">Yes</option>';
-        	$html .= '<option value="false" ' . selected( $val, 'false', false ) . ' >No (Recommended)</option>';
+        	$html .= '<option value="false" ' . selected( $val, 'false', false ) . ' >No</option>';
         $html .= '</select>';
         
 		echo $html;

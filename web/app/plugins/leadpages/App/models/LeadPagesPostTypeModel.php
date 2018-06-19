@@ -1,6 +1,5 @@
 <?php
 
-
 namespace LeadpagesWP\models;
 
 use Leadpages\Pages\LeadpagesPages;
@@ -13,12 +12,14 @@ class LeadPagesPostTypeModel
      * @var currently unused
      */
     protected $html;
+
     /**
      * @var
      */
     private $PagesApi;
 
     public $LeadPageId;
+
     public $LeadpageXORId;
     /**
      * @var \LeadpagesWP\Admin\CustomPostTypes\LeadpagesPostType
@@ -34,7 +35,6 @@ class LeadPagesPostTypeModel
     public function saveLeadPageMeta($post_id, $post)
     {
         global $wpdb;
-        // check autosave
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return $post_id;
         }
@@ -98,14 +98,14 @@ class LeadPagesPostTypeModel
 
         }
 
-        update_post_meta($post_id, 'leadpages_slug', sanitize_text_field(trim($_POST['leadpages_slug'], '/')));
+        $slug = sanitize_text_field(trim($_POST['leadpages_slug'], '/'));
+        update_post_meta($post_id, 'leadpages_slug', $slug);
 
-        //save post name in meta for backwards compatibility
-        update_post_meta($post_id, 'leadpages_name', sanitize_text_field(trim($_POST['leadpages_name'], '/')));
-
+        // save post name in meta for backwards compatibility
+        $post_name = sanitize_text_field(trim($_POST['leadpages_name'], '/'));
+        update_post_meta($post_id, 'leadpages_name', $post_name);
         update_post_meta($post_id, 'leadpages_page_id', $this->LeadPageId);
         update_post_meta($post_id, 'leadpages_my_selected_page', $this->LeadpageXORId);
-
         update_post_meta($post_id, 'leadpages_post_type', $postType);
 
         /**

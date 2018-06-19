@@ -2,19 +2,30 @@
 /*	color, whether in the player defaults or the shortcode. */
 
 .smart-podcast-player.spp-color-(($color)) .spp-player-layout .spp-main-region .spp-main-view .spp-controls .spp-play-pause-circle .spp-play .spp-play-bar,
-.smart-track-player.stp-color-(($color))-(($background_color)) .spp-track-layer-1 .spp-playback-controls .spp-play-pause .spp-play .spp-play-bar {
+.smart-track-player.stp-color-(($color))-(($background_color)) .spp-track-layer-1 .spp-playback-controls .spp-play-pause .spp-play .spp-play-bar
+{
 	background-color: #(($play_pause_color)) (($importantStr));
 }
 
+.smart-podcast-player.spp-color-(($color)) .spp-player-layout .spp-main-region .spp-main-view .spp-top-matter .spp-artist-and-title .spp-news,
+.smart-track-player.stp-color-(($color))-(($background_color)) .spp-track-layer-3 .spp-news,
+.spp-news-overlay .spp-news-region .spp-news-layout .spp-news-basic-cta .spp-button-wrapper .spp-news-subscribe
+{
+	background-color: #(($email_button_bg_color)) (($importantStr));
+	color: #(($email_button_text_color)) (($importantStr));
+}
+
 .smart-podcast-player.spp-color-(($color)) .spp-player-layout .spp-playlist-region .spp-track-list .spp-track-row .spp-eq-svg,
-.smart-podcast-player.spp-color-(($color)) .spp-player-layout .spp-playlist-region .spp-track-list .spp-track-row .spp-play-svg {
+.smart-podcast-player.spp-color-(($color)) .spp-player-layout .spp-playlist-region .spp-track-list .spp-track-row .spp-play-svg
+{
 	fill: #(($color)) (($importantStr));
 }
 
 .smart-podcast-player.spp-color-(($color)) .spp-player-layout .spp-main-region .spp-main-view .spp-progress-bar .spp-progress-played,
 .smart-podcast-player.spp-color-(($color)) .spp-player-layout .spp-main-region .spp-main-view .spp-progress-bar .spp-seek-time,
 .smart-track-player.stp-color-(($color))-(($background_color)) .spp-track-layer-2 .spp-progress-bar .spp-progress-played,
-.smart-track-player.stp-color-(($color))-(($background_color)) .spp-track-layer-2 .spp-progress-bar .spp-seek-time {
+.smart-track-player.stp-color-(($color))-(($background_color)) .spp-track-layer-2 .spp-progress-bar .spp-seek-time
+{
 	background-color: #(($color)) (($importantStr));
 }
 
@@ -23,11 +34,13 @@
 .smart-podcast-player.spp-color-(($color)) .spp-player-layout .spp-main-region .spp-main-view .spp-progress-bar .spp-seek-time,
 .smart-track-player.stp-color-(($color))-(($background_color)) .spp-track-layer-2 .spp-progress-bar .spp-time-elapsed,
 .smart-track-player.stp-color-(($color))-(($background_color)) .spp-track-layer-2 .spp-progress-bar .spp-time-remaining,
-.smart-track-player.stp-color-(($color))-(($background_color)) .spp-track-layer-2 .spp-progress-bar .spp-seek-time {
+.smart-track-player.stp-color-(($color))-(($background_color)) .spp-track-layer-2 .spp-progress-bar .spp-seek-time
+{
 	color: #((FFF; FFF; 000)) (($importantStr));
 }
 
 .smart-podcast-player.spp-color-(($color)) .spp-show-notes a,
-.smart-podcast-player.spp-color-(($color)) .spp-truncated-show-notes a {
+.smart-podcast-player.spp-color-(($color)) .spp-truncated-show-notes a
+{
 	color: #(($color)) (($importantStr));
 }

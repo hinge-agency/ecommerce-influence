@@ -53,21 +53,25 @@ class LeadpageType
      * Modify meta 'leadpages-served-by' before caching/output html from WP
      *
      * ex. <meta name="leadpages-served-by" content=""/>
-     * 
+     *
      * @param string $html      HTML for leadpage to modify
      * @param string $new_value content value of meta served-by tag
-     * 
+     *
      * @todo generalize the dom selector for reuse on other tags.
      *
      * @return string html
      */
     public static function modifyMetaServedBy($html, $new_value = 'wordpress')
     {
+        if (!class_exists('\DOMDocument')) {
+            return $html;
+        }
+
         libxml_use_internal_errors(true);
         $dom = new \DOMDocument('1.0', 'UTF-8');
-        $dom->strictErrorChecking = false; 
+        $dom->strictErrorChecking = false;
         $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
-        libxml_clear_errors(); 
+        libxml_clear_errors();
 
         $xpath = new \DOMXPath($dom);
         $elem = $xpath->query("//meta[@name='leadpages-served-by']")->item(0);
@@ -78,13 +82,13 @@ class LeadpageType
             $dom = static::appendElementToHeadTag($dom, $elem);
         }
 
-        return '<!DOCTYPE html>' . PHP_EOL . $dom->saveHTML($dom->documentElement) . PHP_EOL . PHP_EOL;    
+        return '<!DOCTYPE html>' . PHP_EOL . $dom->saveHTML($dom->documentElement) . PHP_EOL . PHP_EOL;
     }
 
     /**
      * Helper to fetch value of a meta tag in the dom
      *
-     * @param DOMDocument $dom 
+     * @param DOMDocument $dom
      * @param string      $name meta tag name attribute
      *
      * @return string content of <meta> tag
@@ -130,15 +134,16 @@ class LeadpageType
     }
 
     /**
-     * Render html procedure 
+     * Render html procedure
      *
-     * Hide the implementation details and allow for 
-     * a single point to make global changes to html 
+     * Hide the implementation details and allow for
+     * a single point to make global changes to html
      * from the plugin.
-     * 
-     * @param string $html
+     *
+     * @param string $html page html
      * @param int    $status_code 200 | 404
      *
+     * @return string
      */
     public static function renderHtml($html, $status_code = 200)
     {
@@ -161,4 +166,5 @@ class LeadpageType
         // @todo something cleaner than die()
         die();
     }
+
 }

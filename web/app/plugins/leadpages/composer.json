@@ -8,8 +8,7 @@
         "leadpages/leadboxes": "^1.2",
         "icanboogie/inflector": "^1.4",
         "twig/twig": "~1.0",
-        "symfony/polyfill-mbstring": "^1.4",
-        "nesbot/carbon": "^1.22"
+        "symfony/polyfill-mbstring": "^1.4"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",

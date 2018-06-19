@@ -64,6 +64,9 @@ class SPP_Admin_Core {
 			// Load admin style sheet and JavaScript.
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+			
+			// Pass the settings variable to JS
+			add_action( 'admin_head', array( 'SPP_Admin_Core', 'output_settings_var' ) );
 
 			// add new buttons
 			add_filter('mce_buttons', array( $this, 'register_buttons' ) );
@@ -139,12 +142,20 @@ class SPP_Admin_Core {
 		wp_localize_script( $this->plugin_slug . '-admin-script',
 				'Smart_Podcast_Player_Admin',
 				array('licensed' => $plugin->is_paid_version()));
-				
-		wp_localize_script( $this->plugin_slug . '-admin-script',
-				'smart_podcast_player_user_settings',
-				get_option( 'spp_player_defaults' ));
 
 
+	}
+	
+	public static function output_settings_var() {
+		if ( function_exists( 'json_encode' ) ) {
+			?>
+			<script type='text/javascript'>
+				var smart_podcast_player_user_settings = 
+				<?php echo json_encode(get_option( 'spp_player_defaults' ) ); ?>;
+				var SPP_ajax_url = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
+			</script>
+			<?php
+		}
 	}
 
 	public function settings() {
@@ -175,6 +186,11 @@ class SPP_Admin_Core {
 		$options[ 'sslverify' ] = false;
 		return $options;
 	}
+	// Filter to add the site's URL to the plugin update checker
+	public static function puc_filter_add_site_url( $query_args ) {
+		$query_args[ 'site_url' ] = site_url();
+		return $query_args;
+	}
 	
 	// Performs an update check.  Returns whether the check completed successfully,
 	// regardless of whether updates are available.  This also serves as a license
@@ -187,7 +203,7 @@ class SPP_Admin_Core {
 				return false;
 		}
 		
-		$update_server = 'https://smartpodcastplayer.com';
+		$update_server = 'https://my.smartpodcastplayer.com';
 		if( ( $util_opt = get_option( 'spp_util_general' ) )
 				&& isset( $util_opt[ 'update_server' ] )
 				&& defined( 'ABSPATH' )
@@ -206,6 +222,7 @@ class SPP_Admin_Core {
 			24
 		);
 		$puc->addHttpRequestArgFilter( array( 'SPP_Admin_Core', 'puc_filter' ) );
+		$puc->addQueryArgFilter( array( 'SPP_Admin_Core', 'puc_filter_add_site_url' ) );
 		if( current_user_can( 'update_plugins' ) ) {
 			$puc->maybeCheckForUpdates();
 		}
@@ -231,8 +248,8 @@ class SPP_Admin_Core {
 	}
 
 	public function register_tinymce_javascript( $plugin_array ) {
-	   $plugin_array['spp'] = SPP_PLUGIN_URL . '/assets/js/spp-mce/spp.js' . '?v=' . SPP_Core::VERSION;
-	   $plugin_array['stp'] = SPP_PLUGIN_URL . '/assets/js/spp-mce/stp.js' . '?v=' . SPP_Core::VERSION;
+	   $plugin_array['spp'] = SPP_PLUGIN_URL . 'assets/js/spp-mce/spp.js' . '?v=' . SPP_Core::VERSION;
+	   $plugin_array['stp'] = SPP_PLUGIN_URL . 'assets/js/spp-mce/stp.js' . '?v=' . SPP_Core::VERSION;
 	   return $plugin_array;
 	}
 
@@ -253,8 +270,8 @@ class SPP_Admin_Core {
 	// inlcude the js for tinymce
 	public function fb_add_tinymce_plugin( $plugin_array ) {
 
-	    $plugin_array['spp'] = SPP_PLUGIN_URL . '/assets/js/spp-mce/spp.js' . '?v=' . SPP_Core::VERSION;
-	    $plugin_array['stp'] = SPP_PLUGIN_URL . '/assets/js/spp-mce/stp.js' . '?v=' . SPP_Core::VERSION;
+	    $plugin_array['spp'] = SPP_PLUGIN_URL . 'assets/js/spp-mce/spp.js' . '?v=' . SPP_Core::VERSION;
+	    $plugin_array['stp'] = SPP_PLUGIN_URL . 'assets/js/spp-mce/stp.js' . '?v=' . SPP_Core::VERSION;
 	    
 	    return $plugin_array;
 	}
@@ -283,6 +300,27 @@ class SPP_Admin_Core {
 			echo '.spp-color-picker .wp-picker-container a { margin: 0; }' . "\n\t";
 			echo 'i.mce-i-stp-icon { background: transparent url("' . SPP_PLUGIN_URL . 'assets/images/stp-icon.png" ) 0 0 no-repeat; background-size: 100%; }' . "\n\t";
 			echo 'i.mce-i-spp-icon { background: transparent url("' . SPP_PLUGIN_URL . 'assets/images/spp-icon.png" ) 0 0 no-repeat; background-size: 100%; }' . "\n\t";
+			echo ".spp_email_portal_options { \n";
+			echo "\tmargin: 4px;\n";
+			echo "\tfont-size: 18px;\n";
+			echo "\tfont-weight: bold;\n";
+			echo "}\n";
+			echo ".spp_email_portal_options select { \n";
+			echo "\tfont-size: inherit;\n";
+			echo "\tfont-weight: inherit;\n";
+			echo "\theight: inherit;\n";
+			echo "\margin-left: inherit;\n";
+			echo "}\n";
+			echo ".smart-podcast-player-settings fieldset { \n";
+			echo "\t\tdisplay: inline-block;\n";
+			echo "\t\tborder: 2px groove #CCC;\n";
+			echo "\t\tmargin: 2px;\n";
+			echo "\t\tpadding: 0 0.5em;\n";
+			echo "\t}\n";
+			echo ".smart-podcast-player-settings legend { \n";
+			echo "\t\tfont-size: 16px;\n";
+			echo "\t\tfont-weight: bold;\n";
+			echo "\t}\n";
 		echo '</style>';
 
 	}

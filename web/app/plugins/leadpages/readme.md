@@ -4,6 +4,20 @@
 A WordPress plugin to easily use your Leadpages pages and Leadboxes inside your WordPress site.
 
 ***Change Log***
+* 2.1.6.21
+    * Removes Carbon library
+    * Removes listing cache due to sped up backend
+
+* 2.1.6.20
+    * Fixes for duplicate split test options in drop down
+
+* 2.1.6.19
+    * Updated pages library
+
+* 2.1.6.18
+    * Fix issue with failing to fetch split tests
+    * Fix dropdown to correctly select the relevent page
+    * General bug fixes
 
 * 2.1.6.17
     * Fix problem with auto-slugs on edit page populating the default slug
@@ -32,7 +46,7 @@ A WordPress plugin to easily use your Leadpages pages and Leadboxes inside your 
 
 * 2.1.6.12
     * Fix for list elements with bold text, new lines from DOMDocument
-    * Fix for specific Leadbox set on static homepage not displayed 
+    * Fix for specific Leadbox set on static homepage not displayed
 
 * 2.1.6.11
     * Fix for `<doctype>` getting stripped off by DOMDocument
@@ -42,10 +56,10 @@ A WordPress plugin to easily use your Leadpages pages and Leadboxes inside your 
 
 * 2.1.6.9
     * Fixed UTF-8 character encoding issue with DOMDocument
-    * Updated plugin login screen 
+    * Updated plugin login screen
 
 * 2.1.6.8
-    * Fix for Leadbox shortcode 
+    * Fix for Leadbox shortcode
     * Replace <meta> served-by attribute for v2 plugin usage to report correctly in WP usage metrics
 
 * 2.1.6.7
@@ -66,7 +80,7 @@ A WordPress plugin to easily use your Leadpages pages and Leadboxes inside your 
 
 * 2.1.6.1
    * Updated cron job to check status of users account to ensure that the response code is 200
-    
+
    and the profiles is a valid index of response
    * Added WordPress cert to all https calls to help mitigate ssl erros
 
@@ -75,15 +89,15 @@ A WordPress plugin to easily use your Leadpages pages and Leadboxes inside your 
 
 * 2.1.5.6
     * is_front_page returning errors with some sites static front page setups. Silenced errors with @is_front_page
-    
+
 * 2.1.5.5
     * Changed update command for updating from version 1 to version 2 to ensure it runs properly
-     
+
 * 2.1.5.4
     * Changed WelcomeGate to only display on home and front pages
 
 * 2.1.5.3
-    * Fixed issue where a exit drag and drop leadbox would not save if a timed 
+    * Fixed issue where a exit drag and drop leadbox would not save if a timed
     drag and drop box did not exist.
     * Fixed issue with plugin not showing drag and drop leadboxes
 
@@ -91,7 +105,7 @@ A WordPress plugin to easily use your Leadpages pages and Leadboxes inside your 
     *  Fixed issue where radio button for All pages for timed leadboxes
     would not stay checked unless you had all pages for exit leadboxes checked as well.
     * Fixed issue with Leadboxes showing on every page even if you had it marked to show only on posts or pages
-    
+
 * 2.1.5.1
     * Fixed issue with composer.json for Auth component
 
@@ -101,14 +115,14 @@ A WordPress plugin to easily use your Leadpages pages and Leadboxes inside your 
 * 2.1.4.6
     * Fix for page load slowness. Had to store the new page api id for pages created with old plugin
     * Allow pages with customer permalinks of something like /blog/pagename to load a leadpages with just pagename
-    
+
 * 2.1.4.5
     * Fixed issue where WelcomeGate pages would not allow a feed to be viewed
     * Fixed issue where a search page would return a Homepage Leadpage if it was setup.
     * Fix for Auto Draft showing up as url in Leadpage listing in admin
     * Fix for trying to resave an existing page shows a slug already exists error
 
-* 2.1.4.4 
+* 2.1.4.4
     * Drag and Drop Leadboxes in the Global Leadbox section.
     * Split Tested pages cookies have been added to track properly
     * Fix for 404 pages taking over the homepage
@@ -122,7 +136,7 @@ A WordPress plugin to easily use your Leadpages pages and Leadboxes inside your 
     * Leadpages now work with all permalink structures including custom
     * Updated to latest version of Leadpages Auth, Pages, and Leadboxes to handle ConnectExpcetion in Guzzle for curl errors
 
-* 2.1.2 
+* 2.1.2
      * Added support for 32 bit systems for UUID generation
 
 

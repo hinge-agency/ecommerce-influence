@@ -4,14 +4,15 @@ $tabs = array(
   'general' => array( 'label' => 'General', 'settings' => 'spp-player-general' ), 
   'soundcloud' => array( 'label' => 'SoundCloud', 'settings' => 'spp-player-soundcloud' ),
   'defaults' => array( 'label' => 'Player Defaults', 'settings' => 'spp-player-defaults' ),
-  'advanced' => array( 'label' => 'Advanced', 'settings' => 'spp-player-advanced'  
-) );
+  'news' => array( 'label' => 'Email Integration', 'settings' => 'spp-player-email' ),
+  'advanced' => array( 'label' => 'Advanced', 'settings' => 'spp-player-advanced'),
+);
+
 
 $current_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET['tab'] : 'general';
 
 ?>
-
-<div class="wrap settings-<?php echo $current_tab; ?>">
+<div class="wrap settings-<?php echo $current_tab; ?> smart-podcast-player-settings">
 	<?php
 	if( ! SPP_Core::is_paid_version() ) {
 	?>
@@ -19,6 +20,9 @@ $current_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) 
 		<p style="line-height: 30px;"><?php _e( 'Please enter your Smart Podcast Player license key to get updates and support! <a href="' . SPP_SETTINGS_URL . '" class="button" style="float: right;">Go to Settings</a>', 'smart-podcast-player' ); ?></p>
 	</div>
 	<?php } ?>
+	<div class="notice notice-info">
+		<p>The recent enactment of the European Union's General Data Protection Regulation (GDPR) has prompted us to make changes to our Email Integration feature and you may need to update your settings. Read about the changes here: <a href="https://support.smartpodcastplayer.com/article/157-email-capture" target="_blank">https://support.smartpodcastplayer.com/article/157-email-capture</a></p>
+	</div>
 
   <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
@@ -53,6 +57,17 @@ $current_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) 
 	  </table>
 	</form>
   <?php }
+  
+  if( $current_tab == 'news' ) { ?>
+
+	<form method="POST" action="options.php">
+		<?php settings_fields( $tabs[ $current_tab ]['settings'] ); ?>
+		<?php include 'settings_news.php' ?>
+		<?php submit_button(); ?>
+	</form>
+	<?php
+  
+  } else {
 
 	// For the license key (the 'general' tab), we need to do an extra action on submit,
 	// so we do some custom inputs.  Otherwise, use the settings API for standard input fields.
@@ -69,7 +84,9 @@ $current_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) 
 	do_settings_sections( $tabs[ $current_tab ]['settings'] );
 	submit_button();
 	
-	} ?>
+	}
+	
+  }?>
 
   </form>
 

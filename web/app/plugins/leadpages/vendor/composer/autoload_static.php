@@ -8,8 +8,8 @@ class ComposerStaticInit992fdebb08c02c905beb24c817d4c26d
 {
     public static $files = array (
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '603ce470d3b0980801c7a6185a3d6d53' => __DIR__ . '/..' . '/icanboogie/inflector/lib/helpers.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -21,7 +21,6 @@ class ComposerStaticInit992fdebb08c02c905beb24c817d4c26d
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Component\\Translation\\' => 30,
         ),
         'R' => 
         array (
@@ -45,10 +44,6 @@ class ComposerStaticInit992fdebb08c02c905beb24c817d4c26d
             'GuzzleHttp\\Ring\\' => 16,
             'GuzzleHttp\\' => 11,
         ),
-        'C' => 
-        array (
-            'Carbon\\' => 7,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -63,10 +58,6 @@ class ComposerStaticInit992fdebb08c02c905beb24c817d4c26d
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'Symfony\\Component\\Translation\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/translation',
         ),
         'React\\Promise\\' => 
         array (
@@ -107,10 +98,6 @@ class ComposerStaticInit992fdebb08c02c905beb24c817d4c26d
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
-        ),
-        'Carbon\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
     );
 

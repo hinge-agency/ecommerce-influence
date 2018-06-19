@@ -2,6 +2,9 @@
     tinymce.PluginManager.add( 'spp', function( editor, url ) {
 		
 		// Shorter name for the default options from the settings page
+		if( typeof smart_podcast_player_user_settings === 'undefined' ) {
+			return;
+		}
 		var def = smart_podcast_player_user_settings;
 
         // Add a button that opens a window
