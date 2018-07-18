@@ -60,7 +60,7 @@ function add_drift()
       echo"<!-- end: Drift Code. -->\n";
 
       // Optional
-      if ( esc_attr( $options['drift_identify'] ) == "on" ){
+      if ( ! empty ( $options['drift_identify'] ) && esc_attr( $options['drift_identify'] ) == "on" ){
         get_drift_identify();
       }
 

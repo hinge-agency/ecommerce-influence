@@ -7,7 +7,7 @@ var environments = {
   'uat':          'https://www-uat.addthis.com/darkseid',
   'test':         'https://www-test.addthis.com/darkseid',
   'dev':          'https://www-dev.addthis.com/darkseid',
-  'local':        'http://www-local.addthis.com/darkseid',
+  'local':        'http://www-local.addthis.com:8019/darkseid',
   'jenkinsdev':   'http://ha-dev-www.clearspring.local/darkseid',
   'jenkinstest':  'http://ha-test-www.clearspring.local/darkseid'
 };
@@ -470,6 +470,7 @@ describe('WordPress registration process on new account ', function() {
       'username': username,
       'email': username,
       'plainPassword': password,
+      'country': 'US',
       'subscribedToNewsletter': true,
       'profileType': 'wp',
       'source': pluginPco,
@@ -2430,41 +2431,6 @@ describe('Multi-tool support (new consolidated PCO) for Share Tools', function()
       expect(toolSettings).to.be.a('object');
       expect(toolSettings.id).to.equal(legacyMobileToolbar.id);
       done(err, res);
-    });
-  });
-});
-
-describe('Look up subscription type for PRO and not Pro pubids ', function() {
-  this.timeout(15000);
-  var basicPubId;
-  var proPubId = 'atblog';
-
-  it('confirms pubid ' + proPubId + ' has a PRO subscription', function(done) {
-    request
-    .get('/wordpress/site/' + proPubId)
-    .expect(200)
-    .end(function(err, res) {
-      expect(res.body).to.be.a('object');
-      expect(res.body.subscription).to.be.a('object');
-      expect(res.body.subscription.edition).to.be.a('string');
-      expect(res.body.subscription.edition).to.equal('PRO');
-      done(err, res);
-    });
-  });
-
-  it('confirms a new pubis does not have a PRO subscription', function(done) {
-    getNewProfile('wp', function(aPubId, anApiKey) {
-      basicPubId = aPubId;
-      request
-      .get('/wordpress/site/'+basicPubId)
-      .expect(200)
-      .end(function(err, res) {
-        expect(res.body).to.be.a('object');
-        expect(res.body.subscription).to.be.a('object');
-        expect(res.body.subscription.edition).to.be.a('string');
-        expect(res.body.subscription.edition).to.not.equal('PRO');
-        done(err, res);
-      });
     });
   });
 });
