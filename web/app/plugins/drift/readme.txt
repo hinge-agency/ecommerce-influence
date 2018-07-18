@@ -1,17 +1,17 @@
 === Drift ===
+
 Contributors: Drift
-
 Tags: drift, live chat, chat, communication, sales, marketing, announcements, talk to customers, customer feedback, feedback, chat plugin, free, free chat, chatra, livechat, slack, intercom, hubspot, salesforce, zapier, hellobar, hello bar, popup, ontraport, pardot, klaviyo, popup, exit intent, growth, subscribers, subscription, email form,  analytics,  widget, lightbox, inbound marketing, welcome mat, landing pagelivechat, olark, boldchat, online chat, online support, in-app chat, instant message, helpdesk, php live chat, snapengage, support software, website chat, wordpress chat, wordpress live chat, wordpress live chat plugin, zendesk, zopim, zopim live chat, tawk, tawk.to, tawkto, jivosite, snapengage,chat widget
-
-Drift enables you to chat with your website visitors, increase sales and collect feedback for Free.
-
 Requires at least: 3.4
-Tested up to: 4.6.1
-Stable tag: 1.8.3
+Stable tag: 1.8.4
+Version: 1.8.4
+Tested up to: 4.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Drift is the 100% free way used by over 10,000 businesses to talk to their leads and customers in real-time, from anywhere. Try it now!
+
+Drift enables you to chat with your website visitors, increase sales and collect feedback for free.
 
 == Description ==
 
@@ -122,6 +122,10 @@ Step-by-step Guide:
 * Finally, make full use of our Dashboard to manage your chat widget.
 
 == Changelog ==
+
+= 1.8.4 =
+* Cleanup
+* Existence check for drift_identify
 
 = 1.8.3 =
 * Cleanup
