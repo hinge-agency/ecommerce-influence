@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="83fc753a-ef89-4e37-b084-cabe18f21823" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/app/themes/ecommerce-influence/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/app/themes/ecommerce-influence/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/app/themes/ecommerce-influence/assets/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/web/app/themes/ecommerce-influence/assets/css/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/app/themes/ecommerce-influence/assets/css/style.css.min.map" beforeDir="false" afterPath="$PROJECT_DIR$/web/app/themes/ecommerce-influence/assets/css/style.css.min.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/app/themes/ecommerce-influence/src/css/common/masthead.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web/app/themes/ecommerce-influence/src/css/common/masthead.scss" afterDir="false" />
-    </list>
+    <list default="true" id="83fc753a-ef89-4e37-b084-cabe18f21823" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,47 +14,79 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/node_modules/gulp-autoprefixer/index.js">
+      <file leaf-file-name="archive.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/archive.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+            <state relative-caret-position="1140">
+              <caret line="90" column="6" selection-start-line="90" selection-start-column="6" selection-end-line="90" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
+      <file leaf-file-name="single.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/single.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="390">
+              <caret line="35" column="105" selection-start-line="35" selection-start-column="105" selection-end-line="35" selection-end-column="105" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="latestContent.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/src/css/blocks/latestContent.scss">
+      <file leaf-file-name="page.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+            <state relative-caret-position="270">
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="masthead.scss" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/src/css/common/masthead.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="472" column="23" lean-forward="true" selection-start-line="472" selection-start-column="23" selection-end-line="472" selection-end-column="23" />
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
+              <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/assets/css/style.css">
+      <file leaf-file-name="page--home.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page--home.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="author.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/author.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4790" />
+            <state relative-caret-position="315">
+              <caret line="31" selection-start-line="31" selection-end-line="31" />
+            </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="page--allPosts.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page--allPosts.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="profiles.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/views/components/blocks/profiles.twig">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="stories-carousel.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/views/components/blocks/stories-carousel.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="35" column="63" lean-forward="true" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/package.json">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -120,9 +146,6 @@
       </GulpfileState>
     </gulpfiles>
     <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/web/app/themes/ecommerce-influence/node_modules" />
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
@@ -705,10 +728,10 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1552" />
-    <option name="y" value="23" />
-    <option name="width" value="2025" />
-    <option name="height" value="1317" />
+    <option name="x" value="1440" />
+    <option name="y" value="563" />
+    <option name="width" value="1440" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -716,7 +739,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -773,6 +795,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -833,24 +856,22 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1671000" />
+    <option name="totallyTimeSpent" value="2661000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1552" y="23" width="2025" height="1317" extended-state="0" />
+    <frame x="1440" y="563" width="1440" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.24060151" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32914287" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.23778072" />
       <window_info anchor="right" id="Remote Host" order="3" />
-      <window_info id="Gulp" order="2" sideWeight="0.5038504" side_tool="true" visible="true" weight="0.22844176" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49614963" visible="true" weight="0.22844176" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.38340485" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -884,6 +905,198 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/views/components/blocks/stories-carousel.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/archive.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="90" column="6" selection-start-line="90" selection-start-column="6" selection-end-line="90" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/single.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="35" column="105" selection-start-line="35" selection-start-column="105" selection-end-line="35" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page--home.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/author.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page--allPosts.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page--about.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/archive.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="49" column="16" lean-forward="true" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/single.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="35" column="105" lean-forward="true" selection-start-line="35" selection-start-column="105" selection-end-line="35" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page--home.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/author.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page--allPosts.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page--about.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/views/html-header.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/views/html-footer.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/views/templates/about.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/views/templates/episode.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/views/components/blocks/pages-sidebar.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-185" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/views/templates/posts.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page--about.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/archive.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="90" column="6" selection-start-line="90" selection-start-column="6" selection-end-line="90" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/single.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="35" column="105" selection-start-line="35" selection-start-column="105" selection-end-line="35" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page--home.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/author.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/page--allPosts.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/views/components/blocks/profiles.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/views/components/blocks/stories-carousel.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="63" lean-forward="true" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/app/themes/ecommerce-influence/node_modules/gulp-autoprefixer/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
