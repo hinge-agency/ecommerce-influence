@@ -415,7 +415,7 @@ if (!class_exists('AddThisRegistrationFeature')) {
          */
         public function printCreateAccountProxy()
         {
-            $required = array('email', 'password', 'newsletter');
+            $required = array('email', 'password', 'country', 'newsletter');
             $input = $this->jsonSetup($required);
             $this->checkForEditPermissions();
 
@@ -425,6 +425,7 @@ if (!class_exists('AddThisRegistrationFeature')) {
                 'username'               => $input['email'],
                 'email'                  => $input['email'],
                 'plainPassword'          => $input['password'],
+                'country'                => $input['country'],
                 'subscribedToNewsletter' => (int)$input['newsletter'],
                 'profileType'            => 'wp',
                 'source'                 => 'wpwt',
