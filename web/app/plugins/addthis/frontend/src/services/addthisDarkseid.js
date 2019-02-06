@@ -14,14 +14,10 @@ angular.module('addthisDarkseid').factory('$darkseid', function(
     return $wordpress.globalOptions.get().then(function(globalOptions) {
       var url;
       if (globalOptions.debug_enable === true &&
-        globalOptions.darkseid_environment.length > 0
+        globalOptions.darkseid_environment.legnth > 0
       ) {
         var env = globalOptions.darkseid_environment;
-        if (env === 'local') {
-          url = 'http://www-local.addthis.com:8019/darkseid/';
-        } else {
-          url = 'http://www-' + env  +'.addthis.com/darkseid/';
-        }
+        url = 'https://www-' + env  +'.addthis.com/darkseid/';
       } else {
         url = 'https://www.addthis.com/darkseid/';
       }
@@ -606,6 +602,20 @@ angular.module('addthisDarkseid').factory('$darkseid', function(
 
     boostConfigsObject.promise = deferred.promise;
     return boostConfigsObject.promise;
+  };
+
+  darkseid.isProProfile = function() {
+    return darkseid.getBoostConfigs(true).then(function(fromBoost) {
+      if (fromBoost !== null &&
+        angular.isDefined(fromBoost.subscription) &&
+        angular.isDefined(fromBoost.subscription.edition) &&
+        fromBoost.subscription.edition === 'PRO'
+      ) {
+        return true;
+      }
+
+      return false;
+    });
   };
 
   darkseid.getToolsByWidgetId = function() {

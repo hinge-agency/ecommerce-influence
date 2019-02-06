@@ -117,9 +117,8 @@ class acf_field_time_picker extends acf_field {
 	
 	function render_field_settings( $field ) {
 		
-		// vars
-		$g_i_a = date('g:i a');
-		$H_i_s = date('H:i:s');
+		// global
+		global $wp_locale;
 		
 		
 		// display_format
@@ -130,9 +129,8 @@ class acf_field_time_picker extends acf_field {
 			'name'			=> 'display_format',
 			'other_choice'	=> 1,
 			'choices'		=> array(
-				'g:i a'	=> '<span>' . $g_i_a . '</span><code>g:i a</code>',
-				'H:i:s'	=> '<span>' . $H_i_s . '</span><code>H:i:s</code>',
-				'other'	=> '<span>' . __('Custom:','acf') . '</span>'
+				'g:i a'	=> date('g:i a'),
+				'H:i:s'	=> date('H:i:s'),
 			)
 		));
 				
@@ -145,9 +143,8 @@ class acf_field_time_picker extends acf_field {
 			'name'			=> 'return_format',
 			'other_choice'	=> 1,
 			'choices'		=> array(
-				'g:i a'	=> '<span>' . $g_i_a . '</span><code>g:i a</code>',
-				'H:i:s'	=> '<span>' . $H_i_s . '</span><code>H:i:s</code>',
-				'other'	=> '<span>' . __('Custom:','acf') . '</span>'
+				'g:i a'	=> date('g:i a'),
+				'H:i:s'	=> date('H:i:s'),
 			)
 		));
 		

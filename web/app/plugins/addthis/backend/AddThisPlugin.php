@@ -185,38 +185,6 @@ if (!class_exists('AddThisPlugin')) {
         }
 
         /**
-         * Send activation metrics to darkseid
-         *
-         * @return null
-         */
-        public function activate()
-        {
-            $pluginInfo = $this->getAddThisPluginInfo();
-            $url = $this->globalOptionsObject->getDarkseidBaseUrl() . 'wordpress/'. 'activation';
-            $body = array(
-                'cmsName' => $pluginInfo['cms_name'],
-                'cmsVersion' => $pluginInfo['cms_version'],
-                'pluginName' => $pluginInfo['plugin_name'],
-                'pluginVersion' => $pluginInfo['plugin_version'],
-                'pluginMode' => $pluginInfo['plugin_mode'],
-                'phpVersion' => $pluginInfo['php_version'],
-                'homepageUrl' => $this->globalOptionsObject->getHomepageUrl(),
-                'pubId' => $this->globalOptionsObject->getUsableProfileId()
-            );
-            $args = array(
-                'headers' => array(
-                    'Content-Type' => 'application/json',
-                    'Accept'       => 'application/json',
-                ),
-                'body' => json_encode($body),
-                'timeout' => 5,
-            );
-            $response = wp_remote_post($url, $args);
-        }
-
-        /**
-         * Send deactivation metrics to darkseid
-         *
          * Marks each feature enabled by this plugin as disabled -- if another
          * plugin also enables any of these feature, then it'll get enabled the
          * next time that plugin bootraps
@@ -225,28 +193,6 @@ if (!class_exists('AddThisPlugin')) {
          */
         public function deactivate()
         {
-            $pluginInfo = $this->getAddThisPluginInfo();
-            $url = $this->globalOptionsObject->getDarkseidBaseUrl() . 'wordpress/'. 'deactivation';
-            $body = array(
-                'cmsName' => $pluginInfo['cms_name'],
-                'cmsVersion' => $pluginInfo['cms_version'],
-                'pluginName' => $pluginInfo['plugin_name'],
-                'pluginVersion' => $pluginInfo['plugin_version'],
-                'pluginMode' => $pluginInfo['plugin_mode'],
-                'phpVersion' => $pluginInfo['php_version'],
-                'homepageUrl' => $this->globalOptionsObject->getHomepageUrl(),
-                'pubId' => $this->globalOptionsObject->getUsableProfileId()
-            );
-            $args = array(
-                'headers' => array(
-                    'Content-Type' => 'application/json',
-                    'Accept'       => 'application/json',
-                ),
-                'body' => json_encode($body),
-                'timeout' => 5,
-            );
-            $response = wp_remote_post($url, $args);
-
             $gooConfigs = $this->globalOptionsObject->getConfigs();
 
             foreach ($this->features as $feature => $info) {
@@ -257,6 +203,7 @@ if (!class_exists('AddThisPlugin')) {
                 if ($enabledByPlugin && $feature != 'globalOptions') {
                     $enabledField = $this->$objectVariable->globalEnabledField;
                     $jsonField = $this->$objectVariable->globalLayersJsonField;
+
                     $globalOptionsConfigs[$enabledField] = false;
                     $globalOptionsConfigs[$jsonField] = '';
                 }
@@ -372,11 +319,6 @@ if (!class_exists('AddThisPlugin')) {
             add_action('widgets_init', array($this, 'registerWidgets'));
 
             $this->addShortCodes();
-
-            register_activation_hook(
-                $this->baseName,
-                array($this, 'activate')
-            );
 
             register_deactivation_hook(
                 $this->baseName,

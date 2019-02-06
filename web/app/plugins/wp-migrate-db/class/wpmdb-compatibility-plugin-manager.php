@@ -66,7 +66,7 @@ class WPMDB_Compatibility_Plugin_Manager {
 	 */
 	public function is_muplugin_installed() {
 		$plugins           = wp_get_mu_plugins();
-		$muplugin_filename = basename( $this->mu_plugin_dest );
+		$muplugin_filename = 'wp-migrate-db-pro-compatibility.php';
 		$installed         = false;
 
 		foreach ( $plugins as $plugin ) {
@@ -199,13 +199,6 @@ class WPMDB_Compatibility_Plugin_Manager {
 
 		if ( ! $this->filesystem->copy( $this->mu_plugin_source, $this->mu_plugin_dest ) ) {
 			return sprintf( __( 'The compatibility plugin could not be activated because your mu-plugin directory is currently not writable.  Please update the permissions of the mu-plugins folder:  %s', 'wp-migrate-db' ), $this->mu_plugin_dir );
-		}
-
-		//Rename muplugin in header
-		if ( ! $this->wpmdb->get( 'is_pro' ) ) {
-			$mu_contents = file_get_contents( $this->mu_plugin_dest );
-			$mu_contents = str_replace( 'Plugin Name: WP Migrate DB Pro Compatibility', 'Plugin Name: WP Migrate DB Compatibility', $mu_contents );
-			file_put_contents( $this->mu_plugin_dest, $mu_contents );
 		}
 
 		if ( $this->is_muplugin_update_required() ) {

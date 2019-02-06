@@ -11,7 +11,7 @@ class Red_Json_File extends Red_FileIO {
 	}
 
 	public function get_data( array $items, array $groups ) {
-		$version = red_get_plugin_data( dirname( dirname( __FILE__ ) ).'/redirection.php' );
+		$version = get_plugin_data( dirname( dirname( __FILE__ ) ).'/redirection.php' );
 
 		$items = array(
 			'plugin' => array(
@@ -24,14 +24,12 @@ class Red_Json_File extends Red_FileIO {
 			}, $items ),
 		);
 
-		return json_encode( $items, JSON_PRETTY_PRINT ) . PHP_EOL;
+		return json_encode( $items, JSON_PRETTY_PRINT ).PHP_EOL;
 	}
 
 	public function load( $group, $filename, $data ) {
-		global $wpdb;
-
 		$count = 0;
-		$json = @json_decode( $data, true );
+		$json = @json_decode( $data );
 		if ( $json === false ) {
 			return 0;
 		}
@@ -40,42 +38,30 @@ class Red_Json_File extends Red_FileIO {
 		$groups = array();
 		$group_map = array();
 
-		if ( isset( $json['groups'] ) ) {
-			foreach ( $json['groups'] as $group ) {
-				$old_group_id = $group['id'];
-				unset( $group['id'] );
+		if ( isset( $json->groups ) ) {
+			foreach ( $json->groups as $group ) {
+				$old_group_id = $group->id;
+				unset( $group->id );
 
-				$group = Red_Group::create( $group['name'], $group['module_id'] );
+				$group = Red_Group::create( $group->name, $group->module_id );
 				if ( $group ) {
 					$group_map[ $old_group_id ] = $group->get_id();
 				}
 			}
 		}
 
-		unset( $json['groups'] );
-
 		// Import redirects
-		if ( isset( $json['redirects'] ) ) {
-			foreach ( $json['redirects'] as $pos => $redirect ) {
-				unset( $redirect['id'] );
+		if ( isset( $json->redirects ) ) {
+			foreach ( $json->redirects as $redirect ) {
+				unset( $redirect->id );
 
-				if ( ! isset( $group_map[ $redirect['group_id'] ] ) ) {
-					$new_group = Red_Group::create( 'Group', 1 );
-					$group_map[ $redirect['group_id'] ] = $new_group->get_id();
+				if ( ! isset( $group_map[ $redirect->group_id ] ) ) {
+					$group_map[ $redirect->group_id ] = Red_Group::create( 'Group', 1 );
 				}
 
-				if ( $redirect['match_type'] === 'url' && isset( $redirect['action_data'] ) && ! is_array( $redirect['action_data'] ) ) {
-					$redirect['action_data'] = array( 'url' => $redirect['action_data'] );
-				}
-
-				$redirect['group_id'] = $group_map[ $redirect['group_id'] ];
-				Red_Item::create( $redirect );
+				$redirect->group_id = $group_map[ $redirect->group_id ];
+				$redirect = Red_Item::create( (array)$redirect );
 				$count++;
-
-				// Helps reduce memory usage
-				unset( $json['redirects'][ $pos ] );
-				$wpdb->queries = array();
-				$wpdb->num_queries = 0;
 			}
 		}
 
