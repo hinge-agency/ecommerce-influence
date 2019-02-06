@@ -436,3 +436,56 @@
 		}
 	}
 }
+
+
+/* Transcript */
+.episode__transcript {
+    margin-top: 32px;
+
+    display: flex;
+    align-items: center;
+}
+
+.episode__transcript-title {
+    margin-right: 32px;
+
+    color: $text-blue;
+
+    font-family: $brandon;
+    font-weight: 900;
+    font-size: px-to-ems(25);
+    line-height: px-to-ems(29,25);
+}
+
+.episode__transcript-toggle {
+    position: relative;
+    z-index: 0;
+
+    color: $text-blue;
+
+    font-family: $brandon;
+    font-weight: bold;
+    font-size: px-to-ems(18);
+    line-height: px-to-ems(30,18);
+
+    &:after{
+        content: "";
+        position: absolute;
+        bottom: 2px;
+        left: -1%;
+        z-index: -1;
+
+        width: 102%;
+        height: 8px;
+
+        background-color: $primary-yellow;
+    }
+}
+
+.episode__transcript-show {
+
+}
+
+.episode__transcript-hide {
+
+}

@@ -39,5 +39,21 @@
 			{{ content }}
 
 		</div>
+
+        {% if (post.transcript) %}
+        <div class="episode__transcript">
+            <h2 class="episode__transcript-title">Transcript</h2>
+            <div class="episode__transcript-toggle">
+                <span class="episode__transcript-show">Show</span>
+                <span class="episode__transcript-hide">Hide</span>
+                <span> full text</span>
+            </div>
+        </div>
+        <div class="episode__content">
+
+            {{ post.transcript }}
+
+        </div>
+        {% endif %}
 	
 </section>
