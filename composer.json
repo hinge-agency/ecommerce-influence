@@ -60,6 +60,7 @@
     "wpackagist-plugin/disqus-comment-system": "^2.87",
     "wpackagist-plugin/wp-migrate-db": "^1.0",
     "wpackagist-plugin/tinymce-custom-styles": "^1.0.4",
+    "wpackagist-plugin/tinymce-advanced":"5.0.0",
     "wpackagist-plugin/addthis": "^6.0.0",
     "wpackagist-plugin/wufoo-shortcode": "^1.43",
     "wpackagist-plugin/redirection": "^2.8.1",
