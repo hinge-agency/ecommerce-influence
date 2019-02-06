@@ -4,7 +4,7 @@
 # web/app/mu-plugins/*/
 !web/app/mu-plugins/gravityforms
 # web/app/upgrade
-# web/app/uploads/*
+web/app/uploads/*
 !web/app/uploads/.gitkeep
 
 # Assets
