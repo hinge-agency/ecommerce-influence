@@ -629,6 +629,59 @@
 
 }
 
+/* Subscribe */
+.sidebar__subscribe {
+    padding: 48px 32px 32px 32px;
+    background-color: $text-blue;
+    text-transform: uppercase;
+}
+
+.sidebar__subscribe-text {
+    margin-bottom: 64px;
+
+    color: $cloudy-white;
+
+    font-family: $brandon;
+    font-weight: 900;
+    font-size: px-to-ems(28);
+    line-height: px-to-ems(34,28);
+}
+
+.sidebar__subscribe-button {
+    padding: 11px;
+    margin-bottom: 16px;
+
+    display: block;
+    width: 100%;
+    max-width: 100%;
+
+    border: 3px solid $primary-yellow;
+
+    font-family: $brandon;
+    color: $primary-yellow;
+    font-weight: 900;
+    font-size: px-to-ems(15);
+    line-height: px-to-ems(15,15);
+
+    text-align: center;
+    text-decoration: none;
+
+    transition: all .2s ease-in-out;
+
+    &:active,
+    &:focus {
+        color: $primary-yellow;
+    }
+
+    &:hover {
+        color: $text-blue;
+        background-color: $primary-yellow;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
 
 /*==================================================
 =            LEGACY BROWSER PLACEHOLDER            =

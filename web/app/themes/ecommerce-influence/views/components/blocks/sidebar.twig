@@ -163,6 +163,23 @@
 
                 </div>
 
+            </li>
+
+        {% elseif (layout.acf_fc_layout) == 'subscribe' %}
+
+            <li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
+
+                <div class="sidebar__subscribe">
+
+                    <p class="sidebar__subscribe-text">{{ layout.text }}</p>
+
+                    {% for button in layout.buttons %}
+
+                        <a href="{{ button.link }}" class="sidebar__subscribe-button" rel="noopener" target="_blank">{{ button.text }}</a>
+
+                    {% endfor %}
+
+                </div>
 
             </li>
 
