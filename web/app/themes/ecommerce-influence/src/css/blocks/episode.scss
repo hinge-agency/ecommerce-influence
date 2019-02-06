@@ -181,6 +181,10 @@
 	margin-top: 20px;
 	padding-bottom: 20px;
 
+    &--transcript {
+        display: none;
+    }
+
 	h1,h2,h3,h4,h5,h6{
 		margin-top: 20px;
 		margin-bottom: 20px;
@@ -468,6 +472,8 @@
     font-size: px-to-ems(18);
     line-height: px-to-ems(30,18);
 
+    cursor: pointer;
+
     &:after{
         content: "";
         position: absolute;
@@ -483,9 +489,9 @@
 }
 
 .episode__transcript-show {
-
+    display: inline;
 }
 
 .episode__transcript-hide {
-
+    display: none;
 }

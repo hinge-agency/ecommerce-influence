@@ -256,4 +256,17 @@ $(function(){
 	    return regex.test(email);
 	}
 
+	/* Toggle Transcript */
+	$('.episode__transcript-toggle').on('click', function() {
+
+	    var show = $(this).find('.episode__transcript-show');
+        var hide = $(this).find('.episode__transcript-hide');
+        var transcript = $( this ).parent().next('.episode__content--transcript');
+
+        show.toggle();
+        hide.toggle();
+        transcript.toggle();
+
+    });
+
 });
