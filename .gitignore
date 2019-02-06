@@ -7,8 +7,11 @@
 # web/app/uploads/*
 !web/app/uploads/.gitkeep
 
+# Assets
+web/app/themes/ecommerce-influence/assets
+
 # WordPress
-# web/wp
+web/wp
 
 # Dotenv
 .env
@@ -16,9 +19,9 @@
 !.env.example
 
 # Composer
-# vendor
-# vendor/*
-# !vendor/.gitkeep
+vendor
+vendor/*
+!vendor/.gitkeep
 
 # Npm
 node_modules
