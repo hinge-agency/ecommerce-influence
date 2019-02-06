@@ -61,7 +61,11 @@
 
 			<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
 
+                {% if (layout.image) %}
 				<div class="sidebar__testimonial" style="background-image: url('{{ layout.image.url }}')">
+                {% else %}
+                <div class="sidebar__testimonial sidebar__testimonial--noimage">
+                {% endif %}
 
 					<div class="sidebar__testimonial-textWrapper">
 						<p class="sidebar__testimonial-text"><span>"{{ layout.text }}"</span></p>
@@ -138,6 +142,29 @@
 				</div>
 
 			</li>
+
+        {% elseif (layout.acf_fc_layout) == 'categories_to_explore' %}
+
+            <li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
+
+                <div class="sidebar__categories">
+
+                    <h3 class="sidebar__categories-title">Categories to Explore</h3>
+
+                    <ul class="sidebar__categories-list">
+                        {% for cat in layout.categories %}
+                            {% set term = post.getTerm(cat.term_id) %}
+                            <li class="sidebar__categories-item">
+                                <a href="{{ term.link }}" rel="noopener" class="sidebar__categories-category">{{ term }}</a>
+                                <div class="sidebar__categories-count">({{ term.posts | length }})</div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+
+            </li>
 
 		{% endif %}
 

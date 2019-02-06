@@ -70,4 +70,9 @@ class Post extends TimberPost
     {
         return comments_template();
     }
+
+    public static function getTerm($id)
+    {
+        return Timber::get_term($id);
+    }
 }
