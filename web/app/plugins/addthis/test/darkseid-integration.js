@@ -7,7 +7,7 @@ var environments = {
   'uat':          'https://www-uat.addthis.com/darkseid',
   'test':         'https://www-test.addthis.com/darkseid',
   'dev':          'https://www-dev.addthis.com/darkseid',
-  'local':        'http://www-local.addthis.com:8019/darkseid',
+  'local':        'http://www-local.addthis.com/darkseid',
   'jenkinsdev':   'http://ha-dev-www.clearspring.local/darkseid',
   'jenkinstest':  'http://ha-test-www.clearspring.local/darkseid'
 };
@@ -53,6 +53,7 @@ var getNewProfile = function(type, callback) {
   .send(body)
   .end(function(err, res) {
     pubId = res.body.pubId;
+
     var cuidish = pubId.replace(/^ra-/, '');
     body = { 'name' : 'Integration Test (created '+ dateString +')' };
 
@@ -385,6 +386,7 @@ describe('WordPress registration process on existing account', function() {
 
   it('validates a good api key in Authorization header', function(done) {
     var cuidish = wptypePubId.replace(/^ra-/, '');
+
     request
     .get('/publisher/' + cuidish + '/application')
     .set('Authorization', wpApiKey)
@@ -414,40 +416,37 @@ describe('WordPress registration process on existing account', function() {
   });
 
   // not yet used in production
-  // k8s will drop X_Api_Key header, we should replace it with dash.
-  // comment out this test until we fix the header.
-  // it('validates a good api key in X_Api_Key header', function(done) {
-  //   var cuidish = wptypePubId.replace(/^ra-/, '');
-  //   request
-  //   .get('/publisher/' + cuidish + '/application')
-  //   .set('X_Api_Key', wpApiKey)
-  //   .set('Accept', json)
-  //   .expect(200)
-  //   .end(function(err, res) {
-  //     expect(res.body).to.be.a('array');
-  //     var match = false;
-  //     res.body.forEach(function(apiKeyInfo) {
-  //       expect(apiKeyInfo).to.be.a('object');
-  //       expect(apiKeyInfo.cuid).to.be.a('string');
-  //       if (apiKeyInfo.cuid === wpApiKey) { match = true; }
-  //     });
-  //     expect(match).to.equal(true);
-  //     done(err, res);
-  //   });
-  // });
+  it('validates a good api key in X_Api_Key header', function(done) {
+    var cuidish = wptypePubId.replace(/^ra-/, '');
+
+    request
+    .get('/publisher/' + cuidish + '/application')
+    .set('X_Api_Key', wpApiKey)
+    .set('Accept', json)
+    .expect(200)
+    .end(function(err, res) {
+      expect(res.body).to.be.a('array');
+      var match = false;
+      res.body.forEach(function(apiKeyInfo) {
+        expect(apiKeyInfo).to.be.a('object');
+        expect(apiKeyInfo.cuid).to.be.a('string');
+        if (apiKeyInfo.cuid === wpApiKey) { match = true; }
+      });
+      expect(match).to.equal(true);
+      done(err, res);
+    });
+  });
 
   // not yet used in production
-  // k8s will drop X_Api_Key header, we should replace it with dash.
-  // comment out this test until we fix the header.
-  // it('rejects a bad api key in X_Api_Key header', function(done) {
-  //   var cuidish = wptypePubId.replace(/^ra-/, '');
+  it('rejects a bad api key in X_Api_Key header', function(done) {
+    var cuidish = wptypePubId.replace(/^ra-/, '');
 
-  //   request
-  //   .get('/publisher/' + cuidish + '/application')
-  //   .set('X_Api_Key', 'gibberish_for_integration_test')
-  //   .set('Accept', json)
-  //   .expect(404, done);
-  // });
+    request
+    .get('/publisher/' + cuidish + '/application')
+    .set('X_Api_Key', 'gibberish_for_integration_test')
+    .set('Accept', json)
+    .expect(404, done);
+  });
 });
 
 describe('WordPress registration process on new account ', function() {
@@ -470,7 +469,6 @@ describe('WordPress registration process on new account ', function() {
       'username': username,
       'email': username,
       'plainPassword': password,
-      'country': 'US',
       'subscribedToNewsletter': true,
       'profileType': 'wp',
       'source': pluginPco,
@@ -602,41 +600,37 @@ describe('WordPress registration process on new account ', function() {
   });
 
   // not yet used in production
-  // k8s will drop X_Api_Key header, we should replace it with dash.
-  // comment out this test until we fix the header.  it('validates a good api key in X_Api_Key header', function(done) {
-  // it('validates a good api key in X_Api_Key header', function(done) {
-  //   var cuidish = pubId.replace(/^ra-/, '');
+  it('validates a good api key in X_Api_Key header', function(done) {
+    var cuidish = pubId.replace(/^ra-/, '');
 
-  //   request
-  //   .get('/publisher/' + cuidish + '/application')
-  //   .set('X_Api_Key', apiKey)
-  //   .set('Accept', json)
-  //   .expect(200)
-  //   .end(function(err, res) {
-  //     expect(res.body).to.be.a('array');
-  //     var match = false;
-  //     res.body.forEach(function(apiKeyInfo) {
-  //       expect(apiKeyInfo).to.be.a('object');
-  //       expect(apiKeyInfo.cuid).to.be.a('string');
-  //       if (apiKeyInfo.cuid === apiKey) { match = true; }
-  //     });
-  //     expect(match).to.equal(true);
-  //     done(err, res);
-  //   });
-  // });
+    request
+    .get('/publisher/' + cuidish + '/application')
+    .set('X_Api_Key', apiKey)
+    .set('Accept', json)
+    .expect(200)
+    .end(function(err, res) {
+      expect(res.body).to.be.a('array');
+      var match = false;
+      res.body.forEach(function(apiKeyInfo) {
+        expect(apiKeyInfo).to.be.a('object');
+        expect(apiKeyInfo.cuid).to.be.a('string');
+        if (apiKeyInfo.cuid === apiKey) { match = true; }
+      });
+      expect(match).to.equal(true);
+      done(err, res);
+    });
+  });
 
   // not yet used in production
-  // k8s will drop X_Api_Key header, we should replace it with dash.
-  // comment out this test until we fix the header.
-  // it('rejects a bad api key in X_Api_Key header', function(done) {
-  //   var cuidish = pubId.replace(/^ra-/, '');
+  it('rejects a bad api key in X_Api_Key header', function(done) {
+    var cuidish = pubId.replace(/^ra-/, '');
 
-  //   request
-  //   .get('/publisher/' + cuidish + '/application')
-  //   .set('X_Api_Key', 'gibberish_for_integration_test')
-  //   .set('Accept', json)
-  //   .expect(404, done);
-  // });
+    request
+    .get('/publisher/' + cuidish + '/application')
+    .set('X_Api_Key', 'gibberish_for_integration_test')
+    .set('Accept', json)
+    .expect(404, done);
+  });
 
   var createdPubId;
   it('creates a new profile of type wp', function(done) {
@@ -684,7 +678,7 @@ describe('WordPress related post promoted URL functionality ', function() {
   var pubId;
   var apiKey;
 
-  it('receives empty object of promote URL campaigns for new pubid', function(done) {
+  it('recieves empty object of promote URL campaigns for new pubid', function(done) {
     getNewProfile('wp', function(aPubId, anApiKey) {
       pubId = aPubId;
       apiKey = anApiKey;
@@ -720,7 +714,7 @@ describe('WordPress related post promoted URL functionality ', function() {
     });
   });
 
-  it('receives object with the first promoted URL campaign for tool ' + toolPco, function(done) {
+  it('recieves object with the first promoted URL campaign for tool ' + toolPco, function(done) {
     request
     .get('/wordpress/site/'+pubId+'/campaigns')
     .set('Authorization', apiKey)
@@ -755,7 +749,7 @@ describe('WordPress related post promoted URL functionality ', function() {
     });
   });
 
-  it('receives object with only the second URL in the promoted URL campaign', function(done) {
+  it('recieves object with only the second URL in the promoted URL campaign', function(done) {
     request
     .get('/wordpress/site/'+pubId+'/campaigns')
     .set('Authorization', apiKey)
@@ -872,7 +866,7 @@ describe('WordPress related boost get/update functionality ', function() {
     ]
   };
 
-  it('receives empty boost settings for new pubid', function(done) {
+  it('recieves empty boost settings for new pubid', function(done) {
     getNewProfile('wp', function(aPubId, anApiKey) {
       pubId = aPubId;
       apiKey = anApiKey;
@@ -1062,7 +1056,7 @@ describe('WordPress related boost get/update functionality ', function() {
   });
 });
 
-describe('WordPress backward compatibility pco translation for follow tools', function() {
+describe('WordPress backward compatability pco translation for follow tools', function() {
   this.timeout(15000);
   var pubId;
   var apiKey;
@@ -1168,7 +1162,7 @@ describe('WordPress backward compatibility pco translation for follow tools', fu
       "__hideOnHomepage": false,
   };
 
-  it('receives empty boost settings for new pubid', function(done) {
+  it('recieves empty boost settings for new pubid', function(done) {
     getNewProfile('wp', function(aPubId, anApiKey) {
       pubId = aPubId;
       apiKey = anApiKey;
@@ -1306,7 +1300,7 @@ describe('WordPress backward compatibility pco translation for follow tools', fu
   });
 });
 
-describe('WordPress backward compatibility pco translation for related post tools', function() {
+describe('WordPress backward compatability pco translation for related post tools', function() {
   this.timeout(15000);
   var pubId;
   var apiKey;
@@ -1420,7 +1414,7 @@ describe('WordPress backward compatibility pco translation for related post tool
       "__hideOnHomepage": false
   };
 
-  it('receives empty boost settings for new pubid', function(done) {
+  it('recieves empty boost settings for new pubid', function(done) {
     getNewProfile('wp', function(aPubId, anApiKey) {
       pubId = aPubId;
       apiKey = anApiKey;
@@ -1686,7 +1680,7 @@ describe('WordPress backward compatibility pco translation for related post tool
 // Depreciation info:
 // Not used after wpsl-2.0.0, wpf-3.0.0, wpwt-1.1.2, wprp-1.0.0
 // never used in wpp
-describe('WordPress backward compatibility pco translation for share tools (depricated after wpsl-2.0.0, wpf-3.0.0, wpwt-1.1.2, wprp-1.0.0)', function() {
+describe('WordPress backward compatability pco translation for share tools (depricated after wpsl-2.0.0, wpf-3.0.0, wpwt-1.1.2, wprp-1.0.0)', function() {
   this.timeout(15000);
   var newInlineSharingPCO = 'shin';
   var newShareingSidebarPCO = 'shfs';
@@ -1855,7 +1849,7 @@ describe('WordPress backward compatibility pco translation for share tools (depr
       ]
   };
 
-  it('receives empty boost settings for new pubid', function(done) {
+  it('recieves empty boost settings for new pubid', function(done) {
     getNewProfile('wp', function(aPubId, anApiKey) {
       pubId = aPubId;
       apiKey = anApiKey;
@@ -2188,7 +2182,7 @@ describe('WordPress backward compatibility pco translation for share tools (depr
   });
 });
 
-describe('Multi-tool support (new consolidated PCO) for Share Tools', function() {
+describe('Multi-tool support (new consoidated PCO) for Share Tools', function() {
   this.timeout(15000);
   var americaInlineShareId1 = Math.random().toString().substr(-4);
   var americaInlineShareId2 = Math.random().toString().substr(-4);
@@ -2308,7 +2302,7 @@ describe('Multi-tool support (new consolidated PCO) for Share Tools', function()
       ]
   };
 
-  it('receives empty boost settings for new pubid', function(done) {
+  it('recieves empty boost settings for new pubid', function(done) {
     getNewProfile('wp', function(aPubId, anApiKey) {
       pubId = aPubId;
       apiKey = anApiKey;
@@ -2431,6 +2425,41 @@ describe('Multi-tool support (new consolidated PCO) for Share Tools', function()
       expect(toolSettings).to.be.a('object');
       expect(toolSettings.id).to.equal(legacyMobileToolbar.id);
       done(err, res);
+    });
+  });
+});
+
+describe('Look up subscription type for PRO and not Pro pubids ', function() {
+  this.timeout(15000);
+  var basicPubId;
+  var proPubId = 'atblog';
+
+  it('confirms pubid ' + proPubId + ' has a PRO subscription', function(done) {
+    request
+    .get('/wordpress/site/' + proPubId)
+    .expect(200)
+    .end(function(err, res) {
+      expect(res.body).to.be.a('object');
+      expect(res.body.subscription).to.be.a('object');
+      expect(res.body.subscription.edition).to.be.a('string');
+      expect(res.body.subscription.edition).to.equal('PRO');
+      done(err, res);
+    });
+  });
+
+  it('confirms a new pubis does not have a PRO subscription', function(done) {
+    getNewProfile('wp', function(aPubId, anApiKey) {
+      basicPubId = aPubId;
+      request
+      .get('/wordpress/site/'+basicPubId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body).to.be.a('object');
+        expect(res.body.subscription).to.be.a('object');
+        expect(res.body.subscription.edition).to.be.a('string');
+        expect(res.body.subscription.edition).to.not.equal('PRO');
+        done(err, res);
+      });
     });
   });
 });

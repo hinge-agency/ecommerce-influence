@@ -4,7 +4,8 @@ class Red_Csv_File extends Red_FileIO {
 	const CSV_SOURCE = 0;
 	const CSV_TARGET = 1;
 	const CSV_REGEX = 2;
-	const CSV_CODE = 3;
+	const CSV_TYPE = 3;
+	const CSV_CODE = 4;
 
 	public function force_download() {
 		parent::force_download();
@@ -27,7 +28,9 @@ class Red_Csv_File extends Red_FileIO {
 
 	public function item_as_csv( $item ) {
 		$data = $item->match->get_data();
-		$data = isset( $data['url'] ) ? $data = $data['url'] : '*';
+		if ( is_array( $data ) ) {
+			$data = '*';
+		}
 
 		$csv = array(
 			$item->get_url(),
@@ -89,10 +92,10 @@ class Red_Csv_File extends Red_FileIO {
 	}
 
 	public function csv_as_item( $csv, $group ) {
-		if ( count( $csv ) > 1 && $csv[ self::CSV_SOURCE ] !== 'source' && $csv[ self::CSV_TARGET ] !== 'target' ) {
+		if ( $csv[ self::CSV_SOURCE ] !== 'source' && $csv[ self::CSV_TARGET ] !== 'target' && count( $csv ) > 1 ) {
 			return array(
-				'url'         => trim( $csv[ self::CSV_SOURCE ] ),
-				'action_data' => array( 'url' => trim( $csv[ self::CSV_TARGET ] ) ),
+				'url'         => trim( $csv[ self ::CSV_SOURCE ] ),
+				'action_data' => trim( $csv[ self ::CSV_TARGET ] ),
 				'regex'       => isset( $csv[ self::CSV_REGEX ] ) ? $this->parse_regex( $csv[ self::CSV_REGEX ] ) : $this->is_regex( $csv[ self::CSV_SOURCE ] ),
 				'group_id'    => $group,
 				'match_type'  => 'url',

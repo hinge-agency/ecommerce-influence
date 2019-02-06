@@ -118,23 +118,14 @@ $breadcrumbs_params = array(
 
 	<p class="connection-status"><?php _e( 'Please enter the connection information above to continue.', 'wp-migrate-db' ); ?></p>
 
-	<?php $this->template_part( array( 'import_file_status', 'mst_required' ) ); ?>
+	<?php $this->template_part( array( 'import_file_status' ) ); ?>
 
 	<div class="notification-message error-notice directory-permission-notice inline-message" style="display: none;">
-		<p>
-			<strong><?php _e( 'Uploads Directory Not Writable', 'wp-migrate-db' ); ?></strong> &mdash;
-			<span class="action-text savefile"><?php _e( 'The Export feature is unavailable because the following directory is not writable:', 'wp-migrate-db' ); ?></span>
-			<span class="action-text import"><?php _e( 'The Import feature is unavailable because the following directory is not writable:', 'wp-migrate-db' ); ?></span>
-		</p>
-
-		<p><?php echo esc_html( $this->get_upload_info( 'path' ) ); ?></p>
-
-		<p>
-			<?php printf( '%s <a href="%s">%s »</a>',
-				__( 'Please adjust the permissions on this directory.', 'wp-migrate-db' ),
-				'https://deliciousbrains.com/wp-migrate-db-pro/doc/uploads-folder-permissions/?utm_campaign=error%2Bmessages&utm_source=MDB%2BPaid&utm_medium=insideplugin',
-				__( 'More info', 'wp-migrate-db' ) ); ?>
-		</p>
+		<strong><?php _e( 'Cannot Access Uploads Directory', 'wp-migrate-db' ); ?></strong> &mdash;
+		<?php
+		_e( 'We require write permissions to the standard WordPress uploads directory. Without this permission exports are unavailable. Please grant 755 permissions on the following directory:', 'wp-migrate-db' );
+		echo esc_html( $this->get_upload_info( 'path' ) );
+		?>
 	</div>
 
 	<div class="step-two">

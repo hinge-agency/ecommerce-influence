@@ -1181,7 +1181,6 @@ class acf_field_clone extends acf_field {
 			
 			// vars
 			$fields = false;
-			$ignore_s = false;
 			$data = array(
 				'text'		=> $field_group['title'],
 				'children'	=> array()
@@ -1205,14 +1204,6 @@ class acf_field_clone extends acf_field {
 			if( !$fields ) continue;
 			
 			
-			// show all children for field group search match
-			if( $s !== false && stripos($data['text'], $s) !== false ) {
-				
-				$ignore_s = true;
-				
-			}
-			
-			
 			// populate children
 			$children = array();
 			$children[] = $field_group['key'];
@@ -1231,7 +1222,7 @@ class acf_field_clone extends acf_field {
 				
 				
 				// bail early if is search, and $text does not contain $s
-				if( $s !== false && !$ignore_s ) {
+				if( $s !== false ) {
 					
 					// get early
 					$text = $this->get_clone_setting_choice( $child );
