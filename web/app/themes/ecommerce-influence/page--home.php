@@ -36,4 +36,6 @@ $archive_posts = Timber::get_posts(array(
 $context['latest_posts'] = $latest_posts;
 $context['archive_posts'] = $archive_posts;
 
+$context['sidebar'] = !$context['sidebar'] ? $context['site_settings']['sidebar'] : $context['sidebar'];
+
 Timber::render('home.twig', $context);
