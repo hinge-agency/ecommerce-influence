@@ -21,7 +21,8 @@
 # !vendor/.gitkeep
 
 # Npm
-# node_modules
+node_modules
 
 # Other
 .DS_Store
+.idea
