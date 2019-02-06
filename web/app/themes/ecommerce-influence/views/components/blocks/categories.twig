@@ -3,7 +3,7 @@
     <h3 class="categories__title">Categories to Explore</h3>
 
     <ul class="categories__list">
-        {% for tag in tags %}
+        {% for tag in site_settings.tags %}
             {% set term = post_obj.getTerm(tag.term_id) %}
             <li class="categories__item">
                 <a href="{{ term.link }}" rel="noopener" class="categories__category {{ title == term.name ? 'active' : '' }}">{{ term }}</a>
