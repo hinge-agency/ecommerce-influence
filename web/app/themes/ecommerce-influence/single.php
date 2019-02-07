@@ -32,10 +32,7 @@ $context['excerpt'] = ($content_parts['extended'] != '' ? $content_parts['main']
 // After More Tag
 $context['content'] = ($content_parts['extended'] ? $content_parts['extended'] : $content_parts['main']);
 
-//if (!get_field('sidebar')) {
-//    $context['sidebar'] = $context['site_settings']['sidebar'];
-//}
-
+/* Use the site_settings sidebar (IT SHOULD BE ALWAYS SETUP), or override it with specific sidebar per page/post */
 $context['sidebar'] = !$context['sidebar'] ? $context['site_settings']['sidebar'] : $context['sidebar'];
 
 
