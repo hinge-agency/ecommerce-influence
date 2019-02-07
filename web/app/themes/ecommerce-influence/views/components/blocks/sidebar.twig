@@ -61,7 +61,9 @@
 
 			<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
 
-                {% if (layout.image) %}
+                {% if (layout.background_type == 'image') %}
+                <div class="sidebar__testimonial sidebar__testimonial--image" style="background-image: url('{{ layout.image.url }}')">
+                {% elseif (layout.background_type == 'image_colour') %}
 				<div class="sidebar__testimonial" style="background-image: url('{{ layout.image.url }}')">
                 {% else %}
                 <div class="sidebar__testimonial sidebar__testimonial--noimage">

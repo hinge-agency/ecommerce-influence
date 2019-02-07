@@ -432,6 +432,23 @@
 
 		transform: rotate(-16deg);
 	}
+
+    &--image {
+        &:after {
+            display: none;
+        }
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background-color: rgba(0,0,0,.4);
+        }
+    }
 }
 .sidebar__testimonial-wrapper{
 	position: relative;
@@ -485,7 +502,7 @@
 
 	display: inline-block;
 
-	background-color: $text-blue;
+	background-color: transparent;
 	border: 3px solid $primary-yellow;
 
 	font-family: $brandon;
@@ -645,6 +662,11 @@
     font-weight: 900;
     font-size: px-to-ems(28);
     line-height: px-to-ems(34,28);
+
+    @include screen-lt(600) {
+        font-size: px-to-ems(24);
+        line-height: px-to-ems(30,24);
+    }
 }
 
 .sidebar__subscribe-button {
