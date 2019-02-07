@@ -474,15 +474,24 @@
 
 	font-family: $brandon;
 	font-weight: 600;
-	font-size: px-to-ems(25);
-	line-height: px-to-ems(41,25);
+	font-size: px-to-ems(26);
+	line-height: px-to-ems(41,26);
 
 	color: $text-blue;
 
-  	span{
+  	h1,h2,h3,h4,h5,h6,p,span{
+        display: inline;
 		background-color: $primary-yellow;
-		padding: 0 2px;
   	}
+
+    span {
+        padding: 0 4px;
+    }
+
+    strong,
+    em {
+        font-weight: 900;
+    }
 }
 .sidebar__testimonial-details{
 	margin-top: 8px;

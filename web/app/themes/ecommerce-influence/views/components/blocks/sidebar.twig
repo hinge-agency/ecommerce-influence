@@ -70,7 +70,13 @@
                 {% endif %}
 
 					<div class="sidebar__testimonial-textWrapper">
-						<p class="sidebar__testimonial-text"><span>"{{ layout.text }}"</span></p>
+						<div class="sidebar__testimonial-text">
+                            {% if (layout.quotes) %}
+                                <span>"{{ layout.text }}"</span>
+                            {% else %}
+                                <span>{{ layout.text }}</span>
+                            {% endif %}
+                        </div>
 
 						<p class="sidebar__testimonial-details">{{ layout.info }}</p>
 
