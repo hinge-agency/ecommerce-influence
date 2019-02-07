@@ -46,6 +46,7 @@ class Site extends TimberSite
 
         // Get categories for use later
         $data['categories'] = Timber::get_terms('category', ['hide_empty' => true, 'include' => array(get_cat_ID('articles'),get_cat_ID('podcasts'))]);
+        $data['tags'] = Timber::get_terms('tag', ['hide_empty' => true]);
 
         // Add ACF block layout fields
         $data['blocks'] = new Blocks();
@@ -60,6 +61,8 @@ class Site extends TimberSite
         $data['acf_helper'] = new AcfHelper();
 
         $data['hide_top_drip_form'] = (isset($_COOKIE['hidetopdripform']) ? true : false);
+
+        $data['post_obj'] = new Post();
 
         return $data;
     }

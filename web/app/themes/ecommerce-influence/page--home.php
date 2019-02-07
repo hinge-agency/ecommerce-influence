@@ -36,4 +36,7 @@ $archive_posts = Timber::get_posts(array(
 $context['latest_posts'] = $latest_posts;
 $context['archive_posts'] = $archive_posts;
 
+/* Use the site_settings sidebar (IT SHOULD BE ALWAYS SETUP), or override it with specific sidebar per page/post */
+$context['sidebar'] = !$context['sidebar'] ? $context['site_settings']['sidebar'] : $context['sidebar'];
+
 Timber::render('home.twig', $context);

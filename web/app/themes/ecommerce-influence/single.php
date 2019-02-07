@@ -32,8 +32,9 @@ $context['excerpt'] = ($content_parts['extended'] != '' ? $content_parts['main']
 // After More Tag
 $context['content'] = ($content_parts['extended'] ? $content_parts['extended'] : $content_parts['main']);
 
+/* Use the site_settings sidebar (IT SHOULD BE ALWAYS SETUP), or override it with specific sidebar per page/post */
+$context['sidebar'] = !$context['sidebar'] ? $context['site_settings']['sidebar'] : $context['sidebar'];
 
-$context['sidebar'] = ($context['site_settings']['sidebar'] ? $context['site_settings']['sidebar'] : '');
 
 $latest_posts = Timber::get_posts(array(
     'posts_per_page' => 3,
