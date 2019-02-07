@@ -78,7 +78,9 @@
                             {% endif %}
                         </div>
 
-						<p class="sidebar__testimonial-details">{{ layout.info }}</p>
+                        {% if (layout.info) %}
+						    <p class="sidebar__testimonial-details">{{ layout.info }}</p>
+                        {% endif %}
 
 						{% if (layout.button_link) %}
 							<a href="{{ layout.button_link }}" class="sidebar__testimonial-button">{{ layout.button_text }}</a>
