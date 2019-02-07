@@ -631,13 +631,13 @@
 
 /* Subscribe */
 .sidebar__subscribe {
-    padding: 48px 32px 32px 32px;
+    padding: 40px 32px 32px 32px;
     background-color: $text-blue;
     text-transform: uppercase;
 }
 
 .sidebar__subscribe-text {
-    margin-bottom: 64px;
+    margin-bottom: 32px;
 
     color: $cloudy-white;
 
@@ -648,8 +648,8 @@
 }
 
 .sidebar__subscribe-button {
-    padding: 11px;
-    margin-bottom: 24px;
+    padding: 10px;
+    margin-bottom: 16px;
 
     display: block;
     width: 100%;
