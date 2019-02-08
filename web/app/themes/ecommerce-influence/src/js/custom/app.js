@@ -312,6 +312,7 @@ $(function(){
             return;
         } else if (toggle_position === (related_posts_total / show_posts - 1) || toggle_position === Math.floor(related_posts_total / show_posts)) {
             $(this).addClass('disabled');
+            $('.related__toggle-link--left').removeClass('disabled');
         }else {
             $(this).removeClass('disabled');
             $('.related__toggle-link--left').removeClass('disabled');
@@ -330,6 +331,7 @@ $(function(){
             return;
         } else if (toggle_position === 0) { /* We are on the last toggle */
             $(this).addClass('disabled');
+            $('.related__toggle-link--right').removeClass('disabled');
         } else { /* We can toggle */
             $(this).removeClass('disabled');
             $('.related__toggle-link--right').removeClass('disabled');
