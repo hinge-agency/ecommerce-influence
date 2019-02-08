@@ -44,4 +44,18 @@ $latest_posts = Timber::get_posts(array(
 
 $context['latest_posts'] = $latest_posts;
 
+$tags = $post->tags();
+
+$tag_ids = [];
+foreach ($tags as $tag) {
+    array_push($tag_ids,$tag->term_id);
+}
+
+$context['related_posts'] = Timber::get_posts(array(
+    'posts_per_page' => -1,
+    'post__not_in' => array($post->id),
+    'cat' => $post->category->id,
+    'tag__in' => $tag_ids,
+));
+
 Timber::render(['episode.twig'], $context);

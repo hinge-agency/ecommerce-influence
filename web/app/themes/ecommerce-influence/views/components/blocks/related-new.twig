@@ -1,0 +1,59 @@
+
+{% if (related_posts | length) %}
+
+    <section class="related">
+
+        <div class="related__container">
+            <header class="related__header">
+
+                <h2 class="related__title">
+                    Similar
+                    {% if (post.category.slug == 'podcasts') %}
+                        <span> episodes</span>
+                    {% else %}
+                        <span> articles</span>
+                    {% endif %}
+                </h2>
+                <div class="related__toggle">
+                    <div class="related__toggle-link related__toggle-link--left disabled"></div>
+                    <div class="related__toggle-link related__toggle-link--right disabled"></div>
+                </div>
+
+            </header>
+
+            <div class="related__posts">
+
+            {% for related in related_posts %}
+
+                {% set obj = acf_helper.getPostFromId(related.ID) %}
+
+                <div class="related__post">
+                    <div class="related__imgWrapper">
+                        <img src="{{ assets }}/images/sizing-img.svg" alt="Post Featured Image" class="related__sizeImg">
+                        <div class="related__post-img" style="background-image: url('{{ obj.thumbnail.src }}')"></div>
+                    </div>
+                    <div class="related__post-label {{ obj.category.slug == 'podcasts' ? 'related__post-label--podcast' : 'related__post-label--article' }}">
+                        <span>{{ obj.category.slug == 'podcasts' ? 'Episode' : 'Article'}} </span>
+                        {% if (obj.category.slug == 'podcasts') %}
+                            <span>{{ obj.podcast_number }}</span>
+                        {% endif %}
+                    </div>
+                    <h3 class="related__post-title"><a href="{{ obj.link }}">{{ obj.title }}</a></h3>
+                    <a href="{{ obj.link }}" class="related__post-link">
+                        {% if (obj.category.slug == 'podcasts') %}
+                            <span>Listen now</span>
+                        {% else %}
+                            <span>Read more</span>
+                        {% endif %}
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+            </div>
+
+        </div>
+    </section>
+
+{% endif %}

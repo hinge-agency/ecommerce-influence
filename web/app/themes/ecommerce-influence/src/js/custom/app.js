@@ -269,4 +269,91 @@ $(function(){
 
     });
 
+	/* Toggle Related Posts */
+    var related_posts_total = $('.related__post').length;
+    var toggle_position = 0;
+    /* Desktop */
+    var show_posts = 3;
+    if ($(window).width() <= 650) {
+        show_posts = 2;
+    }
+
+    /* Page Load */
+    if (related_posts_total <= show_posts) {
+        $('.related__toggle').hide();
+        $('.related__post').show();
+    } else {
+
+        $('.related__toggle-link--right').removeClass('disabled');
+
+        var post_start = toggle_position * show_posts;
+        var post_end = post_start + show_posts;
+
+        var posts = $('.related__post');
+
+        for (var i = 0; i < related_posts_total; i++) {
+
+
+            if (i + 1 > post_end) {
+                $(posts[i]).hide();
+            } else {
+                $(posts[i]).show();
+            }
+
+        }
+    }
+
+    $('.related__toggle-link--right').on('click', function() {
+
+        toggle_position++;
+        if (toggle_position >= related_posts_total / show_posts) {
+            toggle_position--;
+            $(this).addClass('disabled');
+            return;
+        } else if (toggle_position === (related_posts_total / show_posts - 1) || toggle_position === Math.floor(related_posts_total / show_posts)) {
+            $(this).addClass('disabled');
+        }else {
+            $(this).removeClass('disabled');
+            $('.related__toggle-link--left').removeClass('disabled');
+        }
+
+        showPosts();
+
+    });
+
+    $('.related__toggle-link--left').on('click', function() {
+
+        toggle_position--;
+        if (toggle_position < 0) { /* Can't toggle */
+            toggle_position = 0;
+            $(this).addClass('disabled');
+            return;
+        } else if (toggle_position === 0) { /* We are on the last toggle */
+            $(this).addClass('disabled');
+        } else { /* We can toggle */
+            $(this).removeClass('disabled');
+            $('.related__toggle-link--right').removeClass('disabled');
+        }
+
+        showPosts();
+    });
+
+    /* Show Similar Posts */
+    function showPosts() {
+
+        var post_start = toggle_position * show_posts;
+        var post_end = post_start + show_posts;
+
+        var posts = $('.related__post');
+
+        for (var i = 1; i <= related_posts_total; i++) {
+            if (i <= post_start || i > post_end) {
+                $(posts[i-1]).hide();
+            } else {
+                $(posts[i-1]).show();
+            }
+
+        }
+    }
+
 });
