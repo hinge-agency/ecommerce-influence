@@ -307,15 +307,24 @@
     &--left{
         background-image: url('../images/leftArrow.svg');
         border-right: 3px solid $light-gray;
+
+        &.disabled {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
     }
 
     &--right{
         background-image: url('../images/rightArrow.svg');
         border-left: 3px solid $light-gray;
+
+        &.disabled {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
     }
 
     &.disabled {
-        border-radius: 5px;
         background-color: $light-gray;
         cursor: default;
     }
