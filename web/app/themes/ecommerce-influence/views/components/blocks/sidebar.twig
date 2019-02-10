@@ -8,7 +8,7 @@
 				<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
 
                     <div class="sidebar__latest-header">
-                        <div class="sidebar__latest-title">Latest</div>
+                        <h3 class="sidebar__latest-title">Latest</h3>
                         <div class="sidebar__latest-all">
                             <a href="/posts" class="sidebar__latest-all-link">See all</a>
                         </div>
@@ -22,10 +22,10 @@
 								
 								{% if (post.category.name == 'Podcasts')%}
 									<div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">Episode {{ post.podcast_number }}</span></div>
-									<a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a>
+									<h4><a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a></h4>
 								{% elseif (post.category.name == 'Articles') %}
 									<div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">Article</span></div>
-									<a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a>
+									<h4><a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a></h4>
 								{% endif %}
 								
 							</div>
@@ -45,7 +45,7 @@
                 <li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
 
                     <div class="sidebar__latest-header">
-                        <div class="sidebar__latest-title">Popular</div>
+                        <h3 class="sidebar__latest-title">Popular</h3>
                     </div>
 
                     <div class="sidebar__latest">
@@ -58,10 +58,10 @@
 
                                 {% if (obj.category.name == 'Podcasts')%}
                                     <div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">Episode {{ obj.podcast_number }}</span></div>
-                                    <a href="{{ obj.link }}" class="sidebar__latest-block-title">{{ obj.title }}</a>
+                                    <h4><a href="{{ obj.link }}" class="sidebar__latest-block-title">{{ obj.title }}</a></h4>
                                 {% elseif (obj.category.name == 'Articles') %}
                                     <div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">Article</span></div>
-                                    <a href="{{ obj.link }}" class="sidebar__latest-block-title">{{ obj.title }}</a>
+                                    <h4><a href="{{ obj.link }}" class="sidebar__latest-block-title">{{ obj.title }}</a></h4>
                                 {% endif %}
 
                             </div>
