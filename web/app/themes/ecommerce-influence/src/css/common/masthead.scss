@@ -1,5 +1,6 @@
 .masthead{
 	position: relative;
+    z-index: 10;
 	width: 100%;
 	min-height: 80px;
 
@@ -467,7 +468,7 @@
 
 
 .masthead__nav-responsive-items{
-	margin-top: 70px;
+	margin-top: 160px;
 }
 .masthead__nav-responsive-items-item{
 	position: relative;

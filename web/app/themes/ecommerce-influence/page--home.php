@@ -28,7 +28,7 @@ $latest_posts = Timber::get_posts(array(
 
 $archive_posts = Timber::get_posts(array(
 	'offset' => 3,
-    'posts_per_page' => 9,
+    'posts_per_page' => 6,
     'category__not_in' => $context['transcript_id'],
     'orderby' => 'post__in'
 ));
