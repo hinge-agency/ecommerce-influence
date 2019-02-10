@@ -201,8 +201,8 @@
                     <h3 class="sidebar__categories-title">Categories to Explore</h3>
 
                     <ul class="sidebar__categories-list">
-                        {% for cat in site_settings.tags %}
-                            {% set term = post.getTerm(cat.term_id) %}
+                        {% for tag in layout.tags %}
+                            {% set term = post.getTerm(tag) %}
                             <li class="sidebar__categories-item">
                                 <a href="{{ term.link }}" rel="noopener" class="sidebar__categories-category">{{ term }}</a>
                                 <div class="sidebar__categories-count">({{ term.posts | length }})</div>
