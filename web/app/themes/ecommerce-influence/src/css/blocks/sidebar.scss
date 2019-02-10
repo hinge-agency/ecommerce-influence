@@ -47,6 +47,31 @@
 	}
 }
 
+.sidebar__latest {
+    margin-top: 24px!important;
+}
+
+.sidebar__latest-header {
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar__latest-title {
+    color: $text-blue;
+
+    font-family: $brandon;
+    font-weight: 900;
+    font-size: px-to-ems(25);
+    line-height: px-to-ems(29,25);
+}
+
+.sidebar__latest-all{
+    margin-top: 0!important;
+    margin-left: 8px;
+}
+
 .sidebar__latest-block{
 	position: relative;
 	padding: 20px 15px;
@@ -109,13 +134,7 @@
 		text-decoration: underline;
 	}
 }
-.sidebar__latest-all{
-	display: block;
-	margin: 0 auto;
-	margin-top: 5px;
 
-	text-align: center;
-}
 .sidebar__latest-all-link{
 	position: relative;
 

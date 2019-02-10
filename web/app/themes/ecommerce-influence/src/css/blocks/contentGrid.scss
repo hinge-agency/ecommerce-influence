@@ -1,6 +1,6 @@
 .contentGrid{
 	position: relative;
-	padding-top: 100px;
+	padding-top: 72px;
 
 	@include screen-lt(1000){
 		padding-top: 40px;
@@ -288,7 +288,8 @@
 }
 .contentGrid__items-item-imageWrapper-sizingImage{
 	display: block;
-	
+
+    width: 100%;
 	max-width: 100%;
 }
 .contentGrid__items-item-imageWrapper-image{
@@ -403,4 +404,80 @@
 	line-height: px-to-ems(56,39);
 
 	text-align: center;
+}
+
+.two-column-grid {
+
+    &.contentGrid {
+
+        padding-top: 64px;
+
+        .contentGrid__items-item{
+            position: relative;
+            margin-left: 5.3%;
+            margin-top: 5.3%;
+
+            display: inline-block;
+            vertical-align: top;
+            width: 47.35%;
+            max-width: 375px;
+
+            &:nth-child(odd){
+                margin-left: 0;
+            }
+
+            @include screen-lt(820){
+                margin-top: 40px;
+
+                width: 46%;
+
+                &:nth-child(even){
+                    margin-left: 8%;
+                }
+                &:nth-child(odd){
+                    margin-left: 0;
+                }
+            }
+            @include screen-lt(500){
+
+                display: block;
+                width: 100%;
+
+                &:nth-child(even),
+                &:nth-child(odd){
+                    margin: 0 auto;
+                    margin-top: 40px;
+                }
+            }
+        }
+
+        .contentGrid__actionBar{
+
+            @include screen-lt(1230){
+                text-align: center;
+
+                &--bottom {
+                    display: none;
+                }
+            }
+
+        }
+
+        .contentGrid__actionBar-filter-items {
+            @include screen-lt(1230){
+                display: none;
+            }
+        }
+
+        .contentGrid__actionBar-filterResponsive {
+            @include screen-lt(1230){
+                margin: 0 10px;
+
+                display: inline-block;
+                vertical-align: middle;
+                min-width: 160px;
+            }
+        }
+
+    }
 }

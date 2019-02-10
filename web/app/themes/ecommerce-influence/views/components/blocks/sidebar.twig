@@ -6,7 +6,14 @@
 			{% if (latest_posts|length > 0) %}
 
 				<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
-					
+
+                    <div class="sidebar__latest-header">
+                        <div class="sidebar__latest-title">Latest</div>
+                        <div class="sidebar__latest-all">
+                            <a href="/posts" class="sidebar__latest-all-link">See all</a>
+                        </div>
+                    </div>
+
 					<div class="sidebar__latest">
 					
 						{% for post in latest_posts %}
@@ -17,7 +24,7 @@
 									<div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">Episode {{ post.podcast_number }}</span></div>
 									<a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a>
 								{% elseif (post.category.name == 'Articles') %}
-									<div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">{{ post.category.name }}</span></div>
+									<div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">Article</span></div>
 									<a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a>
 								{% endif %}
 								
@@ -25,15 +32,47 @@
 							
 						{% endfor %}
 
-						<div class="sidebar__latest-all">
-							<a href="/posts" class="sidebar__latest-all-link">See all content</a>				
-						</div>
-
 					</div>
 
 				</li>
 
 			{% endif %}<!-- LATEST END -->
+
+        {% elseif (layout.acf_fc_layout) == 'popular_posts' %}
+
+            {% if (layout.posts | length) %}
+
+                <li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
+
+                    <div class="sidebar__latest-header">
+                        <div class="sidebar__latest-title">Popular</div>
+                    </div>
+
+                    <div class="sidebar__latest">
+
+                        {% for post in layout.posts | slice(0,3) %}
+
+                            {% set obj = acf_helper.getPostFromId(post) %}
+
+                            <div class="sidebar__latest-block">
+
+                                {% if (obj.category.name == 'Podcasts')%}
+                                    <div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">Episode {{ obj.podcast_number }}</span></div>
+                                    <a href="{{ obj.link }}" class="sidebar__latest-block-title">{{ obj.title }}</a>
+                                {% elseif (obj.category.name == 'Articles') %}
+                                    <div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">Article</span></div>
+                                    <a href="{{ obj.link }}" class="sidebar__latest-block-title">{{ obj.title }}</a>
+                                {% endif %}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </li>
+
+            {% endif %}<!-- LATEST END -->
 
 		{% elseif (layout.acf_fc_layout) == 'user_profile' %}
 			
@@ -162,8 +201,8 @@
                     <h3 class="sidebar__categories-title">Categories to Explore</h3>
 
                     <ul class="sidebar__categories-list">
-                        {% for cat in site_settings.tags %}
-                            {% set term = post.getTerm(cat.term_id) %}
+                        {% for tag in layout.tags %}
+                            {% set term = post.getTerm(tag) %}
                             <li class="sidebar__categories-item">
                                 <a href="{{ term.link }}" rel="noopener" class="sidebar__categories-category">{{ term }}</a>
                                 <div class="sidebar__categories-count">({{ term.posts | length }})</div>
