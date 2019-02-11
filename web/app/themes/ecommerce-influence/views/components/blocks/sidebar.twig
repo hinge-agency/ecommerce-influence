@@ -44,9 +44,11 @@
 
                 <li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
 
+                    {% if (layout.title) %}
                     <div class="sidebar__latest-header">
-                        <h3 class="sidebar__latest-title">Popular</h3>
+                        <h3 class="sidebar__latest-title">{{ layout.title }}</h3>
                     </div>
+                    {% endif %}
 
                     <div class="sidebar__latest">
 
