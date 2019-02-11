@@ -22,6 +22,7 @@ $templates = ['episodes.twig'];
 $data = Timber::get_context();
 
 $data['title'] = 'Archive';
+$data['is_tag'] = false;
 
 if (is_day()) {
     $data['title'] = 'Archive: '.get_the_date('D M Y');
@@ -30,6 +31,7 @@ if (is_day()) {
 } elseif (is_year()) {
     $data['title'] = 'Archive: '.get_the_date('Y');
 } elseif (is_tag()) {
+    $data['is_tag'] = true;
     $data['title'] = single_tag_title('', false);
 } elseif (is_category()) {
     $data['title'] = single_cat_title('', false);
@@ -63,6 +65,7 @@ $count_cat = ($cat ? $cat->count : '');
 $cat_name = ($cat ? $cat->slug : '');
 $data['transcript_id'] = get_cat_ID('transcripts');
 
+/* Search query in URL */
 if($searchQuery){
 
     $query_searched_posts = [
@@ -87,7 +90,10 @@ if($searchQuery){
 
 }elseif ($count_cat){
     $count_pages = ceil($count_cat / $posts_per_page);
-    $url_base = $url_base . get_option('category_base') . '/';
+    /* If we are searching tags change the url base from category to tag */
+    $taxonomy = $data['is_tag'] ? get_option('tag_base') : get_option('category_base') ;
+    $url_base = $url_base . $taxonomy . '/';
+
 }else{
     $count_pages = ceil($count_posts / $posts_per_page);
     $url_base = $url_base . 'posts/';
@@ -95,7 +101,7 @@ if($searchQuery){
     $data['allPosts'] = true;
 }
 
-//URL CONSTRACT FOR PAGINATION
+//URL CONSTRUCT FOR PAGINATION
 $data['next_page'] = '#';
 $data['prev_page'] = '#';
 
@@ -121,10 +127,15 @@ if ($data['current_page'] == 1){
 $query_args = [
     'posts_per_page' => $posts_per_page,
     'orderby' => 'post__in',
-    'category_name' => $cat_name,
-    'category__not_in' => $data['transcript_id'],
     'paged' => $data['current_page']
 ];
+
+if ($data['is_tag']) {
+    $query_args['tag'] = $cat_name;
+} else {
+    $query_args['category_name'] = $cat_name;
+    $query_args['category__not_in'] = $data['transcript_id'];
+}
 
 if ($searchQuery){
     $query_args['s'] = $searchQuery;

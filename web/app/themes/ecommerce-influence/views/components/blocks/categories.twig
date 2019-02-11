@@ -1,0 +1,15 @@
+<section class="categories constrain">
+
+    <h3 class="categories__title">Categories to Explore</h3>
+
+    <ul class="categories__list">
+        {% for tag in site_settings.tags %}
+            {% set term = post_obj.getTerm(tag.term_id) %}
+            <li class="categories__item {{ title == term.name ? 'active' : '' }}">
+                <a href="{{ term.link }}" rel="noopener" class="categories__category">{{ term }}</a>
+                <div class="categories__count">({{ term.posts | length }})</div>
+            </li>
+        {% endfor %}
+    </ul>
+
+</section>

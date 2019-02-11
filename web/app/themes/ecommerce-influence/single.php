@@ -32,8 +32,9 @@ $context['excerpt'] = ($content_parts['extended'] != '' ? $content_parts['main']
 // After More Tag
 $context['content'] = ($content_parts['extended'] ? $content_parts['extended'] : $content_parts['main']);
 
+/* Use the site_settings sidebar (IT SHOULD BE ALWAYS SETUP), or override it with specific sidebar per page/post */
+$context['sidebar'] = !$context['sidebar'] ? $context['site_settings']['sidebar'] : $context['sidebar'];
 
-$context['sidebar'] = ($context['site_settings']['sidebar'] ? $context['site_settings']['sidebar'] : '');
 
 $latest_posts = Timber::get_posts(array(
     'posts_per_page' => 3,
@@ -42,5 +43,19 @@ $latest_posts = Timber::get_posts(array(
 ));
 
 $context['latest_posts'] = $latest_posts;
+
+$tags = $post->tags();
+
+$tag_ids = [];
+foreach ($tags as $tag) {
+    array_push($tag_ids,$tag->term_id);
+}
+
+$context['related_posts'] = Timber::get_posts(array(
+    'posts_per_page' => -1,
+    'post__not_in' => array($post->id),
+    'cat' => $post->category->id,
+    'tag__in' => $tag_ids,
+));
 
 Timber::render(['episode.twig'], $context);

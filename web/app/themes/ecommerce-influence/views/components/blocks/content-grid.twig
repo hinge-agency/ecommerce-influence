@@ -59,13 +59,13 @@
 					{% if (post.category.name == 'Podcasts') %}
 						<div class="contentGrid__items-item-textWrapper">
 							<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--podcast">Episode {{ post.podcast_number }}</div>
-							<p class="contentGrid__items-item-textWrapper-title">{{ post.title }}</p>
+							<h3 class="contentGrid__items-item-textWrapper-title">{{ post.title }}</h3>
 							<a href="{{ post.link }}" class="contentGrid__items-item-textWrapper-link">Listen now</a>
 						</div>
 					{% else %}
 						<div class="contentGrid__items-item-textWrapper">
 							<div class="contentGrid__items-item-textWrapper-label contentGrid__items-item-textWrapper-label--article">{{ post.category.name }}</div>
-							<p class="contentGrid__items-item-textWrapper-title">{{ post.title }}</p>
+							<h3 class="contentGrid__items-item-textWrapper-title">{{ post.title }}</h3>
 							<a href="{{ post.link }}" class="contentGrid__items-item-textWrapper-link">Read now</a>
 						</div>
 					{% endif %}

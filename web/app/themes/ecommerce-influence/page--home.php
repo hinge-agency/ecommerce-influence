@@ -28,12 +28,15 @@ $latest_posts = Timber::get_posts(array(
 
 $archive_posts = Timber::get_posts(array(
 	'offset' => 3,
-    'posts_per_page' => 9,
+    'posts_per_page' => 6,
     'category__not_in' => $context['transcript_id'],
     'orderby' => 'post__in'
 ));
 
 $context['latest_posts'] = $latest_posts;
 $context['archive_posts'] = $archive_posts;
+
+/* Use the site_settings sidebar (IT SHOULD BE ALWAYS SETUP), or override it with specific sidebar per page/post */
+$context['sidebar'] = !$context['sidebar'] ? $context['site_settings']['sidebar'] : $context['sidebar'];
 
 Timber::render('home.twig', $context);

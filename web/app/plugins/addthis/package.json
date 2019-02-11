@@ -3,8 +3,7 @@
   "version": "2.0.0",
   "description": "AddThis WordPress plugins base",
   "scripts": {
-    "test": "mocha test",
-    "gulp": "gulp"
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",

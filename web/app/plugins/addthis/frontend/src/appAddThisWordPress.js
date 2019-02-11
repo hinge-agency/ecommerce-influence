@@ -21,10 +21,9 @@ appAddThisWordPress.config(function($sceDelegateProvider) {
     'https://cache.addthiscdn.com/services/**',
 	  //include local and internal URLs for development purposes
     'http://localhost:3000/**',
-    'http://darkseid/darkseid/**',
     'http://www-test.addthis.com/darkseid/**',
     'http://www-dev.addthis.com/darkseid/**',
-    'http://www-local.addthis.com:8019/darkseid/**'
+    'http://www-local.addthis.com/darkseid/**'
   ]);
 });
 
@@ -112,7 +111,15 @@ appAddThisWordPress.config(function($stateProvider, $urlRouterProvider) {
     .then(function(globalOptions) {
       // if addthis mode
       if (globalOptions.addthis_plugin_controls === 'AddThis') {
-        return $darkseid.getPromotedUrl();
+        // if this is a pro account
+        return $darkseid.isProProfile().then(function(isPro) {
+          if (isPro) {
+            // go get their promoted urls
+            return $darkseid.getPromotedUrl();
+          } else {
+            return false;
+          }
+        });
       } else {
         return false;
       }

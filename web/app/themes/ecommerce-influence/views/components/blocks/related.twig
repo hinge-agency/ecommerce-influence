@@ -1,62 +1,59 @@
-<section class="relatedContent">
-	
-	<div class="relatedContent__inner constrain">
-		
-		<div class="relatedContent__topBar">
-			
-			<h2 class="relatedContent__topBar-title">Related Content</h2><!--
-			--><div class="relatedContent__topBar-pagination">
 
-				<ul class="relatedContent__topBar-pagination-buttons">
-					<li class="relatedContent__topBar-pagination-button">
-						<a href="" class="relatedContent__topBar-pagination-button-link relatedContent__topBar-pagination-button-link--left"></a>
-					</li><!--
-					--><li class="relatedContent__topBar-pagination-button">
-						<a href="" class="relatedContent__topBar-pagination-button-link relatedContent__topBar-pagination-button-link--right"></a>
-					</li>		
-				</ul>
+{% if (related_posts | length) %}
 
-			</div>
+    <section class="related">
 
-		</div><!-- TOP BAR END -->
+        <div class="related__container">
+            <header class="related__header">
 
-		<ul class="relatedContent__carousel">
-			
-			{% for post in block.link_posts %}<!--
-			--><li class="relatedContent__carousel-slide-items-item">
-								
-				<a href="{{ acf_helper.getPostFromId(post.related_post).link }}" class="relatedContent__carousel-slide-items-item-wrapper">
+                <h2 class="related__title">
+                    Related
+                    {% if (post.category.slug == 'podcasts') %}
+                        <span> episodes</span>
+                    {% else %}
+                        <span> articles</span>
+                    {% endif %}
+                </h2>
+                <div class="related__toggle">
+                    <div class="related__toggle-link related__toggle-link--left disabled"></div>
+                    <div class="related__toggle-link related__toggle-link--right disabled"></div>
+                </div>
 
-					<div class="relatedContent__carousel-slide-items-item-imageWrapper">
-						<img src="{{ assets }}/images/sizing-img.svg" alt="Sizing Image" class="relatedContent__carousel-slide-items-item-imageWrapper-sizingImage">
-						<span class="relatedContent__carousel-slide-items-item-imageWrapper-image" style="background-image: url('{{ acf_helper.getPostFromId(post.related_post).thumbnail.src }}')"></span>
-					</div>
-					
-					{% if (acf_helper.getPostFromId(post.related_post).category.name == 'Podcasts') %}
-						
-						<div class="relatedContent__carousel-slide-items-item-textWrapper">
-							<div class="relatedContent__carousel-slide-items-item-textWrapper-label relatedContent__carousel-slide-items-item-textWrapper-label--podcast">Episode {{ acf_helper.getPostFromId(post.related_post).podcast_number }}</div>
-							<p class="relatedContent__carousel-slide-items-item-textWrapper-title">{{ acf_helper.getPostFromId(post.related_post).title }}</p>
-							<a href="{{ acf_helper.getPostFromId(post.related_post).link }}" class="relatedContent__carousel-slide-items-item-textWrapper-link">Listen now</a>
-						</div>
+            </header>
 
-					{% else %}
+            <div class="related__posts">
 
-						<div class="relatedContent__carousel-slide-items-item-textWrapper">
-							<div class="relatedContent__carousel-slide-items-item-textWrapper-label relatedContent__carousel-slide-items-item-textWrapper-label--article">{{ acf_helper.getPostFromId(post.related_post).category.name }}</div>
-							<p class="relatedContent__carousel-slide-items-item-textWrapper-title">{{ acf_helper.getPostFromId(post.related_post).title }}</p>
-							<a href="{{ acf_helper.getPostFromId(post.related_post).link }}" class="relatedContent__carousel-slide-items-item-textWrapper-link">Read now</a>
-						</div>
+            {% for related in related_posts %}
 
-					{% endif %}
+                {% set obj = acf_helper.getPostFromId(related.ID) %}
 
-				</a>
+                <div class="related__post">
+                    <div class="related__imgWrapper">
+                        <img src="{{ assets }}/images/sizing-img.svg" alt="Post Featured Image" class="related__sizeImg">
+                        <div class="related__post-img" style="background-image: url('{{ obj.thumbnail.src }}')"></div>
+                    </div>
+                    <div class="related__post-label {{ obj.category.slug == 'podcasts' ? 'related__post-label--podcast' : 'related__post-label--article' }}">
+                        <span>{{ obj.category.slug == 'podcasts' ? 'Episode' : 'Article'}} </span>
+                        {% if (obj.category.slug == 'podcasts') %}
+                            <span>{{ obj.podcast_number }}</span>
+                        {% endif %}
+                    </div>
+                    <h3 class="related__post-title"><a href="{{ obj.link }}">{{ obj.title }}</a></h3>
+                    <a href="{{ obj.link }}" class="related__post-link">
+                        {% if (obj.category.slug == 'podcasts') %}
+                            <span>Listen now</span>
+                        {% else %}
+                            <span>Read more</span>
+                        {% endif %}
+                    </a>
 
-			</li><!-- ITEM END
-			-->{% endfor %}
+                </div>
 
-		</ul><!-- CAROUSEL END -->
+            {% endfor %}
 
-	</div><!-- INNER END -->
+            </div>
 
-</section><!-- RELATED END -->
+        </div>
+    </section>
+
+{% endif %}

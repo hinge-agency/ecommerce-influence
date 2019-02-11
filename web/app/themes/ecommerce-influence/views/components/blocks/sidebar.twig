@@ -6,7 +6,14 @@
 			{% if (latest_posts|length > 0) %}
 
 				<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
-					
+
+                    <div class="sidebar__latest-header">
+                        <h3 class="sidebar__latest-title">Latest</h3>
+                        <div class="sidebar__latest-all">
+                            <a href="/posts" class="sidebar__latest-all-link">See all</a>
+                        </div>
+                    </div>
+
 					<div class="sidebar__latest">
 					
 						{% for post in latest_posts %}
@@ -15,25 +22,59 @@
 								
 								{% if (post.category.name == 'Podcasts')%}
 									<div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">Episode {{ post.podcast_number }}</span></div>
-									<a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a>
+									<h4><a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a></h4>
 								{% elseif (post.category.name == 'Articles') %}
-									<div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">{{ post.category.name }}</span></div>
-									<a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a>
+									<div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">Article</span></div>
+									<h4><a href="{{ post.link }}" class="sidebar__latest-block-title">{{ post.title }}</a></h4>
 								{% endif %}
 								
 							</div>
 							
 						{% endfor %}
 
-						<div class="sidebar__latest-all">
-							<a href="/posts" class="sidebar__latest-all-link">See all content</a>				
-						</div>
-
 					</div>
 
 				</li>
 
 			{% endif %}<!-- LATEST END -->
+
+        {% elseif (layout.acf_fc_layout) == 'popular_posts' %}
+
+            {% if (layout.posts | length) %}
+
+                <li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
+
+                    {% if (layout.title) %}
+                    <div class="sidebar__latest-header">
+                        <h3 class="sidebar__latest-title">{{ layout.title }}</h3>
+                    </div>
+                    {% endif %}
+
+                    <div class="sidebar__latest">
+
+                        {% for post in layout.posts | slice(0,3) %}
+
+                            {% set obj = acf_helper.getPostFromId(post) %}
+
+                            <div class="sidebar__latest-block">
+
+                                {% if (obj.category.name == 'Podcasts')%}
+                                    <div class="sidebar__latest-block-label sidebar__latest-block-label--podcast"><span class="sidebar__latest-block-label-text">Episode {{ obj.podcast_number }}</span></div>
+                                    <h4><a href="{{ obj.link }}" class="sidebar__latest-block-title">{{ obj.title }}</a></h4>
+                                {% elseif (obj.category.name == 'Articles') %}
+                                    <div class="sidebar__latest-block-label sidebar__latest-block-label--article"><span class="sidebar__latest-block-label-text">Article</span></div>
+                                    <h4><a href="{{ obj.link }}" class="sidebar__latest-block-title">{{ obj.title }}</a></h4>
+                                {% endif %}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </li>
+
+            {% endif %}<!-- LATEST END -->
 
 		{% elseif (layout.acf_fc_layout) == 'user_profile' %}
 			
@@ -61,12 +102,26 @@
 
 			<li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
 
+                {% if (layout.background_type == 'image') %}
+                <div class="sidebar__testimonial sidebar__testimonial--image" style="background-image: url('{{ layout.image.url }}')">
+                {% elseif (layout.background_type == 'image_colour') %}
 				<div class="sidebar__testimonial" style="background-image: url('{{ layout.image.url }}')">
+                {% else %}
+                <div class="sidebar__testimonial sidebar__testimonial--noimage">
+                {% endif %}
 
 					<div class="sidebar__testimonial-textWrapper">
-						<p class="sidebar__testimonial-text"><span>"{{ layout.text }}"</span></p>
+						<div class="sidebar__testimonial-text">
+                            {% if (layout.quotes) %}
+                                <span>"{{ layout.text }}"</span>
+                            {% else %}
+                                <span>{{ layout.text }}</span>
+                            {% endif %}
+                        </div>
 
-						<p class="sidebar__testimonial-details">{{ layout.info }}</p>
+                        {% if (layout.info) %}
+						    <p class="sidebar__testimonial-details">{{ layout.info }}</p>
+                        {% endif %}
 
 						{% if (layout.button_link) %}
 							<a href="{{ layout.button_link }}" class="sidebar__testimonial-button">{{ layout.button_text }}</a>
@@ -138,6 +193,52 @@
 				</div>
 
 			</li>
+
+        {% elseif (layout.acf_fc_layout) == 'categories_to_explore' %}
+
+            <li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
+
+                <div class="sidebar__categories">
+
+                    <h3 class="sidebar__categories-title">Categories to Explore</h3>
+
+                    <ul class="sidebar__categories-list">
+                        {% for tag in layout.tags %}
+                            {% set term = post.getTerm(tag) %}
+                            <li class="sidebar__categories-item">
+                                <a href="{{ term.link }}" rel="noopener" class="sidebar__categories-category">{{ term }}</a>
+                                <div class="sidebar__categories-count">({{ term.posts | length }})</div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+            </li>
+
+        {% elseif (layout.acf_fc_layout) == 'subscribe' %}
+
+            <li class="sidebar__block {{ loop.first ? 'sidebar__first' }}">
+
+                <div class="sidebar__subscribe">
+
+                    <p class="sidebar__subscribe-text">{{ layout.text }}</p>
+
+                    {% for button in layout.buttons %}
+
+                        {% if (button.type == 'page') %} <!-- Page link button -->
+                            <a href="{{ button.link }}" class="sidebar__subscribe-button" rel="noopener" target="_blank">{{ button.text }}</a>
+                        {% else %} <!-- Leadbox button -->
+                            <a class="sidebar__subscribe-button" rel="noopener" target="_blank" data-leadbox-popup="{{ button.leadbox_popup_code  }}" data-leadbox-domain="{{ button.leadbox_popup_domain }}">
+                                {{ button.text }}<i></i>
+                            </a>
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+            </li>
 
 		{% endif %}
 
