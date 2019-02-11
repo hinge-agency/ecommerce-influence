@@ -224,7 +224,13 @@
 
                     {% for button in layout.buttons %}
 
-                        <a href="{{ button.link }}" class="sidebar__subscribe-button" rel="noopener" target="_blank">{{ button.text }}</a>
+                        {% if (button.type == 'page') %} <!-- Page link button -->
+                            <a href="{{ button.link }}" class="sidebar__subscribe-button" rel="noopener" target="_blank">{{ button.text }}</a>
+                        {% else %} <!-- Leadbox button -->
+                            <a class="sidebar__subscribe-button" rel="noopener" target="_blank" data-leadbox-popup="{{ button.leadbox_popup_code  }}" data-leadbox-domain="{{ button.leadbox_popup_domain }}">
+                                {{ button.text }}<i></i>
+                            </a>
+                        {% endif %}
 
                     {% endfor %}
 
