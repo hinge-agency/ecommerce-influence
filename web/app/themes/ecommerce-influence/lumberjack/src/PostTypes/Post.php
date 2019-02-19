@@ -76,6 +76,17 @@ class Post extends TimberPost
         return Timber::get_term($id);
     }
 
+    public static function getPostsFromTagCount($tag) {
+
+        $query_args = [
+            'posts_per_page' => -1,
+            'tag' => $tag
+        ];
+
+        $posts = self::query($query_args);
+        return count($posts);
+    }
+
 //    public static function getPostCountByTag($term) {
 //
 //        $query_args = [

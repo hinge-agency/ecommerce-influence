@@ -7,7 +7,8 @@
             {% set term = post_obj.getTerm(tag.term_id) %}
             <li class="categories__item {{ title == term.name ? 'active' : '' }}">
                 <a href="{{ term.link }}" rel="noopener" class="categories__category">{{ term }}</a>
-                <div class="categories__count">({{ term.posts | length }})</div>
+                {% set posts_count = post_obj.getPostsFromTagCount(term.slug) %}
+                <div class="categories__count">({{ posts_count }})</div>
             </li>
         {% endfor %}
     </ul>
