@@ -207,7 +207,8 @@
                             {% set term = post.getTerm(tag) %}
                             <li class="sidebar__categories-item">
                                 <a href="{{ term.link }}" rel="noopener" class="sidebar__categories-category">{{ term }}</a>
-                                <div class="sidebar__categories-count">({{ term.posts | length }})</div>
+                                {% set posts_count = post_obj.getPostsFromTagCount(term.slug) %}
+                                <div class="sidebar__categories-count">({{ posts_count }})</div>
                             </li>
                         {% endfor %}
                     </ul>
