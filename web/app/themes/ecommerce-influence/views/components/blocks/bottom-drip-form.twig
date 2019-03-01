@@ -7,7 +7,7 @@
 			<div class="bottomDripForm__content">
 		
 				<div class="bottomDripForm__content-top">
-					<img src="{{ assets }}/images/iPad-gold-small.png" alt="" class="bottomDripForm__content-top-image">
+					<img src="{{site_settings.ss_popup_form_desktop_image['url']}}" alt="" class="bottomDripForm__content-top-image">
 					<div data-drip-attribute="headline" class="bottomDripForm__content-title">{{ site_settings.ss_popup_form_title }}</div>
 					<div data-drip-attribute="description" class="bottomDripForm__content-text">{{ site_settings.ss_popup_form_text ? site_settings.ss_popup_form_text }}</div>
 				</div><!--
@@ -16,15 +16,15 @@
 					<form action="https://www.getdrip.com/forms/10754076/submissions" method="post" data-drip-embedded-form="10754076" class="topDripForm__form" class="bottomDripForm__form">
 						
 						<div class="bottomDripForm__form-block">
-							<label for="drip-First-Name" class="bottomDripForm__form-block-label">First name</label>
-							<input type="text" id="drip-First-Name" name="fields[First_Name]" value="" class="bottomDripForm__form-block-input" placeholder="First name">
+							<label for="drip-First-Name" class="bottomDripForm__form-block-label">{{ site_settings.ss_popup_form_name_field }}</label>
+							<input type="text" id="drip-First-Name" name="fields[First_Name]" value="" class="bottomDripForm__form-block-input" placeholder="{{ site_settings.ss_popup_form_bottom_name_placeholder }}">
 						</div><!--
 						--><div class="bottomDripForm__form-block">
-							<label for="drip-email" class="bottomDripForm__form-block-label">Email address</label>
-							<input type="email" id="drip-email" name="fields[email]" value="" class="bottomDripForm__form-block-input bottomDripForm__form-block-input--email" placeholder="Email address">
+							<label for="drip-email" class="bottomDripForm__form-block-label">{{ site_settings.ss_popup_form_email_field }}</label>
+							<input type="email" id="drip-email" name="fields[email]" value="" class="bottomDripForm__form-block-input bottomDripForm__form-block-input--email" placeholder="{{ site_settings.ss_popup_form_bottom_email_placeholder }}">
 						</div><!--
 						--><div class="bottomDripForm__form-block bottomDripForm__form-block--button">
-							<input type="submit" name="submit" value="Sign Up" data-drip-attribute="sign-up-button" class="bottomDripForm__form-block-button">
+							<input type="submit" name="submit" value="{{ site_settings.ss_popup_form_button_text }}" data-drip-attribute="sign-up-button" class="bottomDripForm__form-block-button">
 						</div>
 
 					</form>
