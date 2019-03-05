@@ -23,17 +23,15 @@
 		margin: 0 auto;
 	}
 }
-.topDripForm__content{
+
+.topDripForm__content {
 	position: relative;
 	width: 100%;
 	min-height: 320px;
-	background-image: url(../images/iPad.png);
 	background-repeat: no-repeat;
 	background-position: 0px -55px;
-
 	padding-left: 49%;
 	padding-top: 42px;
-
 	@include transition();
 
 	@include screen-lt(1440){
@@ -54,9 +52,8 @@
 		background-position: -280px -55px;
 	}
 	@include screen-lt(920){
-		background-image: url(../images/iPad-small.png);
 		background-position: -180px 5px;
-
+		background-image: none !important;
 		padding-left: 40%;
 	}
 	@include screen-lt(840){
@@ -72,10 +69,26 @@
 		padding-left: 0;
 		padding-top: 70px;
 		padding-bottom: 30px;
-
+		background-image: none;
 		text-align: center;
 	}
 }
+.tablet-image {
+	display: none;
+	@include screen-lt(920){
+		display: block;
+		position: absolute;
+		right: 61%;
+		@include transition();
+	}
+	@include screen-lt(710){
+		right: 67%;
+	}
+	@include screen-lt(600){
+		display: none;
+	}
+}
+
 .topDripForm__content-title{
 	position: relative;
 	display: inline-block;
