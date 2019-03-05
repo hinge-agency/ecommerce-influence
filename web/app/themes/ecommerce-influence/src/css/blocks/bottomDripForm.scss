@@ -15,43 +15,25 @@
 	width: 100%;
 	max-width: 1440px;
 	margin: 0 auto;
+	background-repeat: no-repeat;
 
-	&:after{
-		content: "";
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		z-index: 10;
+	@include transition();
 
-		width: 48%;
-		height: 438px;
-		// min-height: 438px;
-
-		background-image: url('../images/iPad-gold.png');
-		background-repeat: no-repeat;
-		background-position: 0 0;
-
-		@include transition();
-
-		@include screen-lt(1400){
-			background-position: -100px 0;
-		}
-		@include screen-lt(1200){
-			background-position: -180px 0;
-		}
-		@include screen-lt(1075){
-			background-position: -220px 0;
-		}
-		@include screen-lt(1000){
-			display: none;
-		}
+	@include screen-lt(1400){
+		background-position: -100px 0;
 	}
-
+	@include screen-lt(1200){
+		background-position: -180px 0;
+	}
 	@include screen-lt(1170){
 		width: 95%;
 		margin-left: 0;
 	}
+	@include screen-lt(1075){
+		background-position: -220px 0;
+	}
 	@include screen-lt(1000){
+		background-image: none !important;
 		width: 100%;
 	}
 }
