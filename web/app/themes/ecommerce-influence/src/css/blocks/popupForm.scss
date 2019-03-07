@@ -40,6 +40,16 @@
     vertical-align: middle;
 	width: 46%;
 }
+.popUpTemplate__formBlock-form {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
 .popUpTemplate__formBlock-image{
 	position: relative;
 	display: block;
