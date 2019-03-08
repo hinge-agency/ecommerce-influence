@@ -13,20 +13,22 @@
 				</div><!--
 				--><div class="bottomDripForm__content-formContainer">
 
-					<form action="https://www.getdrip.com/forms/956224861/submissions" method="post" data-drip-embedded-form="956224861" class="topDripForm__form" class="bottomDripForm__form">
+					<form action="{{ site_settings.ss_popup_form_submission_url }}" method="post" data-drip-embedded-form="{{ site_settings.ss_popup_form_id }}" class="bottomDripForm__form">
 
 						<div class="bottomDripForm__form-block">
-							<label for="drip-First-Name" class="bottomDripForm__form-block-label">{{ site_settings.ss_popup_form_name_field }}</label>
-							<input type="text" id="drip-First-Name" name="fields[First_Name]" value="" class="bottomDripForm__form-block-input" placeholder="{{ site_settings.ss_popup_form_bottom_name_placeholder }}">
+							<label for="bottomDrip-First-Name" class="bottomDripForm__form-block-label">{{ site_settings.ss_popup_form_name_field }}</label>
+							<input type="text" id="bottomDrip-First-Name" name="fields[First_Name]" value="" class="bottomDripForm__form-block-input" placeholder="{{ site_settings.ss_popup_form_bottom_name_placeholder }}">
 						</div><!--
 						--><div class="bottomDripForm__form-block">
-							<label for="drip-email" class="bottomDripForm__form-block-label">{{ site_settings.ss_popup_form_email_field }}</label>
-							<input type="email" id="drip-email" name="fields[email]" value="" class="bottomDripForm__form-block-input bottomDripForm__form-block-input--email" placeholder="{{ site_settings.ss_popup_form_bottom_email_placeholder }}">
+							<label for="bottomDrip-email" class="bottomDripForm__form-block-label">{{ site_settings.ss_popup_form_email_field }}</label>
+							<input type="email" id="bottomDrip-email" name="fields[email]" value="" class="bottomDripForm__form-block-input bottomDripForm__form-block-input--email" placeholder="{{ site_settings.ss_popup_form_bottom_email_placeholder }}">
 						</div><!--
 						-->
 						<div class="bottomDripForm__form-block bottomDripForm__form-block--button">
 							<input type="submit" name="submit" value="{{ site_settings.ss_popup_form_button_text }}" class="bottomDripForm__form-block-button">
 						</div>
+
+						<div class="bottomDripForm__form-errors">Please enter a valid name and email</div>
 
 					</form>
 

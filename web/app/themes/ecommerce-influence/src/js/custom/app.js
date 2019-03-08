@@ -251,6 +251,30 @@ $(function(){
 		}
 	});
 
+	$(".bottomDripForm__form-block-button").on('click', function() {
+		var errors = $(".bottomDripForm__form-errors");
+		errors.hide();
+
+		if ( $("#bottomDrip-First-Name").val() && isEmail($("#bottomDrip-email").val()) ) {
+			$(".bottomDripForm__form").submit();
+		} else {
+			errors.show();
+			return false;
+		}
+	});
+
+	$(".popUpTemplate__formBlock-form-block-button").on('click', function() {
+		var errors = $(".popUpTemplate__form-errors");
+		errors.hide();
+
+		if ( $("#popUpTemplate-First-Name").val() && isEmail($("#popUpTemplate-email").val()) ) {
+			$(".popUpTemplate__formBlock-form").submit();
+		} else {
+			errors.show();
+			return false;
+		}
+	});
+
 	function isEmail(email) {
 		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	    return regex.test(email);
