@@ -91,12 +91,10 @@
 
 .topDripForm__content-title{
 	position: relative;
-	display: inline-block;
-
+	display: inline;
 	font-size: px-to-ems(39);
 	line-height: px-to-ems(46,39);
 	color: $text-blue;
-
 	font-family: $brandon;
 	font-weight: 900;
 
@@ -105,13 +103,18 @@
 		position: absolute;
 		bottom: -1px;
 		left: -1%;
-
 		width: 102%;
 		height: 12px;
-
 		background-color: $primary-yellow;
-
 		z-index: -1;
+		@include screen-lt(500){
+			left: 79%;
+			width: 23.5%;
+		}
+		@include screen-lt(442){
+			left: 24%;
+			width: 78%;
+		}
 	}
 
 	@include screen-lt(600){
