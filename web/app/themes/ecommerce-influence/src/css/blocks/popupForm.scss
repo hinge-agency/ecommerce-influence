@@ -154,3 +154,12 @@
 		background-color: $yellow-dark;
 	}
 }
+
+.popUpTemplate__form-errors {
+	color: $primary-red;
+	font-size: px-to-ems(16);
+	margin-top: 12px;
+	font-family: $brandon;
+	font-weight: 600;
+	display: none;
+}
