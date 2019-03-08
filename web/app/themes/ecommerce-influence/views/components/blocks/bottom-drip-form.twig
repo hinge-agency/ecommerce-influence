@@ -13,7 +13,7 @@
 				</div><!--
 				--><div class="bottomDripForm__content-formContainer">
 
-					<form action="https://www.getdrip.com/forms/956224861/submissions" method="post" data-drip-embedded-form="956224861" class="bottomDripForm__form">
+					<form action="{{ site_settings.ss_popup_form_submission_url }}" method="post" data-drip-embedded-form="{{ site_settings.ss_popup_form_id }}" class="bottomDripForm__form">
 
 						<div class="bottomDripForm__form-block">
 							<label for="bottomDrip-First-Name" class="bottomDripForm__form-block-label">{{ site_settings.ss_popup_form_name_field }}</label>
