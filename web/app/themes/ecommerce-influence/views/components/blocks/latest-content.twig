@@ -10,19 +10,20 @@
 				{% else %}
 					<div class="latestContentHome__block-label latestContentHome__block-label--article">{{ post.category.name }}</div>
 				{% endif %}
-				
-				<div class="latestContentHome__block-imageWrapper">
-					<img src="{{ assets }}/images/sizingImage-episode.png" alt="Sizing Image" class="latestContentHome__block-imageWrapper-sizingImage">
-					<span class="latestContentHome__block-imageWrapper-image" style="background-image: url('{{ post.thumbnail.src }}')"></span>
+
+			   	<div class="latestContentHome__block-link-wrapper">
+					<div class="latestContentHome__block-imageWrapper">
+						<a href="{{ post.link }}" class="latestContentHome__block-image-link">
+							<img src="{{ assets }}/images/sizingImage-episode.png" alt="Sizing Image" class="latestContentHome__block-imageWrapper-sizingImage">
+							<span class="latestContentHome__block-imageWrapper-image" style="background-image: url('{{ post.thumbnail.src }}')"></span>
+						</a>
+					</div>
+
+					<div class="latestContentHome__block-textWrapper">
+						<h2 class="latestContentHome__block-title"><a href="{{ post.link }}" class="latestContentHome__block-title-link">{{ post.title }}</a></h2>
+						<p class="latestContentHome__block-text"><a href="{{ post.link }}" class="latestContentHome__block-text-link">{{ post.get_preview(50,false,false)}}</a></p>
+					</div>
 				</div>
-
-				<div class="latestContentHome__block-textWrapper">
-					<h2 class="latestContentHome__block-title"><a href="{{ post.link }}" class="latestContentHome__block-title-link">{{ post.title }}</a></h2>
-
-					<p class="latestContentHome__block-text">{{ post.get_preview(50,false,false)}}</p>
-					
-				</div>
-
 			</div>
 
 		{% endfor %}
