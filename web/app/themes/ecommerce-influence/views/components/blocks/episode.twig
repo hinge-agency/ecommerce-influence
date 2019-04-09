@@ -50,7 +50,13 @@
         </div>
         <div class="episode__content episode__content--transcript">
 
-            {{ post.transcript }}
+			<div class="episode__content-full-transcript episode__transcript-hide">
+				{{ post.transcript }}
+			</div>
+
+			<div class="episode__content-preview-transcript episode__transcript-show">
+				{{ post.transcript | slice(0,350)}}...
+			</div>
 
         </div>
         {% endif %}

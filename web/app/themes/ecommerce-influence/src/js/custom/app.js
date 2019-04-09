@@ -285,11 +285,15 @@ $(function(){
 
 	    var show = $(this).find('.episode__transcript-show');
         var hide = $(this).find('.episode__transcript-hide');
-        var transcript = $( this ).parent().next('.episode__content--transcript');
 
-        show.toggle();
-        hide.toggle();
-        transcript.toggle();
+		var previewTranscript = $('.episode__content-preview-transcript');
+		var fullTranscript = $('.episode__content-full-transcript');
+
+		show.toggle();
+		hide.toggle();
+
+		previewTranscript.toggleClass('episode__transcript-show');
+		fullTranscript.toggleClass('episode__transcript-hide');
 
     });
 
