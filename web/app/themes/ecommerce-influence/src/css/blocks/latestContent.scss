@@ -110,3 +110,9 @@
 	font-size: px-to-ems(20);
 	line-height: px-to-ems(30,20);
 }
+.latestContentHome__block-text-link {
+	color: $dark-gray;
+}
+.latestContentHome__block-link-wrapper:hover .latestContentHome__block-title-link{
+	text-decoration: underline;
+}

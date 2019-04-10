@@ -181,9 +181,9 @@
 	margin-top: 20px;
 	padding-bottom: 20px;
 
-    &--transcript {
-        display: none;
-    }
+    //&--transcript {
+    //    display: none;
+    //}
 
 	h1,h2,h3,h4,h5,h6{
 		margin-top: 20px;
@@ -486,6 +486,13 @@
 
         background-color: $primary-yellow;
     }
+}
+
+.episode__content-full-transcript {
+	display: inline;
+}
+.episode__content-preview-transcript {
+	display: none;
 }
 
 .episode__transcript-show {
