@@ -38,6 +38,8 @@
 
 			{{ content }}
 
+			{% include 'components/blocks/post-layouts.twig' with { layouts: post_layouts } %}
+
 		</div>
 
         {% if (post.transcript) %}
