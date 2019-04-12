@@ -7,10 +7,8 @@
     @include screen-lt(768) {
       padding: px-to-ems(24);
     }
-    .callToAction-title {
+    h1, h2, h3, h4, h5, h6 {
       margin: 0;
-      font-size: px-to-ems(27);
-      color: $text-blue;
       margin-bottom: px-to-ems(12);
     }
     .callToAction-text {
