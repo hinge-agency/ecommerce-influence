@@ -1,0 +1,30 @@
+.callToAction {
+  background: $primary-yellow;
+  margin-top: px-to-ems(40);
+  margin-bottom: px-to-ems(40);
+  .callToAction-content {
+    padding: px-to-ems(40);
+    @include screen-lt(768) {
+      padding: px-to-ems(24);
+    }
+    .callToAction-title {
+      margin: 0;
+      font-size: px-to-ems(27);
+      color: $text-blue;
+      margin-bottom: px-to-ems(12);
+    }
+    .callToAction-text {
+      p {
+        font-family: $brandon;
+        color: $dark-gray;
+        font-size: px-to-ems(20);
+        margin-top: 0;
+        margin-bottom: px-to-ems(12);
+        font-weight: 600;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
