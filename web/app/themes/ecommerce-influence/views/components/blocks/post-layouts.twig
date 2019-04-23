@@ -1,0 +1,10 @@
+{% for layout in layouts %}
+
+    {% if (layout.acf_fc_layout) == 'content' %}
+        {% include 'components/blocks/post-content.twig' with { layout: layout } %}
+    {% endif %}
+    {% if (layout.acf_fc_layout) == 'call_to_action' %}
+        {% include 'components/blocks/call-to-action.twig' with { layout: layout } %}
+    {% endif %}
+
+{% endfor %}
