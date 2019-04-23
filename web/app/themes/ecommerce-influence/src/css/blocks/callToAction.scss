@@ -11,12 +11,15 @@
       margin: 0;
       letter-spacing: px-to-ems(0.7);
       margin-bottom: px-to-ems(12);
+      // Make text as big on the tablet as on phone
+      @include screen-lt(768) {
+        font-size: 25px;
+      }
     }
     .callToAction-text {
       p {
         font-family: $brandon;
         color: $dark-gray;
-        font-size: px-to-ems(20);
         margin-top: 0;
         margin-bottom: px-to-ems(24);
         font-weight: 600;
@@ -25,6 +28,7 @@
           margin-bottom: 0;
         }
         @include screen-lt(768) {
+          font-size: 20px;
           margin-bottom: px-to-ems(16);
         }
       }
