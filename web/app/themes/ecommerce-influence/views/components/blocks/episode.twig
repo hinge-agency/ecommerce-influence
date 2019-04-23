@@ -36,7 +36,12 @@
 		</div><!-- HEADER END --> 
 		<div class="episode__content">
 
-			{{ content }}
+			{% if (post_layouts | length > 0) %}
+				{% include 'components/blocks/post-layouts.twig' with { layouts: post_layouts } %}
+			{% else %}
+				{{ content }}
+			{% endif %}
+
 
 		</div>
 

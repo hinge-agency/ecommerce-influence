@@ -29,8 +29,13 @@ $context['transcript_id'] = get_cat_ID('transcripts');
 // Before More Tag
 $context['excerpt'] = ($content_parts['extended'] != '' ? $content_parts['main'] : false);
 
+$context['post_layouts'] = get_field('post_layouts',$post->id);
+
+
 // After More Tag
 $context['content'] = ($content_parts['extended'] ? $content_parts['extended'] : $content_parts['main']);
+
+
 
 /* Use the site_settings sidebar (IT SHOULD BE ALWAYS SETUP), or override it with specific sidebar per page/post */
 $context['sidebar'] = !$context['sidebar'] ? $context['site_settings']['sidebar'] : $context['sidebar'];
