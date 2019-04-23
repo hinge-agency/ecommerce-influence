@@ -9,6 +9,7 @@
     }
     h1, h2, h3, h4, h5, h6 {
       margin: 0;
+      letter-spacing: px-to-ems(0.7);
       margin-bottom: px-to-ems(12);
     }
     .callToAction-text {
@@ -17,10 +18,14 @@
         color: $dark-gray;
         font-size: px-to-ems(20);
         margin-top: 0;
-        margin-bottom: px-to-ems(12);
+        margin-bottom: px-to-ems(24);
         font-weight: 600;
+        line-height: 28px;
         &:last-child {
           margin-bottom: 0;
+        }
+        @include screen-lt(768) {
+          margin-bottom: px-to-ems(16);
         }
       }
     }
