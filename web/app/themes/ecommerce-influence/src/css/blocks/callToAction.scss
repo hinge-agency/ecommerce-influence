@@ -1,0 +1,40 @@
+.callToAction {
+  background: $primary-yellow;
+  margin-top: px-to-ems(40);
+  margin-bottom: px-to-ems(40);
+  .callToAction-content {
+    padding: px-to-ems(40);
+    @include screen-lt(768) {
+      padding: px-to-ems(24);
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      letter-spacing: px-to-ems(0.7);
+      margin-bottom: px-to-ems(12);
+      // Make text as big on the tablet as on phone
+      @include screen-lt(768) {
+        font-size: 25px;
+      }
+    }
+    .callToAction-text {
+      p {
+        font-family: $brandon;
+        color: $dark-gray;
+        margin-top: 0;
+        margin-bottom: px-to-ems(24);
+        font-weight: 600;
+        line-height: 28px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        @include screen-lt(768) {
+          font-size: 20px;
+          margin-bottom: px-to-ems(16);
+        }
+      }
+      a {
+        color: $dark-gray;
+      }
+    }
+  }
+}
