@@ -17,9 +17,13 @@
 
 	text-align: left;
 
-	@include screen-lt(1000){
-		display: none;
-	}
+	//@include screen-lt(1000){
+	//	display: none;
+	//}
+
+    @include screen-lt(668){
+        display: block;
+    }
 }
 .popUpTemplate__formBlock-wrapper{
 	position: relative;
@@ -29,10 +33,20 @@
 .popUpTemplate__formBlock-form{
 	display: inline-block;
 	vertical-align: bottom;
+
+    @include screen-lt(668){
+        display: block;
+        width: 100% !important;
+        margin-left: 0!important;
+    }
 }
 .popUpTemplate__formBlock-top{
 	position: relative;
 	width: 51%;
+
+    @include screen-lt(668){
+        text-align: center;
+    }
 }
 .popUpTemplate__formBlock-form{
 	margin-top: 20px;
@@ -50,6 +64,10 @@
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
+
+    @include screen-lt(668){
+        display: block;
+    }
 }
 .popUpTemplate__formBlock-image{
 	position: relative;
