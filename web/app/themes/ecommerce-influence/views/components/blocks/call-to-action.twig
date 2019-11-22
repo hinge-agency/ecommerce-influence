@@ -1,7 +1,13 @@
 <section class="callToAction">
     <div class="callToAction-content">
         <div class="callToAction-text">
-            {{ layout.text }}
+
+            {% if (layout.custom) %}
+                {{ layout.text }}
+            {% else %}
+                {{ site_settings.default_cta_content }}
+            {% endif %}
+
         </div>
     </div>
 </section>
