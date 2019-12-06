@@ -46,23 +46,25 @@
 		</div>
 
         {% if (post.add_transcript) %}
-        <div class="episode__transcript">
-            <h2 class="episode__transcript-title">{{ post.transcript_title }}</h2>
-            <div class="episode__transcript-toggle">
-                <span class="episode__transcript-show">{{ post.show_transcript }}</span>
-                <span class="episode__transcript-hide">{{ post.hide_transcript }}</span>
+        <div class="transcript">
+            <div class="episode__transcript">
+                <h2 class="episode__transcript-title">{{ post.transcript_title }}</h2>
+                <div class="episode__transcript-toggle">
+                    <span class="episode__transcript-show">{{ post.show_transcript }}</span>
+                    <span class="episode__transcript-hide">{{ post.hide_transcript }}</span>
+                </div>
             </div>
-        </div>
-        <div class="episode__content episode__content--transcript">
+            <div class="episode__content episode__content--transcript">
 
-			<div class="episode__content-full-transcript episode__transcript-hide">
-				{{ post.transcript }}
-			</div>
+                <div class="episode__content-full-transcript episode__transcript-hide">
+                    {{ post.transcript }}
+                </div>
 
-			<div class="episode__content-preview-transcript episode__transcript-show">
-				{{ post.transcript | slice(0,350)}}...
-			</div>
+                <div class="episode__content-preview-transcript episode__transcript-show">
+                    {{ post.transcript | slice(0,350)}}...
+                </div>
 
+            </div>
         </div>
         {% endif %}
 	
