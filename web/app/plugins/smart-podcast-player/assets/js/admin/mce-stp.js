@@ -40,121 +40,58 @@
 				var backgroundPrompt;
 				var downloadablePrompt;
 				var socialPrompt;
-				if( isPaidVersionAdmin() ) {
-					// For the paid version, the color goes in a text box
-					colorPrompt = {
-						type: 'textbox',
-						name: 'color',
-						label: 'Highlight color (Hex) #',
-						value: def.bg_color ? def.bg_color : ''
-					};
-					backgroundPrompt = {
-						type: 'textbox',
-						name: 'bg',
-						label: 'Background color (Hex) #',
-						value: def.stp_background_color ? def.stp_background_color : ''
-					};
-					// The paid version has the downloadable option
-					downloadablePrompt = {
-						type: 'listbox',
-						name: 'download',
-						label: 'Display download button',
-						onselect: function(e) {},
-						values: def.download && def.download == 'false' ?
-									[{text: 'No', value: 'false'}, {text: 'Yes', value: 'true'}]
-								:
-									[{text: 'Yes', value: 'true'}, {text: 'No', value: 'false'}]
-					};
+				
+				// For the paid version, the color goes in a text box
+				colorPrompt = {
+					type: 'textbox',
+					name: 'color',
+					label: 'Highlight color (Hex) #',
+					value: def.bg_color ? def.bg_color : ''
+				};
+				backgroundPrompt = {
+					type: 'textbox',
+					name: 'bg',
+					label: 'Background color (Hex) #',
+					value: def.stp_background_color ? def.stp_background_color : ''
+				};
+				// The paid version has the downloadable option
+				downloadablePrompt = {
+					type: 'listbox',
+					name: 'download',
+					label: 'Display download button',
+					onselect: function(e) {},
+					values: def.download && def.download == 'false' ?
+								[{text: 'No', value: 'false'}, {text: 'Yes', value: 'true'}]
+							:
+								[{text: 'Yes', value: 'true'}, {text: 'No', value: 'false'}]
+				};
 
-					socialPrompt = {
-	                     type: 'listbox',
-	                     name: 'social',
-	                     label: 'Display social sharing buttons',
-	                     onselect: function(e) {},
-	                     values: [{text: 'Yes', value: 'on'}, {text: 'No', value: 'off'}]
-	                };
-					socialOptionsPrompt = {
-						type: 'container',
-						name: 'social_opts',
-						label: 'Social sharing buttons',
-						tooltip: 'Choose up to seven social sharing sites.',
-						html: '<table> \
-								<tr> \
-									<td><input type="checkbox" id="spp_socialopt_twitter" checked>Twitter</input></td> \
-									<td><input type="checkbox" id="spp_socialopt_facebook" checked>Facebook</input></td> \
-								</tr> \
-								<tr> \
-									<td><input type="checkbox" id="spp_socialopt_gplus" checked>Google+</input></td> \
-									<td><input type="checkbox" id="spp_socialopt_linkedin">LinkedIn</input></td> \
-								</tr> \
-								<tr> \
-									<td><input type="checkbox" id="spp_socialopt_pinterest">Pinterest</input></td> \
-									<td><input type="checkbox" id="spp_socialopt_email">Email</input></td> \
-								</tr> \
-								</table>'
-					};
-				} else {
-					// For the free version, only one color is available
-					colorPrompt = {
-						type: 'listbox',
-						name: 'color',
-						label: 'Color',
-						onselect: function(e) {},
-						values: [{text: 'Green', value: '60b86c'}],
-						disabled: true,
-						tooltip: 'Upgrade to choose any color of the rainbow!'
-					}
-					backgroundPrompt = {
-						type: 'listbox',
-						name: 'bg',
-						label: 'Background color',
-						onselect: function(e) {},
-						values: [{text: 'Green', value: '60b86c'}],
-						disabled: true,
-						tooltip: 'Upgrade to choose any color of the rainbow!'
-					}
-					// The free version has no downloadable option
-						downloadablePrompt = {
-						type: 'listbox',
-						name: 'download',
-						label: 'Display download button',
-						onselect: function(e) {},
-						values: [{text: 'No', value: 'false'}],
-						disabled: true,
-						tooltip: 'If you upgrade, you can decide whether to add a nifty download button to your player.'
-					};
-
-					socialPrompt = {
-	                     type: 'listbox',
-	                     name: 'social',
-	                     label: 'Display social sharing buttons',
-	                     onselect: function(e) {},
-	                     values: [{text: 'No', value: 'off'}],
-						 disabled: true,
-						 tooltip: 'Your listeners can tell their friends about your show with ease when you upgrade.'
-	                };
-					socialOptionsPrompt = {
-						type: 'container',
-						name: 'social_opts',
-						label: 'Social sharing buttons',
-						disabled: true,
-						tooltip: 'Your listeners can tell their friends about your show with ease when you upgrade.',
-						html: '<table> \
-								<tr> \
-									<td><input type="checkbox" id="spp_socialopt_twitter" disabled><label class="mce-label mce-disabled">Twitter</label></input></td> \
-									<td><input type="checkbox" id="spp_socialopt_facebook" disabled><label class="mce-label mce-disabled">Facebook</label></input></td> \
-								</tr> \
-								<tr> \
-									<td><input type="checkbox" id="spp_socialopt_gplus" disabled><label class="mce-label mce-disabled">Google+</label></input></td> \
-									<td><input type="checkbox" id="spp_socialopt_linkedin" disabled><label class="mce-label mce-disabled">LinkedIn</label></input></td> \
-								</tr> \
-								<tr> \
-									<td><input type="checkbox" id="spp_socialopt_pinterest" disabled><label class="mce-label mce-disabled">Pinterest</label></input></td> \
-									<td><input type="checkbox" id="spp_socialopt_email" disabled><label class="mce-label mce-disabled">Email</label></input></td> \
-								</tr> \
-								</table>'
-					};
-				}
+				socialPrompt = {
+					 type: 'listbox',
+					 name: 'social',
+					 label: 'Display social sharing buttons',
+					 onselect: function(e) {},
+					 values: [{text: 'Yes', value: 'on'}, {text: 'No', value: 'off'}]
+				};
+				socialOptionsPrompt = {
+					type: 'container',
+					name: 'social_opts',
+					label: 'Social sharing buttons',
+					tooltip: 'Choose up to seven social sharing sites.',
+					html: '<table> \
+							<tr> \
+								<td><input type="checkbox" id="spp_socialopt_twitter" checked>Twitter</input></td> \
+								<td><input type="checkbox" id="spp_socialopt_facebook" checked>Facebook</input></td> \
+							</tr> \
+							<tr> \
+								<td><input type="checkbox" id="spp_socialopt_linkedin">LinkedIn</input></td> \
+								<td><input type="checkbox" id="spp_socialopt_pinterest">Pinterest</input></td> \
+							</tr> \
+							<tr> \
+								<td><input type="checkbox" id="spp_socialopt_email">Email</input></td> \
+							</tr> \
+							</table>'
+				};
 				
                 // Open window
                 editor.windowManager.open( {
@@ -327,56 +264,51 @@
                     	if( e.data.image != '' && ( !def.stp_image || def.stp_image != e.data.image ) )
                     		shortcode += ' image="' + e.data.image + '" ';
 
-                    	if( isPaidVersionAdmin() ) {
+						if( e.data.color != '' && ( !def.bg_color || def.bg_color != e.data.color ) )
+							shortcode += ' color="' + e.data.color + '" ';
 
-							if( e.data.color != '' && ( !def.bg_color || def.bg_color != e.data.color ) )
-                    			shortcode += ' color="' + e.data.color + '" ';
-
-							if( !def.stp_background
-									|| ( e.data.background_type != def.stp_background )
-									|| ( e.data.background_type == 'color' && e.data.bg != def.stp_background_color ) ) {
-								if( e.data.background_type == 'color' ) {
-									shortcode += ' background="' + e.data.bg + '" ';
-								} else {
-									shortcode += ' background="' + e.data.background_type + '" ';
-								}
-							}
-
-							if( def.download ) {
-								if( e.data.download != def.download )
-									shortcode += ' download="' + e.data.download + '" ';
+						if( !def.stp_background
+								|| ( e.data.background_type != def.stp_background )
+								|| ( e.data.background_type == 'color' && e.data.bg != def.stp_background_color ) ) {
+							if( e.data.background_type == 'color' ) {
+								shortcode += ' background="' + e.data.bg + '" ';
 							} else {
-								if( e.data.download != 'true' )
-									shortcode += ' download="' + e.data.download + '" ';
+								shortcode += ' background="' + e.data.background_type + '" ';
 							}
+						}
 
-                    		if( e.data.social != 'on' ) {
-                    			shortcode += ' social="false" ';
-							} else {
-								// Default: Twitter, Facebook, G+ true; others false
-								if( ! jQuery("#spp_socialopt_twitter").is( ":checked" ) )
-									shortcode += ' social_twitter="false" ';
-								if( ! jQuery("#spp_socialopt_facebook").is( ":checked" ) )
-									shortcode += ' social_facebook="false" ';
-								if( ! jQuery("#spp_socialopt_gplus").is( ":checked" ) )
-									shortcode += ' social_gplus="false" ';
-								if( jQuery("#spp_socialopt_linkedin").is( ":checked" ) )
-									shortcode += ' social_linkedin="true" ';
-								if( jQuery("#spp_socialopt_pinterest").is( ":checked" ) )
-									shortcode += ' social_pinterest="true" ';
-								if( jQuery("#spp_socialopt_email").is( ":checked" ) )
-									shortcode += ' social_email="true" ';
-							}
-							
-							if( e.data.permalink != '' )
-								shortcode += ' permalink="' + e.data.permalink + '" ';
-							if( e.data.tweet_text != '' )
-								shortcode += ' tweet_text="' + e.data.tweet_text + '" ';
-							if( e.data.hashtag != '' )
-								shortcode += ' hashtag="' + e.data.hashtag.replace('#','') + '" ';
-							if( e.data.twitter_username != '' )
-								shortcode += ' twitter_username="' + e.data.twitter_username.replace('@','') + '" ';
-                    	}
+						if( def.download ) {
+							if( e.data.download != def.download )
+								shortcode += ' download="' + e.data.download + '" ';
+						} else {
+							if( e.data.download != 'true' )
+								shortcode += ' download="' + e.data.download + '" ';
+						}
+
+						if( e.data.social != 'on' ) {
+							shortcode += ' social="false" ';
+						} else {
+							// Default: Twitter, Facebook true; others false
+							if( ! jQuery("#spp_socialopt_twitter").is( ":checked" ) )
+								shortcode += ' social_twitter="false" ';
+							if( ! jQuery("#spp_socialopt_facebook").is( ":checked" ) )
+								shortcode += ' social_facebook="false" ';
+							if( jQuery("#spp_socialopt_linkedin").is( ":checked" ) )
+								shortcode += ' social_linkedin="true" ';
+							if( jQuery("#spp_socialopt_pinterest").is( ":checked" ) )
+								shortcode += ' social_pinterest="true" ';
+							if( jQuery("#spp_socialopt_email").is( ":checked" ) )
+								shortcode += ' social_email="true" ';
+						}
+						
+						if( e.data.permalink != '' )
+							shortcode += ' permalink="' + e.data.permalink + '" ';
+						if( e.data.tweet_text != '' )
+							shortcode += ' tweet_text="' + e.data.tweet_text + '" ';
+						if( e.data.hashtag != '' )
+							shortcode += ' hashtag="' + e.data.hashtag.replace('#','') + '" ';
+						if( e.data.twitter_username != '' )
+							shortcode += ' twitter_username="' + e.data.twitter_username.replace('@','') + '" ';
 
                     	shortcode += ']';
 

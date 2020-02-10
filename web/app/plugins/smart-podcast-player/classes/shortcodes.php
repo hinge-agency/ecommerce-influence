@@ -44,6 +44,9 @@ class SPP_Shortcodes {
 		}
 		
 		extract( $processed_atts );
+		
+		// Google Plus discontinued April 2019
+		$social_gplus = 'false';
 
 		// Check URL to see if it is an html link or a url
 		if( strpos( $url, ' href="' ) !== false ) {
@@ -93,10 +96,15 @@ class SPP_Shortcodes {
 			$email_use_spp_cta = false;
 		}
 		// If there's no embedded HTML for a provider, remove the email button entirely
-		if (isset($email_portal)) {
+		if (isset($email_portal) && isset($email_button_function) && $email_button_function == 'email') {
 			if (($email_portal == 'mc' && empty($email_mc_html))
 					|| ($email_portal == 'ck' && empty($email_ck_html))
-					|| ($email_portal == 'enable' && empty($email_embed_html))) {
+					|| ($email_portal == 'enable' &&
+						(empty($email_embed_html)
+						&& empty($email_embed_html_ctct)
+						&& empty($email_embed_js)
+						&& empty($email_embed_shsp)
+						))) {
 				$email_portal = 'none';
 			}
 		}
@@ -117,6 +125,13 @@ class SPP_Shortcodes {
 		$html .= 'data-uid="' . $uid . '" ';
 
 		$html .= '></div>';
+		
+		// For Sharpspring, put the embed code on the page
+		if (!empty($email_embed_shsp)) {
+			$html .= '<div class="spp-shsp-form spp-shsp-form-' . $uid . '">';
+			$html .= $email_embed_shsp;
+			$html .= '</div>';
+		}
 		
 		// Put all of the attributes back into an array for insertion onto the page
 		$js_obj[ 'options' ] = array();
@@ -199,7 +214,7 @@ class SPP_Shortcodes {
 			$shortcode_atts[ 'social' ] = 'true';
 			$shortcode_atts[ 'social_twitter' ] = 'true';
 			$shortcode_atts[ 'social_facebook' ] = 'true';
-			$shortcode_atts[ 'social_gplus' ] = 'true';
+			$shortcode_atts[ 'social_gplus' ] = 'false'; // Google discontinued Apr 2019
 			if( $is_full_player )
 				$shortcode_atts[ 'social_email' ] = 'true';
 		}
@@ -236,14 +251,22 @@ class SPP_Shortcodes {
 			'social_email'          => 'false',
 			'sort'                  => 'newest',
 			'speedcontrol'          => 'true',
+			'spp_branding'          => 'true',
 			'style'                 => 'light',
+			'subscribe_acast'       => '',
 			'subscribe_itunes'      => '',
 			'subscribe_buzzsprout'  => '',
 			'subscribe_googleplay'  => '',
+			'subscribe_googlepodcasts' => '',
 			'subscribe_iheartradio' => '',
+			'subscribe_playerfm'    => '',
 			'subscribe_pocketcasts' => '',
 			'subscribe_soundcloud'  => '',
+			'subscribe_spotify'     => '',
+			'subscribe_spreaker'    => '',
 			'subscribe_stitcher'    => '',
+			'subscribe_tunein'      => '',
+			'subscribe_overcast'    => '',
 			'subscribe_rss'         => 'true',
 			'tweet_text'            => '',
 			'twitter_username'      => '',
@@ -271,6 +294,12 @@ class SPP_Shortcodes {
 			'email_mc_list_id'            => '',
 			'email_mc_html'               => '',
 			'email_embed_html'            => '',
+			'email_embed_html_ctct'       => '',
+			'email_embed_js'              => '',
+			'email_embed_shsp'            => '',
+			'email_button_function'       => 'email',
+			'email_link'                  => '',
+			'email_js_function'           => '',
 		);
 	}
 	
@@ -327,17 +356,38 @@ class SPP_Shortcodes {
 	 * @return string $html Shortcode HTML
 	 */
 	public static function shortcode_smart_track_player_latest( $atts = array() ) {
+		
+		if (!isset($atts['url'])) {
+			$found_sticky = false;
+			if (isset($atts['sticky']) && $atts['sticky'] == "true") {
+				$sticky = get_option( 'spp_player_sticky' );
+				if ($sticky && isset($sticky['url']) && $sticky['url'] !== '') {
+					$atts['url'] = $sticky['url'];
+					$found_sticky = true;
+				}
+			}
+			if (!$found_sticky) {
+				$settings = get_option( 'spp_player_defaults' );
+				if (isset($settings['url'])) {
+					$atts['url'] = $settings['url'];
+				}
+			}
+		}
 
-		// Check if we've already gotten the feed stored in a transient
-		list( $transient_name, $timeout ) = SPP_Transients::spp_transient_info( array(
-				'purpose' => 'tracks from feed url',
-				'url' => $atts['url'],
-				'episode_limit' => 1 ) );
-		$data = get_transient( $transient_name );
+		if (isset($atts['url'])) {
+			// Check if we've already gotten the feed stored in a transient
+			list( $transient_name, $timeout ) = SPP_Transients::spp_transient_info( array(
+					'purpose' => 'tracks from feed url',
+					'url' => $atts['url'],
+					'episode_limit' => 1 ) );
+			$data = get_transient( $transient_name );
+		}
 		
 		// If we have the transient data
 		if( $data != null
+				&& is_array( $data )
 				&& isset( $data['tracks'] )
+				&& is_array( $data['tracks'] )
 				&& isset( $data['tracks'][0]->stream_url )
 				&& isset( $data['tracks'][0]->title )
 				&& isset( $data['tracks'][0]->show_name ) ) {
@@ -385,9 +435,27 @@ class SPP_Shortcodes {
 			'social_pinterest' => 'false',
 			'social_email'     => 'false',
 			'speedcontrol'     => 'true',
+			'subscribe_in_stp' => 'true',
+			'subscribe_acast'       => '',
+			'subscribe_itunes'      => '',
+			'subscribe_buzzsprout'  => '',
+			'subscribe_googleplay'  => '',
+			'subscribe_googlepodcasts' => '',
+			'subscribe_iheartradio' => '',
+			'subscribe_playerfm'    => '',
+			'subscribe_pocketcasts' => '',
+			'subscribe_soundcloud'  => '',
+			'subscribe_spotify'     => '',
+			'subscribe_spreaker'    => '',
+			'subscribe_stitcher'    => '',
+			'subscribe_tunein'      => '',
+			'subscribe_overcast'    => '',
+			'subscribe_rss'         => '',
 			'permalink'        => '',
+			'position'         => 'bottom',
 			'show_numbering'   => '',
 			'style'            => 'light',
+			'sticky'           => 'false',
 			// 'title' has special treatment; it's left out here
 			'tweet_text'       => '',
 			'twitter_username' => '',
@@ -415,14 +483,21 @@ class SPP_Shortcodes {
 			'email_mc_list_id'            => '',
 			'email_mc_html'               => '',
 			'email_embed_html'            => '',
+			'email_embed_html_ctct'       => '',
+			'email_embed_js'              => '',
+			'email_embed_shsp'            => '',
+			'email_button_function'       => 'email',
+			'email_link'                  => '',
+			'email_js_function'           => '',
 		);
 	}
 	
-	private static function get_stp_attribute_settings( $atts ) {
+	private static function get_stp_attribute_settings( $atts, $is_sticky_player ) {
 		
 		$settings = get_option( 'spp_player_defaults' );
 		$advanced = get_option( 'spp_player_advanced' );
 		$news = get_option( 'spp_player_email' );
+		$sticky = get_option( 'spp_player_sticky' );
 		$out = array();
 		
 		foreach( $atts as $key => $value ) {
@@ -434,6 +509,8 @@ class SPP_Shortcodes {
 				$key_short = substr( $key, 6 );
 				if( isset( $news[$key_short] ) )
 					$out[$key] = $news[$key_short];
+			} else {
+				$out[$key] = $atts[$key];
 			}
 		}
 		
@@ -448,10 +525,23 @@ class SPP_Shortcodes {
 			$out['background'] = $settings['stp_background'];
 		if( isset( $settings['stp_background_color'] ) )
 			$out['stp_background_color'] = $settings['stp_background_color'];
+		if( isset( $settings['subscribe_in_stp'] ) )
+			$out['subscribe'] = $settings['subscribe_in_stp'];
+		if( isset( $settings['url'] ) )
+			$out['subscribe_rss'] = $settings['url'];
 		
 		// If the artist is the empty string, we treat it as null
 		if( isset( $out['artist'] ) && $out['artist'] === '' )
 			unset( $out['artist'] );
+		
+		// Apply sticky settings
+		if ( $is_sticky_player && $sticky ) {
+			foreach( $atts as $key => $value )
+				if ( isset( $sticky[$key] ) )
+					$out[$key] = $sticky[$key];
+			if ( isset( $sticky['show_name'] ) )
+				$out['artist'] = $sticky['show_name'];
+		}
 		
 		return $out;
 	}
@@ -477,11 +567,16 @@ class SPP_Shortcodes {
 		if( $settings == false )
 			$settings = array();
 		
+		if(empty($shortcode_atts))
+			$shortcode_atts = array();
+		
+		$is_sticky_player = isset($shortcode_atts['sticky']) && $shortcode_atts['sticky'] == "true";
+		
 		// Get the attribute values in order:
 		//   1) Static defaults 2) Settings page 3) Shortcode
 		// Later definitions override earlier ones
 		$default_atts = self::get_stp_attribute_defaults();
-		$settings_page = self::get_stp_attribute_settings( $default_atts );
+		$settings_page = self::get_stp_attribute_settings( $default_atts, $is_sticky_player );
 		$atts = array_merge( $default_atts, $settings_page, $shortcode_atts );
 		
 		SPP_Core::enqueue_assets( $atts['html_assets'] );
@@ -516,6 +611,11 @@ class SPP_Shortcodes {
 			$atts['speedcontrol'] = false;
 		}
 		
+		// If this is the sticky player, no option for background color
+		if( $atts['sticky'] == 'true' ) {
+			$atts['background'] = 'default';
+		}
+		
 		// v2.4: No more Zapier, remove basic (SPP) CTA
 		if (array_key_exists('email_portal', $atts) && $atts['email_portal'] === 'zp')
 			$atts['email_portal'] = 'none';
@@ -523,18 +623,48 @@ class SPP_Shortcodes {
 			$atts['email_use_spp_cta'] = false;
 		}
 		// If there's no embedded HTML for a provider, remove the email button entirely
-		if (array_key_exists('email_portal', $atts)) {
+		if (array_key_exists('email_portal', $atts)
+				&& array_key_exists('email_button_function', $atts)
+				&& $atts['email_button_function'] == 'email') {
 			if (($atts['email_portal'] == 'mc' &&
 						(!array_key_exists('email_mc_html', $atts) || $atts['email_mc_html'] == ''))
 					|| ($atts['email_portal']== 'ck' &&
 						(!array_key_exists('email_ck_html', $atts) || $atts['email_ck_html'] == ''))
 					|| ($atts['email_portal']== 'enable' &&
-						(!array_key_exists('email_embed_html', $atts) || $atts['email_embed_html'] == ''))) {
+						(!array_key_exists('email_embed_html',      $atts) || $atts['email_embed_html']      == '') && 
+						(!array_key_exists('email_embed_js',        $atts) || $atts['email_embed_js']        == '') &&
+						(!array_key_exists('email_embed_html_ctct', $atts) || $atts['email_embed_html_ctct'] == '') &&
+						(!array_key_exists('email_embed_shsp',      $atts) || $atts['email_embed_shsp']      == ''))) {
 				$atts['email_portal'] = 'none';
 			}
 		}
 		
 		$atts = self::spp_social_customize( $atts, false );
+		$atts['social_gplus'] = 'false'; // Discontinued April 2019
+		
+		// If subscribe is set to false, all of the subscription options are cleared
+		if (array_key_exists('subscribe', $atts) && $atts['subscribe'] === 'false') {
+			$sub_options = array(
+				'subscribe_acast',
+				'subscribe_itunes',
+				'subscribe_buzzsprout',
+				'subscribe_googleplay',
+				'subscribe_googlepodcasts',
+				'subscribe_iheartradio',
+				'subscribe_playerfm',
+				'subscribe_pocketcasts',
+				'subscribe_soundcloud',
+				'subscribe_spotify',
+				'subscribe_spreaker',
+				'subscribe_stitcher',
+				'subscribe_tunein',
+				'subscribe_overcast',
+				'subscribe_rss',
+			);
+			foreach ($sub_options as $sub_opt) {
+				$atts[$sub_opt] = '';
+			}
+		}
 		
 		// Check and/or set the player's unique ID
 		if( $atts['uid'] !== '' ) {
@@ -551,7 +681,10 @@ class SPP_Shortcodes {
 		//    based on background and possibly stp_background_color
 		if( $atts['background'] == 'default' ) {
 			$atts['background_type'] = 'default';
-			$atts['background_color'] = $atts['style'] === 'dark' ? '#2A2A2A' : '#EEEEEE';
+			if ($atts['sticky'] == 'true')
+				$atts['background_color'] = $atts['style'] === 'dark' ? '#2A2A2A' : '#FFFFFF';
+			else
+				$atts['background_color'] = $atts['style'] === 'dark' ? '#2A2A2A' : '#EEEEEE';
 		} elseif( $atts['background'] === 'blurred_logo' || $atts['background'] === 'blurry_logo'
 				|| $atts['background'] === 'blurred logo' || $atts['background'] === 'blurry logo' ) {
 			$atts['background_type'] = 'blurred_logo';
@@ -574,25 +707,6 @@ class SPP_Shortcodes {
 		unset( $atts['background'] );
 		unset( $atts['stp_background_color'] );
 		
-		if( $is_latest_player == false ) {
-			// Verify the URL is for an MP3 or M4A file
-			$is_audio = false;
-			if( strpos( $atts['url'], 'soundcloud.com' ) !== false ) {
-				$test = rtrim( $atts['url'], '/' );
-				$count = substr_count( $test, '/' );
-				if( $count > 3 && strpos( $atts['url'], '/sets/' ) === false ) {
-					$is_audio = true;
-				}		
-			} else {
-				if( strpos( $atts['url'], '.mp3' ) !== false || strpos( $atts['url'], '.m4a' ) !== false ) {
-					$is_audio = true;
-				}
-			}
-			// If it's not an MP3 or M4A, we give nothing out so as to not crash the page.
-			if( !$is_audio )
-				return;
-		}
-
 		list( $transient_name, $timeout ) = SPP_Transients::spp_transient_info( array(
 				'purpose' => 'track data from track url',
 				'url' => $atts['url'] ) );
@@ -640,9 +754,27 @@ class SPP_Shortcodes {
 		$class = 'smart-track-player-container';
 		// Add the color class every time
 		$class .= ' stp-color-' . $atts['color'] . '-' . $atts['background_color'];
+		// Mobile class
+		if( $atts['view'] === 'mobile' ) {
+			$class .= ' spp-stp-mobile ';
+		} else {
+			$class .= ' spp-stp-desktop ';
+		}
+		// Dark class
+		if( $atts['style'] === 'dark' )
+			$class .= ' smart-track-player-dark ';
+		
+		// Put the div on the page
 		$html = '<div class="' . trim( $class ) . '"';
 		$html .= ' data-uid="' . $atts['uid'] . '"';
 		$html .= '></div>';
+		
+		// For Sharpspring, put the embed code on the page
+		if (array_key_exists('email_embed_shsp', $atts)) {
+			$html .= '<div class="spp-shsp-form spp-shsp-form-' . $atts['uid'] . '">';
+			$html .= $atts['email_embed_shsp'];
+			$html .= '</div>';
+		}
 		
 		// Rename 'image' to 'show_logo' for HTML portability
 		if( !empty( $atts[ 'image' ] ) )
@@ -669,6 +801,9 @@ class SPP_Shortcodes {
 		
 		wp_localize_script( SPP_Core::PLUGIN_SLUG . '-plugin-script',
 				'SmartPodcastPlayer_uid_' . $atts['uid'], $js_obj );
+		if ($atts['html_assets'] === 'true') {
+			$html .= self::get_injected_jsobj_html($atts['uid'], $js_obj);
+		}
 				
 		// Also save the data, just in case we need to get it from AJAX
 		list( $transient_name, $timeout ) = SPP_Transients::spp_transient_info( array(
@@ -683,11 +818,97 @@ class SPP_Shortcodes {
 		}
 	}
 	
+	public static function get_injected_jsobj_html($uid, $js_obj) {
+		$output = '';
+		$output .= '<script type="text/javascript">';
+		$output .=    'var SmartPodcastPlayer_uid_' . $uid . ' = ';
+		$output .=        json_encode($js_obj);
+		$output .=    ';';
+		$output .= '</script>';
+		return $output;
+	}
+	
+	public static function shortcode_stp_timestamp( $atts, $content = null ) {
+		if (!isset($atts['time']))
+			return $content;
+		
+		// Figure the number of seconds
+		$time = explode(":", $atts['time']);
+		$t_len = count($time);
+		$seconds = intval($time[$t_len - 1], 10);
+		if ($t_len > 1)
+			$seconds += 60 * intval($time[$t_len - 2], 10);
+		if ($t_len > 2)
+			$seconds += 60 * 60 * intval($time[$t_len - 3], 10);
+		
+		$html = '<a class="spp-timestamp" href="#" data-seconds="';
+		$html .= $seconds . '"';
+		if (isset($atts['player_uid']))
+			$html .= ' data-player_uid="' . $atts['player_uid'] . '"';
+		$html .= '>';
+		if ($atts['show_times'] == 'true') {
+			$sec = $seconds % 60;
+			$min = floor($seconds / 60) % 60;
+			$hrs = floor($seconds / 3600);
+			$html .= '[';
+			if ($hrs > 0)
+				$html .= $hrs . ':';
+			if ($hrs > 0 && $min < 10)
+				$html .= '0';
+			$html .= $min . ':';
+			if ($sec < 10)
+				$html .= '0';
+			$html .= $sec . '] ';
+		}
+		$html .= $content . '</a><br>';
+		return $html;
+	}
+	
+	public static function shortcode_stp_timestamps($atts) {
+		if (!isset($atts['ref']))
+			return '';
+		$ref = $atts['ref'];
+		$timestamps = get_option('spp_player_timestamps');
+		if (!$timestamps
+				|| !isset($timestamps['refs'])
+				|| !isset($timestamps['stamps'])
+				|| !isset($timestamps['refs'][$ref])
+				|| !isset($timestamps['stamps'][$timestamps['refs'][$ref]]))
+			return '';
+		
+		$show_times = isset($timestamps['show_times']) ? $timestamps['show_times'] : 'true';
+		
+		$url = $timestamps['refs'][$ref];
+		$stamps = $timestamps['stamps'][$timestamps['refs'][$ref]];
+		$html = '<div class="spp-timestamp-set" data-url="' . $url . '">';
+		foreach ($stamps as $seconds => $content) {
+			$sc_atts = array(
+					'time' => $seconds,
+					'show_times' => $show_times,
+			);
+			if (isset($atts['player_uid']))
+				$sc_atts['player_uid'] = $atts['player_uid'];
+			$html .= self::shortcode_stp_timestamp($sc_atts, $content);
+		}
+		$html .= '</div>';
+		return $html;
+	}
+	
 	/**
 	 * Gives a four-character ID generated from all the options
 	 */
+	protected static $used_uids = array();
 	private static function get_uid($atts) {
 		$hash = md5(serialize($atts));
-		return substr($hash, -8); // 8 characters should do
+		$uid = substr($hash, -8); // 8 characters should do
+		while (in_array($uid, self::$used_uids)) {
+			// Add one to the UID until it hasn't been used
+			if ($uid == "ffffffff")
+				$uid = "0";
+			else
+				$uid = dechex(hexdec($uid)+1);
+		}
+		self::$used_uids[] = $uid;
+		return $uid;
 	}
 }
