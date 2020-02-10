@@ -28,7 +28,7 @@ class SPP_Core {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '2.4.0';
+	const VERSION = '2.8.11';
 
 	/**
 	 * The variable name is used as the text domain when internationalizing strings
@@ -39,7 +39,7 @@ class SPP_Core {
 	 *
 	 * @var      string
 	 */
-	const PLUGIN_SLUG = 'askpat-player';
+	const PLUGIN_SLUG = 'smart-podcast-player';
 
 
 	/**
@@ -76,27 +76,23 @@ class SPP_Core {
 		add_shortcode( 'smart_track_player_latest', array( 'SPP_Shortcodes', 'shortcode_smart_track_player_latest' ) );
 		add_shortcode( 'smart_podcast_player', array( 'SPP_Shortcodes', 'shortcode_smart_podcast_player' ) );
 		add_shortcode( 'smart_podcast_player_assets', array( $this, 'enqueue_assets' ) );
+		add_shortcode( 'stp_timestamp', array( 'SPP_Shortcodes', 'shortcode_stp_timestamp' ) );
+		add_shortcode( 'stp_timestamps', array( 'SPP_Shortcodes', 'shortcode_stp_timestamps' ) );
+		
+		add_action( 'wp_ajax_nopriv_get_stp_tracks_new', array( 'SPP_Ajax_Tracks', 'ajax_get_stp_new' ) );
+		add_action( 'wp_ajax_get_stp_tracks_new', array( 'SPP_Ajax_Tracks', 'ajax_get_stp_new' ) );
 		
 		add_action( 'wp_ajax_nopriv_get_spplayer_tracks', array( 'SPP_Ajax_Feed', 'ajax_get_tracks' ) );
 		add_action( 'wp_ajax_get_spplayer_tracks', array( 'SPP_Ajax_Feed', 'ajax_get_tracks' ) );
 		
 		add_action( 'wp_ajax_nopriv_get_spplayer_tracks_array', array( 'SPP_Ajax_Feed', 'ajax_get_tracks_array' ) );
 		add_action( 'wp_ajax_get_spplayer_tracks_array', array( 'SPP_Ajax_Feed', 'ajax_get_tracks_array' ) );
-
-		add_action( 'wp_ajax_nopriv_fetch_track_data', array( 'SPP_Ajax_Tracks', 'fetch_track_data' ) );
-		add_action( 'wp_ajax_fetch_track_data', array( 'SPP_Ajax_Tracks', 'fetch_track_data' ) );
-
-		add_action( 'wp_ajax_nopriv_get_soundcloud_track', array( 'SPP_Ajax_Tracks', 'ajax_get_soundcloud_track' ) );
-		add_action( 'wp_ajax_get_soundcloud_track', array( 'SPP_Ajax_Tracks', 'ajax_get_soundcloud_track' ) );
 		
 		add_action( 'wp_ajax_nopriv_spp_newsletter_subscribe', array( 'SPP_Ajax_Newsletter', 'spp_newsletter_subscribe' ) );
 		add_action( 'wp_ajax_spp_newsletter_subscribe', array( 'SPP_Ajax_Newsletter', 'spp_newsletter_subscribe' ) );
 		
 		add_action( 'wp_ajax_nopriv_spp_get_jsobj', array( 'SPP_Ajax_Jsobj', 'get_js_obj' ) );
 		add_action( 'wp_ajax_spp_get_jsobj', array( 'SPP_Ajax_Jsobj', 'get_js_obj' ) );
-		
-		add_action( 'wp_ajax_spp_test_zapier', array( 'SPP_Ajax_Newsletter', 'test_zapier' ) );
-		add_action( 'wp_ajax_nopriv_spp_test_zapier', array( 'SPP_Ajax_Newsletter', 'test_zapier' ) );
 
 		add_action( 'template_redirect', array( $this, 'force_download' ), 1 );
 		
@@ -105,6 +101,8 @@ class SPP_Core {
 
 		// Use shortcodes in text widgets.
 		add_filter('widget_text', 'do_shortcode');
+		
+		add_action( 'wp_footer', array( 'SPP_Core', 'maybe_add_sticky_player_footer' ), 10 );
 
 	}
 
@@ -172,6 +170,18 @@ class SPP_Core {
 				return;
 			}
 		}
+		
+		// If we're using Constant Contact, we manually add the JS (similar to HTML assets)
+		$ctct_html = '';
+		$email_options = get_option('spp_player_email');
+		if ($email_options && isset($email_options['portal']) && $email_options['portal'] === 'enable'
+				&& isset($email_options['service']) && $email_options['service'] === 'ctct') {
+			add_action( 'wp_footer', array( 'SPP_Core', 'add_ctct_js_to_html' ), 100 );
+			// Also, the HTML needs to be put in the global options below
+			if (isset($email_options['embed_html_ctct'])) {
+				$ctct_html = $email_options['embed_html_ctct'];
+			}
+		}
 			
 		// Get the Soundcloud key if set, or just use our own
 		$soundcloud_options = get_option( 'spp_player_soundcloud' );
@@ -182,7 +192,9 @@ class SPP_Core {
 		}
 
 		// Put the JS object with our general settings onto the page
+		$advanced_options = get_option( 'spp_player_advanced' );
 		$importantStr = self::get_css_important_str() === ' !important' ? 'important' : '';
+		$iom = isset($advanced_options['init_on_mutation']) && $advanced_options['init_on_mutation'] === 'true';
 		wp_localize_script( self::PLUGIN_SLUG . '-plugin-script', 'AP_Player', array(
 			'homeUrl' => home_url(),
 			'baseUrl' => SPP_ASSETS_URL . 'js/',
@@ -192,13 +204,14 @@ class SPP_Core {
 			'importantStr' => $importantStr,
 			'licensed' => self::is_paid_version(),
 			'debug_output' => self::debug_output(),
+			'ctct_html' => $ctct_html,
+			'init_on_mutation' => $iom,
 		));
 	
 		// Enqueue our CSS file.  If the important option is set, use the override file
 		$css_file = "css/style";
 		if ( "important" == $importantStr )
 			$css_file = $css_file . "-override";
-		$advanced_options = get_option( 'spp_player_advanced' );
 		if( isset( $advanced_options[ 'versioned_assets' ] ) && $advanced_options[ 'versioned_assets' ] === 'false') {
 			$css_file = $css_file . '.css';
 			$version_string = self::VERSION;
@@ -245,6 +258,82 @@ class SPP_Core {
 			return true;
 		}
 		return false;
+	}
+	
+	public static function maybe_add_sticky_player_footer() {
+		echo do_shortcode(self::maybe_add_sticky_player(""));
+	}
+	
+	public static function maybe_add_sticky_player($content) {
+		
+		$sticky_settings = get_option( 'spp_player_sticky' );
+		$dbg = self::debug_output();
+		if (!$sticky_settings || !isset($sticky_settings['enabled']) || $sticky_settings['enabled'] !== 'true')
+			return $content . $dbg ? '<!-- SPP sticky: Not enabled. -->' : '';
+		
+		global $post;
+		global $wp;
+		if(!$post instanceof WP_Post)
+			return $content . $dbg ? '<!-- SPP sticky: $post is not WP_Post. -->' : '';
+		
+		if (isset($sticky_settings['post_types']))
+			$type_array = preg_split("/\s+/", $sticky_settings['post_types']);
+		else
+			$type_array = array();
+		if (isset($sticky_settings['post_type_page']) && $sticky_settings['post_type_page'] == 'false') {
+		} else {
+			$type_array[] = 'page';
+		}
+		if (isset($sticky_settings['post_type_post']) && $sticky_settings['post_type_post'] == 'false') {
+		} else {
+			$type_array[] = 'post';
+		}
+		
+		if (in_array($post->post_type, $type_array)) {
+			if (isset($sticky_settings['excluded_pages'])) {
+				$current_url = trailingslashit(home_url($wp->request));
+				$struct = get_option('permalink_structure');
+				if (!$struct) {
+					$current_url = add_query_arg($wp->query_vars, $current_url);
+				}
+				$current_url =  preg_replace("/^http(s?):\/\//", "", $current_url);
+				$excl_array = preg_split("/\s+/", $sticky_settings['excluded_pages']);
+				foreach ($excl_array as $excl) {
+					$excl = str_replace(array("\r", "\n"), '', $excl);
+					$excl =  preg_replace("/^http(s?):\/\//", "", $excl);
+					if ($current_url === $excl) {
+						return $content . $dbg ? '<!-- SPP sticky: Page excluded. -->' : '';
+					}
+					$excl = trailingslashit($excl);
+					if ($current_url === $excl) {
+						return $content . $dbg ? '<!-- SPP sticky: Page excluded. -->' : '';
+					}
+				}
+			}
+			return self::add_sticky_player($content);
+		} else {
+			return $content . $dbg ? '<!-- SPP sticky: Post type is ' . $post->post_type . ' -->' : '';
+		}
+	}
+	
+	public static function add_sticky_player($content) {
+		$sticky_settings = get_option( 'spp_player_sticky' );
+		if ($sticky_settings
+				&& isset($sticky_settings['latest'])
+				&& $sticky_settings['latest'] == 'false'
+				&& isset($sticky_settings['episode_url'])) {
+			$sc = '[smart_track_player sticky="true" url="' . $sticky_settings['episode_url'] . '" ';
+		} else {
+			$sc = '[smart_track_player_latest sticky="true" ';
+		}
+		if ($sticky_settings && isset($sticky_settings['shortcode_options'])) {
+			$sc_opts = $sticky_settings['shortcode_options'];
+			$sc_opts = str_replace(array("\r", "\n"), ' ', $sc_opts);
+			$sc = $sc . $sc_opts;
+		}
+		$sc = $sc . ']';
+		$bumper = '<div class="spp-sticky-bumper"></div>';
+		return $content . $sc . $bumper;
 	}
 
 	/**
@@ -427,6 +516,7 @@ class SPP_Core {
 				add_option( 'spp_player_advanced', array() );
 			if( ! get_option( 'spp_player_soundcloud' ) )
 				add_option( 'spp_player_soundcloud', array() );
+			// Sticky options set below
 	        
 	        // Migrate ap_player options to spp_player options.
 			// This change happened around August 2014.
@@ -495,7 +585,7 @@ class SPP_Core {
 			
 			// Version 2.4: Zapier removed; change to "none".  Basic CTA also removed.
 			// Portals changed to just 'none' or 'enable'.  MC/CK embed code moved to embed_html.
-			$email_opts = get_option( 'spp_player_email' );
+			$email_opts = get_option( 'spp_player_email', array() );
 			if( $email_opts !== false ) {
 				if (array_key_exists( 'portal', $email_opts )) {
 					if ($email_opts['portal'] === 'zp') {
@@ -507,19 +597,52 @@ class SPP_Core {
 						}
 					} else if ($email_opts['portal'] === 'mc') {
 						$email_opts['portal'] = 'enable';
-						error_log('Mailchimp.');
-						error_log(!array_key_exists('embed_html', $email_opts));
-						error_log(array_key_exists('mc_html', $email_opts));
 						if (!array_key_exists('embed_html', $email_opts) && array_key_exists('mc_html', $email_opts)) {
-							error_log($email_opts['mc_html']);
 							$email_opts['embed_html'] = $email_opts['mc_html'];
 						}
 					}
 				}
 				$email_opts['email_use_spp_cta'] = false;
 			}
-			update_option( 'spp_player_email' , $email_opts );
-
+			
+			// Version 2.5: embed_html split into ctct and other
+			if (!array_key_exists('embed_html_ctct', $email_opts)) {
+				$email_opts['embed_html_ctct'] = $email_opts['embed_html'];
+			}
+			if( $email_opts !== false ) {
+				update_option( 'spp_player_email' , $email_opts );
+			}
+			
+			// Version 2.6: Pull all the sticky player options from the defaults
+			$def = get_option( 'spp_player_defaults' );
+			$stk = get_option( 'spp_player_sticky' );
+			if (!$stk) {
+				add_option( 'spp_player_sticky', array() );
+				$stk = array();
+				if ($def) {
+					if (isset( $def['url'] ) )
+						$stk['url'] = $def['url'];
+					if (isset( $def['show_name'] ) )
+						$stk['show_name'] = $def['show_name'];
+					if (isset( $def['bg_color'] ) )
+						$stk['color'] = $def['bg_color'];
+					if (isset( $def['download'] ) )
+						$stk['download'] = $def['download'];
+					if (isset( $def['stp_image'] ) )
+						$stk['image'] = $def['stp_image'];
+					if (isset( $def['style'] ) )
+						$stk['style'] = $def['style'];
+				}
+				update_option( 'spp_player_sticky', $stk );
+			}
+			
+			// Version 2.7: Pull the feed URL from the defaults
+			$ts = get_option('spp_player_timestamps');
+			if (!$ts)
+				$ts = array();
+			if (!isset($ts['feed_url']) && isset($def['url']))
+				$ts['feed_url'] = $def['url'];
+			update_option('spp_player_timestamps', $ts);
 	    }
 
 	}
@@ -538,6 +661,13 @@ class SPP_Core {
 			$important_str = "";
 		}
 		return $important_str;
+	}
+	
+	public static function get_sticky_z_index() {
+		$sticky_options = get_option( 'spp_player_sticky');
+		if ($sticky_options && isset($sticky_options['z_index']))
+			return $sticky_options['z_index'];
+		return 1000;
 	}
 	
 	public static function debug_output() {
@@ -575,6 +705,7 @@ class SPP_Core {
 			$css_file .= '.css?ver=' . self::VERSION;
 		}
 		
+		$iom = isset($advanced_options['init_on_mutation']) && $advanced_options['init_on_mutation'] === 'true';
 		$output = '';
 		$output .= '<script type="text/javascript" src="';
 		$output .=    includes_url( 'js/underscore.min.js' ) . '"></script>';
@@ -591,6 +722,7 @@ class SPP_Core {
 		$output .=       '"licensed":"' . self::is_paid_version() . '",';
 		$output .=       '"debug_output":"' . self::debug_output() . '",';
 		$output .=       '"html_assets":"' . 'true' . '",';
+		$output .=       '"init_on_mutation":"' . $iom . '",';
 		$output .=    '};';
 		$output .=    '/* ]]> */';
 		
@@ -598,11 +730,19 @@ class SPP_Core {
 		$output .= '<script type="text/javascript" src="';
 		$output .=    SPP_ASSETS_URL . 'js/' . $js_file . '"></script>';
 		
-		$output .= '<link rel="stylesheet" id="askpat-player-plugin-styles-css" href="';
+		$output .= '<link rel="stylesheet" id="smart-podcast-player-plugin-styles-css" href="';
 		$output .=    SPP_ASSETS_URL . $css_file . '" type="text/css" media="all">';
 		
 		echo $output;
 
+	}
+	
+	// Add whatever the user put into the CTCT JS box to the page
+	public static function add_ctct_js_to_html() {
+		$email_options = get_option('spp_player_email');
+		if ($email_options && isset($email_options['embed_js'])) {
+			echo $email_options['embed_js'];
+		}
 	}
 	
    public static function err_handle( $errno, $errstr, $errfile, $errline) {
