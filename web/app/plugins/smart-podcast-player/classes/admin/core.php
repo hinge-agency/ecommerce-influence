@@ -35,6 +35,7 @@ class SPP_Admin_Core {
 	 */
 	protected $plugin_screen_hook_suffix = null;
 
+
 	/**
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
@@ -52,29 +53,25 @@ class SPP_Admin_Core {
 
 		add_action( 'init', array( $this, 'settings' ) );
 		add_action( 'init', array( 'SPP_Admin_Core', 'update_check' ) );
+		add_action( 'init', array( 'SPP_Admin_Core', 'enqueue_block_assets' ) );
 		
 		add_action( 'admin_post_clear_spp_cache', 'SPP_Admin_Core::clear_spp_cache_fn' );
-		
-		add_action( 'admin_post_spp_set_license_key', 'SPP_Admin_Core::spp_set_license_key_fn' );
+		add_action( 'wp_ajax_spp_dismiss_mbstring_notice', array( $this, 'dismiss_mbstring_notice' ) );
 
 		global $pagenow;
 
 		if ( $pagenow == 'post.php' || $pagenow == 'post-new.php' ||  $pagenow == 'options-general.php' || $pagenow != 'widgets.php' || current_user_can('publish_posts') ) {
 
 			// Load admin style sheet and JavaScript.
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 			
 			// Pass the settings variable to JS
 			add_action( 'admin_head', array( 'SPP_Admin_Core', 'output_settings_var' ) );
 
 			// add new buttons
 			add_filter('mce_buttons', array( $this, 'register_buttons' ) );
-
 			add_filter('mce_external_plugins', array( $this, 'register_tinymce_javascript' ) );
-
 			add_action( 'admin_head', array( $this, 'fb_add_tinymce' ) );
-
 			add_action( 'admin_head', array( $this, 'admin_css' ) );
 
 		}
@@ -101,59 +98,104 @@ class SPP_Admin_Core {
 	}
 
 	/**
-	 * Register and enqueue admin-specific style sheet.
+	 * Register and enqueue admin-specific style sheet and Javascript.
 	 *
 	 * @since     1.0.0
 	 *
 	 * @return    null    Return early if no settings page is registered.
 	 */
-	public function enqueue_admin_styles() {
+	public function enqueue_admin_assets() {
+		
+		// The filename depends on whether versions are in the filename or the query string
+		$admin_js_file = 'admin-spp-' . SPP_Core::VERSION . '.min.js';
+		$version_string = null;
+		$advanced_options = get_option( 'spp_player_advanced' );
+		if( isset( $advanced_options[ 'versioned_assets' ] ) && $advanced_options[ 'versioned_assets' ] === 'false') {
+			$admin_js_file = 'admin-spp.min.js';
+			$version_string = SPP_Core::VERSION;
+		}
 
-		if( is_admin() ) {
-        	wp_enqueue_style( 'wp-color-picker' );
-        }
+		// Check whether we're running Gutenberg
+		$gutenberg = function_exists('register_block_type');
+		
+		// Register the CSS file
+		wp_register_style(
+				SPP_Core::PLUGIN_SLUG . '-admin-styles',
+				SPP_ASSETS_URL . 'css/admin.css',
+				$gutenberg ? array('wp-edit-blocks') : array(),
+				$version_string,
+				false);
 
-	}
-
-	/**
-	 * Register and enqueue admin-specific JavaScript.
-	 *
-	 * @since     1.0.0
-	 *
-	 * @return    null    Return early if no settings page is registered.
-	 */
-	public function enqueue_admin_scripts() {
-
+		// Register the JS file
+		$js_deps = array('jquery', 'underscore');
 		$advanced_options = get_option( 'spp_player_advanced');
 		$color_pickers = isset( $advanced_options['color_pickers'] ) ? $advanced_options['color_pickers'] : "true";
-		
-		// Load the color pickers if the option is true or unset
-		if ("true" == $color_pickers) { 
-			$dependencies = array('jquery', 'wp-color-picker');
-		} else {
-			$dependencies = array('jquery');
+		if ("true" == $color_pickers) {
+			$js_deps[] = 'wp-color-picker';
+			wp_enqueue_style('wp-color-picker');
 		}
-		wp_enqueue_script( $this->plugin_slug . '-admin-script',
-				SPP_ASSETS_URL . 'js/admin-spp.min.js',
-				$dependencies,
-				SPP_Core::VERSION );
+		wp_register_script(
+				$this->plugin_slug . '-admin-script',
+				SPP_ASSETS_URL . 'js/admin/' . $admin_js_file,
+				$js_deps,
+				$version_string,
+				false);
+		
+		$timestamps = get_option('spp_player_timestamps');
+		wp_localize_script( SPP_Core::PLUGIN_SLUG . '-admin-script', 'SmartPodcastPlayerAdmin', array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'user_settings' => get_option( 'spp_player_defaults' ),
+			'timestamp_refs' => $timestamps && isset($timestamps['refs'])
+					? $timestamps['refs'] : array(),
+			'last_timestamp_set' => $timestamps && isset($timestamps['last_set'])
+					? $timestamps['last_set'] : '',
+		));
+		
+		// Enqueue the CSS and JS
+		wp_enqueue_style(SPP_Core::PLUGIN_SLUG . '-admin-styles');
+		wp_enqueue_script(SPP_Core::PLUGIN_SLUG . '-admin-script');
 
-		$plugin = SPP_Core::get_instance();
-		wp_localize_script( $this->plugin_slug . '-admin-script',
-				'Smart_Podcast_Player_Admin',
-				array('licensed' => $plugin->is_paid_version()));
+	}
+	
+	public static function enqueue_block_assets() {
 
-
+		// Check whether we're running Gutenberg.  If not, skip the whole thing
+		if (! function_exists('register_block_type'))
+			return;
+		
+		// The filename depends on whether versions are in the filename or the query string
+		$blocks_js_file = 'blocks-' . SPP_Core::VERSION . '.min.js';
+		$version_string = null;
+		$advanced_options = get_option( 'spp_player_advanced' );
+		if( isset( $advanced_options[ 'versioned_assets' ] ) && $advanced_options[ 'versioned_assets' ] === 'false') {
+			$blocks_js_file = 'blocks.min.js';
+			$version_string = SPP_Core::VERSION;
+		}
+		
+		wp_register_script(
+				SPP_Core::PLUGIN_SLUG . '-block-script',
+				SPP_ASSETS_URL . 'js/admin/' . $blocks_js_file,
+				array('jquery', 'underscore', 'wp-blocks', 'wp-element'),
+				$version_string,
+				false);
+		register_block_type(SPP_Core::PLUGIN_SLUG . '/spp', array(
+				'editor_script' => SPP_Core::PLUGIN_SLUG . '-block-script',
+			));
+		register_block_type(SPP_Core::PLUGIN_SLUG . '/stp', array(
+				'editor_script' => SPP_Core::PLUGIN_SLUG . '-block-script',
+			));
 	}
 	
 	public static function output_settings_var() {
 		if ( function_exists( 'json_encode' ) ) {
+			$js_var = new StdClass();
+			$js_var->ajax_url = admin_url( 'admin-ajax.php' );
+			$js_var->user_settings = get_option( 'spp_player_defaults' );
 			?>
-			<script type='text/javascript'>
-				var smart_podcast_player_user_settings = 
-				<?php echo json_encode(get_option( 'spp_player_defaults' ) ); ?>;
-				var SPP_ajax_url = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
-			</script>
+				<script type="text/javascript">
+					var smart_podcast_player_user_settings = 
+					<?php echo json_encode(get_option( 'spp_player_defaults' ) ); ?>;
+				</script>
 			<?php
 		}
 	}
@@ -179,6 +221,14 @@ class SPP_Admin_Core {
 			$links
 		);
 
+	}
+	
+	public static function dismiss_mbstring_notice() {
+		$gen = get_option('spp_player_general');
+		if (!$gen)
+			$gen = array();
+		$gen['mbstring_notice_dismissed'] = true;
+		update_option('spp_player_general', $gen);
 	}
 	
 	// Filter to set sslverify to false in the plugin update checker
@@ -233,14 +283,6 @@ class SPP_Admin_Core {
 		return false;
 	}
 
-	public function download_progress( $download_size, $downloaded, $upload_size, $uploaded ) {
-
-	    $percent = $downloaded / $download_size;
-		
-		return ( $downloaded > ( 512 * 1024 ) ) ? 1 : 0;
-
-	}
-
 	public function register_buttons($buttons) {
 	   array_push( $buttons, 'separator', 'spp' );
 	   array_push( $buttons, 'separator', 'stp' );
@@ -248,8 +290,8 @@ class SPP_Admin_Core {
 	}
 
 	public function register_tinymce_javascript( $plugin_array ) {
-	   $plugin_array['spp'] = SPP_PLUGIN_URL . 'assets/js/spp-mce/spp.js' . '?v=' . SPP_Core::VERSION;
-	   $plugin_array['stp'] = SPP_PLUGIN_URL . 'assets/js/spp-mce/stp.js' . '?v=' . SPP_Core::VERSION;
+	   $plugin_array['spp'] = SPP_PLUGIN_URL . 'assets/js/admin/mce-spp.js' . '?v=' . SPP_Core::VERSION;
+	   $plugin_array['stp'] = SPP_PLUGIN_URL . 'assets/js/admin/mce-stp.js' . '?v=' . SPP_Core::VERSION;
 	   return $plugin_array;
 	}
 
@@ -270,8 +312,8 @@ class SPP_Admin_Core {
 	// inlcude the js for tinymce
 	public function fb_add_tinymce_plugin( $plugin_array ) {
 
-	    $plugin_array['spp'] = SPP_PLUGIN_URL . 'assets/js/spp-mce/spp.js' . '?v=' . SPP_Core::VERSION;
-	    $plugin_array['stp'] = SPP_PLUGIN_URL . 'assets/js/spp-mce/stp.js' . '?v=' . SPP_Core::VERSION;
+	    $plugin_array['spp'] = SPP_PLUGIN_URL . 'assets/js/admin/mce-spp.js' . '?v=' . SPP_Core::VERSION;
+	    $plugin_array['stp'] = SPP_PLUGIN_URL . 'assets/js/admin/mce-stp.js' . '?v=' . SPP_Core::VERSION;
 	    
 	    return $plugin_array;
 	}
@@ -287,42 +329,16 @@ class SPP_Admin_Core {
 	}
 
 	public function admin_css() {
-
-		echo '<style>' . "\n\t";
-			echo '.spp-indented-option { margin-left: 50px; }' . "\n\t";
-			echo 'th.spp-wider-column { width: 250px; }' . "\n\t";
-			echo '.mce-container .spp-mce-hr { '
-					. 'border-top: 1px solid #444;'
-					. 'margin-top: 5px;'
-					. 'margin-bottom: 5px;'
-				    . '}' . "\n\t";
-			echo '.spp-color-picker .wp-picker-container { position: relative; top: 4px; left: 2px; }' . "\n\t";
-			echo '.spp-color-picker .wp-picker-container a { margin: 0; }' . "\n\t";
-			echo 'i.mce-i-stp-icon { background: transparent url("' . SPP_PLUGIN_URL . 'assets/images/stp-icon.png" ) 0 0 no-repeat; background-size: 100%; }' . "\n\t";
-			echo 'i.mce-i-spp-icon { background: transparent url("' . SPP_PLUGIN_URL . 'assets/images/spp-icon.png" ) 0 0 no-repeat; background-size: 100%; }' . "\n\t";
-			echo ".spp_email_portal_options { \n";
-			echo "\tmargin: 4px;\n";
-			echo "\tfont-size: 18px;\n";
-			echo "\tfont-weight: bold;\n";
-			echo "}\n";
-			echo ".spp_email_portal_options select { \n";
-			echo "\tfont-size: inherit;\n";
-			echo "\tfont-weight: inherit;\n";
-			echo "\theight: inherit;\n";
-			echo "\margin-left: inherit;\n";
-			echo "}\n";
-			echo ".smart-podcast-player-settings fieldset { \n";
-			echo "\t\tdisplay: inline-block;\n";
-			echo "\t\tborder: 2px groove #CCC;\n";
-			echo "\t\tmargin: 2px;\n";
-			echo "\t\tpadding: 0 0.5em;\n";
-			echo "\t}\n";
-			echo ".smart-podcast-player-settings legend { \n";
-			echo "\t\tfont-size: 16px;\n";
-			echo "\t\tfont-weight: bold;\n";
-			echo "\t}\n";
-		echo '</style>';
-
+		?>
+			<style>
+			i.mce-i-stp-icon {
+				background-image: url("<?php echo SPP_PLUGIN_URL ?>assets/images/stp-icon.png" );
+			}
+			i.mce-i-spp-icon {
+				background-image: url("<?php echo SPP_PLUGIN_URL ?>assets/images/spp-icon.png" );
+			}
+			</style>
+		<?php
 	}
 	
 	public static function clear_spp_cache_fn() {
@@ -340,22 +356,10 @@ class SPP_Admin_Core {
         exit;
 	}
 	
-	public static function spp_set_license_key_fn() {
-		if ( ! wp_verify_nonce( $_POST[ 'spp_set_license_key_nonce' ], 'spp_set_license_key' ) )
-            die( 'Invalid nonce.' . var_export( $_POST, true ) );
-		
-		if( isset( $_POST[ 'spp_player_general' ] ) ) {
-			update_option( 'spp_player_general', $_POST[ 'spp_player_general' ] );
-		}
-		
-		// Invalidate any previous license checks
+	// Invalidate any previous license checks
+	public static function license_key_reset() {
 		delete_option( 'spp_license_check' );
 		delete_site_option( 'external_updates-smart-podcast-player' );
-		
-		if ( ! isset ( $_POST['_wp_http_referer'] ) )
-            die( 'Missing target.' );
-        wp_safe_redirect( urldecode( $_POST['_wp_http_referer'] ) );
-		exit;
 	}
 
 }

@@ -13,7 +13,7 @@ class SPP_Dynamic_Css {
 	public static function add_color_array( $color_array ) {
 		$c = self::get_instance();
 		$c->color_arrays[] = $color_array;
-		add_action( 'wp_footer', array( &$c, 'add_dynamic_css' ) );
+		add_action( 'wp_footer', array( &$c, 'add_dynamic_css' ), 100 );
 	}
 	
 	private static function parse_dynamic_css_fragment( $expr, $color_array ) {
@@ -48,6 +48,8 @@ class SPP_Dynamic_Css {
 			return 'url(' . SPP_ASSETS_URL . 'images/sub-dl-black.png)';
 		} else if ( $matches[1] === '$importantStr') {
 			return SPP_Core::get_css_important_str();
+		} else if ( $matches[1] === '$z_index') {
+			return SPP_Core::get_sticky_z_index();
 		} else {
 			return trim($matches[0]);
 		}

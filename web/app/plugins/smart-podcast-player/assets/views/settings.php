@@ -2,9 +2,10 @@
 
 $tabs = array( 
   'general' => array( 'label' => 'General', 'settings' => 'spp-player-general' ), 
-  'soundcloud' => array( 'label' => 'SoundCloud', 'settings' => 'spp-player-soundcloud' ),
-  'defaults' => array( 'label' => 'Player Defaults', 'settings' => 'spp-player-defaults' ),
-  'news' => array( 'label' => 'Email Integration', 'settings' => 'spp-player-email' ),
+  'defaults' => array( 'label' => 'Player Defaults', 'settings' => 'spp-player-defaults'),
+  'news' => array( 'label' => 'Featured Button', 'settings' => 'spp-player-email' ),
+  'sticky' => array( 'label' => 'Sticky Player', 'settings' => 'spp-player-sticky' ),
+  'timestamps' => array( 'label' => 'Timestamps', 'settings' => 'spp-player-timestamps' ),
   'advanced' => array( 'label' => 'Advanced', 'settings' => 'spp-player-advanced'),
 );
 
@@ -16,13 +17,30 @@ $current_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) 
 	<?php
 	if( ! SPP_Core::is_paid_version() ) {
 	?>
-	<div class="error">
-		<p style="line-height: 30px;"><?php _e( 'Please enter your Smart Podcast Player license key to get updates and support! <a href="' . SPP_SETTINGS_URL . '" class="button" style="float: right;">Go to Settings</a>', 'smart-podcast-player' ); ?></p>
-	</div>
+		<div class="notice notice-error">
+			<p style="line-height: 30px;"><?php _e( 'Please enter your Smart Podcast Player license key to get updates and support! <a href="' . SPP_SETTINGS_URL . '" class="button" style="float: right;">Go to Settings</a>', 'smart-podcast-player' ); ?></p>
+		</div>
+	<?php
+	}
+	if( ! extension_loaded("xml") ) {
+	?>
+		<div class="notice notice-error">
+			<p style="line-height: 30px;">This PHP installation is missing XML support.  Without it, Smart Podcast Player
+			will be unable to read your RSS feed.  Please contact your web host's support and ask them to install to install the "xml" PHP extension.</p>
+		</div>
+	<?php }
+	if( ! extension_loaded("mbstring") ) {
+		$gen = get_option("spp_player_general");
+		if (!$gen || !isset($gen["mbstring_notice_dismissed"]) || $gen["mbstring_notice_dismissed"] !== true) {
+		?>
+			<div class="notice notice-warning spp-mbstring-notice">
+				<p style="line-height: 30px;">This PHP installation is missing multibyte support.  Without it, Smart Podcast Player
+				may not properly display characters such as quotation marks, dashes, or symbols.
+				If you see unusual characters in SPP, please contact your web host's support and ask them to install the "mbstring" PHP extension.</p>
+				<a href="#" class="spp-mbstring-dismiss">Dismiss this notice</a>
+			</div>
+		<?php } ?>
 	<?php } ?>
-	<div class="notice notice-info">
-		<p>The recent enactment of the European Union's General Data Protection Regulation (GDPR) has prompted us to make changes to our Email Integration feature and you may need to update your settings. Read about the changes here: <a href="https://support.smartpodcastplayer.com/article/157-email-capture" target="_blank">https://support.smartpodcastplayer.com/article/157-email-capture</a></p>
-	</div>
 
   <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
@@ -36,58 +54,52 @@ $current_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) 
    
   <?php if( isset( $tabs[ $current_tab ] ) ) {
   
-  if( $current_tab == 'advanced' ) { ?>
-    <?php $redirect = urlencode( $_SERVER['REQUEST_URI'] ); ?>
-    <form method="POST" action="<?php echo admin_url( 'admin-post.php' ); ?>">
-	  <?php if( isset( $_GET["spp_cache"] ) && $_GET["spp_cache"] == 'cleared' ) { ?>
-	    <div class="updated">
-          <p>Smart Podcast Player cache cleared.</p>
-        </div>
-	  <?php } ?>
-	  <input type="hidden" name="action" value="clear_spp_cache">
-	  <?php wp_nonce_field( "clear_spp_cache", "clear_spp_cache_nonce", FALSE ); ?>
-	  <input type="hidden" name="_wp_http_referer" value="<?php echo $redirect; ?>">
-	  <table class="form-table">
-	    <tr>
-		  <th scope="row">Clear SPP Cache: </th>
-		  <td>
-		    <input type="submit" name="submit" id="submit" class="button button-secondary" value="Clear Cache">
-		  </td>
-		</tr>
-	  </table>
-	</form>
-  <?php }
-  
-  if( $current_tab == 'news' ) { ?>
-
-	<form method="POST" action="options.php">
-		<?php settings_fields( $tabs[ $current_tab ]['settings'] ); ?>
-		<?php include 'settings_news.php' ?>
-		<?php submit_button(); ?>
-	</form>
-	<?php
-  
-  } else {
-
-	// For the license key (the 'general' tab), we need to do an extra action on submit,
-	// so we do some custom inputs.  Otherwise, use the settings API for standard input fields.
-	if( $current_tab == 'general' ) { ?>
+	  // "Advanced" has a special action.
+	  if( $current_tab == 'advanced' ) { ?>
+		<?php $redirect = urlencode( $_SERVER['REQUEST_URI'] ); ?>
 		<form method="POST" action="<?php echo admin_url( 'admin-post.php' ); ?>">
-		<input type="hidden" name="action" value="spp_set_license_key">
-		<?php wp_nonce_field( "spp_set_license_key", "spp_set_license_key_nonce", FALSE ); ?>
-		<input type="hidden" name="_wp_http_referer" value="<?php echo urlencode( $_SERVER['REQUEST_URI'] ); ?>">
-	<?php } else { ?>
-		<form method="POST" action="options.php">
-		<?php settings_fields( $tabs[ $current_tab ]['settings'] );
-	}
-
-	do_settings_sections( $tabs[ $current_tab ]['settings'] );
-	submit_button();
+		  <?php if( isset( $_GET["spp_cache"] ) && $_GET["spp_cache"] == 'cleared' ) { ?>
+			<div class="updated">
+			  <p>Smart Podcast Player cache cleared.</p>
+			</div>
+		  <?php } ?>
+		  <input type="hidden" name="action" value="clear_spp_cache">
+		  <?php wp_nonce_field( "clear_spp_cache", "clear_spp_cache_nonce", FALSE ); ?>
+		  <input type="hidden" name="_wp_http_referer" value="<?php echo $redirect; ?>">
+		  <table class="form-table">
+			<tr>
+			  <th scope="row">Clear SPP Cache: </th>
+			  <td>
+				<input type="submit" name="submit" id="submit" class="button button-secondary" value="Clear Cache">
+			  </td>
+			</tr>
+		  </table>
+		</form>
+			
+	  <?php } ?>
+	  
+	<form method="POST" action="options.php" class="spp-settings-form">
+		<?php
+			settings_fields( $tabs[ $current_tab ]['settings'] );
+			if ($current_tab == 'news')
+				include 'settings_news.php';
+			else if ($current_tab == 'sticky')
+				include 'settings_sticky.php';
+			else if ($current_tab == 'timestamps')
+				include 'settings_timestamps.php';
+			else if ($current_tab == 'defaults')
+				include 'settings_defaults.php';
+			else if ($current_tab == 'advanced')
+				include 'settings_advanced.php';
+			else if ($current_tab == 'general')
+				include 'settings_general.php';
+			
+			if ($current_tab !== 'timestamps') {
+				submit_button();
+			}
+		?>
+	</form>
 	
-	}
-	
-  }?>
-
-  </form>
+  <?php } ?>
 
 </div>

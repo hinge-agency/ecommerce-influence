@@ -12,7 +12,7 @@ class SPP_Transients {
 		if( $args['purpose'] === 'tracks from feed url' ) {
 			$settings = get_option( 'spp_player_advanced' );
 			$val = isset( $settings['cache_timeout'] ) ? $settings['cache_timeout'] : '15';
-			if ( $val > 60 || $val < 5 || !is_numeric( $val ) )
+			if ( $val > 1440 || $val < 5 || !is_numeric( $val ) )
 				$val = 15;
 			$timeout = $val * MINUTE_IN_SECONDS;
 			if( isset( $args['url'] ) && isset( $args['episode_limit'] ) ) {

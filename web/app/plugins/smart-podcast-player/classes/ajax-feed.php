@@ -106,15 +106,23 @@ class SPP_Ajax_Feed {
 			} else {
 				$tracks = self::get_rss_tracks( $url, $episode_limit );
 			}
+			$tracks = self::add_timestamps($tracks);
 			
 			$data[ 'tracks' ] = $tracks;
 			if( ! is_wp_error( $tracks ) && is_array( $tracks ) && !empty( $tracks ) ) {
 				$data[ 'numTracks' ] = count( $data[ 'tracks' ] );
-				set_transient( $transient_name, $data, $timeout );
+				if ($timeout > 0) {
+					set_transient( $transient_name, $data, $timeout );
+				}
 			} else {
 				// Prevent crazy load and re-fetching
 				set_transient( $transient_name, $data, MINUTE_IN_SECONDS);
 			}
+		} else {
+			// We have cached data, but maybe need to fix the timestamps
+			// $timestamps = get_option('spp_player_timestamps');
+			// if (isset($timestamps['invalid_cache']) && $timestamps['invalid_cache'] == 'true')
+				$data['tracks'] = self::add_timestamps($data['tracks']);
 		}
 		
 		return $data;
@@ -288,72 +296,36 @@ class SPP_Ajax_Feed {
 			return null;
 		}
 	}
-
-	/**
-	 * Rewrite of WP Core fetch_feed function, removing the WP_SimplePie_File, which was causing issues 
-	 * with FeedBlitz feeds. Commit of 2016-03-10 accidentally added it back for all files, not just
-	 * FeedBlitz, so I added it back for everything 2017-09-08.  TODO: Look at going back to core fetch_feed.
-	 * 
-	 * @param  string $url Url of RSS feed
-	 * @return void
-	 */
-	public static function fetch_feed( $url ) {
-
-		require_once( ABSPATH . WPINC . '/class-simplepie.php' );
-		require_once( ABSPATH . WPINC . '/class-feed.php' );
-
-		$rss = new SimplePie();
-
-		$rss->set_sanitize_class( 'WP_SimplePie_Sanitize_KSES' );
-
-		// We must manually overwrite $feed->sanitize because SimplePie's
-		// constructor sets it before we have a chance to set the sanitization class
-		$rss->sanitize = new WP_SimplePie_Sanitize_KSES();
-		$rss->set_cache_class( 'WP_Feed_Cache' );
-		$rss->set_file_class( 'WP_SimplePie_File' );
-		$rss->set_feed_url( $url );
+	
+	// Changes to fetch_feed
+	public static $spoof_user_agent = false;
+	public static function add_fetch_feed_options($feed) {
+		
+		$url = $feed->feed_url;
+		
 		// extend for slow feed generation/hosts
-		$rss->set_timeout(15);
+		$feed->set_timeout(15);
 
 		// If the user has cleared the cache, it was marked in this transient
 		if( get_transient( 'spp_cache_clear_simplepie' ) == true ) {
-			$rss->enable_cache( false );
+			$feed->enable_cache( false );
 		} else {
-			$rss->set_cache_duration( 5 * MINUTE_IN_SECONDS );
+			$feed->set_cache_duration( 5 * MINUTE_IN_SECONDS );
 		}
 
 		// The Wordpress 4.5 update broke lots of feeds by setting the type
 		// to application/octet-stream instead of application/rss+xml.
 		// I don't know the root cause, but I do know the fix: force_feed.
-		$rss->force_feed(true);
+		$feed->force_feed(true);
 		
 		// Squarespace returns a 403 Forbidden with the default SimplePie user agent.
-		if( strpos( $url, 'squarespace.com' ) !== false ) {
-			$rss->set_useragent( 'iTunes/9.1.1' );
+		if( self::$spoof_user_agent || strpos( $url, 'squarespace.com' ) !== false ) {
+			$feed->set_useragent( 'iTunes/9.1.1' );
 		}
 		
 		// Set the parser to a class that accepts more feeds
 		require_once( SPP_PLUGIN_BASE . 'classes/simplepie-ext.php' );
-		$rss->set_parser_class( 'SPP_SimplePie_Parser_Ext' );
-		
-		$rss->init();
-		
-		// Check to see if it's a "403 Forbidden" page.  Squarespace returns these pages
-		// when they don't recognize the user agent, and not all Squarespace feeds are on
-		// Squarespace URLs.  If the page says 403 Forbidden, we retry as iTunes.
-		if( $rss->error() && stripos( $rss->get_raw_data(), '403 Forbidden' ) > -1 ) {
-			$rss->set_useragent( 'iTunes/9.1.1' );
-			$rss->init();
-		}
-		
-		$rss->handle_content_type();
-
-		if ( $rss->error() ) {
-			return new WP_Error( 'simplepie-error', $rss->error() );
-		}
-
-		return $rss;
-
+		$feed->set_parser_class( 'SPP_SimplePie_Parser_Ext' );
 	}
 
 	/**
@@ -364,11 +336,21 @@ class SPP_Ajax_Feed {
 	 */
 	public static function get_rss_tracks( $url, $episode_limit ) {
 
-		$rss = self::fetch_feed( $url );
+		add_action('wp_feed_options', array('SPP_Ajax_Feed', 'add_fetch_feed_options'));
+		$rss = fetch_feed( $url );
 
 		if( is_wp_error( $rss ) ) {
-			return $rss;
+			// Try again with iTunes user agent
+			self::$spoof_user_agent = true;
+			$rss = fetch_feed( $url );
+			self::$spoof_user_agent = false;
+			if( is_wp_error( $rss ) ) {
+				remove_action('wp_feed_options', array('SPP_Ajax_Feed', 'add_fetch_feed_options'));
+				return $rss;
+			}
 		}
+		// Play nice with anything else that might be using fetch_feed
+		remove_action('wp_feed_options', array('SPP_Ajax_Feed', 'add_fetch_feed_options'));
 
 		list( $transient_name, $timeout ) = SPP_Transients::spp_transient_info( array(
 				'purpose' => 'xml from feed url',
@@ -422,6 +404,7 @@ class SPP_Ajax_Feed {
 		if( !is_wp_error( $rss ) ) {
 		
 			require_once( SPP_PLUGIN_BASE . 'classes/download.php' );
+			$all_timestamps = get_option('spp_player_timestamps');
 
 			foreach ( $rss->get_items() as $item) {
 				
@@ -704,6 +687,32 @@ class SPP_Ajax_Feed {
 	public static function linkify_show_notes( $notes ) {
 		require_once( SPP_PLUGIN_BASE . 'classes/vendor/lib_autolink-master/lib_autolink.php' );
 		return autolink( $notes, 30, ' target="_blank"' );
+	}
+	
+	public static function add_timestamps($tracks) {
+		$timestamps = get_option('spp_player_timestamps');
+		
+		// Timestamp cache will now be valid, whether or not there are timestamps set.
+		// If there aren't any, we just mark the cache valid and return
+		if (!$timestamps || !isset($timestamps['stamps'])) {
+			$timestamps = array('invalid_cache' => 'false');
+			update_option('spp_player_timestamps', $timestamps);
+			return $tracks;
+		} else {
+			$timestamps['invalid_cache'] = 'false';
+			update_option('spp_player_timestamps', $timestamps);
+		}
+		
+		foreach ($tracks as $track) {
+			$ts_url = $track->stream_url;
+			$ts_url = preg_replace('/^https?:\/\//', '', $track->stream_url);
+			$ts_url = preg_replace('/\?.*$/', '', $ts_url);
+			if (isset($timestamps['stamps'][$ts_url])) {
+				$track->timestamps = $timestamps['stamps'][$ts_url];
+			}
+		}
+		
+		return $tracks;
 	}
 
 }

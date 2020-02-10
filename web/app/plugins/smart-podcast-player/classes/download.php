@@ -8,6 +8,7 @@ class SPP_Download {
     protected $_file;
     protected $_size = 0;
     protected $_method = 'curl';
+	protected $_out_file_name = '';
 
     public function __construct( $download_id ) {
 
@@ -23,6 +24,7 @@ class SPP_Download {
 				//error_log('SPP: Download ID "' . $download_id . '" not found.');
 			} else {
 				$this->_file = $this->safe_spp_url( $file );
+				$this->_out_file_name = preg_replace('/\?.*/', '', basename( $this->_file ));
 			}
 
         } else {
@@ -79,7 +81,7 @@ class SPP_Download {
         set_time_limit(0);
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header('Content-disposition: attachment; filename=' . basename( $this->_file ) );
+        header('Content-disposition: attachment; filename=' . $this->_out_file_name );
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Expires: 0');
         header('Pragma: public');
@@ -150,7 +152,7 @@ class SPP_Download {
     public function fopen_download() {
 
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . basename( $this->_file ) . '"');
+        header('Content-Disposition: attachment; filename="' . $this->_out_file_name . '"');
         header('SPP: FOP');
         //header('Content-Length: ' . $this->_size);
 
@@ -210,7 +212,7 @@ class SPP_Download {
             $this->smart_download_local();
 
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . basename( $this->_file ) . '"');
+        header('Content-Disposition: attachment; filename="' . $this->_out_file_name . '"');
 
         if ( !empty ( $this->_size ) )
             header('Content-Length: ' . $this->_size);
@@ -251,7 +253,7 @@ class SPP_Download {
         }
 
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . basename( $this->_file ) . '"');
+        header('Content-Disposition: attachment; filename="' . $this->_out_file_name . '"');
 
         if ( !empty($retbytes) && $retbytes >= 1 && ($this->_size = $retbytes) )
             header('Content-Length: ' . $this->_size );

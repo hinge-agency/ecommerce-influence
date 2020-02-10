@@ -1,12 +1,51 @@
 # Smart Podcast Player
 Requires at least: 3.9.4
-Tested up to: 4.9
-Stable tag: 2.4.0
+Tested up to: 5.0.4
+Stable tag: 2.8.0
 Copyright: SPI Labs, LLC
 
 An audio player built for podcasters by podcasters.  Most web-based podcast players are dumb. Not this one.  The Smart Podcast Player is the best way to engage your listeners and grow your audience.
 
 ## Changelog
+
+### v2.8.0
+* Added seven new subscription services
+* Added support for Sharpspring email
+* Updated logos for iTunes and Play Music
+* Removed Google+ due to service shutdown
+* Fixed Soundcloud download issue
+* Fixes for featured button
+
+### v2.7.0
+* Added clickable timestamps feature
+* Additional options for the featured button
+* Option to specify an episode for the sticky player
+* Capability to add the sticky player to an individual page
+* Fixed issues playing Soundcloud tracks
+* Fix for featured episode when sorting by oldest
+* Fix for social sharing email button in sticky player
+* Fixed missing download button with certain share/subscribe settings
+
+### v2.6.0
+* Added new sticky player option
+* Support for new Gutenberg editor
+* Added background color options for mobile track player
+* Fixed email embed code bug
+* Workaround for resizing bug in Safari
+* Fixed sound duplication bug
+* Fixed bug where STP fails to restart after finishing a track
+* Fixed filenames of downloaded MP3s
+* Added option to not cache feeds
+
+### v2.5.0
+* Major upgrade to mobile STP design
+* Added additional speed options
+* Added subscription buttons to STP
+* Fixed text selection bug when clicking controls
+* Fixed downloading issue for some browsers
+* Fixed issue with Constant Contact email integration
+* Fixed conflict with Ninja Forms
+* Option to hide SPP logo while loading full player
 
 ### v2.4.0
 * Updated email capture feature for GDPR requirements

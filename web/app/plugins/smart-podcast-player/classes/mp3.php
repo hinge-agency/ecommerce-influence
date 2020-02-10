@@ -6,7 +6,7 @@ class SPP_MP3 {
 
 	public static function get_data( $url_in ) {
 
-		$method = self::get_method();
+		$method = self::get_method( $url_in );
 
 		$data = array();
 
@@ -40,7 +40,17 @@ class SPP_MP3 {
 
 	}
 
-	private static function get_method() {
+	private static function get_method( $url_in ) {
+		
+		// Buzzsprout was returning a 403 when accessed by Curl.  I don't know why.
+		if (strpos($url_in, 'http://buzzsprout.com') === 0
+				|| strpos($url_in, 'https://buzzsprout.com') === 0
+				|| strpos($url_in, 'http://www.buzzsprout.com') === 0
+				|| strpos($url_in, 'https://www.buzzsprout.com') === 0) {
+			if( ini_get( 'allow_url_fopen' ) ) {
+				return 'fopen';
+			}
+		}
 	
 		// Curl is the preferred method.  In order to use it, it has to exist,
 		// be above version 7.19.4, and PHP has to be greater than version
@@ -140,7 +150,7 @@ class SPP_MP3 {
 				} else {
 					$code = curl_getinfo($rcurl, CURLINFO_HTTP_CODE);
 					if ($code == 301 || $code == 302) {
-						preg_match('/Location:(.*?)\n/', $header, $matches);
+						preg_match('/[Ll]ocation:(.*?)\n/', $header, $matches);
 						$newurl = trim(array_pop($matches));
 					} else {
 						$code = 0;
