@@ -1,0 +1,59 @@
+version: '3'
+services:
+
+  #NGINX
+  webserver:
+    image: nginx:stable-alpine
+    container_name: ecommerceinfluence-webserver
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+      - mysql
+    volumes:
+      - ./:/var/www/html:delegated
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app
+
+  #MYSQL
+  mysql:
+    image: mysql:5.7.22
+    container_name: ecommerceinfluence-mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql:/var/lib/mysql:delegated
+    environment:
+      MYSQL_DATABASE: ecommerceinfluence
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - app
+
+  #PHP
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecommerceinfluence-app
+    volumes:
+      - ./:/var/www/html:delegated
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    ports:
+      - "9000:9000"
+    networks:
+      - app
+
+#Docker Networks
+networks:
+  app:
+
+#Docker Volumes
+volumes:
+  mysql:
